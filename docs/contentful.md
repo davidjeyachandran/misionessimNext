@@ -1,6 +1,6 @@
 # Contentful
 
-Reference — **copied from the sim-blog project** (2026-07-03). It documents the existing shared Contentful space that the misionessim.org migration will import into; "this app" below means sim-blog, and the relative `src/` links point into that repo, not this one. See [nextjs-migration-analysis.md §4](nextjs-migration-analysis.md) for how this migration reuses and extends the `BlogPost` and `Revista` types described here.
+Reference — **copied from `~/websites/poc/mi-movilicemos`** (2026-07-03). It documents the existing shared Contentful space that the misionessim.org migration will import into; "this app" below means mi-movilicemos, and the relative `src/` links point into that repo, not this one. See [nextjs-migration-analysis.md §4](nextjs-migration-analysis.md) for how this migration reuses and extends the `BlogPost` and `Revista` types described here.
 
 How this app connects to Contentful and how content is structured. Contentful is the source of truth for all learning content (resource groups, magazines, blog posts, external resources); Neon holds only user/progress data.
 

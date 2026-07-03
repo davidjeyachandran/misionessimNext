@@ -180,3 +180,9 @@ docs/.docusaurus/
 
 .claude/worktrees/
 .claude/settings.local.json
+
+# reference/baselines/ IS committed (docs/nextjs-migration-analysis.md §6.1) —
+# it's the diffing ground truth for every phase's visual regression tests.
+# Only the wget mirror is excluded: much larger, and reproducible on demand
+# via `yarn mirror:site` against the live site.
+reference/mirror/

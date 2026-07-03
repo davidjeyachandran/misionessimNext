@@ -6,6 +6,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8137", "--directory", "poc"],
       "port": 8137
+    },
+    {
+      "name": "next-app",
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["dev"],
+      "port": 3000
     }
   ]
 }

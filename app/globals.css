@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/*
+ * Brand tokens — same values as the live misionessim.org render and the
+ * sim-blog / mi-movilicemos sister projects, so all three stay visually
+ * consistent. See docs/nextjs-migration-analysis.md §2.3 / §4.
+ */
+@theme {
+  --color-brand: #c91430;
+  --color-brand-dark: #900201;
+  --color-navy: #002f49;
+  --color-ink: #0a0117;
+  --color-muted: #696f8c;
+  --color-cream: #fef1d5;
+  --color-hairline: #e6e8f0;
+
+  --font-sans: var(--font-work-sans), system-ui, sans-serif;
+  --font-heading: var(--font-raleway), system-ui, sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: var(--color-ink);
+}
+
+@layer base {
+  body {
+    background: var(--background);
+    color: var(--color-muted);
+    font-family: var(--font-sans);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    color: var(--color-ink);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  a {
+    color: inherit;
+  }
+}

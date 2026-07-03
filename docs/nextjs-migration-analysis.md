@@ -11,7 +11,7 @@
 misionessim.org is a WordPress + Elementor site with a small number of hand-built pages and a large body of clean, structured content (blog + magazine). The **chosen approach (C) is a full rebuild of the presentation layer in Next.js, with blog posts and revista editions migrated into Contentful** (existing infra — see below), not a headless-WordPress integration. The reasons, in short:
 
 - Only **~8 pages** are Elementor-built and they are **truly static** — they will not change during the migration. They are rebuilt once as React components; their copy lives in code for day 1 (optionally moved to markdown/Contentful later).
-- Everything with a long tail — 336 blog posts + 119 revista editions — is structured content and goes into **Contentful**, where editors already have infrastructure and a publishing workflow. The frontend stays fully static with on-demand revalidation.
+- Everything with a long tail — 335 blog posts + 118 revista editions — is structured content and goes into **Contentful**, where editors already have infrastructure and a publishing workflow. The frontend stays fully static with on-demand revalidation.
 - Elementor markup is unusable in a headless frontend, so keeping WP as a headless CMS would buy nothing while adding a permanent WP server to the critical path.
 - The homepage POC in this repo proves the rebuild approach works and already encodes the design system (colors, fonts, header, hero, parallax).
 
@@ -19,7 +19,7 @@ misionessim.org is a WordPress + Elementor site with a small number of hand-buil
 - **Donations (GiveWP) are out of scope** — dropped entirely, **all references removed**: no donor dashboard, no donate CTAs; legacy `/donations/*` 301 → homepage.
 - **Deploy target: Vercel** (decided 2026-07-03). Vercel has **no native forms product** (that's Netlify-only), so the contact form is a plain HTML form posting to a small serverless route handler that sends email via **Resend** (decided 2026-07-03). No WP either way.
 - **PDF embedder is not replaced** — revista PDFs are plain download/view links.
-- **Contentful is the CMS — specifically the existing shared space used by sim-blog**, which already has `BlogPost`/`Revista` types and some VAMOS content (see §4 and [contentful.md](contentful.md)). On conflicts, misionessim.org content wins.
+- **Contentful is the CMS — specifically the existing shared space used by mi-movilicemos** (`~/websites/poc/mi-movilicemos`), which already has `BlogPost`/`Revista` types and VAMOS-magazine-derived content from an earlier import (see §2.5, §4 and [contentful.md](contentful.md)). A live quality audit (§2.5) found WP text/images are better and more complete than the existing Contentful data, but Contentful's revista↔blogPost links are worth keeping — so the import is a **per-field policy** (WP wins on body/images, Contentful wins on revista links), not a blanket winner.
 - **Tag and author archives are both kept.**
 
 The plan is structured in **8 phases** (0–7), each with explicit exit criteria, unit tests (Vitest), and Playwright visual-regression checks against baseline screenshots captured from the live site.
@@ -28,13 +28,15 @@ The plan is structured in **8 phases** (0–7), each with explicit exit criteria
 
 ## 2. Current site audit
 
-### 2.1 Content inventory (from Yoast sitemaps + REST API, 2026-07-03)
+### 2.1 Content inventory (from Yoast sitemaps + REST API, 2026-07-03; counts corrected during Phase 0, 2026-07-03)
+
+**Correction:** the counts below were originally recorded as 336 posts / 119 revista items — an off-by-one from counting raw sitemap `<url>` entries, which include the `/blog/` and `/la-revista/` **index pages themselves** alongside the actual content items. `scripts/build-url-inventory.ts` classifies index pages separately, and the WP REST API confirms the true post count directly (`x-wp-total: 335` header on `/wp-json/wp/v2/posts`). Corrected: **335 posts, 118 revista items.**
 
 | Content type | Count | Built with | REST-exposed? | Disposition |
 |---|---|---|---|---|
 | Pages | 8 | Elementor (static) | yes (`/wp-json/wp/v2/pages`) but content is Elementor markup | **Rebuild by hand as code** (copy in components day 1) |
-| Blog posts (`/blog/YYYY-MM/slug/`) | 336 | Gutenberg (clean `wp-block-*` HTML) | yes (`/wp-json/wp/v2/posts`) | **→ Contentful** (scripted export/import) |
-| La Revista items (`/la-revista/slug/`) | 119 | Elementor, via `keydesign-portfolio` CPT | **no** (not registered in REST) | **→ Contentful** (needs REST-exposure snippet or WP-CLI) |
+| Blog posts (`/blog/YYYY-MM/slug/`) | 335 | Gutenberg (clean `wp-block-*` HTML) | yes (`/wp-json/wp/v2/posts`) | **→ Contentful** (scripted export/import) |
+| La Revista items (`/la-revista/slug/`) | 118 | Elementor, via `keydesign-portfolio` CPT | **no** (not registered in REST) | **→ Contentful** (needs REST-exposure snippet or WP-CLI) |
 | GiveWP donation forms (`/donations/...`) | 8 | GiveWP plugin | yes (`give_forms`) | **Dropped — out of scope** |
 | Categories / tags | 36 / 28 | taxonomy archives | yes | → Contentful references; generated archive pages |
 | Portfolio categories | 6 | taxonomy archives | no | Generated pages once CPT is exported |
@@ -42,7 +44,7 @@ The plan is structured in **8 phases** (0–7), each with explicit exit criteria
 
 The 8 in-scope pages: home, `/sirve-con-sim/`, `/nosotros/`, `/recursos/`, `/revistavamos/`, `/ora/`, `/declaracion-de-fe-de-sim/`, `/terms-and-conditions/`. The three GiveWP utility pages (`/donation-confirmation/`, `/donation-failed/`, `/donor-dashboard/`) are **dropped** with donations.
 
-**The `/revistavamos/` URL space (investigated 2026-07-03).** The magazine editions that appear "under" `/revistavamos/` are the 119 `keydesign-portfolio` items — canonically served at `/la-revista/<slug>/` and present in `keydesign-portfolio-sitemap.xml`, so no content is missing from the inventory. Three implementation-relevant facts, though:
+**The `/revistavamos/` URL space (investigated 2026-07-03).** The magazine editions that appear "under" `/revistavamos/` are the 118 `keydesign-portfolio` items — canonically served at `/la-revista/<slug>/` and present in `keydesign-portfolio-sitemap.xml`, so no content is missing from the inventory. Three implementation-relevant facts, though:
 
 1. The "Ediciones Revista VAMOS" carousel on `/revistavamos/` is **not in the page HTML** — it's fetched client-side from `admin-ajax.php` (`action=postcs_getdata`, plugin `post-types-carousel-slider`, paginated 16 per page). Any HTML-scrape-based export would silently miss all editions; the CPT/REST export path is mandatory.
 2. `/revistavamos/<slug>/` works as an **alias that 301-redirects** to `/la-revista/<slug>/` (e.g. `/revistavamos/el-clamor-macedonio/` → `/la-revista/el-clamor-macedonio/`). These aliases may be linked externally or in print; the Next.js `redirects()` map must reproduce them for every edition slug.
@@ -77,6 +79,40 @@ What each implies for the rebuild:
 - **No GraphQL endpoint** (WPGraphQL not installed).
 - `keydesign-portfolio` CPT is not in REST. Since we have admin access, either (a) add a 5-line `register_post_type_args` filter to expose it, or (b) export from a local copy with WP-CLI (`wp export` / `wp post list --post_type=keydesign-portfolio --format=json`). Option (a) is less work and doesn't require standing up a local WP.
 
+### 2.5 WP vs. existing Contentful content — quality audit (2026-07-04)
+
+Before committing to an import strategy, we queried the live Contentful space directly (GraphQL) and compared it field-by-field against the WP REST API for the same posts. This is the evidence behind §4's per-field conflict policy.
+
+**Coverage:** the space holds 791 `BlogPost` entries total (spanning multiple SIM sources, not just misionessim.org) and 110 `Revista` entries. Matching by slug, **215 of misionessim.org's 335 WP posts (64%) already exist**, but the overlap is concentrated in the 2019–2022 VAMOS-magazine era and collapses after that:
+
+| Year | Found in Contentful / WP total |
+|---|---|
+| 2020 | 131/158 (83%) |
+| 2021 | 42/44 (95%) |
+| 2022 | 24/26 (92%) |
+| 2023 | 5/15 (33%) |
+| 2024 | 6/68 (9%) |
+| 2025–2026 | 0/14 (0%) |
+
+Contentful's copy is **stale** — it's missing nearly everything from the last ~2.5 years, which rules out "treat Contentful as authoritative, only import what's missing" as an option: that would silently drop most of the site's recent content.
+
+**Text quality — Contentful is cleaner for overlapping posts.** WP's raw `content.rendered` has a systemic mojibake bug: smart quotes stored as broken `\x93`/`\x94` bytes (a Windows-1252/UTF-8 mismatch), present in 5 of 6 sampled 2020 posts (2–11 occurrences each). The matching Contentful entries — evidently extracted from the original VAMOS PDF issues via a separate historical import, not synced from this WP field — have proper `“ ”` quotes. Recent WP-only posts (2023+, no Contentful match) have a *different* defect instead: Google-Docs-paste artifacts (`<span id="docs-internal-guid-...">` wrappers with inline `font-family: Arial` styling) that need stripping regardless of source.
+
+**Images — WP wins decisively.** Sampled overlapping posts:
+
+| Post | WP featured image | Contentful heroImage |
+|---|---|---|
+| `10-consejos-...-individualismo` | 1280×853 (Pexels) | 345×230 (`mi23.png`) |
+| `13-signos-...-equipo` | 1280×853 (Pexels) | 403×293 (`mi7_2.png`) |
+| `7-formas-para-mejorar-tu-equipo` | 1280×853 (Pexels) | 425×422 (`mi17.png`) |
+| `abuelas-a-distancia` | 1280×853 (Pexels) | *(none)* |
+
+Contentful's images are low-resolution PDF-page-render crops (filenames like `mi23.png` are sequential magazine-page exports, not original photography), sometimes missing entirely. WP's are full-resolution stock photos. For **Revista cover images** specifically (not blog featured images) the two sources are roughly equivalent — both trace back to the same modest-resolution magazine-cover scan (verified on `/la-revista/trabajo-en-la-selva/`, WP's own `og:image` is only 270×382).
+
+**Structural bonus:** where a match exists, Contentful's `BlogPost.nid` field equals the exact WP post ID (e.g. `nid: "1544"` = WP post 1544, `un-ministerio-sin-igual`), and many overlapping posts already carry a `revista` back-reference matching what WP's `/la-revista/<slug>/` pages describe. That relationship isn't otherwise derivable from the WP REST API (the CPT gap noted above) and is worth preserving on import.
+
+**Decision:** see §4's conflict-strategy bullet — WP wins on body text (after mojibake cleanup) and images, re-imported for all 335 posts; existing Contentful revista links are preserved where present.
+
 ---
 
 ## 3. Approaches considered
@@ -99,7 +135,7 @@ Keep WordPress running as the content backend; Next.js renders everything, reval
 
 ### Approach B — Full static rebuild + one-time content migration into the repo
 
-Rebuild the ~8 Elementor pages as hand-crafted Next.js components (the homepage POC is the template for this). Export all structured content (336 posts, 119 revista items, taxonomies, media) once via scripts into the repo as MDX/JSON + downloaded assets. Ship as a fully static Next.js site (`output: 'export'` or static-rendered App Router on Vercel/Netlify).
+Rebuild the ~8 Elementor pages as hand-crafted Next.js components (the homepage POC is the template for this). Export all structured content (335 posts, 118 revista items, taxonomies, media) once via scripts into the repo as MDX/JSON + downloaded assets. Ship as a fully static Next.js site (`output: 'export'` or static-rendered App Router on Vercel/Netlify).
 
 **Pros**
 - **Best possible performance**: every page pre-rendered, no origin server, no DB. This directly serves the stated goal ("performant site").
@@ -109,14 +145,14 @@ Rebuild the ~8 Elementor pages as hand-crafted Next.js components (the homepage 
 - The existing homepage POC de-risks the hardest page and is directly portable.
 
 **Cons**
-- Content publishing changes: new posts are MDX files + a deploy, not a WP editor. (Mitigable: the sim-blog project and `import-vamos` workflow suggest content ops are already moving toward file/scripted workflows; also MDX-on-GitHub editors or a later CMS bolt-on are cheap.)
+- Content publishing changes: new posts are MDX files + a deploy, not a WP editor. (Mitigable: the `import-vamos` workflow suggests content ops are already moving toward scripted workflows; also MDX-on-GitHub editors or a later CMS bolt-on are cheap.)
 - Donations and contact forms need replacements (true in every approach except A).
 
 **Verdict:** Technically right-sized for a ~470-item, 2-author site, and everything in it except the final storage target carries over to Approach C. **Superseded by the decision to give editors a CMS** — kept documented as the fallback if CMS costs or complexity become a problem.
 
 ### Approach C — Rebuild + Contentful for structured content — **CHOSEN (2026-07-03)**
 
-Presentation-layer rebuild as in B, but the structured long tail (336 blog posts, 119 revista editions, taxonomies, authors) lands in **Contentful** — infra David already has. The ~8 Elementor pages are hand-built React components with their copy in code for day 1 (they're static and won't change during migration); moving that copy to markdown/Contentful is an optional later enhancement, not a launch requirement.
+Presentation-layer rebuild as in B, but the structured long tail (335 blog posts, 118 revista editions, taxonomies, authors) lands in **Contentful** — infra David already has. The ~8 Elementor pages are hand-built React components with their copy in code for day 1 (they're static and won't change during migration); moving that copy to markdown/Contentful is an optional later enhancement, not a launch requirement.
 
 **Pros**
 - Proper editorial UI, drafts, preview, roles — editors publish blog/revista content without touching git or waiting on a developer, using infrastructure they already have.
@@ -157,24 +193,29 @@ Put Next.js in front, `rewrites()` unmigrated paths to WordPress, migrate sectio
 
 ## 4. Target architecture
 
-- **Next.js 15+ App Router, TypeScript, static rendering** for all routes (SSG + on-demand ISR from Contentful webhooks). No long-running server — the only server-side pieces are serverless route handlers (`/api/revalidate`, and the contact form if we go the route-handler path).
-- **Styling:** CSS Modules with design tokens as CSS custom properties (`--color-primary: #C91430`, etc.). This ports the POC's vanilla CSS most directly and keeps the pixel-parity work honest. (Tailwind is fine too, but translating already-verified CSS into utilities adds risk without benefit.)
+- **Next.js 16, React 19, TypeScript, App Router, static rendering** for all routes (SSG + on-demand ISR from Contentful webhooks). No long-running server — the only server-side pieces are serverless route handlers (`/api/revalidate`, `/api/contact`). Aligns with the versions in both sister projects: **sim-blog** (`~/websites/learn/sim-blog`, Next.js 16, `output: "export"`, GitHub Pages at `historias.misionessim.org`) and **mi-movilicemos** (`~/websites/poc/mi-movilicemos`, Next.js 16, Vercel). misionessim-new uses Vercel like mi-movilicemos (needs route handlers; cannot use `output: "export"` like sim-blog).
+- **Styling:** **Tailwind v4** (same as sim-blog) with design tokens via `@theme` CSS custom properties — same token names as sim-blog's `app/globals.css` (`--color-brand: #c91430`, `--color-navy: #002f49`, `--color-ink: #0a0117`, `--color-muted: #696f8c`, `--color-cream: #fef1d5`, `--color-hairline: #e6e8f0`; fonts `--font-heading: var(--font-raleway)`, `--font-sans: var(--font-work-sans)`). Tailwind instead of the originally-planned CSS Modules — chosen for consistency with the sister projects and easier future component sharing.
 - **Fonts:** `next/font` with Raleway + Work Sans, `display: swap`, subset to latin — removes Google Fonts render-blocking.
-- **Content layer:** **Contentful — the existing shared space** already used in production by the sim-blog learning app (documented in [contentful.md](contentful.md), copied from that project). The space already has `BlogPost` and `Revista` content types (plus `ResourceGroup`/`Resource`, which this site ignores) and **already contains VAMOS-derived content** imported via the `import-vamos` workflow — so slugs from the WP export can collide with existing entries. We **reuse and additively extend** the existing types rather than creating parallel ones:
-  - `BlogPost` (existing: slug, title, publishDate, nid, body as **RichText JSON**, multipleChoice, heroImage, revista back-ref) — extend with optional fields the WP posts need: excerpt, categories/tags/author (refs), seoTitle, seoDescription. Optional additions are safe for sim-blog, whose GraphQL queries select explicit fields.
-  - `Revista` (existing: slug, title, fecha, coverImage, blogPostsCollection) — extend with optional pdfUrl/pdfAsset (linked/downloaded, not embedded), editionCategory, summary. The 119 WP editions import as `Revista` entries.
-  - **Body format:** the existing `BlogPost.body` is Contentful **RichText**, not the markdown originally planned. Recommended: convert WP HTML → markdown → RichText at import (sim-blog already has markdown→RichText conversion in its `scripts/create-course.mts`) so both apps share one body field; the Phase 0 neutral **markdown export remains the lossless, vendor-neutral canonical backup**. Settle at Phase 4 start (§5.1).
-  - **Conflict strategy (David, 2026-07-03):** import is slug-keyed upsert and **misionessim.org (the WP export) is authoritative** — on discrepancy it overwrites the Contentful entry. Phase 4 produces a pre-import collision diff report so overwrites are reviewed, not silent; extending (never deleting/recreating) existing entries preserves sim-blog's references to them.
-  - `author`, `category`, `tag` — new reference types (no conflict; sim-blog ignores them).
+- **Content layer:** **Contentful — the existing shared space** already used in production by the mi-movilicemos learning app (documented in [contentful.md](contentful.md), copied from that project (`~/websites/poc/mi-movilicemos`)). The space already has `BlogPost` and `Revista` content types (plus `ResourceGroup`/`Resource`, which this site ignores) and **already contains content sourced from VAMOS PDF magazine issues** — imported via an earlier, separate pipeline into this app directly (**not** the `import-vamos` skill, which targets sim-blog's local filesystem, `public/misionessim/*.{json,md}` — a different destination entirely; corrected 2026-07-04 after verifying against the live space). So slugs from the WP export can collide with existing entries. We **reuse and additively extend** the existing types rather than creating parallel ones:
+  - `BlogPost` (existing: slug, title, publishDate, nid, body as **RichText JSON**, multipleChoice, heroImage, revista back-ref) — extend with optional fields the WP posts need: excerpt, categories/tags/author (refs), seoTitle, seoDescription. Optional additions are safe for mi-movilicemos, whose GraphQL queries select explicit fields.
+  - `Revista` (existing: slug, title, fecha, coverImage, blogPostsCollection) — extend with optional pdfUrl/pdfAsset (linked/downloaded, not embedded), editionCategory, summary. The 118 WP editions import as `Revista` entries.
+  - **Body format:** the existing `BlogPost.body` is Contentful **RichText**, not the markdown originally planned. Recommended: convert WP HTML → markdown → RichText at import (mi-movilicemos already has markdown→RichText conversion in its `scripts/create-course.mts`) so both apps share one body field; the Phase 0 neutral **markdown export remains the lossless, vendor-neutral canonical backup**. Settle at Phase 4 start (§5.1).
+  - **Conflict strategy — refined with data, 2026-07-04.** A live GraphQL audit of the space (see §2.5 below) showed the existing content isn't uniformly better or worse than WP — it splits cleanly by field. Per-field policy, not a blanket winner:
+    - **Body text & images: WP wins**, and is re-imported for **all 335 posts** regardless of whether a Contentful match exists (Contentful's overlap is stale and 36% incomplete — see §2.5). The HTML→RichText conversion step must **clean up WP's mojibake** (broken smart-quote bytes) as part of the pipeline, not carry it forward.
+    - **Revista↔BlogPost links: Contentful wins** — where an existing `BlogPost` matches a WP slug and already has a `revista` back-reference, that link is **preserved** on upsert (re-attached to the re-imported entry) rather than dropped, since it's a real structural relationship the WP REST API doesn't expose directly (§2.1's `keydesign-portfolio` CPT gap).
+    - Mechanically still a **slug-keyed upsert, existing entries updated in place** (never deleted/recreated) — same infrastructure as before, just field-scoped instead of whole-entry.
+    - Phase 4 produces a pre-import collision diff report so every overwrite is reviewed, not silent.
+  - `author`, `category`, `tag` — new reference types (no conflict; mi-movilicemos ignores them).
   - `redirect` — new type: from/to/status, so the alias map (`/revistavamos/<slug>` → `/la-revista/<slug>`, plus anything dropped at launch) is editor-maintainable.
   - The ~8 Elementor-replacement pages are **code, not Contentful entries** — their copy is static and lives in the components for day 1. A `pageSection` type can be added later if editors ever need to change hero copy, but that is explicitly out of the launch scope.
   - All routes statically generated at build; Contentful publish webhooks hit an `/api/revalidate` route for on-demand ISR — no full redeploy per post.
-  - A thin typed accessor (`lib/cms.ts`, zod-validated) isolates the Contentful SDK so it's swappable and unit tests can run against recorded fixtures.
+  - Contentful is queried via **GraphQL** (`graphql-request`, same library and endpoint pattern as mi-movilicemos). Env vars: `CONTENTFUL_SPACE_ID`, `CONTENTFUL_ACCESS_TOKEN` (same names as mi-movilicemos). `images.ctfassets.net` in `next.config.ts` `remotePatterns` for `next/image`.
+  - A thin typed accessor (`lib/cms.ts`, zod-validated) isolates the GraphQL client so it's swappable and unit tests can run against recorded fixtures (same MSW approach as mi-movilicemos's `E2E_MOCK_CONTENTFUL`).
 - **Images:** WP media imported as Contentful assets; `next/image` with the Contentful Images API loader (resizing/AVIF). Explicit width/height everywhere to eliminate CLS. Design/layout images (hero backgrounds, parallax) stay in the repo under `public/`.
 - **Parallax:** the POC's vanilla `requestAnimationFrame`/`background-attachment` technique wrapped in a small client component; respect `prefers-reduced-motion`.
 - **SEO:** Metadata API per route reproducing Yoast output (title pattern, meta description, canonical, OG/Twitter, `Article` JSON-LD on posts); `app/sitemap.ts`, `app/robots.ts`; a `redirects()` map preserving every legacy URL.
 - **Search:** the header search currently hits WP search. Replace with a client-side index (Pagefind over the statically built pages) — zero backend. Caveat on Vercel: the Pagefind index is generated at **build time**, so posts published via on-demand ISR appear on the site immediately but in search only after the next deploy. Acceptable for this publishing cadence; if not, add a Contentful → Vercel deploy hook (debounced) alongside the revalidate webhook.
-- **Analytics:** MonsterInsights is just GA — re-add GA4 (or PostHog, already in use for sim-blog) via a script component.
+- **Analytics:** MonsterInsights is just GA — re-add GA4 (or PostHog, already in use for mi-movilicemos) via a script component.
 - **Hosting:** **Vercel** (decided 2026-07-03) — static output + serverless route handlers. No WP in production post-cutover.
 
 ---
@@ -183,7 +224,7 @@ Put Next.js in front, `rewrites()` unmigrated paths to WordPress, migrate sectio
 
 **Resolved (2026-07-03):**
 - **Approach C** — rebuild + Contentful for blog/revista.
-- **Contentful = the existing shared space** used by sim-blog ([contentful.md](contentful.md)); reuse + additively extend its `BlogPost`/`Revista` types. On slug collisions with already-imported content, **misionessim.org wins** (slug-keyed upsert overwrites, reviewed via a pre-import diff report).
+- **Contentful = the existing shared space** used by mi-movilicemos ([contentful.md](contentful.md)); reuse + additively extend its `BlogPost`/`Revista` types. **Per-field conflict policy** (data-driven, §2.5): WP wins on body text (mojibake-cleaned) and images — re-imported for all 335 posts regardless of overlap; existing Contentful `revista` back-references are preserved on upsert. Reviewed via a pre-import collision diff report.
 - **Donations dropped entirely, all references removed** — no GiveWP, no donor dashboard, no donate CTAs anywhere on the new site; legacy `/donations/*` URLs 301 → homepage in the Phase 7 redirect map.
 - **Deploy target: Vercel.**
 - **Contact form → Next.js route handler + Resend** (Vercel has no native forms product).
@@ -194,35 +235,55 @@ Put Next.js in front, `rewrites()` unmigrated paths to WordPress, migrate sectio
 
 **Small remaining choices (do not block Phases 0–3; settle at Phase 4 start):**
 1. **Body format detail** — single shared RichText body converted at import (recommended, §4) vs. adding a parallel markdown field (drift risk between two bodies).
-2. **Contentful environment rollout** — dry-run the model migration + import in a sandbox environment, then decide how it lands in the environment sim-blog reads (production content is live there) and how sim-blog is regression-checked afterwards.
+2. **Contentful environment rollout** — dry-run the model migration + import in a sandbox environment, then decide how it lands in the environment mi-movilicemos reads (production content is live there) and how mi-movilicemos is regression-checked afterwards.
 
 ---
 
 ## 6. Verification strategy (applies to every phase)
 
+The core loop at each phase: **capture live-site screenshots → build the Next.js equivalent → diff with Playwright → fix until within threshold → advance**. This runs at three viewports every time, so mobile regressions surface at the same phase as desktop ones.
+
 ### 6.1 Baseline capture (Phase 0 artifact)
 
-- Playwright script captures **reference screenshots of the live site** (logged out — no admin bar) for every migrated route at three viewports: 375×812, 768×1024, 1440×900. Full-page and above-the-fold shots.
-- Simultaneously `wget --mirror` a static snapshot of the rendered site into `reference/mirror/` (git-ignored or LFS) so baselines are reproducible even after WP content changes or the site goes down.
-- Store screenshots in `reference/baselines/` — these are the ground truth for "matches closely."
+- **Playwright `baseline` project** targets `https://misionessim.org` directly. It runs **logged out** (the WP admin bar adds 32–46px when logged in) and captures two shot types per route:
+  - Above-the-fold (viewport clip) — sensitive to header/hero layout.
+  - Full-page — catches footer and scroll-position-dependent sections.
+- Three Playwright viewport projects (all using Chromium; add Firefox/WebKit in Phase 7 if needed):
+
+  | Project | Viewport | Device analogue |
+  |---|---|---|
+  | `baseline-mobile` | 375 × 812 | iPhone SE |
+  | `baseline-tablet` | 768 × 1024 | iPad |
+  | `baseline-desktop` | 1440 × 900 | standard laptop |
+
+- Output: `reference/baselines/<route>/<viewport>.(above-fold|full-page).png`. Routes covered: every URL in `data/url-inventory.json` — homepage, all 8 static pages, a representative sample of blog posts + revista issues (not all 455; full sweep in Phase 7).
+- Simultaneously `wget --mirror` → `reference/mirror/` (git-LFS or gitignored) for an HTML/asset snapshot independent of the live site.
 
 ### 6.2 Visual regression (Playwright)
 
-- `expect(page).toHaveScreenshot()` comparing the Next.js build against the live-site baselines.
-- Comparison settings: start at `maxDiffPixelRatio: 0.02` per page, tighten as parity improves; `animations: 'disabled'`; wait for `document.fonts.ready`; freeze parallax via a test-mode query param or `prefers-reduced-motion` emulation.
-- **Mask dynamic regions** (latest-posts widgets, embedded YouTube `zx8x6J7vPNI` thumbnail, any date-driven content) rather than chasing false diffs.
-- Run desktop + mobile in CI on every PR (`npx playwright test --project=chromium-desktop --project=chromium-mobile`).
+- **`visual` Playwright project** runs the same viewport trio against the **Next.js dev/build server** (or the Vercel preview URL in CI).
+- `expect(page).toHaveScreenshot({ name: '<route>/<shot>.png' })` with the Phase 0 files as the golden reference (`snapshotDir: 'reference/baselines'`).
+- Common settings applied to every visual test:
+  ```ts
+  animations: 'disabled',
+  // Wait for fonts before snapping
+  page.waitForFunction(() => document.fonts.ready),
+  // Freeze parallax (prefers-reduced-motion emulation or ?noParallax=1 query param)
+  ```
+- **Mask dynamic regions** (latest-posts widget, YouTube `zx8x6J7vPNI` thumbnail, any date-relative text) with `page.locator('.dynamic').toHaveScreenshot({ mask: [...] })` — avoids false diffs.
+- Start at `maxDiffPixelRatio: 0.02` per page; tighten per-route as parity improves. Known intentional diffs (donation-page removal, redesigned 404) are documented and excluded.
+- **Runs in CI on every PR** across all three viewport projects. Fails the PR until the diff is within threshold or documented as intentional.
 
 ### 6.3 Unit / integration tests (Vitest + React Testing Library)
 
-- **The content pipeline is the highest-value unit-test target** — both hops: WP → neutral JSON (heading/image/embed conversion, Spanish-accented slugs, URL mapping `/blog/2017-07/slug/` preserved exactly, media manifest completeness: 336 + 119 items, zero missing) and neutral JSON → CMS (idempotent upserts, asset-reference rewriting, reconciliation counts).
-- `lib/cms.ts` tested against recorded CMS fixtures so the suite runs offline and deterministic.
-- Component tests: header (fixed white bar, CTA present, mobile menu), hero (title/columns, hidden "Dona aquí" stays hidden), listing pagination, taxonomy filtering.
+- **The content pipeline is the highest-value unit-test target** — both hops: WP → neutral JSON (heading/image/embed conversion, Spanish-accented slugs, URL mapping `/blog/2017-07/slug/` preserved exactly, media manifest completeness: 335 + 118 items, zero missing) and neutral JSON → CMS (idempotent upserts, asset-reference rewriting, reconciliation counts).
+- `lib/cms.ts` tested against recorded GraphQL fixtures (same MSW approach as mi-movilicemos's `E2E_MOCK_CONTENTFUL`) so the suite runs offline and deterministic.
+- Component tests: header (fixed white bar, CTA present, mobile menu), hero (title/columns), listing pagination, taxonomy filtering.
 - Route tests: every URL from the legacy sitemaps resolves in the new app (generated from the Phase 0 URL inventory — this single test prevents silent content loss).
 
 ### 6.4 Functional e2e (Playwright, non-visual)
 
-- Navigation, mobile menu, search returns known post, form submission (mocked backend), PDF links resolve, parallax elements move on scroll (assert `backgroundPositionY`/transform changes between two scroll positions).
+- Navigation, mobile menu, search returns known post, form submission (mocked Resend handler), PDF links resolve, parallax elements move on scroll (assert `backgroundPositionY`/transform changes between two scroll positions), no page contains donation links.
 
 ### 6.5 Performance gates (Lighthouse CI)
 
@@ -243,18 +304,26 @@ Each phase ends with: all tests green in CI, visual diffs within threshold for t
 - `wget` mirror snapshot → `reference/mirror/`.
 - Write `scripts/export-wp.ts`: pulls posts/pages/media/taxonomies via REST; expose `keydesign-portfolio` in REST via a one-line mu-plugin (we have admin) or fall back to WP-CLI on a local copy. Do **not** scrape rendered HTML for the revista editions — they only surface client-side via admin-ajax (§2.1).
 - Normalize into a **neutral intermediate**: `export/*.json` + markdown bodies with typed metadata (`title, slug, date, categories, tags, author, featuredImage, yoastTitle, yoastDescription`); download all referenced media with an integrity manifest. This neutral layer is deliberate: it feeds the Contentful import (Phase 4), serves as the vendor-independent backup, and is what we diff against at the Phase 7 content freeze.
-- **Tests:** unit tests on converter fixtures (accents, embeds, image URLs); manifest assertions (336 posts, 119 revista, 0 missing images).
+- **Tests:** unit tests on converter fixtures (accents, embeds, image URLs); manifest assertions (335 posts, 118 revista, 0 missing images).
 - **Exit:** re-runnable one-command export; inventory + baselines committed.
 
 ### Phase 1 — Next.js scaffold, design system, global layout
 
 **Goal:** app shell that matches the site chrome.
 
-- `create-next-app` (TS, App Router); CSS custom properties for the token set (§2.3); `next/font` Raleway + Work Sans.
+- `create-next-app` — Next.js 16, React 19, TypeScript, App Router, Tailwind v4.
+- `next.config.ts` mirrors mi-movilicemos's config: `trailingSlash: true`, `reactStrictMode: true`, `images.remotePatterns` for `images.ctfassets.net` + `img.youtube.com`; **no** `output: "export"` (needs route handlers).
+- Tailwind v4 `@theme` tokens matching sim-blog's `globals.css` exactly — same token names, same values (§4).
+- `next/font` with Raleway + Work Sans, `display: swap`, latin subset — same weight selections as sim-blog's `layout.tsx`.
 - Header (fixed white 71px, logo, nav, search icon, "Servir con SIM" CTA), footer, mobile menu.
-- CI: Vitest, Playwright (visual + e2e projects), Lighthouse CI wiring.
-- **Tests:** header/footer component tests; visual diff of chrome-only page vs. baseline crops.
-- **Exit:** CI pipeline running all three test types.
+- **Playwright config:** four projects from day 1 —
+  - `baseline-mobile`, `baseline-tablet`, `baseline-desktop` — target `https://misionessim.org` (Phase 0 baseline capture, not in CI).
+  - `visual-mobile`, `visual-tablet`, `visual-desktop` — target local dev server, compare against `reference/baselines/`.
+  - `e2e` — functional tests (Desktop Chrome, same pattern as mi-movilicemos).
+- **Vitest + React Testing Library** for component/unit tests (Vitest preferred over Jest for ESM/Tailwind ecosystem; mi-movilicemos uses Jest but is pre-existing).
+- Lighthouse CI config (`lighthouserc.json`) wired to fail below budget thresholds.
+- **Tests:** header/footer component tests; visual diff of chrome-only page vs. baseline crops at all 3 viewports.
+- **Exit:** CI pipeline running all three test types; all viewport diffs within threshold for the chrome-only page.
 
 ### Phase 2 — Homepage
 
@@ -274,26 +343,26 @@ Each phase ends with: all tests green in CI, visual diffs within threshold for t
 - **Tests:** visual diff per page/viewport; carousel interaction e2e.
 - **Exit:** all 7 pages within threshold.
 
-### Phase 4 — Contentful setup + blog (336 posts + archives)
+### Phase 4 — Contentful setup + blog (335 posts + archives)
 
 **Goal:** model the content backend and migrate the long tail.
 
-- Use the existing **shared** Contentful space (§4); model changes are **additive migrations to the existing `BlogPost`/`Revista` types** plus the new `author`/`category`/`tag`/`redirect` types, defined as code (Contentful migration CLI scripts, committed to the repo — never hand-edit the model in the web UI). Dry-run the model migration and full import in a **sandbox environment** first; the space carries live sim-blog production content, so verify sim-blog still works after the migration lands (its GraphQL queries select explicit fields, so additive optional fields should be safe — verify anyway).
-- `scripts/import-cms.ts`: neutral JSON (Phase 0) → Contentful Management API. **Idempotent upserts keyed by slug**, batched under rate limits, resumable; uploads media as assets; converts bodies per the §5.1 body-format decision (WP HTML → RichText recommended) and rewrites body image URLs to asset references. Before writing anything, emit a **collision diff report** (WP export vs. entries already in the space from `import-vamos`); on conflict **misionessim.org wins**, and existing entries are updated in place — never deleted/recreated — so sim-blog's references survive.
+- Use the existing **shared** Contentful space (§4); model changes are **additive migrations to the existing `BlogPost`/`Revista` types** plus the new `author`/`category`/`tag`/`redirect` types, defined as code (Contentful migration CLI scripts, committed to the repo — never hand-edit the model in the web UI). Dry-run the model migration and full import in a **sandbox environment** first; the space carries live mi-movilicemos production content, so verify mi-movilicemos still works after the migration lands (its GraphQL queries select explicit fields, so additive optional fields should be safe — verify anyway).
+- `scripts/import-cms.ts`: neutral JSON (Phase 0) → Contentful Management API. **Idempotent upserts keyed by slug**, batched under rate limits, resumable; uploads media as assets (WP's higher-res images, per §2.5); converts bodies per the §5.1 body-format decision (WP HTML → RichText, with a **mojibake-cleanup step** — fix broken `\x93`/`\x94` smart-quote bytes before conversion) and rewrites body image URLs to asset references. Before writing anything, emit a **collision diff report** against the space's existing content (from an earlier, separate VAMOS-PDF import — not `import-vamos`, which targets sim-blog's filesystem, see §2.5). On a matching slug: WP's title/body/images overwrite the entry, but if the existing entry has a `revista` back-reference, that reference is **preserved**, not dropped. Existing entries are updated in place — never deleted/recreated — so mi-movilicemos's other references survive.
 - `lib/cms.ts` typed accessor (zod-validated), with recorded-fixture mode for tests; `/api/revalidate` webhook route for on-demand ISR.
 - Post template; `/blog/` index with pagination matching current UX; category (36), tag (28), and author (2) archives — all kept (decided 2026-07-03).
 - **Exact URL preservation**: `/blog/YYYY-MM/slug/`.
 - `Article` JSON-LD; per-post metadata from exported Yoast fields.
-- **Tests:** import-script unit tests (idempotency — running twice creates nothing new; slug/accent fidelity); post-import reconciliation script (336 entries in CMS, zero missing assets); route test asserting every inventory URL builds from CMS data; `lib/cms.ts` unit tests against fixtures; revalidation webhook test; visual diff on 5 representative posts (text-only, image-heavy, embed, oldest 2017, newest 2026) + index + one category page.
-- **Exit:** all 336 posts served from the CMS; editing a post in the CMS updates the site without a redeploy; spot-check diffs pass; build time acceptable.
+- **Tests:** import-script unit tests (idempotency — running twice creates nothing new; slug/accent fidelity); post-import reconciliation script (335 entries in CMS, zero missing assets); route test asserting every inventory URL builds from CMS data; `lib/cms.ts` unit tests against fixtures; revalidation webhook test; visual diff on 5 representative posts (text-only, image-heavy, embed, oldest 2017, newest 2026) + index + one category page.
+- **Exit:** all 335 posts served from the CMS; editing a post in the CMS updates the site without a redeploy; spot-check diffs pass; build time acceptable.
 
-### Phase 5 — La Revista (119 items)
+### Phase 5 — La Revista (118 items)
 
 **Goal:** magazine section.
 
-- Import the 119 editions (from the Phase 0 export) as **`Revista` entries — the existing shared type, extended per §4**. Some editions already exist in the space from `import-vamos`: same slug-keyed upsert + collision-diff + misionessim.org-wins strategy as Phase 4, updating in place so sim-blog's `blogPostsCollection` references are preserved. Model issues vs. articles (6 portfolio categories); issue template with **PDF as a plain download/view link + cover image** (no embedder); `/la-revista/` hub + `/revistavamos/` landing with its Ediciones grid/carousel rendered server-side from Contentful data (replacing the admin-ajax carousel).
-- Generate the `/revistavamos/<slug>` → `/la-revista/<slug>` alias redirects for all 119 editions (§2.1).
-- **Tests:** 119-route build assertion; alias-redirect e2e (sample of edition slugs return 301 to `/la-revista/...`); visual diff on hub + 3 representative issues; PDF link e2e.
+- Import the 118 editions (from the Phase 0 export) as **`Revista` entries — the existing shared type, extended per §4**. Some editions already exist in the space (110 `Revista` entries found in the §2.5 audit, from the earlier VAMOS-PDF import): same slug-keyed upsert + collision-diff + per-field policy as Phase 4 (WP wins on cover image/summary if better; existing `blogPostsCollection` links are preserved), updating in place. Model issues vs. articles (6 portfolio categories); issue template with **PDF as a plain download/view link + cover image** (no embedder); `/la-revista/` hub + `/revistavamos/` landing with its Ediciones grid/carousel rendered server-side from Contentful data (replacing the admin-ajax carousel).
+- Generate the `/revistavamos/<slug>` → `/la-revista/<slug>` alias redirects for all 118 editions (§2.1).
+- **Tests:** 118-route build assertion; alias-redirect e2e (sample of edition slugs return 301 to `/la-revista/...`); visual diff on hub + 3 representative issues; PDF link e2e.
 - **Exit:** section complete within thresholds; editions maintainable in the CMS.
 
 ### Phase 6 — Forms & search
@@ -326,7 +395,7 @@ Each phase ends with: all tests green in CI, visual diffs within threshold for t
 | Content drifts while we migrate (editors keep publishing to WP) | Baselines go stale, content missed | wget mirror pins baselines; content freeze + delta re-export in Phase 7; route test auto-detects new posts |
 | Pixel-parity rabbit holes on low-traffic pages | Schedule blowout | Per-page diff thresholds; PM signs off a documented list of intentional diffs instead of chasing 0% |
 | Donation traffic/links lost after dropping GiveWP | Confused donors, lost giving | 301 the old `/donations/*` URLs to the homepage; announce the change; monitor 404s post-launch |
-| Shared-space migration breaks sim-blog (model change or overwritten entries) | Live learning app degrades | Additive-only model migrations (optional fields); dry-run in sandbox environment; pre-import collision diff report; update entries in place (never delete/recreate); run sim-blog's test suite / spot-checks after the migration lands |
+| Shared-space migration breaks mi-movilicemos (model change or overwritten entries) | Live learning app degrades | Additive-only model migrations (optional fields); dry-run in sandbox environment; pre-import collision diff report; update entries in place (never delete/recreate); run mi-movilicemos's test suite / spot-checks after the migration lands |
 | Spanish-accented slugs / encoding bugs in export | Broken URLs, SEO loss | Converter unit tests with accent fixtures; byte-exact URL inventory assertion |
 | CMS import partial failure (rate limits, timeouts) | Missing posts/assets nobody notices | Idempotent resumable import; post-import reconciliation script asserting exact entry/asset counts vs. the neutral export |
 | CMS vendor cost creep or lock-in regret | Forced re-migration | Neutral JSON export is the canonical backup and re-runnable from the CMS; only `lib/cms.ts` + import script are vendor-specific (Approach B remains the documented fallback) |
@@ -339,6 +408,15 @@ Each phase ends with: all tests green in CI, visual diffs within threshold for t
 ## 9. Suggested repo layout
 
 The Next.js app lives at the root of **this repo** (the static homepage POC was moved to `poc/` on 2026-07-03).
+
+### Sister projects
+
+| Project | Path | Stack | Host | Relation |
+|---|---|---|---|---|
+| **sim-blog** | `~/websites/learn/sim-blog` | Next.js 16, Tailwind v4, `output: "export"` | GitHub Pages → `historias.misionessim.org` | Same design tokens + fonts; no Contentful. misionessim-new will cross-link to it. |
+| **mi-movilicemos** | `~/websites/poc/mi-movilicemos` | Next.js 16, Jest, Playwright, Vercel | — | Shares the Contentful space; has the GraphQL client pattern, Resend, and MSW mock approach to copy from. |
+
+misionessim-new aligns with these rather than reinventing patterns. Code (GraphQL clients, Contentful types, RichText renderer) can be copied from mi-movilicemos; Tailwind token names copied from sim-blog.
 
 ```
 misionessim-new/
