@@ -1,6 +1,7 @@
 {
-  "generatedAt": "2026-07-03T21:11:04.013Z",
+  "generatedAt": "2026-07-03T22:16:29.782Z",
   "summary": {
+    "environment": "master",
     "total": 335,
     "new": 120,
     "update": 215,
@@ -115,9 +116,9 @@
       "wpTitle": "10 Devocionales en YouVersion sobre Trabajo y Fe",
       "cfTitle": "10 Devocionales en YouVersion sobre Trabajo y Fe",
       "titleChanged": false,
-      "wpBodyChars": 7139,
+      "wpBodyChars": 6584,
       "cfBodyChars": 5394,
-      "bodyLengthRatio": 1.3235076010381905,
+      "bodyLengthRatio": 1.2206154987022617,
       "hasRevistaLink": true,
       "revistaSlug": "tu-trabajo-en-el-reino",
       "imageVerdict": "wp-higher-res",

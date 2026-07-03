@@ -18,6 +18,7 @@ import matter from "gray-matter";
 import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const SITE = "https://misionessim.org";
 const POSTS_DIR = path.join(process.cwd(), "export", "posts");
@@ -50,6 +51,34 @@ const MOJIBAKE_RE = new RegExp(`[${Object.keys(MOJIBAKE_MAP).join("")}]`, "g");
 
 export function cleanMojibake(text: string): string {
   return text.replace(MOJIBAKE_RE, (ch) => MOJIBAKE_MAP[ch]);
+}
+
+// Leftover Drupal Media module embed tokens (misionessim.org was migrated
+// off Drupal at some point — confirmed 2026-07-04 by a real example in
+// 10-devocionales-en-youversion-sobre-trabajo-y-fe.md: a
+// `[[{"fid":"3200","view_mode":"default",...,"type":"media",...}]]` blob
+// sitting as literal visible text where an inline image used to render).
+// The referenced Drupal file ID is unrecoverable (no access to that site's
+// file table), so these are stripped rather than converted. Scanned all
+// 335 exported bodies for this pattern: only this one post is affected —
+// low frequency, but the regex stays defensive for future re-exports.
+//
+// Applied AFTER turndown conversion, not on the raw HTML: the source
+// stores the quotes as HTML numeric entities (&#8220;/&#8221;, a
+// Google-Docs-paste artifact, not the \x93/\x94 mojibake pattern), which
+// only become literal curly-quote characters once turndown decodes
+// entities during HTML->Markdown conversion. Turndown also
+// backslash-escapes every `[`/`]` in the token (including the ones
+// embedded in the payload itself, e.g. `field_file_image_alt_text\[und\]`)
+// to prevent them being read as markdown link syntax — the regex tolerates
+// an optional backslash before each bracket, and matches broadly between
+// the opening `[[{` and the `"type":"media"` marker rather than trying to
+// enumerate every escaped-bracket field in between.
+const DRUPAL_MEDIA_TOKEN_RE =
+  /\\?\[\\?\[\s*\{[\s\S]*?["“”]type["“”]\s*:\s*["“”]media["“”][\s\S]*?\}\s*\\?\]\\?\]/g;
+
+export function stripDrupalMediaTokens(text: string): string {
+  return text.replace(DRUPAL_MEDIA_TOKEN_RE, "").trim();
 }
 
 // title.rendered and excerpt.rendered are plain HTML fragments, not run
@@ -197,7 +226,11 @@ async function main() {
       const title = cleanMojibake(stripHtml(post.title.rendered));
       const excerpt = cleanMojibake(stripHtml(post.excerpt.rendered));
       const cleanedContentHtml = cleanMojibake(post.content.rendered);
-      const bodyMarkdown = turndown.turndown(cleanedContentHtml).trim();
+      // stripDrupalMediaTokens runs post-turndown, not on the raw HTML —
+      // see the comment on DRUPAL_MEDIA_TOKEN_RE for why.
+      const bodyMarkdown = stripDrupalMediaTokens(
+        turndown.turndown(cleanedContentHtml).trim(),
+      );
 
       const terms = post._embedded?.["wp:term"] ?? [];
       const categories = terms
@@ -307,7 +340,15 @@ async function main() {
   }
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Guard against running on import — tests/unit/export-wp.test.ts imports
+// this module for its exported utility functions (cleanMojibake, stripHtml,
+// stripDrupalMediaTokens, etc.), and without this check that import would
+// trigger a full live WP export (network calls, file writes) as a side
+// effect. Confirmed as a real problem 2026-07-04 while ad-hoc testing this
+// file's exports via a throwaway script.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

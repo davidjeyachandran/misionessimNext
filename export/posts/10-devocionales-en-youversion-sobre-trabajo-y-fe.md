@@ -86,7 +86,7 @@ Realizado por: Conociendo a Dios.
 
 Devocional aquí: [https://my.bible.com/es/reading-plans/16095-fe-y-trabajo](https://my.bible.com/es/reading-plans/16095-fe-y-trabajo) 
 
-\[\[{“fid”:”3200″,”view\_mode”:”default”,”fields”:{“format”:”default”,”alignment”:”center”,”field\_file\_image\_alt\_text\[und\]\[0\]\[value\]”:false,”field\_file\_image\_title\_text\[und\]\[0\]\[value\]”:false},”type”:”media”,”field\_deltas”:{“1”:{“format”:”default”,”alignment”:”center”,”field\_file\_image\_alt\_text\[und\]\[0\]\[value\]”:false,”field\_file\_image\_title\_text\[und\]\[0\]\[value\]”:false}},”link\_text”:null,”attributes”:{“height”:174,”width”:1000,”class”:”media-element file-default media-wysiwyg-align-center”,”data-delta”:”1″}}\]\]
+
 
 6\. Hacer negocios de manera sobrenatural
 

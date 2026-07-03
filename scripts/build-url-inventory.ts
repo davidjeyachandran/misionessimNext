@@ -12,6 +12,7 @@
 import { XMLParser } from "fast-xml-parser";
 import { writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const SITE = "https://misionessim.org";
 const OUT_PATH = path.join(process.cwd(), "data", "url-inventory.json");
@@ -200,7 +201,12 @@ async function main() {
   console.log("Counts by type:", counts);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Guard against running on import — tests/unit/build-url-inventory.test.ts
+// imports this module for `classify`; without this check, that import
+// would trigger a full live sitemap crawl as a side effect.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

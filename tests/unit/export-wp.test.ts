@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   cleanMojibake,
   decodeHtmlEntities,
+  stripDrupalMediaTokens,
   stripHtml,
 } from "../../scripts/export-wp";
 
@@ -80,5 +81,42 @@ describe("decodeHtmlEntities", () => {
   it("is a no-op on text with no entities", () => {
     const text = "Texto normal sin entidades.";
     expect(decodeHtmlEntities(text)).toBe(text);
+  });
+});
+
+describe("stripDrupalMediaTokens", () => {
+  // Real sample, in its actual post-turndown markdown form (brackets
+  // backslash-escaped, including inside the payload) — from
+  // 10-devocionales-en-youversion-sobre-trabajo-y-fe.md, the one post out
+  // of 335 with this leftover Drupal Media module embed token. `fid: 3200`
+  // is a Drupal file ID with no recoverable target.
+  const REAL_TOKEN =
+    '\\[\\[{“fid”:”3200″,”view\\_mode”:”default”,”fields”:{“format”:”default”,”alignment”:”center”,”field\\_file\\_image\\_alt\\_text\\[und\\]\\[0\\]\\[value\\]”:false,”field\\_file\\_image\\_title\\_text\\[und\\]\\[0\\]\\[value\\]”:false},”type”:”media”,”field\\_deltas”:{“1”:{“format”:”default”,”alignment”:”center”,”field\\_file\\_image\\_alt\\_text\\[und\\]\\[0\\]\\[value\\]”:false,”field\\_file\\_image\\_title\\_text\\[und\\]\\[0\\]\\[value\\]”:false}},”link\\_text”:null,”attributes”:{“height”:174,”width”:1000,”class”:”media-element file-default media-wysiwyg-align-center”,”data-delta”:”1″}}\\]\\]';
+
+  it("strips the real corrupted token sampled from the live site", () => {
+    const before = `5. Fe y trabajo\n\n${REAL_TOKEN}\n\n6. Hacer negocios de manera sobrenatural`;
+    const after = stripDrupalMediaTokens(before);
+    expect(after).not.toContain("fid");
+    expect(after).not.toContain("view_mode");
+    expect(after).toContain("5. Fe y trabajo");
+    expect(after).toContain("6. Hacer negocios de manera sobrenatural");
+  });
+
+  it("handles a token with unescaped brackets too (defensive — in case a future post isn't turndown-escaped the same way)", () => {
+    const before = 'antes [[{"fid":"99","type":"media","x":1}]] despues';
+    const after = stripDrupalMediaTokens(before);
+    expect(after).not.toContain("fid");
+    expect(after).toContain("antes");
+    expect(after).toContain("despues");
+  });
+
+  it("is a no-op on text with no Drupal tokens", () => {
+    const text = "Texto normal con [un enlace](https://example.com) y nada más.";
+    expect(stripDrupalMediaTokens(text)).toBe(text);
+  });
+
+  it("does not strip unrelated bracket/brace text", () => {
+    const text = "Un array [1, 2, 3] y un objeto {a: 1} normales.";
+    expect(stripDrupalMediaTokens(text)).toBe(text);
   });
 });

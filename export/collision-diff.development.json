@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-03T21:55:54.148Z",
+  "generatedAt": "2026-07-03T22:16:49.566Z",
   "summary": {
     "environment": "development",
     "total": 335,
@@ -119,9 +119,9 @@
       "wpTitle": "10 Devocionales en YouVersion sobre Trabajo y Fe",
       "cfTitle": "10 Devocionales en YouVersion sobre Trabajo y Fe",
       "titleChanged": false,
-      "wpBodyChars": 7139,
+      "wpBodyChars": 6584,
       "cfBodyChars": 6201,
-      "bodyLengthRatio": 1.1512659248508306,
+      "bodyLengthRatio": 1.0617642315755522,
       "hasRevistaLink": false,
       "revistaSlug": null,
       "imageVerdict": "wp-higher-res",
