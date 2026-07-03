@@ -187,3 +187,8 @@ docs/.docusaurus/
 # Only the wget mirror is excluded: much larger, and reproducible on demand
 # via `yarn mirror:site` against the live site.
 reference/mirror/
+
+# export/import-plan.json is a large (3.8MB+) derived artifact — embeds full
+# RichText bodies for every post, deterministically regenerable via
+# `yarn import:cms` from already-committed export/posts/ + collision-diff.json.
+export/import-plan.json
