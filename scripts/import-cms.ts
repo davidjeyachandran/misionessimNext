@@ -7,18 +7,23 @@
  *    export/import-plan.json. Makes NO Content Management API calls.
  *  - `yarn import:cms --live --environment=<id>`: executes the plan against
  *    the given Contentful environment. Requires CONTENTFUL_MANAGEMENT_TOKEN.
- *    Refuses to target "master" without --force (this space is shared
- *    production infra for mi-movilicemos — see docs/contentful.md).
+ *    Refuses to target "master" or "main" without --force ("master" is a
+ *    Contentful environment ALIAS pointing at "main" — same production data,
+ *    shared infra for mi-movilicemos — see docs/contentful.md). Reads
+ *    export/collision-diff.<id>.json (NOT the unsuffixed master one) — run
+ *    `yarn diff:cms -- --environment=<id>` first. This matters: environments
+ *    are not clean mirrors of each other (confirmed 2026-07-04 — Contentful's
+ *    "development" environment has only 22/335 slug matches vs. master's
+ *    215, i.e. genuinely different content, not a recent branch of master).
  *
- * As of 2026-07-04 the live path is UNTESTED — no Management API
- * credentials scoped to this space exist yet (see docs/PROGRESS.md). Do not
- * run --live until it has been dry-run-reviewed and exercised against a
- * sandbox environment first.
+ * As of 2026-07-04 the live path is UNTESTED — dry-run plans have been
+ * computed and reviewed for both master and development, but no --live
+ * execution has happened yet (see docs/PROGRESS.md).
  *
  * Per-field policy (docs/nextjs-migration-analysis.md §2.5/§4):
  *  - Title/body always come from WP (mojibake-cleaned, already true of the
  *    export/posts/*.md files).
- *  - Image comes from whichever side collision-diff.json's `imageVerdict`
+ *  - Image comes from whichever side the collision diff's `imageVerdict`
  *    says has the larger image.
  *  - An existing `revista` back-reference is always preserved, never
  *    touched or cleared.
@@ -86,8 +91,23 @@ interface CollisionDiffEntry {
 // Plan computation (runs in both dry-run and --live modes)
 // ---------------------------------------------------------------------------
 
-async function buildPlan(): Promise<PostPlan[]> {
-  const diffRaw = await readFile(COLLISION_DIFF_PATH, "utf-8");
+async function buildPlan(environmentId?: string): Promise<PostPlan[]> {
+  // Each environment can have genuinely different content (confirmed
+  // 2026-07-04: "development" has only 22/335 slug matches vs. master's
+  // 215 — it is NOT a clean mirror), so the collision diff must be
+  // environment-specific. `yarn diff:cms --environment=<id>` produces
+  // export/collision-diff.<id>.json; master uses the unsuffixed file.
+  const diffPath = environmentId
+    ? path.join(process.cwd(), "export", `collision-diff.${environmentId}.json`)
+    : COLLISION_DIFF_PATH;
+  let diffRaw: string;
+  try {
+    diffRaw = await readFile(diffPath, "utf-8");
+  } catch {
+    throw new Error(
+      `Missing ${diffPath} — run \`yarn diff:cms${environmentId ? ` -- --environment=${environmentId}` : ""}\` first.`,
+    );
+  }
   const diff = JSON.parse(diffRaw) as { diffs: CollisionDiffEntry[] };
   const diffBySlug = new Map(diff.diffs.map((d) => [d.slug, d]));
 
@@ -216,7 +236,12 @@ async function runLive(plans: PostPlan[], environmentId: string) {
       body: { "en-US": plan.fields.body },
       nid: { "en-US": plan.fields.nid },
       publishDate: { "en-US": plan.fields.publishDate },
-      excerpt: { "en-US": plan.fields.excerpt },
+      // Contentful's field is `description`, not `excerpt` — the schema
+      // already had a required `description` field serving the same
+      // purpose (confirmed via Management API, 2026-07-04); no `excerpt`
+      // field exists. Required, so fall back to the title if WP's excerpt
+      // is empty (rare, but happens on very short posts).
+      description: { "en-US": plan.fields.excerpt || plan.fields.title },
       categories: { "en-US": plan.fields.categories },
       tags: { "en-US": plan.fields.tags },
       seoTitle: { "en-US": plan.fields.seoTitle },
@@ -258,13 +283,22 @@ async function main() {
   const force = args.includes("--force");
   const envArg = args.find((a) => a.startsWith("--environment="));
   const environmentId = envArg?.split("=")[1];
+  const limitArg = args.find((a) => a.startsWith("--limit="));
+  const liveLimit = limitArg ? Number(limitArg.split("=")[1]) : undefined;
+  const slugArg = args.find((a) => a.startsWith("--slugs="));
+  const onlySlugs = slugArg ? new Set(slugArg.split("=")[1].split(",")) : undefined;
 
-  console.log("Building import plan from export/collision-diff.json + export/posts/*.md...");
-  const plans = await buildPlan();
+  console.log(
+    `Building import plan from ${environmentId ? `collision-diff.${environmentId}.json` : "collision-diff.json"} + export/posts/*.md...`,
+  );
+  const plans = await buildPlan(environmentId);
   const summary = summarize(plans);
 
+  const planOutPath = environmentId
+    ? path.join(process.cwd(), "export", `import-plan.${environmentId}.json`)
+    : PLAN_OUT_PATH;
   await writeFile(
-    PLAN_OUT_PATH,
+    planOutPath,
     JSON.stringify({ generatedAt: new Date().toISOString(), summary, plans }, null, 2),
   );
 
@@ -276,7 +310,7 @@ async function main() {
   console.log(`Images kept (Contentful): ${summary.imagesKeptExisting}`);
   console.log(`Images: none either side: ${summary.imagesNone}`);
   console.log(`Revista links preserved:  ${summary.revistaLinksPreserved}`);
-  console.log(`\nFull plan: ${PLAN_OUT_PATH}`);
+  console.log(`\nFull plan: ${planOutPath}`);
 
   if (!live) {
     console.log("\nDry run only — no Contentful API calls made. Pass --live --environment=<id> to execute.");
@@ -286,14 +320,25 @@ async function main() {
   if (!environmentId) {
     throw new Error("--live requires --environment=<id> (no default — refuses to guess).");
   }
-  if (environmentId === "master" && !force) {
+  // "master" is a Contentful environment ALIAS, not a real environment — in
+  // this space it points at "main" (confirmed 2026-07-04 via
+  // client.environmentAlias.getMany). Writing to "main" IS writing to
+  // production, identically to writing to "master". Block both.
+  const PRODUCTION_ENVIRONMENT_IDS = ["master", "main"];
+  if (PRODUCTION_ENVIRONMENT_IDS.includes(environmentId) && !force) {
     throw new Error(
-      "Refusing to run --live against the \"master\" environment (shared production space, also used by mi-movilicemos) without --force. Use a sandbox environment first.",
+      `Refusing to run --live against "${environmentId}" — production environment (shared space, also used by mi-movilicemos; "master" is an alias for "main", same data). Use a sandbox environment (e.g. "development") first, or pass --force if you really mean it.`,
     );
   }
 
-  console.log(`\n--live: executing plan against environment "${environmentId}"...`);
-  await runLive(plans, environmentId);
+  let livePlans = plans;
+  if (onlySlugs) livePlans = livePlans.filter((p) => onlySlugs.has(p.slug));
+  if (liveLimit) livePlans = livePlans.slice(0, liveLimit);
+
+  console.log(
+    `\n--live: executing plan against environment "${environmentId}" (${livePlans.length}/${plans.length} posts${liveLimit ? `, --limit=${liveLimit}` : ""}${onlySlugs ? `, --slugs filter` : ""})...`,
+  );
+  await runLive(livePlans, environmentId);
   console.log("Done.");
 }
 

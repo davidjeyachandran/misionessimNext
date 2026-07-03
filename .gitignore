@@ -188,7 +188,9 @@ docs/.docusaurus/
 # via `yarn mirror:site` against the live site.
 reference/mirror/
 
-# export/import-plan.json is a large (3.8MB+) derived artifact — embeds full
+# export/import-plan*.json is a large (3.8MB+) derived artifact — embeds full
 # RichText bodies for every post, deterministically regenerable via
-# `yarn import:cms` from already-committed export/posts/ + collision-diff.json.
+# `yarn import:cms` from already-committed export/posts/ + collision-diff*.json.
+# collision-diff*.json (smaller, no bodies) IS committed as an audit trail.
 export/import-plan.json
+export/import-plan.*.json

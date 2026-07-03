@@ -13,6 +13,7 @@
     "export:wp": "tsx scripts/export-wp.ts",
     "diff:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/diff-cms-collisions.ts",
     "import:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-cms.ts",
+    "migrate:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/run-migration.ts",
     "test:unit": "vitest run"
   },
   "dependencies": {
@@ -30,6 +31,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/turndown": "^5.0.6",
+    "contentful-migration": "^5.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "fast-xml-parser": "^5.9.3",
