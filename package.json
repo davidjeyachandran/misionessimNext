@@ -11,6 +11,7 @@
     "capture:baselines": "tsx scripts/capture-baselines.ts",
     "mirror:site": "bash scripts/mirror-site.sh",
     "export:wp": "tsx scripts/export-wp.ts",
+    "diff:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/diff-cms-collisions.ts",
     "test:unit": "vitest run"
   },
   "dependencies": {
