@@ -22,13 +22,21 @@ export async function generateStaticParams() {
 type Props = { params: Promise<{ date: string; slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { date, slug } = await params;
   const post = await getBlogPostBySlug(slug);
   if (!post) return {};
+  // Canonicalise to the post's own publishDate segment, so a request that
+  // reached this post under a different date segment still points search
+  // engines at the one true URL.
+  const canonicalDate = post.publishDate
+    ? publishDateToSegment(post.publishDate)
+    : date;
   return {
     title: post.seoTitle ?? post.title,
     description: post.seoDescription ?? post.description ?? undefined,
+    alternates: { canonical: `/blog/${canonicalDate}/${slug}/` },
     openGraph: {
+      type: "article",
       title: post.seoTitle ?? post.title,
       description: post.seoDescription ?? post.description ?? undefined,
       images: post.heroImage?.url ? [{ url: post.heroImage.url }] : [],

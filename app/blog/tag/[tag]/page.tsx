@@ -22,6 +22,7 @@ export async function generateMetadata({
   return {
     title: `Etiqueta: ${name}`,
     description: `Artículos etiquetados con ${name}.`,
+    alternates: { canonical: `/blog/tag/${tag}/` },
   };
 }
 

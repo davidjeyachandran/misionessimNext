@@ -5,6 +5,7 @@ import { PostGrid } from "./_components/PostGrid";
 export const metadata: Metadata = {
   title: "Blog",
   description: "Artículos sobre misiones, fe y servicio de SIM Latinoamérica.",
+  alternates: { canonical: "/blog/" },
 };
 
 const PER_PAGE = 12;

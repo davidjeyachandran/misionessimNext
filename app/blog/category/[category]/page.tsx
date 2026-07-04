@@ -25,6 +25,7 @@ export async function generateMetadata({
   return {
     title: `Categoría: ${name}`,
     description: `Artículos en la categoría ${name}.`,
+    alternates: { canonical: `/blog/category/${category}/` },
   };
 }
 

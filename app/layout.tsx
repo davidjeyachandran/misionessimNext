@@ -3,6 +3,7 @@ import { Raleway, Work_Sans } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "./_components/SiteHeader";
 import { SiteFooter } from "./_components/SiteFooter";
+import { SITE_URL } from "../lib/site";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -19,12 +20,21 @@ const workSans = Work_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "SIM Latinoamérica",
     template: "%s · SIM Latinoamérica",
   },
   description:
     "SIM es una comunidad de creyentes comprometidos a servir a Dios y a las personas en Latinoamérica y el mundo.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: "SIM Latinoamérica",
+    locale: "es_ES",
+  },
 };
 
 export default function RootLayout({
