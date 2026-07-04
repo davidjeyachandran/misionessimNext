@@ -49,17 +49,6 @@ export function PostCard({ post }: { post: BlogPostCard }) {
         )}
         <div className="flex items-center gap-2 text-xs text-muted">
           <time dateTime={post.publishDate}>{displayDate}</time>
-          {post.author && (
-            <>
-              <span aria-hidden>·</span>
-              <Link
-                href={`/blog/author/${slugify(post.author)}/`}
-                className="hover:text-ink transition-colors"
-              >
-                {post.author}
-              </Link>
-            </>
-          )}
         </div>
       </div>
     </article>

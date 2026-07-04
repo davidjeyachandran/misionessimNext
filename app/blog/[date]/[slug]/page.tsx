@@ -157,17 +157,6 @@ export default async function BlogPostPage({ params }: Props) {
         <h1 className="font-heading text-4xl font-bold leading-tight text-ink">{post.title}</h1>
         <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-muted">
           <time dateTime={post.publishDate}>{displayDate}</time>
-          {post.author && (
-            <>
-              <span aria-hidden>·</span>
-              <Link
-                href={`/blog/author/${slugify(post.author)}/`}
-                className="hover:text-ink transition-colors"
-              >
-                {post.author}
-              </Link>
-            </>
-          )}
         </div>
       </header>
 

@@ -43,7 +43,6 @@ export interface BlogPostCard {
   heroImage?: ContentfulImage | null;
   categories?: string[] | null;
   tags?: string[] | null;
-  author?: string | null;
   revistaSlug?: string | null;
 }
 
@@ -157,7 +156,6 @@ function toCard(e: RawEntry): BlogPostCard {
     heroImage: e.heroImage,
     categories: e.categories,
     tags: e.tags,
-    author: e.author,
     revistaSlug: e.revista?.slug ?? null,
   };
 }
@@ -207,13 +205,14 @@ export const getBlogPosts = cache(
 );
 
 // ---------------------------------------------------------------------------
-// Taxonomy archives (category / tag / author)
+// Taxonomy archives (category / tag)
 //
-// Contentful stores the human-readable term names ("Contextualización",
-// "misiones", an author's name). Archive URLs use a clean slug derived from
-// the name (`/blog/category/contextualizacion/`), matched back by comparing
-// slugify(storedName) to the URL segment. A term resolves to its display
-// name from the first matching entry.
+// Author archives were dropped: the WP import only carries account names
+// (admin/SIM Latinoamérica), not editorial bylines. Contentful stores the
+// human-readable term names ("Contextualización", "misiones"). Archive URLs
+// use a clean slug derived from the name (`/blog/category/contextualizacion/`),
+// matched back by comparing slugify(storedName) to the URL segment. A term
+// resolves to its display name from the first matching entry.
 
 export function slugify(value: string): string {
   return (value || "")
@@ -230,15 +229,13 @@ export interface TaxonomyTerm {
   count: number;
 }
 
-type TaxonomyKind = "categories" | "tags" | "author";
+type TaxonomyKind = "categories" | "tags";
 
 async function aggregateTerms(kind: TaxonomyKind): Promise<TaxonomyTerm[]> {
   const entries = await getCanonicalEntries();
   const bySlug = new Map<string, TaxonomyTerm>();
   for (const e of entries) {
-    const values =
-      kind === "author" ? (e.author ? [e.author] : []) : (e[kind] ?? []);
-    for (const value of values) {
+    for (const value of e[kind] ?? []) {
       if (!value) continue;
       const slug = slugify(value);
       if (!slug) continue;
@@ -254,7 +251,6 @@ async function aggregateTerms(kind: TaxonomyKind): Promise<TaxonomyTerm[]> {
 
 export const getAllCategories = cache(() => aggregateTerms("categories"));
 export const getAllTags = cache(() => aggregateTerms("tags"));
-export const getAllAuthors = cache(() => aggregateTerms("author"));
 
 interface TermArchive {
   name: string;
@@ -271,9 +267,7 @@ async function archiveBySlug(
   const entries = await getCanonicalEntries();
   let name = "";
   const matching = entries.filter((e) => {
-    const values =
-      kind === "author" ? (e.author ? [e.author] : []) : (e[kind] ?? []);
-    const hit = values.find((v) => slugify(v) === slug);
+    const hit = (e[kind] ?? []).find((v) => slugify(v) === slug);
     if (hit && !name) name = hit;
     return Boolean(hit);
   });
@@ -289,9 +283,6 @@ export const getBlogPostsByCategory = cache(
 );
 export const getBlogPostsByTag = cache(
   (slug: string, limit = 12, skip = 0) => archiveBySlug("tags", slug, limit, skip),
-);
-export const getBlogPostsByAuthor = cache(
-  (slug: string, limit = 12, skip = 0) => archiveBySlug("author", slug, limit, skip),
 );
 
 // ---------------------------------------------------------------------------
@@ -309,7 +300,6 @@ export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | 
           description
           categories
           tags
-          author
           heroImage { url description width height }
           seoTitle
           seoDescription
