@@ -49,6 +49,12 @@ interface CfBlogPost {
   heroImage: { width: number; height: number } | null;
   revistaSlug: string | null;
   body: RichTextNode | null;
+  /** True when the entry is archived in Contentful (Management API only —
+   * the CDA/GraphQL path never returns archived entries). Archived matches
+   * are deliberate removals (2026-07-04 duplicate cleanup: WP-slug losers
+   * whose canonical content lives under a VAMOS-slug twin) — they must be
+   * neither updated (the API refuses) nor recreated. */
+  archived: boolean;
 }
 
 function richTextToPlainLength(node: RichTextNode | null | undefined): number {
@@ -124,6 +130,7 @@ async function fetchViaGraphQL(slugs: string[]): Promise<Map<string, CfBlogPost>
         heroImage: item.heroImage,
         revistaSlug: item.revista?.slug ?? null,
         body: item.body?.json ?? null,
+        archived: false, // CDA only serves published entries
       });
     }
     process.stderr.write(".");
@@ -153,7 +160,7 @@ async function fetchViaManagementApi(environmentId: string): Promise<Map<string,
 
   console.log(`Fetching all blogPost entries from environment "${environmentId}"...`);
   const allEntries: Array<{
-    sys: { id: string };
+    sys: { id: string; archivedVersion?: number };
     fields: Record<string, Record<string, unknown>>;
   }> = [];
   let skip = 0;
@@ -243,6 +250,10 @@ async function fetchViaManagementApi(environmentId: string): Promise<Map<string,
       ?.sys?.id;
     const revistaId = (e.fields.revista?.["en-US"] as { sys?: { id: string } } | undefined)?.sys
       ?.id;
+    const archived = e.sys.archivedVersion !== undefined;
+    // If a live and an archived entry ever share a slug, the live one wins
+    // the match — never let an archived row shadow updatable content.
+    if (archived && found.has(slug) && !found.get(slug)!.archived) continue;
     found.set(slug, {
       entryId: e.sys.id,
       slug,
@@ -251,6 +262,7 @@ async function fetchViaManagementApi(environmentId: string): Promise<Map<string,
       heroImage: heroImageId ? (assetDims.get(heroImageId) ?? null) : null,
       revistaSlug: revistaId ? (revistaSlugs.get(revistaId) ?? null) : null,
       body: (e.fields.body?.["en-US"] as RichTextNode) ?? null,
+      archived,
     });
   }
   return found;
@@ -267,7 +279,9 @@ type ImageVerdict =
 
 interface DiffEntry {
   slug: string;
-  status: "new" | "update";
+  /** "skip-archived": the matching Contentful entry is archived (a deliberate
+   * duplicate-cleanup removal) — the import must not update or recreate it. */
+  status: "new" | "update" | "skip-archived";
   contentfulEntryId: string | null;
   wpTitle: string;
   cfTitle: string | null;
@@ -324,14 +338,18 @@ async function main() {
     if (!wpImage && !cf?.heroImage) imageVerdict = "neither";
     else if (!wpImage && cf?.heroImage) imageVerdict = "wp-missing-cf-has";
     else if (wpImage && !cf?.heroImage) imageVerdict = "wp-has-cf-missing";
-    else imageVerdict = wpArea >= cfArea ? "wp-higher-res" : "cf-higher-res";
+    // Strictly-greater: an equal-area tie keeps the existing Contentful
+    // asset. After the initial import CF holds the very WP image we uploaded,
+    // so a tie means "same image" — treating it as wp-higher-res (as the
+    // original >= did) would re-upload a duplicate asset on every re-run.
+    else imageVerdict = wpArea > cfArea ? "wp-higher-res" : "cf-higher-res";
 
     const cfBodyChars = richTextToPlainLength(cf?.body);
     const wpBodyChars = body.length;
 
     return {
       slug,
-      status: cf ? "update" : "new",
+      status: cf ? (cf.archived ? "skip-archived" : "update") : "new",
       contentfulEntryId: cf?.entryId ?? null,
       wpTitle: frontmatter.title as string,
       cfTitle: cf?.title ?? null,
@@ -352,6 +370,7 @@ async function main() {
     total: diffs.length,
     new: diffs.filter((d) => d.status === "new").length,
     update: diffs.filter((d) => d.status === "update").length,
+    skippedArchived: diffs.filter((d) => d.status === "skip-archived").length,
     updatesWithRevistaLinkToPreserve: diffs.filter((d) => d.hasRevistaLink).length,
     imageVerdicts: diffs.reduce<Record<string, number>>((acc, d) => {
       acc[d.imageVerdict] = (acc[d.imageVerdict] ?? 0) + 1;
@@ -375,6 +394,7 @@ async function main() {
   console.log(`Total WP posts:              ${summary.total}`);
   console.log(`New (no Contentful match):   ${summary.new}`);
   console.log(`Updates (slug matches):      ${summary.update}`);
+  console.log(`Skipped (archived in CF):    ${summary.skippedArchived}`);
   console.log(`  ...with revista link kept: ${summary.updatesWithRevistaLinkToPreserve}`);
   console.log(`Image verdicts:`, summary.imageVerdicts);
   console.log(`Suspicious length mismatches (needs manual review): ${summary.suspiciousLengthMismatches}`);

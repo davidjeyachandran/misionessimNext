@@ -142,4 +142,34 @@ describe("markdownToRichText", () => {
       "Esta es una línea que continúa aquí.",
     );
   });
+
+  describe("markdown backslash escapes (turndown escapes prose punctuation)", () => {
+    it("strips the escape from numbered-prefix headings (found live in Contentful as '1\\. Organiza una reunión')", () => {
+      const doc = markdownToRichText("#### 1\\. Organiza una reunión para ver un partido");
+      expect(doc.content[0].nodeType).toBe("heading-4");
+      expect(doc.content[0].content![0].value).toBe(
+        "1. Organiza una reunión para ver un partido",
+      );
+    });
+
+    it("strips escaped underscores and brackets in paragraph text", () => {
+      const doc = markdownToRichText("Texto con view\\_mode y \\[corchetes\\] literales.");
+      expect(doc.content[0].content![0].value).toBe(
+        "Texto con view_mode y [corchetes] literales.",
+      );
+    });
+
+    it("strips escapes inside list item text, not just the marker", () => {
+      const doc = markdownToRichText("1\\. Punto uno \\(detalle\\)");
+      expect(doc.content[0].nodeType).toBe("ordered-list");
+      expect(doc.content[0].content![0].content![0].content![0].value).toBe(
+        "Punto uno (detalle)",
+      );
+    });
+
+    it("leaves a lone backslash before a non-escapable character untouched", () => {
+      const doc = markdownToRichText("Ruta C:\\Windows normal.");
+      expect(doc.content[0].content![0].value).toBe("Ruta C:\\Windows normal.");
+    });
+  });
 });

@@ -94,8 +94,21 @@ function parseInline(text: string): RichTextNode[] {
   return nodes;
 }
 
+// turndown backslash-escapes markdown-significant punctuation in prose so its
+// output survives a markdown round-trip (`1\.` at line start, `view\_mode`,
+// `\[texto\]`). Those escapes are markdown syntax, not content — strip them
+// from every text value or they render literally in Contentful (found live:
+// headings showing "1\. Organiza una reunión"). Runs in textNode so headings,
+// paragraphs, list items, link text and bold/italic all get cleaned after
+// inline parsing.
+const MARKDOWN_ESCAPE_RE = /\\([\\`*_{}[\]()#+\-.!>|~])/g;
+
+export function unescapeMarkdown(text: string): string {
+  return text.replace(MARKDOWN_ESCAPE_RE, "$1");
+}
+
 function textNode(value: string, marks: RichTextMark[] = []): RichTextNode {
-  return { nodeType: "text", data: {}, value, marks };
+  return { nodeType: "text", data: {}, value: unescapeMarkdown(value), marks };
 }
 
 function paragraph(text: string): RichTextNode {

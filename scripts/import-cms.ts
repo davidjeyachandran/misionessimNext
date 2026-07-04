@@ -79,7 +79,7 @@ interface PostPlan {
 
 interface CollisionDiffEntry {
   slug: string;
-  status: "new" | "update";
+  status: "new" | "update" | "skip-archived";
   contentfulEntryId: string | null;
   hasRevistaLink: boolean;
   revistaSlug: string | null;
@@ -124,6 +124,13 @@ async function buildPlan(environmentId?: string): Promise<PostPlan[]> {
       throw new Error(
         `No collision-diff entry for ${slug} — rerun \`yarn diff:cms\` after \`yarn export:wp\``,
       );
+    }
+    if (d.status === "skip-archived") {
+      // Archived = deliberately removed (duplicate cleanup); the canonical
+      // article lives under another slug. Updating would 400, recreating
+      // would resurrect the duplicate.
+      console.log(`  skipping ${slug} (Contentful entry is archived)`);
+      continue;
     }
 
     const featuredImage = data.featuredImage as
