@@ -17,6 +17,8 @@
     "test:unit": "vitest run"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^16.2.1",
+    "@contentful/rich-text-types": "^17.2.7",
     "contentful-management": "^12.8.0",
     "gray-matter": "^4.0.3",
     "next": "16.2.10",

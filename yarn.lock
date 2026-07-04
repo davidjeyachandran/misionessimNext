@@ -151,10 +151,22 @@
     "@babel/helper-string-parser" "^7.29.7"
     "@babel/helper-validator-identifier" "^7.29.7"
 
+"@contentful/rich-text-react-renderer@^16.2.1":
+  version "16.2.1"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-react-renderer/-/rich-text-react-renderer-16.2.1.tgz#9dd3f9e7b08c6080b10bf5d1f83ed0ee0cfdd8ca"
+  integrity sha512-CZTqlaa/Je3T6JfFaHDAaDWuJrDAYBlBEptedlyBml+hojpMFRRz3Vmv5iU7AI7d80BJ1MlXdA7srLXK7ik/HA==
+  dependencies:
+    "@contentful/rich-text-types" "^17.2.7"
+
 "@contentful/rich-text-types@^16.6.1":
   version "16.8.5"
   resolved "https://registry.yarnpkg.com/@contentful/rich-text-types/-/rich-text-types-16.8.5.tgz#832c8b428612f5181908bc1033c6ef9f48f1ce83"
   integrity sha512-q18RJuJCOuYveGiCIjE5xLCQc5lZ3L2Qgxrlg/H2YEobDFqdtmklazRi1XwEWaK3tMg6yVXBzKKkQfLB4qW14A==
+
+"@contentful/rich-text-types@^17.2.7":
+  version "17.2.7"
+  resolved "https://registry.yarnpkg.com/@contentful/rich-text-types/-/rich-text-types-17.2.7.tgz#fdb485298c0fb18504277ac75ea8738f0bc6e208"
+  integrity sha512-aIdozk8vk5gsYcallOrwEiL6+GSlMXZorDOmiVELfpbVaXMJPJPlf2CBw3LUzviAqCw0UPQcKHHCwG7SdY7u5w==
 
 "@emnapi/core@1.10.0":
   version "1.10.0"
