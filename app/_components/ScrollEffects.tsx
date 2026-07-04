@@ -30,7 +30,11 @@ export function ScrollEffects() {
     }
 
     // ---- Parallax ----
-    const layers = Array.from(document.querySelectorAll<HTMLElement>(".parallax-bg"));
+    // Only translate layers with a non-zero speed. data-parallax="0" (the
+    // hero) opts out entirely so its `cover` crop stays pinned to the box.
+    const layers = Array.from(
+      document.querySelectorAll<HTMLElement>(".parallax-bg"),
+    ).filter((el) => (parseFloat(el.dataset.parallax ?? "0.3") || 0) !== 0);
     let ticking = false;
 
     function updateParallax() {

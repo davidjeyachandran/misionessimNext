@@ -26,7 +26,7 @@ export default async function Home() {
       <section className="hero" id="hero">
         <div
           className="parallax-bg"
-          data-parallax="0.35"
+          data-parallax="0"
           style={{ backgroundImage: "url('/home/banner-sim-home_.webp')" }}
         />
         <div className="hero-overlay" />

@@ -178,6 +178,16 @@
   will-change: transform;
   z-index: 0;
 }
+/* The hero image's aspect ratio (~1.75) nearly matches the hero box, so the
+   -22% parallax overshoot would zoom `cover` in and crop the scene (the live
+   site's jarallax hero barely parallaxes for the same reason). Pin the hero
+   background to the box for a faithful, full-scene crop; parallax stays on
+   the video-promo and revista sections. Paired with data-parallax="0" so
+   ScrollEffects leaves it untranslated. */
+.hero .parallax-bg {
+  inset: 0;
+  background-position: center;
+}
 
 /* ==========================================================================
    Hero
@@ -420,7 +430,9 @@
 
 @media (max-width: 768px) {
   .section { padding: 60px 0; }
-  .hero { min-height: auto; margin-top: var(--header-h); padding: 90px 0 60px; }
+  /* Compact banner matching the live mobile hero (~330px at 375w keeps the
+     same crop as the desktop `cover`, so the scene isn't over-zoomed). */
+  .hero { min-height: 330px; margin-top: var(--header-h); padding: 40px 0; }
   .hero h1 { font-size: 32px; }
   .section-title { font-size: 28px; }
   .about-title { font-size: 20px; }
