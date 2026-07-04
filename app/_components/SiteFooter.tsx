@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 const MENU_LINKS = [
-  { label: "Nosotros", href: "https://misionessim.org/nosotros/", external: true },
-  { label: "Recursos", href: "https://misionessim.org/recursos/", external: true },
+  { label: "Nosotros", href: "/nosotros/", external: false },
+  { label: "Recursos", href: "/recursos/", external: false },
   { label: "Revista Vamos", href: "/revistavamos/", external: false },
   { label: "Blog", href: "/blog/", external: false },
-  { label: "Ora", href: "https://misionessim.org/ora/", external: true },
-  { label: "Servir con SIM", href: "https://misionessim.org/sirve-con-sim/", external: true },
+  { label: "Ora", href: "/ora/", external: false },
+  { label: "Servir con SIM", href: "/sirve-con-sim/", external: false },
 ];
 
 const ACCESS_LINKS = [

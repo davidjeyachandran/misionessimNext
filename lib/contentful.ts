@@ -9,6 +9,10 @@ const GQL_URL = `https://graphql.contentful.com/content/v1/spaces/${SPACE_ID}`;
 // fetch pages through in chunks of this size.
 const PAGE_SIZE = 100;
 
+interface GqlError {
+  extensions?: { contentful?: { code?: string } };
+}
+
 async function gql<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
   const res = await fetch(GQL_URL, {
     method: "POST",
@@ -20,8 +24,18 @@ async function gql<T>(query: string, variables?: Record<string, unknown>): Promi
     next: { tags: ["contentful"] },
   });
   if (!res.ok) throw new Error(`Contentful GraphQL error: ${res.status}`);
-  const { data, errors } = (await res.json()) as { data: T; errors?: unknown[] };
-  if (errors?.length) throw new Error(`GraphQL errors: ${JSON.stringify(errors)}`);
+  const { data, errors } = (await res.json()) as { data: T; errors?: GqlError[] };
+  if (errors?.length) {
+    // UNRESOLVABLE_LINK is data quality, not failure: a linked entry is
+    // archived/deleted (e.g. revista.blogPosts still pointing at blogPost
+    // rows archived in the 2026-07-04 duplicate cleanup). Contentful returns
+    // the rest of the data with a null in the collection — callers already
+    // filter nulls, so use the data rather than failing the whole page.
+    const fatal = errors.filter(
+      (e) => e.extensions?.contentful?.code !== "UNRESOLVABLE_LINK",
+    );
+    if (fatal.length) throw new Error(`GraphQL errors: ${JSON.stringify(fatal)}`);
+  }
   return data;
 }
 

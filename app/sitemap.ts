@@ -26,6 +26,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: url("/"), changeFrequency: "weekly", priority: 1 },
     { url: url("/blog"), changeFrequency: "daily", priority: 0.9 },
     { url: url("/revistavamos"), changeFrequency: "monthly", priority: 0.9 },
+    { url: url("/nosotros"), changeFrequency: "yearly", priority: 0.8 },
+    { url: url("/recursos"), changeFrequency: "monthly", priority: 0.8 },
+    { url: url("/ora"), changeFrequency: "monthly", priority: 0.8 },
+    { url: url("/sirve-con-sim"), changeFrequency: "yearly", priority: 0.8 },
+    { url: url("/declaracion-de-fe-de-sim"), changeFrequency: "yearly", priority: 0.5 },
   ];
 
   const revistaEntries: MetadataRoute.Sitemap = revistas.map((r) => ({

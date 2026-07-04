@@ -94,9 +94,9 @@ export default async function Home() {
                   parte de nuestra misión ayudar a los que están buscando ser
                   usados por Dios.
                 </p>
-                <a className="btn btn-outline" href="https://misionessim.org/sirve-con-sim/">
+                <Link className="btn btn-outline" href="/sirve-con-sim/">
                   Escríbenos
-                </a>
+                </Link>
               </div>
             </article>
             <article className="card reveal">
@@ -134,9 +134,9 @@ export default async function Home() {
                   desafíos para tener unidad y buena comunicación. Ora que Dios
                   sea glorificado por la forma en como trabajamos juntos.
                 </p>
-                <a className="btn btn-outline" href="https://misionessim.org/ora/">
+                <Link className="btn btn-outline" href="/ora/">
                   Nuestra oración
-                </a>
+                </Link>
               </div>
             </article>
           </div>

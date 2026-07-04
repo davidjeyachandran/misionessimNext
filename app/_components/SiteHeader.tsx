@@ -4,14 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-// Nav targets: Blog is internal; the other sections aren't built yet, so they
-// point at the live site as placeholders until later phases replace them.
 const NAV_LINKS = [
-  { label: "Nosotros", href: "https://misionessim.org/nosotros/", external: true },
-  { label: "Recursos", href: "https://misionessim.org/recursos/", external: true },
+  { label: "Nosotros", href: "/nosotros/", external: false },
+  { label: "Recursos", href: "/recursos/", external: false },
   { label: "Revista VAMOS", href: "/revistavamos/", external: false },
   { label: "Blog", href: "/blog/", external: false },
-  { label: "Ora", href: "https://misionessim.org/ora/", external: true },
+  { label: "Ora", href: "/ora/", external: false },
 ];
 
 export function SiteHeader() {
@@ -58,13 +56,13 @@ export function SiteHeader() {
               </button>
             </li>
             <li>
-              <a
-                href="https://misionessim.org/sirve-con-sim/"
+              <Link
+                href="/sirve-con-sim/"
                 className="nav-cta"
                 onClick={() => setOpen(false)}
               >
                 Servir con SIM
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
