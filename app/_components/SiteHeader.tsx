@@ -9,7 +9,7 @@ import { useState } from "react";
 const NAV_LINKS = [
   { label: "Nosotros", href: "https://misionessim.org/nosotros/", external: true },
   { label: "Recursos", href: "https://misionessim.org/recursos/", external: true },
-  { label: "Revista VAMOS", href: "https://misionessim.org/revistavamos/", external: true },
+  { label: "Revista VAMOS", href: "/revistavamos/", external: false },
   { label: "Blog", href: "/blog/", external: false },
   { label: "Ora", href: "https://misionessim.org/ora/", external: true },
 ];

@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import {
   getAllBlogPostSlugs,
   getBlogPostBySlug,
+  normalizeRevistaSlug,
   publishDateToSegment,
   slugify,
 } from "../../../../lib/contentful";
@@ -139,7 +140,7 @@ export default async function BlogPostPage({ params }: Props) {
           <>
             {" / "}
             <Link
-              href={`/la-revista/${post.revista.slug}/`}
+              href={`/revistavamos/${normalizeRevistaSlug(post.revista.slug)}/`}
               className="hover:text-ink transition-colors"
             >
               {post.revista.title}

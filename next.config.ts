@@ -19,19 +19,18 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Donations dropped entirely (GiveWP out of scope) — all 11 legacy
-      // URLs 301 → homepage.
-      { source: "/donations", destination: "/", permanent: true },
-      { source: "/donations/:path*", destination: "/", permanent: true },
-      { source: "/donation-confirmation", destination: "/", permanent: true },
-      { source: "/donation-failed", destination: "/", permanent: true },
-      { source: "/donor-dashboard", destination: "/", permanent: true },
+      // Donations dropped entirely (GiveWP out of scope; David 2026-07-05:
+      // no donation paths at all — not even redirects). Legacy /donations/*
+      // URLs simply 404.
+      //
       // Author archives dropped (WP data was only account names) — send the
       // 2 legacy author URLs to the blog index.
       { source: "/blog/author/:slug*", destination: "/blog", permanent: true },
-      // NOTE: the 118 /revistavamos/<slug>/ → /la-revista/<slug>/ aliases are
-      // intentionally deferred until the revista routes exist, so they don't
-      // 301 into a 404 in the interim.
+      // Revista canonical inverted vs. the legacy site (David 2026-07-05):
+      // the new canonical route is /revistavamos/; the old canonical
+      // /la-revista/<slug>/ URLs (118 in the legacy sitemap) 301 across.
+      { source: "/la-revista", destination: "/revistavamos", permanent: true },
+      { source: "/la-revista/:slug", destination: "/revistavamos/:slug", permanent: true },
     ];
   },
 };

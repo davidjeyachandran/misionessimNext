@@ -317,3 +317,153 @@ export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | 
 export function publishDateToSegment(publishDate: string): string {
   return publishDate.slice(0, 7); // "2024-01-15T..." → "2024-01"
 }
+
+// ---------------------------------------------------------------------------
+// Revista VAMOS — magazine editions, served at /revistavamos/. The entries
+// come from the earlier VAMOS PDF pipeline (110 published; the last ~5 print
+// editions are still to be imported). Each edition links its articles via
+// blogPostsCollection and carries the full PDF as a plain asset link (no
+// embedder, per the migration decision).
+
+export interface RevistaCard {
+  /** Contentful entry id — the only truly unique key (see normalizeRevistaSlug). */
+  id: string;
+  /** URL-safe slug used for /revistavamos/<slug>/ routes. */
+  slug: string;
+  title: string;
+  fecha: string;
+  coverImage?: ContentfulImage | null;
+  pdfUrl?: string | null;
+}
+
+export interface Revista extends RevistaCard {
+  posts: BlogPostCard[];
+}
+
+// The original VAMOS import stored most revista slugs with a leading "/"
+// ("/la-oracion", "/africa" — ~104 of 110 entries), and two distinct
+// editions ("La Oración" 2010 + 2014) share the IDENTICAL stored slug.
+// The data is shared with mi-movilicemos, so it stays untouched; URLs are
+// normalized here instead, and slug collisions are disambiguated with the
+// edition year (newest keeps the base slug — matching the legacy site,
+// where only the newer edition was reachable).
+export function normalizeRevistaSlug(storedSlug: string): string {
+  return (storedSlug ?? "").trim().replace(/^\/+|\/+$/g, "");
+}
+
+const REVISTA_CARD_FIELDS = `
+  sys { id }
+  slug
+  title
+  fecha
+  coverImage { url description width height }
+  revistaPdf { url }
+`;
+
+interface RawRevista {
+  sys: { id: string };
+  slug: string;
+  title: string;
+  fecha: string;
+  coverImage?: ContentfulImage | null;
+  revistaPdf?: { url: string } | null;
+}
+
+function toRevistaCard(r: RawRevista, urlSlug: string): RevistaCard {
+  return {
+    id: r.sys.id,
+    slug: urlSlug,
+    title: (r.title ?? "").trim(),
+    fecha: r.fecha,
+    coverImage: r.coverImage,
+    pdfUrl: r.revistaPdf?.url ?? null,
+  };
+}
+
+// All editions, newest first, with unique URL slugs assigned.
+export const getAllRevistas = cache(async (): Promise<RevistaCard[]> => {
+  const all: RawRevista[] = [];
+  let skip = 0;
+  while (true) {
+    const data = await gql<{
+      revistaCollection: { total: number; items: RawRevista[] };
+    }>(
+      `query ($limit: Int!, $skip: Int!) {
+        revistaCollection(order: fecha_DESC, limit: $limit, skip: $skip) {
+          total
+          items { ${REVISTA_CARD_FIELDS} }
+        }
+      }`,
+      { limit: PAGE_SIZE, skip },
+    );
+    all.push(...data.revistaCollection.items);
+    if (all.length >= data.revistaCollection.total || data.revistaCollection.items.length === 0) {
+      break;
+    }
+    skip += PAGE_SIZE;
+  }
+
+  const taken = new Set<string>();
+  return all.map((r) => {
+    const base = normalizeRevistaSlug(r.slug) || r.sys.id;
+    let urlSlug = base;
+    if (taken.has(urlSlug)) {
+      const year = new Date(r.fecha).getUTCFullYear();
+      urlSlug = `${base}-${year}`;
+      let i = 2;
+      while (taken.has(urlSlug)) urlSlug = `${base}-${year}-${i++}`;
+    }
+    taken.add(urlSlug);
+    return toRevistaCard(r, urlSlug);
+  });
+});
+
+export const getRevistaBySlug = cache(async (slug: string): Promise<Revista | null> => {
+  // Resolve the URL slug through the (cached) catalogue — stored slugs are
+  // neither URL-safe nor unique, so the entry id is the real lookup key.
+  const card = (await getAllRevistas()).find((r) => r.slug === slug);
+  if (!card) return null;
+
+  const data = await gql<{
+    revista: {
+      blogPostsCollection?: {
+        items: ({
+          slug: string;
+          title: string;
+          publishDate: string | null;
+          description?: string | null;
+          heroImage?: ContentfulImage | null;
+        } | null)[];
+      } | null;
+    } | null;
+  }>(
+    `query ($id: String!) {
+      revista(id: $id) {
+        blogPostsCollection(limit: 50) {
+          items {
+            slug
+            title
+            publishDate
+            description
+            heroImage { url description width height }
+          }
+        }
+      }
+    }`,
+    { id: card.id },
+  );
+  return {
+    ...card,
+    // Keep the collection's editorial order (the magazine's own sequence);
+    // drop unresolvable links (e.g. a linked post that is archived/draft).
+    posts: (data.revista?.blogPostsCollection?.items ?? [])
+      .filter((p): p is NonNullable<typeof p> => p !== null && !!p.publishDate)
+      .map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        publishDate: p.publishDate!,
+        description: p.description,
+        heroImage: p.heroImage,
+      })),
+  };
+});

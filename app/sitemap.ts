@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import {
   getAllBlogPostSlugs,
   getAllCategories,
+  getAllRevistas,
   getAllTags,
   publishDateToSegment,
 } from "../lib/contentful";
@@ -14,16 +15,25 @@ function url(path: string): string {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, categories, tags] = await Promise.all([
+  const [posts, categories, tags, revistas] = await Promise.all([
     getAllBlogPostSlugs(),
     getAllCategories(),
     getAllTags(),
+    getAllRevistas(),
   ]);
 
   const staticEntries: MetadataRoute.Sitemap = [
     { url: url("/"), changeFrequency: "weekly", priority: 1 },
     { url: url("/blog"), changeFrequency: "daily", priority: 0.9 },
+    { url: url("/revistavamos"), changeFrequency: "monthly", priority: 0.9 },
   ];
+
+  const revistaEntries: MetadataRoute.Sitemap = revistas.map((r) => ({
+    url: url(`/revistavamos/${r.slug}`),
+    lastModified: r.fecha || undefined,
+    changeFrequency: "yearly",
+    priority: 0.7,
+  }));
 
   const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
     url: url(`/blog/${publishDateToSegment(p.publishDate)}/${p.slug}`),
@@ -44,5 +54,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.4,
   }));
 
-  return [...staticEntries, ...postEntries, ...categoryEntries, ...tagEntries];
+  return [
+    ...staticEntries,
+    ...revistaEntries,
+    ...postEntries,
+    ...categoryEntries,
+    ...tagEntries,
+  ];
 }

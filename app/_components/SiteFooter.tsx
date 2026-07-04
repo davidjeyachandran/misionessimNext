@@ -4,16 +4,16 @@ import Link from "next/link";
 const MENU_LINKS = [
   { label: "Nosotros", href: "https://misionessim.org/nosotros/", external: true },
   { label: "Recursos", href: "https://misionessim.org/recursos/", external: true },
-  { label: "Revista Vamos", href: "https://misionessim.org/revistavamos/", external: true },
+  { label: "Revista Vamos", href: "/revistavamos/", external: false },
   { label: "Blog", href: "/blog/", external: false },
   { label: "Ora", href: "https://misionessim.org/ora/", external: true },
   { label: "Servir con SIM", href: "https://misionessim.org/sirve-con-sim/", external: true },
 ];
 
 const ACCESS_LINKS = [
-  { label: "Movilicemos", href: "https://movilicemos.org/recursos" },
-  { label: "Curso Vamos", href: "https://movilicemos.org/curso-vamos/intro" },
-  { label: "Revista Vamos", href: "https://misionessim.org/revistavamos/" },
+  { label: "Movilicemos", href: "https://movilicemos.org/recursos", external: true },
+  { label: "Curso Vamos", href: "https://movilicemos.org/curso-vamos/intro", external: true },
+  { label: "Revista Vamos", href: "/revistavamos/", external: false },
 ];
 
 const SOCIAL = [
@@ -98,7 +98,7 @@ export function SiteFooter() {
           <ul>
             {ACCESS_LINKS.map((link) => (
               <li key={link.label}>
-                <a href={link.href}>{link.label}</a>
+                <FooterLink link={link} />
               </li>
             ))}
           </ul>

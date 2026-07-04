@@ -210,9 +210,9 @@ export default async function Home() {
             latina. Tenemos más de 110 ediciones publicadas en formato digital y
             gratis.
           </p>
-          <a className="btn btn-primary" href="https://misionessim.org/revistavamos/">
+          <Link className="btn btn-primary" href="/revistavamos/">
             Ver ediciones
-          </a>
+          </Link>
         </div>
       </section>
 
