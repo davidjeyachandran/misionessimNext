@@ -8,6 +8,7 @@ import {
   getAllBlogPostSlugs,
   getBlogPostBySlug,
   publishDateToSegment,
+  slugify,
 } from "../../../../lib/contentful";
 
 export async function generateStaticParams() {
@@ -145,7 +146,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.categories.map((cat) => (
               <Link
                 key={cat}
-                href={`/blog/category/${encodeURIComponent(cat)}/`}
+                href={`/blog/category/${slugify(cat)}/`}
                 className="text-xs font-semibold uppercase tracking-wide text-brand hover:text-brand-dark"
               >
                 {cat}
@@ -160,7 +161,7 @@ export default async function BlogPostPage({ params }: Props) {
             <>
               <span aria-hidden>·</span>
               <Link
-                href={`/blog/author/${encodeURIComponent(post.author)}/`}
+                href={`/blog/author/${slugify(post.author)}/`}
                 className="hover:text-ink transition-colors"
               >
                 {post.author}
@@ -201,7 +202,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.tags.map((tag) => (
               <Link
                 key={tag}
-                href={`/blog/tag/${encodeURIComponent(tag)}/`}
+                href={`/blog/tag/${slugify(tag)}/`}
                 className="rounded-full border border-hairline px-3 py-1 text-xs text-muted hover:border-brand hover:text-brand transition-colors"
               >
                 #{tag}

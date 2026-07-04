@@ -206,36 +206,92 @@ export const getBlogPosts = cache(
   },
 );
 
+// ---------------------------------------------------------------------------
+// Taxonomy archives (category / tag / author)
+//
+// Contentful stores the human-readable term names ("Contextualización",
+// "misiones", an author's name). Archive URLs use a clean slug derived from
+// the name (`/blog/category/contextualizacion/`), matched back by comparing
+// slugify(storedName) to the URL segment. A term resolves to its display
+// name from the first matching entry.
+
+export function slugify(value: string): string {
+  return (value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export interface TaxonomyTerm {
+  name: string;
+  slug: string;
+  count: number;
+}
+
+type TaxonomyKind = "categories" | "tags" | "author";
+
+async function aggregateTerms(kind: TaxonomyKind): Promise<TaxonomyTerm[]> {
+  const entries = await getCanonicalEntries();
+  const bySlug = new Map<string, TaxonomyTerm>();
+  for (const e of entries) {
+    const values =
+      kind === "author" ? (e.author ? [e.author] : []) : (e[kind] ?? []);
+    for (const value of values) {
+      if (!value) continue;
+      const slug = slugify(value);
+      if (!slug) continue;
+      const existing = bySlug.get(slug);
+      if (existing) existing.count++;
+      else bySlug.set(slug, { name: value, slug, count: 1 });
+    }
+  }
+  return [...bySlug.values()].sort(
+    (a, b) => b.count - a.count || a.name.localeCompare(b.name),
+  );
+}
+
+export const getAllCategories = cache(() => aggregateTerms("categories"));
+export const getAllTags = cache(() => aggregateTerms("tags"));
+export const getAllAuthors = cache(() => aggregateTerms("author"));
+
+interface TermArchive {
+  name: string;
+  total: number;
+  items: BlogPostCard[];
+}
+
+async function archiveBySlug(
+  kind: TaxonomyKind,
+  slug: string,
+  limit: number,
+  skip: number,
+): Promise<TermArchive> {
+  const entries = await getCanonicalEntries();
+  let name = "";
+  const matching = entries.filter((e) => {
+    const values =
+      kind === "author" ? (e.author ? [e.author] : []) : (e[kind] ?? []);
+    const hit = values.find((v) => slugify(v) === slug);
+    if (hit && !name) name = hit;
+    return Boolean(hit);
+  });
+  return {
+    name,
+    total: matching.length,
+    items: matching.slice(skip, skip + limit).map(toCard),
+  };
+}
+
 export const getBlogPostsByCategory = cache(
-  async (category: string, limit = 12, skip = 0): Promise<{ total: number; items: BlogPostCard[] }> => {
-    const entries = (await getCanonicalEntries()).filter((e) =>
-      e.categories?.includes(category),
-    );
-    return {
-      total: entries.length,
-      items: entries.slice(skip, skip + limit).map(toCard),
-    };
-  },
+  (slug: string, limit = 12, skip = 0) => archiveBySlug("categories", slug, limit, skip),
 );
-
 export const getBlogPostsByTag = cache(
-  async (tag: string, limit = 12, skip = 0): Promise<{ total: number; items: BlogPostCard[] }> => {
-    const entries = (await getCanonicalEntries()).filter((e) => e.tags?.includes(tag));
-    return {
-      total: entries.length,
-      items: entries.slice(skip, skip + limit).map(toCard),
-    };
-  },
+  (slug: string, limit = 12, skip = 0) => archiveBySlug("tags", slug, limit, skip),
 );
-
 export const getBlogPostsByAuthor = cache(
-  async (author: string, limit = 12, skip = 0): Promise<{ total: number; items: BlogPostCard[] }> => {
-    const entries = (await getCanonicalEntries()).filter((e) => e.author === author);
-    return {
-      total: entries.length,
-      items: entries.slice(skip, skip + limit).map(toCard),
-    };
-  },
+  (slug: string, limit = 12, skip = 0) => archiveBySlug("author", slug, limit, skip),
 );
 
 // ---------------------------------------------------------------------------

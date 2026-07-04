@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { BlogPostCard } from "../../../lib/contentful";
-import { publishDateToSegment } from "../../../lib/contentful";
+import { publishDateToSegment, slugify } from "../../../lib/contentful";
 
 export function PostCard({ post }: { post: BlogPostCard }) {
   const dateSegment = publishDateToSegment(post.publishDate);
@@ -31,7 +31,7 @@ export function PostCard({ post }: { post: BlogPostCard }) {
             {post.categories.map((cat) => (
               <Link
                 key={cat}
-                href={`/blog/category/${encodeURIComponent(cat)}/`}
+                href={`/blog/category/${slugify(cat)}/`}
                 className="text-xs font-semibold uppercase tracking-wide text-brand hover:text-brand-dark"
               >
                 {cat}
@@ -53,7 +53,7 @@ export function PostCard({ post }: { post: BlogPostCard }) {
             <>
               <span aria-hidden>·</span>
               <Link
-                href={`/blog/author/${encodeURIComponent(post.author)}/`}
+                href={`/blog/author/${slugify(post.author)}/`}
                 className="hover:text-ink transition-colors"
               >
                 {post.author}
