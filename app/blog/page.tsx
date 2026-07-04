@@ -21,7 +21,7 @@ export default async function BlogIndexPage({
   const { total, items } = await getBlogPosts(PER_PAGE, skip);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12">
+    <main className="page-offset mx-auto max-w-6xl px-4 py-12">
       <header className="mb-10">
         <h1 className="font-heading text-4xl font-bold text-ink">Blog</h1>
         <p className="mt-2 text-muted">{total} artículos</p>

@@ -122,7 +122,7 @@ export default async function BlogPostPage({ params }: Props) {
   });
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
+    <main className="page-offset mx-auto max-w-3xl px-4 py-12">
       <nav className="mb-6 text-sm text-muted">
         <Link href="/" className="hover:text-ink transition-colors">Inicio</Link>
         {" / "}

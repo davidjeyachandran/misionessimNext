@@ -41,7 +41,7 @@ export default async function TagArchivePage({
   if (!name) notFound();
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-12">
+    <main className="page-offset mx-auto max-w-6xl px-4 py-12">
       <nav className="mb-4 text-sm text-muted">
         <Link href="/blog/" className="hover:text-ink transition-colors">Blog</Link>
         {" / "}

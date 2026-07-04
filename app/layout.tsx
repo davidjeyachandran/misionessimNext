@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Raleway, Work_Sans } from "next/font/google";
 import "./globals.css";
+import { SiteHeader } from "./_components/SiteHeader";
+import { SiteFooter } from "./_components/SiteFooter";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -32,7 +34,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${raleway.variable} ${workSans.variable}`}>
-      <body className="min-h-screen">{children}</body>
+      <body className="min-h-screen">
+        <SiteHeader />
+        {children}
+        <SiteFooter />
+      </body>
     </html>
   );
 }
