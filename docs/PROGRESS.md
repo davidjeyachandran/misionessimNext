@@ -103,11 +103,18 @@ Also: make the initial git commit (repo is init-ed but has no commits yet).
   - Re-ran the export (335/335 clean, 0 residual matches for the pattern), regenerated both `collision-diff.json` and `collision-diff.development.json`, and live-patched the one already-written `development` entry — verified directly via the Management API that the corrected body no longer contains `fid`/`view_mode`.
   - 4 new unit tests added, including one using the exact real corrupted sample (in its actual post-turndown escaped form).
 
-### Next session: run the full batch, then plan production
-1. **Run the full 335-post batch against `development`**: `yarn import:cms --live --environment=development`. Expect ~5-10 min given the sample took ~48s for 15 posts with mostly-sequential image uploads.
-2. After that succeeds, decide the path to **production** (`master`/`main`): re-run the same two migrations there (they're idempotent-safe additive schema changes, low risk), regenerate `collision-diff.json` fresh (content may have drifted since the last read), review the plan once more, then `--live --environment=main --force` (master/main still needs `--force` — that's intentional, a deliberate extra step for production).
-3. Revista CPT (`keydesign-portfolio`) still needs the mu-plugin REST-exposure filter — requires David's WP admin action, not yet done.
-4. `reference/mirror/` (wget) was still running as of this session's end — check it completed cleanly (gitignored, no commit action needed either way).
+### Full development batch — completed 2026-07-04
+- **Full 335-post batch ran cleanly against `development`** (297 creates + 38 updates + 321 image uploads, 0 errors). ~10 min total.
+- **Discovered and fixed a new blocker mid-run** (post 25/335): the `blogPost.tags` field had an allowed-values validation (`["general","javascript","static-sites"]`) left over from the mi-movilicemos schema setup. All 28 misionessim.org tag values fail it. Added migration `003-relax-tags-validation.js` to remove the constraint, ran it against `development`, then re-ran the full batch — clean.
+- **Drupal-token fix confirmed landed**: `10-devocionales-en-youversion-sobre-trabajo-y-fe.md` has no `fid`/`view_mode` in the exported markdown; the post was written to Contentful `development` with the corrected body during the full batch (one of the 38 updates). Verified by grep on the markdown file.
+- All 3 migrations have been run against `development`; **none have been run against `master`/`main` yet**.
+
+### Next: production import
+1. Run migrations 001, 002, 003 against `master` (additive/idempotent, low risk): `yarn migrate:cms -- --file=cms/migrations/001-... --environment=master --force` (repeat for 002 and 003).
+2. Regenerate `collision-diff.json` fresh: `yarn diff:cms` (no `--environment` flag — reads master via CDA GraphQL).
+3. Review the plan, then: `yarn import:cms --live --environment=main --force`.
+4. Revista CPT (`keydesign-portfolio`) still needs the mu-plugin REST-exposure filter — requires David's WP admin action, not yet done.
+5. `reference/mirror/` (wget) was killed by David — gitignored, no commit action needed.
 
 ### Key context for future sessions
 - Homepage POC (verified near pixel-perfect) is in `poc/`; serve via launch.json config "sim-home" (port 8137). Design tokens: primary `#C91430`, secondary `#002F49`, text `#0A0117`, nav `#696F8C`; Raleway + Work Sans; fixed white 71px header; 95vh hero; 3 parallax sections; YouTube `zx8x6J7vPNI`.
