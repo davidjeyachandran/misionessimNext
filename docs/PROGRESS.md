@@ -137,12 +137,51 @@ Also: make the initial git commit (repo is init-ed but has no commits yet).
 - Nav: Blog internal; unbuilt pages (Nosotros/Recursos/Revista/Ora/Servir) point at the live site as placeholders until later phases.
 - Verified desktop + mobile (nav toggle) via computed-style inspection; hero screenshot pixel-matches POC. NOTE: the preview screenshot tool goes blank after programmatic scroll on this page — use `preview_inspect`/`elementFromPoint` to verify lower sections, not screenshots.
 
-### Next: Phase 5 continued
-- Revista CPT (`keydesign-portfolio`) still needs the mu-plugin REST-exposure filter — requires David's WP admin action before `export-revista.ts` can be built.
-- Contact form via Resend route handler.
-- SEO: `generateMetadata`, sitemap, canonical tags, 301 redirects for dropped URLs.
-- Heading backslash bug (`1\. Title`) — background task `task_cc17ef73`.
-- Replace placeholder nav links as those pages get built.
+### Content-fidelity audit — inline images & embeds missing (2026-07-04)
+Triggered by a real report: inline images missing on `vivir-entre-los-fulani-el-viaje-de-alegria-de-christine` (hero renders, body images don't). Root-caused and audited the **whole 335-post corpus against the live WP REST API** (`/wp-json/wp/v2/posts`, authoritative source — the export markdown can't reveal turndown-dropped content). **No code changed** — findings recorded for a future re-import (David: migrate to Contentful, re-import required, audit first, then stop).
+
+**What the import lost (turndown + `markdown-to-richtext.ts` are lossy):**
+1. **Inline images — 12 `<img>` across 6 posts.** Stored in RichText as `hyperlink` nodes (link text "imagen") pointing at `misionessim.org/wp-content/...`, so they render as text links, not images. There are **zero `embedded-asset` nodes** in any WP-imported post; `body.links.assets.block` is empty everywhere. Affected posts:
+   - `alemania-una-puerta-abierta-para-profesionales-estudiantes-y-jovenes-con-llamado-misionero` (×1)
+   - `olas-del-llamado-de-dios` (×1)
+   - `un-oasis-de-esperanza-para-los-ninos-fulani` (×2)
+   - `vivir-entre-los-fulani-el-viaje-de-alegria-de-christine` (×2)
+   - `la-buena-noticia-se-extiende-de-un-fulani-a-toda-una-aldea-fulani` (×1)
+   - `el-caracter-se-pone-a-prueba-en-prisma` (×5 — a `wp-block-gallery`)
+2. **YouTube video embed — SILENTLY DROPPED (1 post).** `la-mision-es-en-equipo-10-razones-para-unirte-a-una-agencia-misionera` has a `wp-block-embed`/`<iframe>` YouTube video. Turndown's default rules drop `<iframe>` entirely (no text content) → no trace in the export markdown or Contentful. The only fully-invisible loss.
+3. **Table — flattened (1 post).** `la-seleccion-de-un-equipo` has a `<table>`; turndown has no table rule, so structure is lost (cells concatenated as text).
+4. **PDF links — 4 posts** (`luz-en-medio-de-la-oscuridad`, `4-verdades-alentadoras-para-aquellos-con-enfermedades-mentales`, `por-que-debemos-conocer-la-cultura-y-su-cosmovision`, `como-aprender-una-nueva-cultura`) link to `.pdf` files on `wp-content`. Survive as hyperlinks (functionally OK) but are WP-hosted → break if WP is decommissioned.
+
+*Clean:* no audio/video `<video>` tags, no `[gallery]`/`[caption]` shortcodes, no code blocks, no h5/h6, no nested lists in the corpus (consistent with `markdown-to-richtext.ts`'s survey header).
+
+**Root causes (three layers):**
+- `scripts/lib/markdown-to-richtext.ts:42-44` — inline images intentionally emitted as hyperlinks; the promised "embed as Contentful asset at live-import time" was never implemented.
+- `scripts/export-wp.ts:28-32,232` — turndown runs with **default rules only** (no `addRule`/plugin for `<iframe>`/embed/`<table>`), so embeds are dropped and tables flattened.
+- `app/blog/[date]/[slug]/page.tsx:79-95` — the `BLOCKS.EMBEDDED_ASSET` renderer reads the **CDA/SDK shape** (`node.data.target.fields.file.url`), which never matches the **GraphQL** shape; and `lib/contentful.ts:306` fetches `body { json }` without `links`. So even if assets were embedded, they wouldn't render. Both need fixing as part of the migration.
+
+**Migration TODO (deferred — do NOT run without David):**
+- `import-cms.ts`: for each inline-image URL in the body, download → `asset.createFromFiles` → `processForAllLocales` → `publish` → replace the `hyperlink` node with an `embedded-asset-block` node referencing the new asset. Reuse the hero-image upload path already at `import-cms.ts:215-230`. Include the 5-image gallery post.
+- `export-wp.ts`: add turndown handling for `<iframe>`/`wp-block-embed` (YouTube) and `<table>` so they're preserved, not dropped/flattened. Decide target representation.
+- Decide PDF hosting: re-host the 4 PDFs to Contentful assets or keep WP links.
+- `page.tsx` + `lib/contentful.ts`: query `body { json links { assets { block { sys { id } url title description width height } } } }` and rewrite `EMBEDDED_ASSET` to resolve an id→asset map from `links.assets.block`. Assets land on `images.ctfassets.net` (already in `next.config.ts` `remotePatterns`).
+- Re-run the import for the affected posts (targeted, like the heading-backslash fix).
+
+### SEO hardening — done (2026-07-04)
+- `lib/site.ts` SITE_URL; `metadataBase` + canonical/OG defaults in `layout.tsx`.
+- `app/sitemap.ts` (940 URLs: home, /blog/, all 874 posts, category + tag archives — revista deferred); `app/robots.ts`.
+- Canonical tags on blog index / post (canonicalised to the post's own publishDate segment) / category / tag; `og:type article` on posts.
+- `next.config.ts` redirects: 11 donation URLs → `/`, 2 dropped author archives → `/blog/`. The 118 `/revistavamos/<slug>/` → `/la-revista/<slug>/` aliases are HELD until revista routes exist (avoid 301-into-404). Verified all in preview.
+
+### Deferred by David (2026-07-04)
+- **Revista routes** — Revistas already in Contentful (~5 missing, do at the very end). Frontend routes + the 118 alias redirects + `export-revista.ts` all deferred.
+- **Contact form** — out of scope for now.
+
+### Next: Phase 5/6 remaining
+- Static pages (Nosotros, Recursos, Ora, Servir con SIM) — currently placeholder nav links to the live site.
+- Search (Phase 6).
+- Heading backslash bug (`1\. Title`) — background task `task_cc17ef73` (converter fix + targeted re-import).
+- Visual regression pass vs. `reference/baselines/`.
+- Revista routes + alias redirects (deferred, at the end).
 
 ### Key context for future sessions
 - Homepage POC (verified near pixel-perfect) is in `poc/`; serve via launch.json config "sim-home" (port 8137). Design tokens: primary `#C91430`, secondary `#002F49`, text `#0A0117`, nav `#696F8C`; Raleway + Work Sans; fixed white 71px header; 95vh hero; 3 parallax sections; YouTube `zx8x6J7vPNI`.
