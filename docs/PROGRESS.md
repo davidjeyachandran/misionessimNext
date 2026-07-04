@@ -182,11 +182,18 @@ Triggered by a real report: inline images missing on `vivir-entre-los-fulani-el-
 - **Revista VAMOS built at `/revistavamos/`** (David: canonical route, inverted vs. legacy `/la-revista/`): index of all 110 editions + detail pages (cover, edition date, PDF plain link, edition's articles as PostCards). 118 legacy `/la-revista/*` URLs 301 across. Sitemap now 1051 URLs. Header/footer/homepage links internal.
   - **Data quirks handled app-side (Contentful untouched — shared with mi-movilicemos)**: ~104/110 stored revista slugs have a leading `/`; two distinct "La Oración" editions (2010/2014) share the identical stored slug. URLs normalized; collisions get a year suffix (`la-oracion` = 2014, `la-oracion-2010`); lookups go by entry id.
 
-### Next: Phase 5/6 remaining
-- Static pages (Nosotros, Recursos, Ora, Servir con SIM) — currently placeholder nav links to the live site.
+### Static pages — done (2026-07-05)
+- Built `/nosotros/` (pillars, 10 service areas, partner logos, history timeline, FAQ via native `<details>`, fe teaser), `/declaracion-de-fe-de-sim/`, `/ora/` (monthly motives shipped in code — Contentful candidate later), `/recursos/`, `/sirve-con-sim/` (contact = mailto + WhatsApp; form deferred). Copy + 29 images extracted from the wget mirror. All nav/footer/homepage links now internal — zero placeholder links to the legacy site remain. Sitemap: 1056 URLs.
+- **`/terms-and-conditions/` deliberately NOT rebuilt** — the legacy page is KeyDesign theme demo boilerplate (English, "WordPress themes and related services"), not SIM content. It 404s; David can add a real terms page later if wanted.
+- **Fixed a 500 on 2 revista pages** (predicted by David's "clean archived posts from Revista collections" note): editions whose `blogPosts` arrays still link the archived duplicate rows. `gql()` now tolerates `UNRESOLVABLE_LINK` (nulls filtered by callers); all 110 edition pages crawl-verified 200. **Data-side cleanup script for those stale links still worth doing** (removes the noise, not just tolerates it).
+
+### Next: Phase 6/7 remaining
 - Search (Phase 6).
-- Visual regression pass vs. `reference/baselines/`.
+- Visual regression pass vs. `reference/baselines/`; Lighthouse; `next build` production check.
+- Contentful revalidation webhook (`CONTENTFUL_REVALIDATE_SECRET` env var reserved).
 - Import the ~5 missing revista editions (end of project).
+- Cleanup script: strip archived blogPost links from Revista.blogPosts arrays.
+- Cutover: DNS, Vercel deploy, redirect verification against `data/url-inventory.json`.
 
 ### Key context for future sessions
 - Homepage POC (verified near pixel-perfect) is in `poc/`; serve via launch.json config "sim-home" (port 8137). Design tokens: primary `#C91430`, secondary `#002F49`, text `#0A0117`, nav `#696F8C`; Raleway + Work Sans; fixed white 71px header; 95vh hero; 3 parallax sections; YouTube `zx8x6J7vPNI`.
