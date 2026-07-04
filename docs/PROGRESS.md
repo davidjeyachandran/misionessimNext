@@ -132,12 +132,17 @@ Also: make the initial git commit (repo is init-ed but has no commits yet).
 - **Category + tag archive pages** built (`/blog/category/[category]/`, `/blog/tag/[tag]/`) with `generateStaticParams`, `generateMetadata`, pagination, slug-based URLs (`slugify` in `lib/contentful.ts` maps display name ↔ clean slug). Shared `PostGrid` component; index refactored onto it. Verified in preview (Contextualización: 17; #misiones: 7).
 - **Author archives DROPPED** (David's call): WP import only has account names (admin ×324, SIM Latinoamérica ×11), not real bylines. Removed the route, bylines, and author queries. NOTE: `author` was also never written to Contentful during import (read into the plan but omitted from the written fields in `import-cms.ts`) — moot now, but relevant if author bylines are ever wanted. Legacy `/blog/author/` URLs → 301 in Phase 7.
 
+### Homepage port — done (2026-07-04)
+- Ported `poc/index.html`+css+js into the Next app. `app/home.css` holds the adapted POC styles (fonts via next/font, Tailwind preflight as reset, homepage base typography scoped under `.sim-home`). Global `SiteHeader`/`SiteFooter` in `layout.tsx`; blog mains get `.page-offset` (71px) for the fixed header. `ScrollEffects` (parallax + reveal) and `VideoPromo` (YouTube lightbox) as client components. Homepage blog strip pulls latest 3 posts live from Contentful.
+- Nav: Blog internal; unbuilt pages (Nosotros/Recursos/Revista/Ora/Servir) point at the live site as placeholders until later phases.
+- Verified desktop + mobile (nav toggle) via computed-style inspection; hero screenshot pixel-matches POC. NOTE: the preview screenshot tool goes blank after programmatic scroll on this page — use `preview_inspect`/`elementFromPoint` to verify lower sections, not screenshots.
+
 ### Next: Phase 5 continued
 - Revista CPT (`keydesign-portfolio`) still needs the mu-plugin REST-exposure filter — requires David's WP admin action before `export-revista.ts` can be built.
-- Homepage port from `poc/` into Next.js app.
 - Contact form via Resend route handler.
 - SEO: `generateMetadata`, sitemap, canonical tags, 301 redirects for dropped URLs.
 - Heading backslash bug (`1\. Title`) — background task `task_cc17ef73`.
+- Replace placeholder nav links as those pages get built.
 
 ### Key context for future sessions
 - Homepage POC (verified near pixel-perfect) is in `poc/`; serve via launch.json config "sim-home" (port 8137). Design tokens: primary `#C91430`, secondary `#002F49`, text `#0A0117`, nav `#696F8C`; Raleway + Work Sans; fixed white 71px header; 95vh hero; 3 parallax sections; YouTube `zx8x6J7vPNI`.
