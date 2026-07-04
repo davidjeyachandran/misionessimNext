@@ -119,9 +119,17 @@ Also: make the initial git commit (repo is init-ed but has no commits yet).
   - All 215 revista back-references preserved
 - **Phase 4 (CMS import) complete.** All 335 misionessim.org blog posts are in Contentful production.
 
-### Next: Phase 5 — Next.js frontend
+### Phase 5 started — blog frontend + dedup (2026-07-04)
+- Built `lib/contentful.ts` (fetch-based GraphQL client) + `/blog/` index and `/blog/[date]/[slug]/` post pages (rich-text via `@contentful/rich-text-react-renderer`). Verified in preview.
+- **Duplicate content decision (David): show all posts, de-duplicated.** The shared space has 911 blogPost entries = 335 WP-import + 576 VAMOS-PDF-pipeline. 34 articles were duplicated (36 surplus rows) because the two pipelines made different slugs for the same article (e.g. `abuelas-a-distancia` vs `abuelas-distancia`). Our import created ZERO new dupes — all were pre-existing pairs we updated on the WP-slug side.
+  - Display-layer dedup in `lib/contentful.ts`: group by normalized title, keep richest entry (heroImage > revista > body length > WP tiebreak). Site shows 874 unique articles.
+  - **CMS cleanup via `scripts/archive-duplicate-posts.ts`**: archived (not deleted — reversible, safe for mi-movilicemos) 33 of 36 loser rows. Impact-checked first: 31 had no revista link; 2 shared the winner's issue (also de-dupes mi-movilicemos's issue page). CDA total: 911 → 878.
+  - **3 cross-issue dupes HELD for David's decision** (loser is in a *different* magazine issue than its winner — archiving removes the article from that issue in mi-movilicemos): `el-alivio-de-moises-un-equipo`, `mariposas-fuertes`, `superando-los-desafios`. Re-run with `--include-cross-issue` to archive them.
+- **Known content bug** (background task): numbered headings render `1\. Title` — turndown backslash-escape leaked into the stored RichText; needs `markdown-to-richtext.ts` fix + targeted re-import.
+
+### Next: Phase 5 continued
+- Category/tag/author archive pages (query fns already in `lib/contentful.ts`).
 - Revista CPT (`keydesign-portfolio`) still needs the mu-plugin REST-exposure filter — requires David's WP admin action before `export-revista.ts` can be built.
-- Begin scaffolding Next.js routes: blog index (`/blog/`), blog post (`/blog/[year]-[month]/[slug]/`), category/tag/author archives, revista index + item pages.
 - Homepage port from `poc/` into Next.js app.
 - Contact form via Resend route handler.
 - SEO: `generateMetadata`, sitemap, canonical tags, 301 redirects for dropped URLs.
