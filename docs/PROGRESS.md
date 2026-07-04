@@ -173,15 +173,20 @@ Triggered by a real report: inline images missing on `vivir-entre-los-fulani-el-
 - `next.config.ts` redirects: 11 donation URLs → `/`, 2 dropped author archives → `/blog/`. The 118 `/revistavamos/<slug>/` → `/la-revista/<slug>/` aliases are HELD until revista routes exist (avoid 301-into-404). Verified all in preview.
 
 ### Deferred by David (2026-07-04)
-- **Revista routes** — Revistas already in Contentful (~5 missing, do at the very end). Frontend routes + the 118 alias redirects + `export-revista.ts` all deferred.
 - **Contact form** — out of scope for now.
+- ~5 missing revista editions — import at the very end (`export-revista.ts` still unbuilt; needs the WP mu-plugin).
+
+### 2026-07-05 — backslash fix, donations removed, Revista VAMOS routes
+- **Heading backslash defect FIXED end-to-end**: `unescapeMarkdown()` in `markdown-to-richtext.ts` (turndown escapes prose punctuation; strip in `textNode`). Re-imported the 66 affected posts to `main`; CDA-verified 0 posts still contain escapes. Two collateral hardenings: image-resolution *tie* now keeps the CF asset (was `>=` → would duplicate every asset on re-run), and the diff/import now mark+skip WP slugs whose Contentful entry is **archived** (31 of 335 — the dedup losers; updating 400s, recreating resurrects dupes).
+- **Donations (David): no donation paths at all** — the 11 redirect rules removed; legacy `/donations/*` plain-404s.
+- **Revista VAMOS built at `/revistavamos/`** (David: canonical route, inverted vs. legacy `/la-revista/`): index of all 110 editions + detail pages (cover, edition date, PDF plain link, edition's articles as PostCards). 118 legacy `/la-revista/*` URLs 301 across. Sitemap now 1051 URLs. Header/footer/homepage links internal.
+  - **Data quirks handled app-side (Contentful untouched — shared with mi-movilicemos)**: ~104/110 stored revista slugs have a leading `/`; two distinct "La Oración" editions (2010/2014) share the identical stored slug. URLs normalized; collisions get a year suffix (`la-oracion` = 2014, `la-oracion-2010`); lookups go by entry id.
 
 ### Next: Phase 5/6 remaining
 - Static pages (Nosotros, Recursos, Ora, Servir con SIM) — currently placeholder nav links to the live site.
 - Search (Phase 6).
-- Heading backslash bug (`1\. Title`) — background task `task_cc17ef73` (converter fix + targeted re-import).
 - Visual regression pass vs. `reference/baselines/`.
-- Revista routes + alias redirects (deferred, at the end).
+- Import the ~5 missing revista editions (end of project).
 
 ### Key context for future sessions
 - Homepage POC (verified near pixel-perfect) is in `poc/`; serve via launch.json config "sim-home" (port 8137). Design tokens: primary `#C91430`, secondary `#002F49`, text `#0A0117`, nav `#696F8C`; Raleway + Work Sans; fixed white 71px header; 95vh hero; 3 parallax sections; YouTube `zx8x6J7vPNI`.
