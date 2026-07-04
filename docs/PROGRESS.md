@@ -128,12 +128,16 @@ Also: make the initial git commit (repo is init-ed but has no commits yet).
   - The display-layer dedup in `lib/contentful.ts` is now redundant with the CMS clean but kept as a safety net against future re-imports reintroducing dupes.
 - **Known content bug** (background task): numbered headings render `1\. Title` — turndown backslash-escape leaked into the stored RichText; needs `markdown-to-richtext.ts` fix + targeted re-import.
 
+### Blog archives — done (2026-07-04)
+- **Category + tag archive pages** built (`/blog/category/[category]/`, `/blog/tag/[tag]/`) with `generateStaticParams`, `generateMetadata`, pagination, slug-based URLs (`slugify` in `lib/contentful.ts` maps display name ↔ clean slug). Shared `PostGrid` component; index refactored onto it. Verified in preview (Contextualización: 17; #misiones: 7).
+- **Author archives DROPPED** (David's call): WP import only has account names (admin ×324, SIM Latinoamérica ×11), not real bylines. Removed the route, bylines, and author queries. NOTE: `author` was also never written to Contentful during import (read into the plan but omitted from the written fields in `import-cms.ts`) — moot now, but relevant if author bylines are ever wanted. Legacy `/blog/author/` URLs → 301 in Phase 7.
+
 ### Next: Phase 5 continued
-- Category/tag/author archive pages (query fns already in `lib/contentful.ts`).
 - Revista CPT (`keydesign-portfolio`) still needs the mu-plugin REST-exposure filter — requires David's WP admin action before `export-revista.ts` can be built.
 - Homepage port from `poc/` into Next.js app.
 - Contact form via Resend route handler.
 - SEO: `generateMetadata`, sitemap, canonical tags, 301 redirects for dropped URLs.
+- Heading backslash bug (`1\. Title`) — background task `task_cc17ef73`.
 
 ### Key context for future sessions
 - Homepage POC (verified near pixel-perfect) is in `poc/`; serve via launch.json config "sim-home" (port 8137). Design tokens: primary `#C91430`, secondary `#002F49`, text `#0A0117`, nav `#696F8C`; Raleway + Work Sans; fixed white 71px header; 95vh hero; 3 parallax sections; YouTube `zx8x6J7vPNI`.
