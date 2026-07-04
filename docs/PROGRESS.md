@@ -109,12 +109,22 @@ Also: make the initial git commit (repo is init-ed but has no commits yet).
 - **Drupal-token fix confirmed landed**: `10-devocionales-en-youversion-sobre-trabajo-y-fe.md` has no `fid`/`view_mode` in the exported markdown; the post was written to Contentful `development` with the corrected body during the full batch (one of the 38 updates). Verified by grep on the markdown file.
 - All 3 migrations have been run against `development`; **none have been run against `master`/`main` yet**.
 
-### Next: production import
-1. Run migrations 001, 002, 003 against `master` (additive/idempotent, low risk): `yarn migrate:cms -- --file=cms/migrations/001-... --environment=master --force` (repeat for 002 and 003).
-2. Regenerate `collision-diff.json` fresh: `yarn diff:cms` (no `--environment` flag — reads master via CDA GraphQL).
-3. Review the plan, then: `yarn import:cms --live --environment=main --force`.
-4. Revista CPT (`keydesign-portfolio`) still needs the mu-plugin REST-exposure filter — requires David's WP admin action, not yet done.
-5. `reference/mirror/` (wget) was killed by David — gitignored, no commit action needed.
+### Production import — completed 2026-07-04
+- Ran all 3 migrations against `master` (001: relax required fields, 002: add SEO/taxonomy fields, 003: relax tags validation). All successful.
+- Regenerated `collision-diff.main.json` via Management API (CDA GraphQL doesn't support non-master environments). Numbers matched exactly: 120 new, 215 update, 215 revista links preserved, same image verdicts.
+- **Full 335-post production batch ran cleanly** (`--live --environment=main --force`, 0 errors):
+  - 120 new posts created
+  - 215 existing posts updated (WP wins on body/metadata; per-post image resolution comparison applied)
+  - 302 featured images uploaded from WP; 28 existing Contentful images kept (higher-res)
+  - All 215 revista back-references preserved
+- **Phase 4 (CMS import) complete.** All 335 misionessim.org blog posts are in Contentful production.
+
+### Next: Phase 5 — Next.js frontend
+- Revista CPT (`keydesign-portfolio`) still needs the mu-plugin REST-exposure filter — requires David's WP admin action before `export-revista.ts` can be built.
+- Begin scaffolding Next.js routes: blog index (`/blog/`), blog post (`/blog/[year]-[month]/[slug]/`), category/tag/author archives, revista index + item pages.
+- Homepage port from `poc/` into Next.js app.
+- Contact form via Resend route handler.
+- SEO: `generateMetadata`, sitemap, canonical tags, 301 redirects for dropped URLs.
 
 ### Key context for future sessions
 - Homepage POC (verified near pixel-perfect) is in `poc/`; serve via launch.json config "sim-home" (port 8137). Design tokens: primary `#C91430`, secondary `#002F49`, text `#0A0117`, nav `#696F8C`; Raleway + Work Sans; fixed white 71px header; 95vh hero; 3 parallax sections; YouTube `zx8x6J7vPNI`.
