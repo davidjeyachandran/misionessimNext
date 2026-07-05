@@ -13,16 +13,39 @@ interface GqlError {
   extensions?: { contentful?: { code?: string } };
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+// Contentful rate-limits the GraphQL API. A full static export prerenders
+// hundreds of posts (one query each) across parallel workers, which bursts
+// past the limit and returns 429. Retry transient failures with exponential
+// backoff, honouring the Retry-After header when present.
+const MAX_RETRIES = 6;
+const RETRYABLE = new Set([429, 502, 503, 504]);
+
+async function fetchGqlWithRetry(body: string): Promise<Response> {
+  for (let attempt = 0; ; attempt++) {
+    const res = await fetch(GQL_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+      body,
+      next: { tags: ["contentful"] },
+    });
+    if (res.ok || !RETRYABLE.has(res.status) || attempt >= MAX_RETRIES) return res;
+
+    const retryAfter = Number(res.headers.get("retry-after"));
+    const backoff = Number.isFinite(retryAfter) && retryAfter > 0
+      ? retryAfter * 1000
+      : Math.min(2 ** attempt * 500, 15_000);
+    // Jitter avoids all workers retrying in lockstep.
+    await sleep(backoff + Math.random() * 250);
+  }
+}
+
 async function gql<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
-  const res = await fetch(GQL_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${ACCESS_TOKEN}`,
-    },
-    body: JSON.stringify({ query, variables }),
-    next: { tags: ["contentful"] },
-  });
+  const res = await fetchGqlWithRetry(JSON.stringify({ query, variables }));
   if (!res.ok) throw new Error(`Contentful GraphQL error: ${res.status}`);
   const { data, errors } = (await res.json()) as { data: T; errors?: GqlError[] };
   if (errors?.length) {
@@ -61,7 +84,21 @@ export interface BlogPostCard {
 }
 
 export interface BlogPost extends BlogPostCard {
-  body?: { json: RichTextDocument } | null;
+  body?: {
+    json: RichTextDocument;
+    links?: {
+      assets?: {
+        block?: Array<{
+          sys: { id: string };
+          url: string;
+          title?: string | null;
+          description?: string | null;
+          width?: number | null;
+          height?: number | null;
+        } | null>;
+      };
+    };
+  } | null;
   seoTitle?: string | null;
   seoDescription?: string | null;
   revista?: {
@@ -317,7 +354,14 @@ export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | 
           heroImage { url description width height }
           seoTitle
           seoDescription
-          body { json }
+          body {
+            json
+            links {
+              assets {
+                block { sys { id } url title description width height }
+              }
+            }
+          }
           revista { slug title }
         }
       }

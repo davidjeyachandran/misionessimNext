@@ -45,84 +45,131 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-interface EmbeddedAssetNode {
-  data: { target?: { fields?: { file?: { url?: string }; title?: string } } };
-}
 interface HyperlinkNode {
   data: { uri: string };
 }
 
-const richTextOptions: Options = {
-  renderMark: {
-    [MARKS.BOLD]: (text) => <strong className="font-semibold">{text}</strong>,
-    [MARKS.ITALIC]: (text) => <em>{text}</em>,
-  },
-  renderNode: {
-    [BLOCKS.PARAGRAPH]: (_node, children) => (
-      <p className="mb-4 leading-relaxed">{children}</p>
-    ),
-    [BLOCKS.HEADING_2]: (_node, children) => (
-      <h2 className="font-heading mt-8 mb-3 text-2xl font-bold text-ink">{children}</h2>
-    ),
-    [BLOCKS.HEADING_3]: (_node, children) => (
-      <h3 className="font-heading mt-6 mb-2 text-xl font-bold text-ink">{children}</h3>
-    ),
-    [BLOCKS.HEADING_4]: (_node, children) => (
-      <h4 className="font-heading mt-4 mb-2 text-lg font-semibold text-ink">{children}</h4>
-    ),
-    [BLOCKS.UL_LIST]: (_node, children) => (
-      <ul className="mb-4 list-disc pl-6 space-y-1">{children}</ul>
-    ),
-    [BLOCKS.OL_LIST]: (_node, children) => (
-      <ol className="mb-4 list-decimal pl-6 space-y-1">{children}</ol>
-    ),
-    [BLOCKS.LIST_ITEM]: (_node, children) => (
-      <li className="leading-relaxed">{children}</li>
-    ),
-    [BLOCKS.QUOTE]: (_node, children) => (
-      <blockquote className="my-6 border-l-4 border-brand pl-4 italic text-muted">
-        {children}
-      </blockquote>
-    ),
-    [BLOCKS.HR]: () => <hr className="my-8 border-hairline" />,
-    [BLOCKS.EMBEDDED_ASSET]: (node) => {
-      const fields = (node as unknown as EmbeddedAssetNode).data.target?.fields;
-      const url = fields?.file?.url;
-      const title = fields?.title ?? "";
-      if (!url) return null;
-      return (
-        <figure className="my-6">
-          <Image
-            src={url.startsWith("//") ? `https:${url}` : url}
-            alt={title}
-            width={800}
-            height={450}
-            className="rounded-md w-full object-cover"
-          />
-        </figure>
-      );
+function buildRichTextOptions(
+  assetMap: Map<string, { url: string; title?: string | null }>,
+): Options {
+  return {
+    renderMark: {
+      [MARKS.BOLD]: (text) => <strong className="font-semibold">{text}</strong>,
+      [MARKS.ITALIC]: (text) => <em>{text}</em>,
     },
-    [INLINES.HYPERLINK]: (node, children) => {
-      const { uri } = (node as unknown as HyperlinkNode).data;
-      const external = uri.startsWith("http");
-      return (
-        <a
-          href={uri}
-          className="text-brand underline hover:text-brand-dark transition-colors"
-          target={external ? "_blank" : undefined}
-          rel={external ? "noopener noreferrer" : undefined}
-        >
+    renderNode: {
+      [BLOCKS.PARAGRAPH]: (_node, children) => (
+        <p className="mb-4 leading-relaxed">{children}</p>
+      ),
+      [BLOCKS.HEADING_2]: (_node, children) => (
+        <h2 className="font-heading mt-8 mb-3 text-2xl font-bold text-ink">{children}</h2>
+      ),
+      [BLOCKS.HEADING_3]: (_node, children) => (
+        <h3 className="font-heading mt-6 mb-2 text-xl font-bold text-ink">{children}</h3>
+      ),
+      [BLOCKS.HEADING_4]: (_node, children) => (
+        <h4 className="font-heading mt-4 mb-2 text-lg font-semibold text-ink">{children}</h4>
+      ),
+      [BLOCKS.UL_LIST]: (_node, children) => (
+        <ul className="mb-4 list-disc pl-6 space-y-1">{children}</ul>
+      ),
+      [BLOCKS.OL_LIST]: (_node, children) => (
+        <ol className="mb-4 list-decimal pl-6 space-y-1">{children}</ol>
+      ),
+      [BLOCKS.LIST_ITEM]: (_node, children) => (
+        <li className="leading-relaxed">{children}</li>
+      ),
+      [BLOCKS.QUOTE]: (_node, children) => (
+        <blockquote className="my-6 border-l-4 border-brand pl-4 italic text-muted">
           {children}
-        </a>
-      );
+        </blockquote>
+      ),
+      [BLOCKS.HR]: () => <hr className="my-8 border-hairline" />,
+      [BLOCKS.EMBEDDED_ASSET]: (node) => {
+        const id = node.data?.target?.sys?.id as string | undefined;
+        const asset = id ? assetMap.get(id) : undefined;
+        if (!asset?.url) return null;
+        return (
+          <figure className="my-6">
+            <Image
+              src={asset.url}
+              alt={asset.title ?? ""}
+              width={800}
+              height={450}
+              className="rounded-md w-full object-cover"
+            />
+          </figure>
+        );
+      },
+      [BLOCKS.TABLE]: (_node, children) => (
+        <div className="my-6 overflow-x-auto">
+          <table className="w-full border-collapse text-sm">{children}</table>
+        </div>
+      ),
+      [BLOCKS.TABLE_ROW]: (_node, children) => (
+        <tr className="border-b border-hairline">{children}</tr>
+      ),
+      [BLOCKS.TABLE_HEADER_CELL]: (_node, children) => (
+        <th className="px-3 py-2 text-left font-semibold bg-cream">{children}</th>
+      ),
+      [BLOCKS.TABLE_CELL]: (_node, children) => (
+        <td className="px-3 py-2">{children}</td>
+      ),
+      [INLINES.HYPERLINK]: (node, children) => {
+        const { uri } = (node as unknown as HyperlinkNode).data;
+
+        // YouTube embed (emitted by the iframe→[video](url) turndown rule)
+        if (uri.includes("youtube.com/embed/")) {
+          return (
+            <div className="relative my-6 aspect-video">
+              <iframe
+                src={uri}
+                className="absolute inset-0 w-full h-full rounded-md"
+                allowFullScreen
+                title="Video"
+              />
+            </div>
+          );
+        }
+
+        // Internal link (absolute misionessim.org links rewritten to relative
+        // paths by import-cms.ts rewriteInternalLinks)
+        if (uri.startsWith("/") || uri.startsWith("./")) {
+          return (
+            <Link
+              href={uri}
+              className="text-brand underline hover:text-brand-dark transition-colors"
+            >
+              {children}
+            </Link>
+          );
+        }
+
+        return (
+          <a
+            href={uri}
+            className="text-brand underline hover:text-brand-dark transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {children}
+          </a>
+        );
+      },
     },
-  },
-};
+  };
+}
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
+
+  const assetMap = new Map<string, { url: string; title?: string | null }>();
+  for (const asset of post.body?.links?.assets?.block ?? []) {
+    if (asset) assetMap.set(asset.sys.id, asset);
+  }
+  const richTextOptions = buildRichTextOptions(assetMap);
 
   const displayDate = new Date(post.publishDate).toLocaleDateString("es-ES", {
     day: "numeric",
@@ -180,12 +227,6 @@ export default async function BlogPostPage({ params }: Props) {
             sizes="(max-width: 768px) 100vw, 768px"
           />
         </div>
-      )}
-
-      {post.description && (
-        <p className="mb-8 text-lg leading-relaxed text-muted border-l-4 border-cream pl-4">
-          {post.description}
-        </p>
       )}
 
       {post.body?.json && (

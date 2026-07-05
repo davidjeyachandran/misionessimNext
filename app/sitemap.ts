@@ -8,6 +8,9 @@ import {
 } from "../lib/contentful";
 import { SITE_URL } from "../lib/site";
 
+// Emit a static sitemap.xml at build time (required under `output: 'export'`).
+export const dynamic = "force-static";
+
 // Absolute URL with a trailing slash (the app uses trailingSlash: true).
 function url(path: string): string {
   const clean = path.endsWith("/") ? path : `${path}/`;

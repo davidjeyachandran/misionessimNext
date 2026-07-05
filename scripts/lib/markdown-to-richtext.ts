@@ -2,8 +2,7 @@
  * Minimal markdown -> Contentful RichText converter, scoped to exactly the
  * constructs present in the WP export (surveyed across all 335 exported
  * bodies, 2026-07-04): paragraphs, headings h1-h4, bold/italic, links,
- * bullet/ordered lists, blockquotes, and a handful of inline images (13
- * total). No code blocks, no tables, no nested lists were found.
+ * bullet/ordered lists, blockquotes, inline images, and GFM pipe tables.
  *
  * Not a general-purpose markdown parser — deliberately narrow to what this
  * corpus actually contains, so gaps are cheap to extend rather than a
@@ -38,69 +37,171 @@ const HEADING_NODE_TYPE: Record<number, string> = {
 };
 
 // ---------------------------------------------------------------------------
-// Inline parsing: bold (**x**), italic (*x*), links ([text](url)), and
-// inline images (![alt](url) -> represented as a hyperlink to the image,
-// since asset-embedding requires the image to already be uploaded as a
-// Contentful asset, which happens at live-import time, not here).
+// Inline parsing: escape-aware recursive descent parser.
+//
+// Handles: \X escapes, ![img](url), [link](url), **bold**, *italic*, _italic_
+// Nested: **[link](url)**, [**bold** _italic_](url), _**bold+italic**_
+// Safe: \* and \_ are literal characters, never open/close emphasis spans.
 // ---------------------------------------------------------------------------
 
-function parseInline(text: string): RichTextNode[] {
+// Characters that markdown (and turndown) backslash-escape in prose.
+const ESCAPABLE_CHARS = new Set(
+  Array.from('\\`*_{}[]()#+-. !>|~'),
+);
+
+/**
+ * Public entry point — parses inline markdown at the top level (links allowed).
+ * Exported so callers (e.g. tests) can access it directly.
+ */
+export function parseInline(text: string): RichTextNode[] {
+  return parseInlineCore(text, [], true);
+}
+
+/**
+ * Escape-aware recursive descent inline parser.
+ *
+ * marks    — marks inherited from the enclosing bold/italic context
+ * canLink  — false when already inside link text (no nested links/images)
+ */
+function parseInlineCore(
+  text: string,
+  marks: RichTextMark[],
+  canLink: boolean,
+): RichTextNode[] {
   const nodes: RichTextNode[] = [];
-  // Order matters: images before links (both use [..](..) but images have a
-  // leading "!"), then bold before italic (bold's ** would otherwise be
-  // half-consumed by the italic pattern).
-  const pattern =
-    /(!\[([^\]]*)\]\(([^)]+)\))|(\[([^\]]+)\]\(([^)]+)\))|(\*\*([^*]+)\*\*)|(\*([^*]+)\*)/g;
+  let i = 0;
+  let plain = "";
 
-  let lastIndex = 0;
-  let match: RegExpExecArray | null;
-  while ((match = pattern.exec(text)) !== null) {
-    if (match.index > lastIndex) {
-      const plain = text.slice(lastIndex, match.index);
-      if (plain) nodes.push(textNode(plain));
+  const flush = () => {
+    if (plain) {
+      nodes.push({ nodeType: "text", data: {}, value: plain, marks });
+      plain = "";
+    }
+  };
+
+  while (i < text.length) {
+    const ch = text[i];
+
+    // 1. Backslash escape — highest priority, prevents \* \_ from opening spans.
+    if (ch === "\\" && i + 1 < text.length && ESCAPABLE_CHARS.has(text[i + 1])) {
+      plain += text[i + 1];
+      i += 2;
+      continue;
     }
 
-    if (match[1]) {
-      // image ![alt](url)
-      const alt = match[2] || "imagen";
-      const url = match[3];
-      nodes.push({
-        nodeType: "hyperlink",
-        data: { uri: url },
-        content: [textNode(alt)],
-      });
-    } else if (match[4]) {
-      // link [text](url)
-      nodes.push({
-        nodeType: "hyperlink",
-        data: { uri: match[6] },
-        content: [textNode(match[5])],
-      });
-    } else if (match[7]) {
-      // bold **text**
-      nodes.push(textNode(match[8], [{ type: "bold" }]));
-    } else if (match[9]) {
-      // italic *text*
-      nodes.push(textNode(match[10], [{ type: "italic" }]));
+    // 2. Image: ![alt](url) — must check before link (both use '[')
+    if (canLink && ch === "!" && text[i + 1] === "[") {
+      const m = /^!\[([^\]]*)\]\(([^)]+)\)/.exec(text.slice(i));
+      if (m) {
+        flush();
+        nodes.push({
+          nodeType: "hyperlink",
+          data: { uri: m[2] },
+          content: [{ nodeType: "text", data: {}, value: m[1] || "imagen", marks: [] }],
+        });
+        i += m[0].length;
+        continue;
+      }
     }
 
-    lastIndex = pattern.lastIndex;
+    // 3. Link: [text](url)
+    if (canLink && ch === "[") {
+      const m = /^\[([^\]]*)\]\(([^)]+)\)/.exec(text.slice(i));
+      if (m) {
+        flush();
+        const inner = parseInlineCore(m[1], marks, false);
+        nodes.push({
+          nodeType: "hyperlink",
+          data: { uri: m[2] },
+          content: inner.length
+            ? inner
+            : [{ nodeType: "text", data: {}, value: "", marks }],
+        });
+        i += m[0].length;
+        continue;
+      }
+    }
+
+    // 4. Bold: **text**
+    if (ch === "*" && text[i + 1] === "*") {
+      const rest = text.slice(i + 2);
+      const end = rest.indexOf("**");
+      if (end !== -1) {
+        flush();
+        const boldMark: RichTextMark = { type: "bold" };
+        const newMarks = marks.some((m) => m.type === "bold")
+          ? marks
+          : [...marks, boldMark];
+        nodes.push(...parseInlineCore(rest.slice(0, end), newMarks, canLink));
+        i += 4 + end; // ** + content + **
+        continue;
+      }
+      // No matching **, treat as literal
+      plain += "**";
+      i += 2;
+      continue;
+    }
+
+    // 5. Italic: *text* (single asterisk, not **)
+    if (ch === "*") {
+      const rest = text.slice(i + 1);
+      // Find closing * that is not part of **
+      let end = -1;
+      for (let j = 0; j < rest.length; j++) {
+        if (rest[j] === "*" && (j === rest.length - 1 || rest[j + 1] !== "*")) {
+          end = j;
+          break;
+        }
+      }
+      if (end > 0) {
+        flush();
+        const italicMark: RichTextMark = { type: "italic" };
+        const newMarks = marks.some((m) => m.type === "italic")
+          ? marks
+          : [...marks, italicMark];
+        nodes.push(...parseInlineCore(rest.slice(0, end), newMarks, canLink));
+        i += 2 + end; // * + content + *
+        continue;
+      }
+      plain += "*";
+      i++;
+      continue;
+    }
+
+    // 6. Italic: _text_ (turndown's default emDelimiter)
+    if (ch === "_") {
+      const rest = text.slice(i + 1);
+      const end = rest.indexOf("_");
+      if (end > 0) {
+        flush();
+        const italicMark: RichTextMark = { type: "italic" };
+        const newMarks = marks.some((m) => m.type === "italic")
+          ? marks
+          : [...marks, italicMark];
+        nodes.push(...parseInlineCore(rest.slice(0, end), newMarks, canLink));
+        i += 2 + end; // _ + content + _
+        continue;
+      }
+      plain += "_";
+      i++;
+      continue;
+    }
+
+    plain += ch;
+    i++;
   }
-  if (lastIndex < text.length) {
-    const rest = text.slice(lastIndex);
-    if (rest) nodes.push(textNode(rest));
+
+  flush();
+  if (nodes.length === 0) {
+    nodes.push({ nodeType: "text", data: {}, value: "", marks });
   }
-  if (nodes.length === 0) nodes.push(textNode(""));
   return nodes;
 }
 
 // turndown backslash-escapes markdown-significant punctuation in prose so its
-// output survives a markdown round-trip (`1\.` at line start, `view\_mode`,
-// `\[texto\]`). Those escapes are markdown syntax, not content — strip them
-// from every text value or they render literally in Contentful (found live:
-// headings showing "1\. Organiza una reunión"). Runs in textNode so headings,
-// paragraphs, list items, link text and bold/italic all get cleaned after
-// inline parsing.
+// output survives a markdown round-trip. Kept as an exported utility for
+// callers that need it independently; the inline parser above handles escapes
+// directly in the character loop (no double-processing).
 const MARKDOWN_ESCAPE_RE = /\\([\\`*_{}[\]()#+\-.!>|~])/g;
 
 export function unescapeMarkdown(text: string): string {
@@ -108,7 +209,7 @@ export function unescapeMarkdown(text: string): string {
 }
 
 function textNode(value: string, marks: RichTextMark[] = []): RichTextNode {
-  return { nodeType: "text", data: {}, value: unescapeMarkdown(value), marks };
+  return { nodeType: "text", data: {}, value, marks };
 }
 
 function paragraph(text: string): RichTextNode {
@@ -161,6 +262,55 @@ function isListBlock(lines: string[], re: RegExp): boolean {
   return lines.every((l) => re.test(l));
 }
 
+// ---------------------------------------------------------------------------
+// GFM pipe-table support.
+// Every line of a table block starts and ends with |.
+
+const TABLE_LINE_RE = /^\|.+\|$/;
+
+function isTableBlock(lines: string[]): boolean {
+  return lines.length >= 2 && lines.every((l) => TABLE_LINE_RE.test(l.trim()));
+}
+
+function isSeparatorLine(line: string): boolean {
+  // Separator rows contain only |, -, :, and whitespace between pipes.
+  return line
+    .trim()
+    .slice(1, -1)
+    .split("|")
+    .every((c) => /^[\s\-:]+$/.test(c));
+}
+
+function parseTableBlock(lines: string[]): RichTextNode {
+  let isHeader = true;
+  const rows: RichTextNode[] = [];
+
+  for (const line of lines) {
+    if (isSeparatorLine(line)) {
+      isHeader = false;
+      continue;
+    }
+    const cells = line
+      .trim()
+      .slice(1, -1)
+      .split("|")
+      .map((c) => c.trim());
+    rows.push({
+      nodeType: "table-row",
+      data: {},
+      content: cells.map((cellText) => ({
+        nodeType: isHeader ? "table-header-cell" : "table-cell",
+        data: {},
+        content: [paragraph(cellText)],
+      })),
+    });
+  }
+
+  return { nodeType: "table", data: {}, content: rows };
+}
+
+// ---------------------------------------------------------------------------
+
 /**
  * Blank-line-separated blocks are usually distinct elements, but turndown
  * inserts a blank line between numbered-list items whenever an item's
@@ -190,7 +340,9 @@ export function markdownToRichText(markdown: string): RichTextDocument {
     const first = lines[0];
     const headingMatch = first.match(HEADING_RE);
 
-    if (headingMatch && lines.length === 1) {
+    if (isTableBlock(lines)) {
+      content.push(parseTableBlock(lines));
+    } else if (headingMatch && lines.length === 1) {
       const level = headingMatch[1].length;
       content.push({
         nodeType: HEADING_NODE_TYPE[level] ?? "heading-6",
@@ -225,8 +377,6 @@ export function markdownToRichText(markdown: string): RichTextDocument {
         content: [paragraph(text)],
       });
     } else {
-      // Plain paragraph — join wrapped lines with a space (turndown wraps
-      // long lines but they're one logical paragraph).
       content.push(paragraph(lines.join(" ")));
     }
   }

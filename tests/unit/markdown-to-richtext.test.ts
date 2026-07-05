@@ -143,6 +143,103 @@ describe("markdownToRichText", () => {
     );
   });
 
+  describe("underscore italic (_text_ — turndown's default emDelimiter)", () => {
+    it("converts _text_ to italic", () => {
+      const doc = markdownToRichText("_Sara, sirviendo en el Norte de África._");
+      const para = doc.content[0];
+      expect(para.nodeType).toBe("paragraph");
+      const italic = para.content!.find((n) => n.marks?.some((m) => m.type === "italic"));
+      expect(italic?.value).toBe("Sara, sirviendo en el Norte de África.");
+    });
+
+    it("converts _**bold inside italic**_ (nested marks)", () => {
+      const doc = markdownToRichText("_**Chris, directora de VAMOS**_");
+      const para = doc.content[0];
+      const node = para.content!.find(
+        (n) => n.marks?.some((m) => m.type === "bold") && n.marks?.some((m) => m.type === "italic"),
+      );
+      expect(node?.value).toBe("Chris, directora de VAMOS");
+    });
+
+    it("lone _ without closing _ is treated as literal text", () => {
+      const doc = markdownToRichText("precio_fijo sin cierre");
+      expect(doc.content[0].content![0].value).toBe("precio_fijo sin cierre");
+    });
+  });
+
+  describe("links inside emphasis and vice versa", () => {
+    it("parses a link inside bold: **[text](url)**", () => {
+      const doc = markdownToRichText("Ver **[MOVIDA](https://instagram.com/movidaint)** aquí.");
+      const para = doc.content[0];
+      const link = para.content!.find((n) => n.nodeType === "hyperlink");
+      expect(link).toBeDefined();
+      expect(link!.data.uri).toBe("https://instagram.com/movidaint");
+      expect(link!.content![0].marks).toEqual([{ type: "bold" }]);
+    });
+
+    it("parses bold+italic inside link text: [**_text_.**](url)", () => {
+      const doc = markdownToRichText("[**_El Clamor Macedonio_.**](https://example.com/)");
+      const para = doc.content[0];
+      const link = para.content!.find((n) => n.nodeType === "hyperlink");
+      expect(link).toBeDefined();
+      const boldItalic = link!.content!.find(
+        (n) =>
+          n.marks?.some((m) => m.type === "bold") &&
+          n.marks?.some((m) => m.type === "italic"),
+      );
+      expect(boldItalic?.value).toBe("El Clamor Macedonio");
+    });
+
+    it("parses bold inside link text: [**aquí.**](url)", () => {
+      const doc = markdownToRichText("[**aquí.**](https://bit.ly/x)");
+      const para = doc.content[0];
+      const link = para.content!.find((n) => n.nodeType === "hyperlink");
+      expect(link).toBeDefined();
+      const bold = link!.content!.find((n) => n.marks?.some((m) => m.type === "bold"));
+      expect(bold?.value).toBe("aquí.");
+    });
+  });
+
+  describe("escaped asterisks as literal characters (pseudonym footnotes)", () => {
+    it("treats \\* as a literal asterisk, not an italic delimiter", () => {
+      const doc = markdownToRichText("Laura\\* es un pseudónimo.");
+      const para = doc.content[0];
+      para.content!.forEach((n) => {
+        expect(n.marks?.some((m) => m.type === "italic")).toBeFalsy();
+      });
+      const fullText = para.content!.map((n) => n.value ?? "").join("");
+      expect(fullText).toContain("Laura*");
+    });
+
+    it("treats \\_ as a literal underscore, not italic delimiter", () => {
+      const doc = markdownToRichText("view\\_mode");
+      expect(doc.content[0].content![0].value).toBe("view_mode");
+    });
+  });
+
+  describe("GFM pipe tables", () => {
+    it("converts a pipe table to a Contentful table node", () => {
+      const md = "| Col A | Col B |\n| --- | --- |\n| cell 1 | cell 2 |";
+      const doc = markdownToRichText(md);
+      expect(doc.content[0].nodeType).toBe("table");
+      const rows = doc.content[0].content!;
+      expect(rows).toHaveLength(2);
+      expect(rows[0].nodeType).toBe("table-row");
+      expect(rows[0].content![0].nodeType).toBe("table-header-cell");
+      expect(rows[0].content![0].content![0].content![0].value).toBe("Col A");
+      expect(rows[1].content![0].nodeType).toBe("table-cell");
+      expect(rows[1].content![0].content![0].content![0].value).toBe("cell 1");
+    });
+
+    it("handles a table with no separator (all rows become body cells)", () => {
+      const md = "| A | B |\n| 1 | 2 |";
+      const doc = markdownToRichText(md);
+      expect(doc.content[0].nodeType).toBe("table");
+      // No separator → isHeader never flips to false after first row
+      expect(doc.content[0].content![0].content![0].nodeType).toBe("table-header-cell");
+    });
+  });
+
   describe("markdown backslash escapes (turndown escapes prose punctuation)", () => {
     it("strips the escape from numbered-prefix headings (found live in Contentful as '1\\. Organiza una reunión')", () => {
       const doc = markdownToRichText("#### 1\\. Organiza una reunión para ver un partido");

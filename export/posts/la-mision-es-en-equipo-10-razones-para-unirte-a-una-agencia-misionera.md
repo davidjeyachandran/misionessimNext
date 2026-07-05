@@ -130,6 +130,8 @@ Unirse a una agencia misionera no significa reemplazar el rol de la iglesia loca
 
 Hoy todavía existen miles de pueblos no alcanzados que necesitan escuchar el Evangelio. Y para llegar a ellos, necesitaremos más que pasión: necesitaremos comunidad, preparación y trabajo en equipo.
 
+[video](https://www.youtube.com/embed/zx8x6J7vPNI?feature=oembed)
+
 ## Artículos relacionados
 
 -   [“Preparación Integral para tu llamado misionero”](https://misionessim.org/blog/2024-07/el-devocional-es-el-que-se-vive-cada-dia/)

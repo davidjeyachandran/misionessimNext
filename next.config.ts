@@ -1,38 +1,21 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Fully static site: `next build` emits `out/` for any static host
+  // (Cloudflare Pages). No server runtime, so content changes require a
+  // rebuild + redeploy — acceptable here (content changes ~every 2 months).
+  output: "export",
   trailingSlash: true,
   reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.ctfassets.net", // Contentful assets
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "img.youtube.com", // YouTube thumbnails
-        pathname: "/**",
-      },
-    ],
+    // The default image optimizer is a server feature and can't run in a
+    // static export. Emit plain <img> tags; the source images
+    // (Contentful/YouTube) and local /public assets are already right-sized.
+    unoptimized: true,
   },
-  async redirects() {
-    return [
-      // Donations dropped entirely (GiveWP out of scope; David 2026-07-05:
-      // no donation paths at all — not even redirects). Legacy /donations/*
-      // URLs simply 404.
-      //
-      // Author archives dropped (WP data was only account names) — send the
-      // 2 legacy author URLs to the blog index.
-      { source: "/blog/author/:slug*", destination: "/blog", permanent: true },
-      // Revista canonical inverted vs. the legacy site (David 2026-07-05):
-      // the new canonical route is /revistavamos/; the old canonical
-      // /la-revista/<slug>/ URLs (118 in the legacy sitemap) 301 across.
-      { source: "/la-revista", destination: "/revistavamos", permanent: true },
-      { source: "/la-revista/:slug", destination: "/revistavamos/:slug", permanent: true },
-    ];
-  },
+  // NOTE: redirects()/rewrites()/headers() are NOT supported by `output:
+  // 'export'` (they need a server). The legacy redirects now live in
+  // `public/_redirects`, which Cloudflare Pages reads. Keep the two in sync.
 };
 
 export default nextConfig;

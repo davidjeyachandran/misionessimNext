@@ -31,6 +31,45 @@ const turndown = new TurndownService({
   bulletListMarker: "-",
 });
 
+// Tables → GFM pipe format so markdown-to-richtext.ts can convert them to
+// Contentful table nodes. Rules fire depth-first (cells → rows → table).
+turndown.addRule("table-cell", {
+  filter: ["th", "td"],
+  replacement: (content) =>
+    ` ${content.replace(/\n+/g, " ").replace(/\|/g, "\\|").trim()} |`,
+});
+
+turndown.addRule("table-row", {
+  filter: "tr",
+  replacement: (content, node) => {
+    const row = `|${content}\n`;
+    const hasHeaders = Array.from((node as Element).children).some(
+      (c) => c.nodeName === "TH",
+    );
+    if (hasHeaders) {
+      const cellCount = (content.match(/ \|/g) ?? []).length;
+      return row + `|${" --- |".repeat(cellCount)}\n`;
+    }
+    return row;
+  },
+});
+
+turndown.addRule("table-block", {
+  filter: ["table", "thead", "tbody", "tfoot"],
+  replacement: (content) => `\n\n${content}\n\n`,
+});
+
+// iframes (YouTube / video embeds) → [video](url) standalone link.
+// The HYPERLINK renderer in page.tsx detects this pattern and renders an
+// <iframe> embed; other callers treat it as a regular external link.
+turndown.addRule("iframe", {
+  filter: "iframe",
+  replacement: (_content, node) => {
+    const src = (node as Element).getAttribute("src") ?? "";
+    return src ? `\n\n[video](${src})\n\n` : "";
+  },
+});
+
 // ---------------------------------------------------------------------------
 // Mojibake cleanup (§2.5): WP's content.rendered stores smart quotes/dashes
 // as raw Windows-1252 control-range codepoints (U+0080-U+009F) instead of

@@ -33,7 +33,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { markdownToRichText } from "./lib/markdown-to-richtext";
+import { markdownToRichText, type RichTextNode } from "./lib/markdown-to-richtext";
 
 const POSTS_DIR = path.join(process.cwd(), "export", "posts");
 const MEDIA_DIR = path.join(process.cwd(), "export", "media");
@@ -75,6 +75,7 @@ interface PostPlan {
     action: "preserve" | "none";
     slug: string | null;
   };
+  inlineImages: Array<{ url: string; alt: string }>;
 }
 
 interface CollisionDiffEntry {
@@ -85,6 +86,70 @@ interface CollisionDiffEntry {
   revistaSlug: string | null;
   imageVerdict: "wp-higher-res" | "wp-has-cf-missing" | "cf-higher-res" | "wp-missing-cf-has" | "neither";
   wpImage: { width?: number; height?: number } | null;
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+// Strip the auto-truncation marker WP appends to excerpts ("texto… […]").
+// Without this, the description field is rendered as a lead paragraph that
+// duplicates the opening ~55 words of the body and ends mid-sentence.
+function cleanExcerpt(excerpt: string): string {
+  return excerpt.replace(/\s*\[…\]\s*$/, "").trim();
+}
+
+// Walk a RichText document and make misionessim.org absolute links relative,
+// and rewrite /la-revista/ paths to the new /revistavamos/ route.
+function rewriteInternalLinks(
+  doc: ReturnType<typeof markdownToRichText>,
+): ReturnType<typeof markdownToRichText> {
+  function walk(nodes: RichTextNode[]): RichTextNode[] {
+    return nodes.map((node) => {
+      if (node.nodeType === "hyperlink" && typeof node.data?.uri === "string") {
+        let uri = node.data.uri as string;
+        if (uri.startsWith("https://misionessim.org/")) {
+          uri = uri.slice("https://misionessim.org".length);
+        }
+        if (uri.startsWith("/la-revista/")) {
+          uri = uri.replace("/la-revista/", "/revistavamos/");
+        }
+        return { ...node, data: { uri }, content: node.content ? walk(node.content) : [] };
+      }
+      if (node.content) return { ...node, content: walk(node.content) };
+      return node;
+    });
+  }
+  return { ...doc, content: walk(doc.content) };
+}
+
+// Collect all wp-content image hyperlinks from a RichText document so the
+// live import can upload them as Contentful assets and replace the hyperlinks
+// with embedded-asset-block nodes. Deduplicates by URL.
+const IMAGE_EXT_RE = /\.(jpe?g|png|gif|webp|svg)(\?.*)?$/i;
+
+function extractInlineImages(
+  doc: ReturnType<typeof markdownToRichText>,
+): Array<{ url: string; alt: string }> {
+  const seen = new Set<string>();
+  const out: Array<{ url: string; alt: string }> = [];
+  function walk(nodes: RichTextNode[]) {
+    for (const n of nodes) {
+      if (
+        n.nodeType === "hyperlink" &&
+        IMAGE_EXT_RE.test((n.data?.uri as string) ?? "")
+      ) {
+        const url = n.data.uri as string;
+        if (!seen.has(url)) {
+          seen.add(url);
+          out.push({ url, alt: (n.content?.[0] as { value?: string })?.value ?? "" });
+        }
+      }
+      if (n.content) walk(n.content);
+    }
+  }
+  walk(doc.content);
+  return out;
 }
 
 // ---------------------------------------------------------------------------
@@ -148,13 +213,15 @@ async function buildPlan(environmentId?: string): Promise<PostPlan[]> {
       image = { action: "none" };
     }
 
+    const body = rewriteInternalLinks(markdownToRichText(content));
     plans.push({
       slug,
       action: d.status === "new" ? "create" : "update",
       contentfulEntryId: d.contentfulEntryId,
+      inlineImages: extractInlineImages(body),
       fields: {
         title: data.title as string,
-        body: markdownToRichText(content),
+        body,
         nid: String(data.wpId),
         excerpt: (data.excerpt as string) ?? "",
         categories: (data.categories as string[]) ?? [],
@@ -237,10 +304,80 @@ async function runLive(plans: PostPlan[], environmentId: string) {
       heroImageLink = { sys: { type: "Link", linkType: "Asset", id: processedAsset.sys.id } };
     }
 
+    // Upload inline images (wp-content image hyperlinks in the body), then
+    // promote their enclosing single-image paragraphs to embedded-asset-block.
+    const urlToAssetId = new Map<string, string>();
+    for (const { url, alt } of plan.inlineImages) {
+      try {
+        // rewriteInternalLinks strips "https://misionessim.org" from image
+        // URLs before extractInlineImages runs, leaving bare /wp-content/...
+        // paths. Restore the origin so fetch() gets an absolute URL.
+        const absoluteUrl = url.startsWith("/")
+          ? `https://misionessim.org${url}`
+          : url;
+        const res = await fetch(absoluteUrl, {
+          headers: { "user-agent": "misionessim-migration-bot/1.0" },
+        });
+        if (!res.ok) {
+          console.warn(`  WARN: could not download ${url}: ${res.status}`);
+          continue;
+        }
+        const buffer = await res.arrayBuffer();
+        const contentType = res.headers.get("content-type") ?? "image/jpeg";
+        const fileName = url.split("/").pop()?.split("?")[0] ?? "image.jpg";
+        const asset = await client.asset.createFromFiles(ctx, {
+          fields: {
+            title: { "en-US": alt || fileName },
+            description: { "en-US": alt },
+            file: { "en-US": { contentType, fileName, file: buffer } },
+          },
+        });
+        const processed = await client.asset.processForAllLocales(ctx, asset);
+        await client.asset.publish({ ...ctx, assetId: processed.sys.id }, processed);
+        urlToAssetId.set(url, processed.sys.id);
+        console.log(`  uploaded inline asset: ${fileName} → ${processed.sys.id}`);
+      } catch (e) {
+        console.warn(
+          `  WARN: failed to upload inline image ${url}: ${(e as Error).message}`,
+        );
+      }
+    }
+
+    // Replace image-only hyperlink paragraphs with embedded-asset-block nodes.
+    let bodyDoc = plan.fields.body;
+    if (urlToAssetId.size > 0) {
+      bodyDoc = {
+        ...bodyDoc,
+        content: bodyDoc.content.map((node) => {
+          if (
+            node.nodeType === "paragraph" &&
+            node.content?.length === 1 &&
+            node.content[0].nodeType === "hyperlink" &&
+            urlToAssetId.has(node.content[0].data?.uri as string)
+          ) {
+            return {
+              nodeType: "embedded-asset-block",
+              data: {
+                target: {
+                  sys: {
+                    type: "Link" as const,
+                    linkType: "Asset" as const,
+                    id: urlToAssetId.get(node.content[0].data.uri as string)!,
+                  },
+                },
+              },
+              content: [],
+            };
+          }
+          return node;
+        }),
+      };
+    }
+
     const fields: Record<string, unknown> = {
       slug: { "en-US": plan.slug },
       title: { "en-US": plan.fields.title },
-      body: { "en-US": plan.fields.body },
+      body: { "en-US": bodyDoc },
       nid: { "en-US": plan.fields.nid },
       publishDate: { "en-US": plan.fields.publishDate },
       // Contentful's field is `description`, not `excerpt` — the schema
@@ -248,7 +385,7 @@ async function runLive(plans: PostPlan[], environmentId: string) {
       // purpose (confirmed via Management API, 2026-07-04); no `excerpt`
       // field exists. Required, so fall back to the title if WP's excerpt
       // is empty (rare, but happens on very short posts).
-      description: { "en-US": plan.fields.excerpt || plan.fields.title },
+      description: { "en-US": cleanExcerpt(plan.fields.excerpt) || plan.fields.title },
       categories: { "en-US": plan.fields.categories },
       tags: { "en-US": plan.fields.tags },
       seoTitle: { "en-US": plan.fields.seoTitle },
