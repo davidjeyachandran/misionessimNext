@@ -45,27 +45,35 @@ export default async function RevistaPage({ params }: Props) {
 
       <header className="mb-12 flex flex-col gap-8 sm:flex-row">
         {revista.coverImage?.url && (
-          <div className="relative aspect-[3/4] w-56 shrink-0 overflow-hidden rounded-md shadow-md">
+          <a
+            href={revista.pdfUrl ?? undefined}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative aspect-[3/4] w-full shrink-0 overflow-hidden rounded-md shadow-md sm:w-[460px]"
+          >
             <Image
               src={revista.coverImage.url}
               alt={revista.coverImage.description ?? `Portada: ${revista.title}`}
               fill
               className="object-cover"
               priority
-              sizes="224px"
+              sizes="(max-width: 640px) 100vw, 460px"
             />
-          </div>
+          </a>
         )}
         <div className="flex flex-col justify-center gap-3">
           <p className="text-sm font-semibold uppercase tracking-wide text-brand">
             Revista VAMOS
           </p>
-          <h1 className="font-heading text-4xl font-bold leading-tight text-ink">
+          <h1 className="font-heading text-4xl font-bold leading-tight text-brand md:text-5xl">
             {revista.title}
           </h1>
-          <p className="capitalize text-muted">
-            <time dateTime={revista.fecha}>{fechaToEdicion(revista.fecha)}</time>
-          </p>
+          <div className="border-y border-hairline py-4 flex gap-4">
+            <span className="font-semibold text-ink w-1/3">Fecha</span>
+            <time dateTime={revista.fecha} className="capitalize text-muted w-2/3">
+              {fechaToEdicion(revista.fecha)}
+            </time>
+          </div>
           {revista.pdfUrl && (
             <p className="mt-2">
               <a
