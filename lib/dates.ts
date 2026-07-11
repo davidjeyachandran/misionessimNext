@@ -7,3 +7,13 @@ export function fechaToEdicion(fecha: string): string {
   const month = d.toLocaleDateString("es-ES", { month: "long", timeZone: "UTC" });
   return `${month} ${d.getUTCFullYear()}`;
 }
+
+// "2021-10-28T..." → "28 de octubre de 2021" (blog post display)
+export function formatPostDate(publishDate: string): string {
+  return new Date(publishDate).toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}

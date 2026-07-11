@@ -11,6 +11,7 @@ import {
   publishDateToSegment,
   slugify,
 } from "../../../../lib/contentful";
+import { formatPostDate } from "../../../../lib/dates";
 
 export async function generateStaticParams() {
   const slugs = await getAllBlogPostSlugs();
@@ -171,11 +172,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
   const richTextOptions = buildRichTextOptions(assetMap);
 
-  const displayDate = new Date(post.publishDate).toLocaleDateString("es-ES", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const displayDate = formatPostDate(post.publishDate);
 
   return (
     <main className="page-offset mx-auto max-w-3xl px-4 py-12">

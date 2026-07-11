@@ -2,15 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import type { BlogPostCard } from "../../../lib/contentful";
 import { publishDateToSegment, slugify } from "../../../lib/contentful";
+import { formatPostDate } from "../../../lib/dates";
 
 export function PostCard({ post }: { post: BlogPostCard }) {
   const dateSegment = publishDateToSegment(post.publishDate);
   const href = `/blog/${dateSegment}/${post.slug}/`;
-  const displayDate = new Date(post.publishDate).toLocaleDateString("es-ES", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
+  const displayDate = formatPostDate(post.publishDate);
 
   return (
     <article className="group flex flex-col gap-3">
