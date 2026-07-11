@@ -100,9 +100,9 @@
 }
 .header-inner {
   width: 100%;
-  max-width: 1380px;
+  max-width: var(--home-container);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
