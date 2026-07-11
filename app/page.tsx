@@ -79,7 +79,12 @@ export default async function Home() {
           <div className="cards">
             <article className="card reveal">
               <div className="card-media">
-                <Image src="/home/foto-sim2_.webp" alt="Sirve en la misión" width={400} height={220} style={{ width: "100%", height: "220px", objectFit: "cover" }} />
+                <Image
+                  src="/home/foto-sim2_.webp"
+                  alt="Sirve en la misión"
+                  fill
+                  sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) calc((100vw - 70px) / 2), 380px"
+                />
               </div>
               <div className="card-body">
                 <h3>Sirve</h3>
@@ -101,7 +106,12 @@ export default async function Home() {
             </article>
             <article className="card reveal">
               <div className="card-media">
-                <Image src="/home/foto-da.webp" alt="Da para la misión" width={400} height={220} style={{ width: "100%", height: "220px", objectFit: "cover" }} />
+                <Image
+                  src="/home/foto-da.webp"
+                  alt="Da para la misión"
+                  fill
+                  sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) calc((100vw - 70px) / 2), 380px"
+                />
               </div>
               <div className="card-body">
                 <h3>Da</h3>
@@ -123,7 +133,12 @@ export default async function Home() {
             </article>
             <article className="card reveal">
               <div className="card-media">
-                <Image src="/home/foto-ora.webp" alt="Ora por la misión" width={400} height={220} style={{ width: "100%", height: "220px", objectFit: "cover" }} />
+                <Image
+                  src="/home/foto-ora.webp"
+                  alt="Ora por la misión"
+                  fill
+                  sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) calc((100vw - 70px) / 2), 380px"
+                />
               </div>
               <div className="card-body">
                 <h3>Ora</h3>
