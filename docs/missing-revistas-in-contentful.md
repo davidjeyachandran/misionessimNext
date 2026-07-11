@@ -1,0 +1,9 @@
+https://misionessim.org/la-revista/el-clamor-macedonio/
+https://misionessim.org/la-revista/lucha-espiritual/
+https://misionessim.org/la-revista/envio-responsable-2/
+https://misionessim.org/la-revista/caracter-misionero/
+https://misionessim.org/la-revista/discipulos-que-hacen-discipulos/
+https://misionessim.org/la-revista/cuidado-integral-biblico-y-solidario/
+https://misionessim.org/la-revista/latinos-en-adaptacion/
+https://misionessim.org/la-revista/la-gente-que-no-vemos/
+https://misionessim.org/la-revista/conferencias-misioneras/
