@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { PageHero } from "../_components/PageHero";
 
 export const metadata: Metadata = {
   title: "Ora",
@@ -76,24 +77,17 @@ const FULANI = [
 export default function OraPage() {
   return (
     <main className="page-offset">
-      {/* Hero */}
-      <section className="bg-navy">
-        <div className="mx-auto max-w-4xl px-4 py-16 text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-cream">
-            ¡Únete en oración!
-          </p>
-          <h1 className="font-heading mt-3 text-4xl font-bold text-white md:text-5xl">
-            Motivos de oración de este mes
-          </h1>
-          <p className="mt-4 text-lg text-white/80">
-            La historia de SIM es una historia de oración. Súmate en clamor
-            junto a miles de cristianos en el mundo.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="¡Únete en oración!"
+        intro="La historia de SIM es una historia de oración. Súmate en clamor junto a miles de cristianos en el mundo."
+        image={{ src: "/heroes/ora.jpg" }}
+      />
 
       {/* Motivos del mes */}
       <section className="mx-auto max-w-6xl px-4 py-16">
+        <h2 className="font-heading mb-10 text-3xl font-bold text-ink">
+          Motivos de oración de este mes
+        </h2>
         <div className="grid gap-8 md:grid-cols-3">
           {MOTIVOS.map((m) => (
             <article key={m.title} className="flex flex-col overflow-hidden rounded-lg border border-hairline bg-white shadow-sm">

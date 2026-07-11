@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { PageHero } from "../_components/PageHero";
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -141,27 +142,11 @@ function Faq({ question, children }: { question: string; children: React.ReactNo
 export default function NosotrosPage() {
   return (
     <main className="page-offset">
-      {/* Hero */}
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
-        <div>
-          <h1 className="font-heading text-4xl font-bold text-ink md:text-5xl">
-            ¿Quiénes somos?
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted">
-            Convencidos de que nadie debe vivir y morir sin haber escuchado las
-            buenas nuevas, creemos que Él nos llamó a hacer discípulos del Señor
-            en comunidades donde es menos conocido.
-          </p>
-        </div>
-        <Image
-          src="/pages/nosotros-hero.jpg"
-          alt="Equipo de SIM Latinoamérica"
-          width={710}
-          height={725}
-          className="w-full rounded-lg object-cover shadow-lg"
-          priority
-        />
-      </section>
+      <PageHero
+        title="¿Quiénes somos?"
+        intro="Convencidos de que nadie debe vivir y morir sin haber escuchado las buenas nuevas, creemos que Él nos llamó a hacer discípulos del Señor en comunidades donde es menos conocido."
+        image={{ src: "/heroes/nosotros.jpg", alt: "Equipo de SIM Latinoamérica" }}
+      />
 
       {/* Lo que nos mueve */}
       <section className="bg-cream/40">

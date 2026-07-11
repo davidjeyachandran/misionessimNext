@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { PageHero } from "../_components/PageHero";
 
 export const metadata: Metadata = {
   title: "Recursos",
@@ -12,22 +13,10 @@ export const metadata: Metadata = {
 export default function RecursosPage() {
   return (
     <main className="page-offset">
-      {/* Hero */}
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
-        <div>
-          <h1 className="font-heading text-4xl font-bold text-ink md:text-5xl">
-            Recursos para candidatos, líderes y toda la iglesia
-          </h1>
-        </div>
-        <Image
-          src="/pages/recursos-hero.jpg"
-          alt="Recursos de SIM Latinoamérica"
-          width={768}
-          height={699}
-          className="w-full rounded-lg object-cover shadow-lg"
-          priority
-        />
-      </section>
+      <PageHero
+        title="Recursos para candidatos, líderes y toda la iglesia"
+        image={{ src: "/heroes/recursos.jpg", alt: "Recursos de SIM Latinoamérica" }}
+      />
 
       {/* Movilicemos */}
       <section className="bg-cream/40">

@@ -103,13 +103,19 @@ export function SiteFooter() {
             ))}
           </ul>
         </nav>
+        <div className="footer-col">
+          <p className="footer-title">¿Tienes alguna pregunta?</p>
+          <p>Escríbenos aquí:</p>
+          <a href="mailto:sim.preguntas@sim.org">sim.preguntas@sim.org</a>
+        </div>
       </div>
       <div className="footer-bottom">
-        <div className="container">
+        <div className="container footer-bottom-inner">
           <p>
             Copyright © {new Date().getFullYear()} SIM Latinoamérica INC. Todos
             los derechos reservados
           </p>
+          <p>Sirve · Ora · Da</p>
         </div>
       </div>
     </footer>

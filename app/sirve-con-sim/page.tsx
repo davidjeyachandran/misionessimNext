@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { PageHero } from "../_components/PageHero";
 
 export const metadata: Metadata = {
   title: "Sirve con SIM",
@@ -24,27 +25,11 @@ const REQUISITOS = [
 export default function SirveConSimPage() {
   return (
     <main className="page-offset">
-      {/* Hero */}
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
-        <div>
-          <h1 className="font-heading text-4xl font-bold text-ink md:text-5xl">
-            ¡Hay lugar para ti en SIM!
-          </h1>
-          <p className="mt-5 text-lg leading-relaxed text-muted">
-            Tú también puedes servir entre los no alcanzados junto a SIM. ¡Tus
-            dones, profesión o talentos pueden ser usados para alcanzar con el
-            mensaje de Jesús!
-          </p>
-        </div>
-        <Image
-          src="/pages/sirve-hero.webp"
-          alt="Sirve con SIM"
-          width={768}
-          height={699}
-          className="w-full rounded-lg object-cover shadow-lg"
-          priority
-        />
-      </section>
+      <PageHero
+        title="¡Hay lugar para ti en SIM!"
+        intro="Tú también puedes servir entre los no alcanzados junto a SIM. ¡Tus dones, profesión o talentos pueden ser usados para alcanzar con el mensaje de Jesús!"
+        image={{ src: "/heroes/sirve-con-sim.webp", alt: "Sirve con SIM" }}
+      />
 
       {/* Puestos */}
       <section className="bg-navy">
