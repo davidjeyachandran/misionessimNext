@@ -15,6 +15,7 @@
     "diff:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/diff-cms-collisions.ts",
     "import:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-cms.ts",
     "import:revistas": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-missing-revistas.ts",
+    "connect:revistas": "node --env-file=.env.local node_modules/.bin/tsx scripts/connect-posts-to-revistas.ts",
     "migrate:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/run-migration.ts",
     "test:unit": "vitest run"
   },
