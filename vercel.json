@@ -1,0 +1,181 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/blog/author/:path*",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista",
+      "destination": "/revistavamos/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/",
+      "destination": "/revistavamos/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/:path*",
+      "destination": "/revistavamos/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/la-mentoria-una-aliada-en-el-ministerio",
+      "destination": "/blog/2020-01/la-mentoria-una-aliada-en-el-ministerio-0/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/una-generacion-destinada-a-morir",
+      "destination": "/blog/2020-01/una-generacion-destinada-morir/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/siempre-sera-un-desafio",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/lo-que-mi-corazon-esconde-tras-hacer-mucho-a-la-vez",
+      "destination": "/blog/2020-01/lo-que-mi-corazon-esconde-tras-hacer-mucho-la-vez/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/guiando-a-los-misioneros-solteros",
+      "destination": "/blog/2020-01/guiando-los-misioneros-solteros/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/abuelas-a-distancia",
+      "destination": "/blog/2020-01/abuelas-distancia/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2019-10/que-son-las-misiones-urbanas-2",
+      "destination": "/blog/2019-10/que-son-las-misiones-urbanas-0/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2022-12/a-dios-le-importa-mas-tener-el-100-de-mi-corazon-que-darme-el-100-de-mi-sustento",
+      "destination": "/blog/2022-12/a-dios-le-importa-mas-tener-el-100-de-mi-corazon-que-darme-el-100-de-mi/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2022-05/las-migraciones-la-nueva-ola-de-las-misiones-2",
+      "destination": "/blog/2017-07/las-migraciones-la-nueva-ola-de-las-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2021-04/adaptandose-a-las-nuevas-formas-de-hacer-ministerio",
+      "destination": "/blog/2021-04/adaptandose-las-nuevas-formas-de-hacer-ministerio/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-12/guiando-a-los-interesados",
+      "destination": "/blog/2020-12/guiando-los-interesados/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2021-01/de-afectada-a-involucrada-e-infectada",
+      "destination": "/blog/2021-01/de-afectada-involucrada-e-infectada/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-09/ya-quiero-volver-a-casa",
+      "destination": "/blog/2020-09/ya-quiero-volver-casa/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-09/comprometiendo-a-las-universidades-globalmente",
+      "destination": "/blog/2020-09/comprometiendo-las-universidades-globalmente/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-09/sin-discipulado-no-hay-mision-2",
+      "destination": "/blog/2019-10/sin-discipulado-no-hay-mision/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-04/sim-ofrece-ayuda-del-covid-19-a-hospitales-alrededor-del-mundo",
+      "destination": "/blog/2020-04/sim-ofrece-ayuda-del-covid-19-hospitales-alrededor-del-mundo/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-06/preparando-a-los-ninos-para-el-tiempo-de-licencia",
+      "destination": "/blog/2020-06/preparando-los-ninos-para-el-tiempo-de-licencia/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-09/conociendo-a-un-htc",
+      "destination": "/blog/2020-09/conociendo-un-htc-0/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-09/involucrar-a-mis-hijos-en-la-mision",
+      "destination": "/blog/2020-09/involucrar-mis-hijos-en-la-mision/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-02/de-una-familia-ordinaria-a-una-familia-misionera",
+      "destination": "/blog/2020-02/de-una-familia-ordinaria-una-familia-misionera/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-02/alcanzando-a-los-hijos-de-david",
+      "destination": "/blog/2020-02/alcanzando-los-hijos-de-david/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-02/desafiados-a-revitalizar-una-iglesia",
+      "destination": "/blog/2020-02/desafiados-revitalizar-una-iglesia/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-02/llamados-a-plantar",
+      "destination": "/blog/2020-02/llamados-plantar/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-02/5-consejos-para-alguien-con-llamado-a-plantar-iglesias",
+      "destination": "/blog/2020-02/5-consejos-para-alguien-con-llamado-plantar-iglesias/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/no-tienes-por-que-caminar-solo-2",
+      "destination": "/blog/2020-01/no-tienes-por-que-caminar-solo-0/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/consejos-practicos-para-involucrar-a-los-jovenes-en-misiones",
+      "destination": "/blog/2020-01/consejos-practicos-para-involucrar-los-jovenes-en-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/el-regreso-a-israel",
+      "destination": "/blog/2020-01/el-regreso-israel/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/representando-a-cristo-en-vivo",
+      "destination": "/blog/2020-01/representando-cristo-en-vivo/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/lo-que-la-iglesia-ha-recibido-de-los-judios-2",
+      "destination": "/blog/2020-01/lo-que-la-iglesia-ha-recibido-de-los-judios-0/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/siempre-sera-un-desafio-2",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2023-01/puedo-tener-novioa-en-un-viaje-de-corto-plazo",
+      "destination": "/blog/2023-01/puedo-tener-novio-a-en-un-viaje-de-corto-plazo/",
+      "permanent": true
+    }
+  ]
+}

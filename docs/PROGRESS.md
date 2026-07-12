@@ -209,3 +209,25 @@ Follow-up to the 2026-07-04 content-fidelity audit (missing inline images). Comp
 - Homepage POC (verified near pixel-perfect) is in `poc/`; serve via launch.json config "sim-home" (port 8137). Design tokens: primary `#C91430`, secondary `#002F49`, text `#0A0117`, nav `#696F8C`; Raleway + Work Sans; fixed white 71px header; 95vh hero; 3 parallax sections; YouTube `zx8x6J7vPNI`.
 - Next.js dev server: launch config `next-app`, port 3000.
 - Memory file `misionessim-homepage-poc.md` (auto-memory) holds the same facts and points here — needs a refresh after this session (Contentful per-field policy, corrected counts, corrected import-vamos attribution).
+
+## 2026-07-12 — Legacy blog URL redirects (Vercel)
+
+- **WP↔Contentful blog gap audit**: all 335 live WP posts exist in Contentful
+  (875 published blogPosts). 31 WP URLs have no published entry under the exact
+  WP slug: 27 are dedup losers (article published under the Drupal/VAMOS-era
+  slug, WP-slug duplicate archived), 4 are slug variants (truncated
+  `a-dios-le-importa-…-de-mi`, `puedo-tener-novio-a-…`, and the corrupt
+  `" 2020-01/Siempre-será-un-desafío "` slug with spaces/accents/embedded date).
+- **Deployment target corrected: Vercel, not Cloudflare Pages.** Created
+  `vercel.json` (35 redirect rules, `trailingSlash: true`): the author-archive
+  and `/la-revista/*` rules migrated from `public/_redirects` (file deleted),
+  plus 301s for all 31 legacy WP blog URLs → their canonical `/blog/<YYYY-MM>/<slug>/`
+  route (mapping computed by replicating `getCanonicalEntries()` dedup; all 29
+  article targets verified present in `out/`). `next.config.ts` comments updated.
+- **Fallbacks**: `/blog/2020-01/siempre-sera-un-desafio/` and `…-2/` redirect to
+  `/blog/` — their only Contentful entry is the corrupt-slug one, whose generated
+  page (`out/blog/2020-01/ 2020-01%2FSiempre-será-un-desafío /`) is unreachable.
+  **TODO (needs David's go — production shared space): repair that entry's slug
+  via CMA to `siempre-sera-un-desafio`, then point both redirects at it.**
+- Comments on WP (32 approved): David decided 2026-07-12 they are dropped — no
+  schema field, no migration.
