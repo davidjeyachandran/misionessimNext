@@ -9,8 +9,8 @@
     },
     {
       "name": "next-app",
-      "runtimeExecutable": "yarn",
-      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "zsh",
+      "runtimeArgs": ["-c", "export PATH=$HOME/.nvm/versions/node/v20.19.3/bin:$PATH && yarn dev"],
       "port": 3000
     }
   ]
