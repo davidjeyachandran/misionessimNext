@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { getAllRevistas, getRevistaBySlug } from "../../../lib/contentful";
 import { fechaToEdicion } from "../../../lib/dates";
 import { PostCard } from "../../blog/_components/PostCard";
@@ -68,6 +69,11 @@ export default async function RevistaPage({ params }: Props) {
           <h1 className="font-heading text-4xl font-bold leading-tight text-brand md:text-5xl">
             {revista.title}
           </h1>
+          {revista.body && (
+            <div className="text-lg leading-relaxed text-ink">
+              {documentToReactComponents(revista.body)}
+            </div>
+          )}
           <div className="border-y border-hairline py-4 flex gap-4">
             <span className="font-semibold text-ink w-1/3">Fecha</span>
             <time dateTime={revista.fecha} className="capitalize text-muted w-2/3">

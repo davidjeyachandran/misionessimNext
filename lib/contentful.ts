@@ -392,6 +392,8 @@ export interface RevistaCard {
   fecha: string;
   coverImage?: ContentfulImage | null;
   pdfUrl?: string | null;
+  /** Intro paragraph shown below the title (RichText). Empty for most editions. */
+  body?: RichTextDocument | null;
 }
 
 export interface Revista extends RevistaCard {
@@ -416,6 +418,7 @@ const REVISTA_CARD_FIELDS = `
   fecha
   coverImage { url description width height }
   revistaPdf { url }
+  body { json }
 `;
 
 interface RawRevista {
@@ -425,6 +428,7 @@ interface RawRevista {
   fecha: string;
   coverImage?: ContentfulImage | null;
   revistaPdf?: { url: string } | null;
+  body?: { json: RichTextDocument } | null;
 }
 
 function toRevistaCard(r: RawRevista, urlSlug: string): RevistaCard {
@@ -435,6 +439,7 @@ function toRevistaCard(r: RawRevista, urlSlug: string): RevistaCard {
     fecha: r.fecha,
     coverImage: r.coverImage,
     pdfUrl: r.revistaPdf?.url ?? null,
+    body: r.body?.json ?? null,
   };
 }
 

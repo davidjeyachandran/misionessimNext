@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { getAllRevistas } from "../../lib/contentful";
 import { fechaToEdicion } from "../../lib/dates";
 import { PageHero } from "../_components/PageHero";
@@ -58,6 +59,11 @@ export default async function RevistaIndexPage() {
                 <p className="capitalize text-muted">
                   <time dateTime={newest.fecha}>{fechaToEdicion(newest.fecha)}</time>
                 </p>
+                {newest.body && (
+                  <div className="leading-relaxed text-ink">
+                    {documentToReactComponents(newest.body)}
+                  </div>
+                )}
                 {newest.pdfUrl && (
                   <a
                     href={newest.pdfUrl}
