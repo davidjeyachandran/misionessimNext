@@ -20,6 +20,8 @@
  *   execute:            ... --environment=main --live
  *   also cross-issue:   ... --environment=main --live --include-cross-issue
  */
+export {}; // only dynamic imports below — force module scope so `main` doesn't collide across scripts
+
 const SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CDA_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
 const CMA_TOKEN = process.env.CONTENTFUL_MANAGEMENT_TOKEN;

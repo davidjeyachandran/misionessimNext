@@ -22,6 +22,7 @@
  * array appends dedupe by entry id, so re-running after a partial
  * failure is safe. The script only updates the two fields above.
  */
+export {}; // only dynamic imports below — force module scope so `main` doesn't collide across scripts
 
 type EditionPlan = {
   /** Clean revista slug (the CMA lookup also tries the legacy "/" form). */

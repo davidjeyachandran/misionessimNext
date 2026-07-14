@@ -21,7 +21,7 @@ export async function BlogIndexView({ page }: { page: number }) {
     <main className="page-offset">
       <PageHero
         title="Reflexiones y experiencias desde el campo"
-        image={{ src: "/heroes/blog.png" }}
+        image={{ src: "/heroes/blog.webp" }}
       />
 
       <div className="mx-auto max-w-6xl px-4 py-12">

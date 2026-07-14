@@ -28,7 +28,7 @@ export function VideoPromo() {
         <div
           className="parallax-bg"
           data-parallax="0.3"
-          style={{ backgroundImage: "url('/home/bg-sim.jpg')" }}
+          style={{ backgroundImage: "url('/home/bg-sim.webp')" }}
         />
         <div className="video-overlay" />
         <div className="container video-content reveal">

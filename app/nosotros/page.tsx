@@ -145,7 +145,7 @@ export default function NosotrosPage() {
       <PageHero
         title="¿Quiénes somos?"
         intro="Convencidos de que nadie debe vivir y morir sin haber escuchado las buenas nuevas, creemos que Él nos llamó a hacer discípulos del Señor en comunidades donde es menos conocido."
-        image={{ src: "/heroes/nosotros.jpg", alt: "Equipo de SIM Latinoamérica" }}
+        image={{ src: "/heroes/nosotros.webp", alt: "Equipo de SIM Latinoamérica" }}
       />
 
       {/* Lo que nos mueve */}

@@ -80,7 +80,7 @@ export default function OraPage() {
       <PageHero
         title="¡Únete en oración!"
         intro="La historia de SIM es una historia de oración. Súmate en clamor junto a miles de cristianos en el mundo."
-        image={{ src: "/heroes/ora.jpg" }}
+        image={{ src: "/heroes/ora.webp" }}
       />
 
       {/* Motivos del mes */}

@@ -213,7 +213,7 @@ export default async function Home() {
         <div
           className="parallax-bg"
           data-parallax="0.3"
-          style={{ backgroundImage: "url('/home/foto-revista2.jpg')" }}
+          style={{ backgroundImage: "url('/home/foto-revista2.webp')" }}
         />
         <div className="revista-overlay" />
         <div className="container revista-content reveal">

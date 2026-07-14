@@ -23,7 +23,7 @@ export default async function RevistaIndexPage() {
       <PageHero
         title="Revista con pasión por las misiones."
         intro="Queremos reflejar la voz de los obreros que se encuentran en el campo y la realidad de la iglesia latina. Tenemos más de 100 ediciones publicadas en formato digital y gratis."
-        image={{ src: "/heroes/revistavamos.png" }}
+        image={{ src: "/heroes/revistavamos.webp" }}
         cta={{ label: "Suscríbete aquí", href: "https://oi.vresp.com?fid=669a6c7963" }}
       />
 

@@ -15,7 +15,7 @@ export default function RecursosPage() {
     <main className="page-offset">
       <PageHero
         title="Recursos para candidatos, líderes y toda la iglesia"
-        image={{ src: "/heroes/recursos.jpg", alt: "Recursos de SIM Latinoamérica" }}
+        image={{ src: "/heroes/recursos.webp", alt: "Recursos de SIM Latinoamérica" }}
       />
 
       {/* Movilicemos */}

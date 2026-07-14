@@ -9,9 +9,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     // The default image optimizer is a server feature and can't run in a
-    // static export. Emit plain <img> tags; the source images
-    // (Contentful/YouTube) and local /public assets are already right-sized.
-    unoptimized: true,
+    // static export. Instead, a custom loader rewrites Contentful asset URLs
+    // to their Images API (CDN-side resize + WebP), giving <Image> real
+    // srcsets. Local /public srcs pass through unchanged.
+    loader: "custom",
+    loaderFile: "./lib/contentful-image-loader.ts",
   },
   // NOTE: redirects()/rewrites()/headers() are NOT supported by `output:
   // 'export'` (they need a server). All legacy redirects live in
