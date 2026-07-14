@@ -412,8 +412,12 @@
 /* ==========================================================================
    Scroll reveal
    ========================================================================== */
-.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.visible { opacity: 1; transform: none; }
+/* Server-rendered content is visible by default; ScrollEffects adds
+   `js-anim` to <html> (after marking in-viewport elements .visible) so the
+   hide-then-reveal animation only applies once JS is running. Without JS —
+   or before hydration — nothing is ever hidden. */
+.js-anim .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+.js-anim .reveal.visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }

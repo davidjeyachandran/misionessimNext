@@ -24,11 +24,16 @@ export default async function Home() {
     <div className="sim-home">
       {/* ============ HERO ============ */}
       <section className="hero" id="hero">
-        <div
-          className="parallax-bg"
-          data-parallax="0"
-          style={{ backgroundImage: "url('/home/banner-sim-home_.webp')" }}
-        />
+        <div className="parallax-bg" data-parallax="0">
+          <Image
+            src="/home/banner-sim-home_.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
         <div className="hero-overlay" />
         <div className="hero-content container reveal">
           <h1>¡Estamos al servicio del movimiento misionero latino!</h1>

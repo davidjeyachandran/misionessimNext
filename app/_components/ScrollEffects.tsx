@@ -15,6 +15,14 @@ export function ScrollEffects() {
     if (reducedMotion || !("IntersectionObserver" in window)) {
       revealEls.forEach((el) => el.classList.add("visible"));
     } else {
+      // Content is visible by default (see home.css); the hide+animate styles
+      // only apply under html.js-anim. Mark anything already on screen as
+      // visible BEFORE enabling them, so hydration never hides the hero.
+      const vh = window.innerHeight;
+      revealEls.forEach((el) => {
+        if (el.getBoundingClientRect().top < vh) el.classList.add("visible");
+      });
+      document.documentElement.classList.add("js-anim");
       io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
