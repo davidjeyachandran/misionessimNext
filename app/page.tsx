@@ -26,7 +26,7 @@ export default async function Home() {
       <section className="hero" id="hero">
         <div className="parallax-bg" data-parallax="0.8">
           <Image
-            src="/home/banner-sim-home_.webp"
+            src="/home/banner-sim-home-2026.webp"
             alt=""
             fill
             priority
@@ -35,7 +35,7 @@ export default async function Home() {
           />
         </div>
         <div className="hero-content container reveal">
-          <h1>¡Estamos al servicio del movimiento misionero latino!</h1>
+          <h1>¡Se parte de lo que Dios está haciendo en el mundo!</h1>
         </div>
       </section>
 

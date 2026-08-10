@@ -15,6 +15,7 @@
   --color-nav: #696f8c;
   --home-container: 1200px;
   --header-h: 71px;
+  --parallax-slack: 24px;
   --font-heading-home: var(--font-raleway), "Raleway", sans-serif;
   --font-body-home: var(--font-work-sans), "Work Sans", sans-serif;
 }
@@ -175,10 +176,8 @@ body { overflow-x: hidden; }
    Parallax base
    ========================================================================== */
 .hero, .video-promo, .revista { position: relative; overflow: hidden; }
-/* Static cover layer by default; ScrollEffects resizes/offsets [data-parallax]
-   layers with the jarallax algorithm the live site uses (ElementsKit, speed
-   0.8). Only the hero parallaxes — video-promo and revista are static covers,
-   same as the POC. */
+/* Static cover layer by default. Only the hero parallaxes — video-promo and
+   revista are static covers, same as the POC. */
 .parallax-bg {
   position: absolute;
   inset: 0;
@@ -186,6 +185,16 @@ body { overflow-x: hidden; }
   background-position: center center;
   will-change: transform;
   z-index: 0;
+}
+/* Parallax layers carry their vertical slack in CSS, not JS. This is the
+   layer's resting geometry (transform: none) and it's what the static HTML
+   paints; ScrollEffects anchors its first frame to exactly this, so the layer
+   never resizes or jumps when the script takes over after hydration.
+   0.2 * --header-h is the largest upward drift the speed-0.8 curve produces
+   while any part of the hero is on screen; 24px rounds that up. */
+.parallax-bg[data-parallax] {
+  top: calc(-1 * var(--parallax-slack));
+  bottom: calc(-1 * var(--parallax-slack));
 }
 
 /* ==========================================================================
@@ -203,14 +212,19 @@ body { overflow-x: hidden; }
   position: relative;
   z-index: 2;
   width: 100%;
-  /* flush at the 1200px content-box edge; bottom padding mimics the hidden
-     button row under the live title, which biases its centering up 16px */
-  padding: 0 0 32px;
+  /* flush at the 1200px content-box edge; bottom padding mimics the live
+     title column's 20px/40px top/bottom padding, which biases its
+     centering up ~10px */
+  padding: 0 0 20px;
 }
 .hero h1 {
   color: #fff;
-  font-size: 57px;
-  max-width: 546px;
+  font-size: 59px;
+  font-weight: 800;
+  line-height: 1.017; /* live: 60px at 59px */
+  letter-spacing: -0.046em; /* live: -2.7px at 59px, in em so smaller sizes don't get crushed */
+  word-spacing: 1px;
+  max-width: 546px; /* reproduces live's line breaks by natural wrap, no hard <br> */
 }
 
 /* ==========================================================================
@@ -432,7 +446,7 @@ body { overflow-x: hidden; }
 @media (max-width: 1024px) {
   .section-title { font-size: 34px; }
   .hero { min-height: 600px; }
-  .hero h1 { font-size: 44px; }
+  .hero h1 { font-size: 44px; line-height: 1.09; }
   .video-content h2, .revista-content h2 { font-size: 34px; }
   .cards, .posts { grid-template-columns: 1fr 1fr; }
   .about-grid, .yt-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -442,7 +456,7 @@ body { overflow-x: hidden; }
   .section { padding: 60px 0; }
   /* live site collapses the hero to a compact banner on mobile */
   .hero { min-height: auto; padding: 100px 10px 40px; }
-  .hero h1 { font-size: 32px; }
+  .hero h1 { font-size: 32px; line-height: 1.13; }
   .section-title { font-size: 28px; }
   .about-title { font-size: 20px; }
   .video-content h2, .revista-content h2 { font-size: 28px; }

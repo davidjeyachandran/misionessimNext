@@ -231,3 +231,43 @@ Follow-up to the 2026-07-04 content-fidelity audit (missing inline images). Comp
   via CMA to `siempre-sera-un-desafio`, then point both redirects at it.**
 - Comments on WP (32 approved): David decided 2026-07-12 they are dropped — no
   schema field, no migration.
+
+## 2026-08-10 — Homepage hero updated to match live redesign
+
+- Live site (`misionessim.org`) redesigned its hero since the pixel-match noted
+  above (line 138): new photo (`2026/08/DisenosWeb-SIM-9-2.png`, classroom
+  scene) and new headline (`¡Se parte de lo que Dios está haciendo en el
+  mundo!`, Raleway 800 59px/60px, tracking -2.7px, was 700/57px). Ported both
+  into `public/home/banner-sim-home-2026.webp` (1600×900, recompressed to
+  WebP q82, 124KB — 31KB lighter than the asset it replaces) and
+  `app/page.tsx`/`app/home.css`.
+- The hero no longer pixel-matches `poc/` — the POC is a frozen snapshot of
+  the pre-redesign live site and was intentionally left untouched.
+- Two deliberate divergences from current live, both David's call:
+  1. **Left-aligned**, not centered — live centers the headline; we kept the
+     existing left-aligned 546px column.
+  2. **Mobile wrapping fixed.** Live hides the heading's `<br>`s and keeps the
+     box 742px wide via `margin-right:-100%`, so text runs off-screen on
+     phones. We let it wrap naturally instead — and the existing 546px
+     `max-width` reproduces live's desktop line breaks as a side effect, so no
+     hard `<br>` was needed at any breakpoint.
+
+### Parallax load-jump fixed (`ScrollEffects.tsx` + `home.css`)
+
+- **Bug (David spotted it, also present on the live site):** the hero image
+  visibly jerked/zoomed on every reload. `sizeParallax()` wrote inline
+  `height`/`marginTop` onto `.parallax-bg` and an already-nonzero `transform`
+  on mount, so the layer jumped from what the static HTML painted to the JS
+  geometry. Measured at 1280×720: **126px vertical shift + 20% rescale.**
+- **Fix:** the layer's slack now lives in CSS (`--parallax-slack: 24px`, applied
+  as negative `top`/`bottom` on `.parallax-bg[data-parallax]`), and JS writes
+  *only* `transform`, anchored so it is exactly `0` at `scrollY 0`. The first
+  frame the script paints is byte-identical to the server-rendered one.
+- Drift rate is unchanged — algebraically the old jarallax expression reduces
+  to `(1 - speed) * (vh + h) * Δprogress`, so the motion still matches
+  ElementsKit at speed 0.8; only the anchor moved. Verified: transform is 0 at
+  load, 150px of drift retained, and the layer still fully covers the hero at
+  every scroll position (worst case 10px of slack to spare).
+- 24px of slack is the rounded-up bound: the largest upward excursion while any
+  part of the hero is on screen is `0.2 × --header-h` ≈ 14.2px, independent of
+  viewport height and hero height, so the constant holds at all breakpoints.

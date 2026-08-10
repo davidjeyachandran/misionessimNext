@@ -35,27 +35,18 @@ export function ScrollEffects() {
     }
 
     // ---- Parallax ----
-    // Same math as jarallax (used by ElementsKit on the live site) with
-    // speed 0.8: the layer is barely taller than its section and drifts at
-    // 0.8x scroll speed, staying centered on the viewport. Layers without
-    // data-parallax (video-promo, revista) stay static covers, as in the POC.
+    // Drift rate matches jarallax (ElementsKit on the live site) at speed 0.8:
+    // the layer travels (1 - speed) of the distance the section travels. Only
+    // `transform` is ever written — the layer's size and resting position come
+    // from CSS (.parallax-bg[data-parallax] slack in home.css), and the offset
+    // is anchored so it's 0 at scrollY 0. That way the first frame this script
+    // paints is identical to the server-rendered one, with no jump or rescale
+    // when it takes over. Layers without data-parallax (video-promo, revista)
+    // stay static covers, as in the POC.
     const layers = Array.from(
       document.querySelectorAll<HTMLElement>(".parallax-bg[data-parallax]"),
     );
     let ticking = false;
-
-    function sizeParallax() {
-      const vh = window.innerHeight;
-      layers.forEach((layer) => {
-        const parent = layer.parentElement;
-        if (!parent) return;
-        const speed = parseFloat(layer.dataset.parallax ?? "") || 0.8;
-        const contH = parent.getBoundingClientRect().height;
-        const bgH = contH + Math.abs(vh - contH) * (1 - speed);
-        layer.style.height = bgH.toFixed(1) + "px";
-        layer.style.marginTop = ((vh - bgH) / 2).toFixed(1) + "px";
-      });
-    }
 
     function updateParallax() {
       ticking = false;
@@ -64,11 +55,16 @@ export function ScrollEffects() {
         const parent = layer.parentElement;
         if (!parent) return;
         const rect = parent.getBoundingClientRect();
+        const span = vh + rect.height;
+        if (span <= 0) return;
         const speed = parseFloat(layer.dataset.parallax ?? "") || 0.8;
-        const scrollDist = (speed * (rect.height + vh)) / 2;
-        const fromViewportCenter =
-          1 - 2 * ((vh - rect.top) / (vh + rect.height));
-        const y = scrollDist * fromViewportCenter - rect.top;
+        // progress: 0 when the section's top edge sits at the viewport bottom,
+        // 1 when its bottom edge sits at the viewport top.
+        const progress = (vh - rect.top) / span;
+        // The same progress at scrollY 0 — rect.top + scrollY is the section's
+        // fixed document offset, so this is scroll-invariant.
+        const atPageTop = (vh - (rect.top + window.scrollY)) / span;
+        const y = (1 - speed) * span * (progress - atPageTop);
         layer.style.transform = `translate3d(0,${y.toFixed(1)}px,0)`;
       });
     }
@@ -80,23 +76,19 @@ export function ScrollEffects() {
       }
     }
 
-    function relayoutParallax() {
-      sizeParallax();
-      updateParallax();
-    }
-
     if (!reducedMotion && layers.length) {
       window.addEventListener("scroll", requestParallax, { passive: true });
-      window.addEventListener("resize", relayoutParallax);
-      window.addEventListener("load", relayoutParallax);
-      relayoutParallax();
+      window.addEventListener("resize", updateParallax);
+      // Re-run once images/fonts settle, in case the section's height changed.
+      window.addEventListener("load", updateParallax);
+      updateParallax();
     }
 
     return () => {
       io?.disconnect();
       window.removeEventListener("scroll", requestParallax);
-      window.removeEventListener("resize", relayoutParallax);
-      window.removeEventListener("load", relayoutParallax);
+      window.removeEventListener("resize", updateParallax);
+      window.removeEventListener("load", updateParallax);
     };
   }, []);
 
