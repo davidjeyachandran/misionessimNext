@@ -271,3 +271,19 @@ Follow-up to the 2026-07-04 content-fidelity audit (missing inline images). Comp
 - 24px of slack is the rounded-up bound: the largest upward excursion while any
   part of the hero is on screen is `0.2 × --header-h` ≈ 14.2px, independent of
   viewport height and hero height, so the constant holds at all breakpoints.
+
+## 2026-08-10 — nosotros/recursos hero images synced to live redesign
+
+- Same live-site redesign as the homepage hero (above) also replaced the
+  `/nosotros/` and `/recursos/` hero photos. Pulled the new sources straight
+  from production (`2026/08/DisenosWeb-SIM-10.png` and `…-SIM-12.png`),
+  center-cropped to the existing 1600×918 `PageHero` convention, and
+  re-encoded WebP q82 (matching the homepage banner's recipe):
+  `public/heroes/nosotros.webp` (65.7KB → 128.8KB) and
+  `public/heroes/recursos.webp` (58.6KB → 56.1KB).
+- `/ora/` was also checked — live's hero (`2025/03/banner-ora.jpg`) is
+  unchanged from what `public/heroes/ora.webp` already has, so no update was
+  needed there.
+- Image-only swap: `PageHero.tsx` and all three route files were left
+  untouched (existing `title`/`intro`/`alt` copy still matches the new
+  photos).
