@@ -27,10 +27,8 @@ export function VideoPromo() {
       <section className="video-promo" id="conocenos">
         <div
           className="parallax-bg"
-          data-parallax="0.3"
           style={{ backgroundImage: "url('/home/bg-sim.webp')" }}
         />
-        <div className="video-overlay" />
         <div className="container video-content reveal">
           <p className="eyebrow eyebrow-light">Conócenos</p>
           <h2>SIM Latinoamérica, al servicio del movimiento latino</h2>

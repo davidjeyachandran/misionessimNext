@@ -431,6 +431,24 @@ interface RawRevista {
   body?: { json: RichTextDocument } | null;
 }
 
+// The magazine PDF is served from our own domain rather than the raw
+// Contentful CDN URL: `/revistavamos/<slug>/<file>.pdf`. A generated rewrite
+// block in vercel.json proxies each of those to its ctfassets URL — see
+// scripts/build-revista-pdf-rewrites.ts, which MUST derive the same filename
+// (the asset URL's last segment, already ASCII-escaped by Contentful) and the
+// same slug, or the pretty URL 404s. `trailingSlash: true` does not apply
+// here: Vercel exempts paths ending in a file extension.
+export function revistaPdfPath(
+  urlSlug: string,
+  assetUrl: string | null | undefined,
+): string | null {
+  if (!assetUrl) return null;
+  const absolute = assetUrl.startsWith("//") ? `https:${assetUrl}` : assetUrl;
+  const fileName = new URL(absolute).pathname.split("/").pop();
+  if (!fileName) return null;
+  return `/revistavamos/${urlSlug}/${fileName}`;
+}
+
 function toRevistaCard(r: RawRevista, urlSlug: string): RevistaCard {
   return {
     id: r.sys.id,
@@ -438,7 +456,7 @@ function toRevistaCard(r: RawRevista, urlSlug: string): RevistaCard {
     title: (r.title ?? "").trim(),
     fecha: r.fecha,
     coverImage: r.coverImage,
-    pdfUrl: r.revistaPdf?.url ?? null,
+    pdfUrl: revistaPdfPath(urlSlug, r.revistaPdf?.url),
     body: r.body?.json ?? null,
   };
 }

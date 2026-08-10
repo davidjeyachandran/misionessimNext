@@ -19,6 +19,9 @@
   --font-body-home: var(--font-work-sans), "Work Sans", sans-serif;
 }
 
+html { scroll-behavior: smooth; }
+body { overflow-x: hidden; }
+
 /* Pushes non-home page content clear of the fixed header. */
 .page-offset { padding-top: var(--header-h); }
 
@@ -99,8 +102,9 @@
   background: #fff;
 }
 .header-inner {
+  /* same 1200px content box as the hero, so the logo aligns with the title */
   width: 100%;
-  max-width: var(--home-container);
+  max-width: 1240px;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
@@ -171,23 +175,17 @@
    Parallax base
    ========================================================================== */
 .hero, .video-promo, .revista { position: relative; overflow: hidden; }
+/* Static cover layer by default; ScrollEffects resizes/offsets [data-parallax]
+   layers with the jarallax algorithm the live site uses (ElementsKit, speed
+   0.8). Only the hero parallaxes — video-promo and revista are static covers,
+   same as the POC. */
 .parallax-bg {
   position: absolute;
-  inset: -22% 0;
+  inset: 0;
   background-size: cover;
   background-position: center center;
   will-change: transform;
   z-index: 0;
-}
-/* The hero image's aspect ratio (~1.75) nearly matches the hero box, so the
-   -22% parallax overshoot would zoom `cover` in and crop the scene (the live
-   site's jarallax hero barely parallaxes for the same reason). Pin the hero
-   background to the box for a faithful, full-scene crop; parallax stays on
-   the video-promo and revista sections. Paired with data-parallax="0" so
-   ScrollEffects leaves it untranslated. */
-.hero .parallax-bg {
-  inset: 0;
-  background-position: center;
 }
 
 /* ==========================================================================
@@ -195,17 +193,24 @@
    ========================================================================== */
 .hero {
   min-height: 95vh;
+  margin-top: var(--header-h); /* live hero sits below the header bar, not behind it */
+  padding: 127px 0 60px;
   display: flex;
   align-items: center;
   background: var(--color-text);
 }
-.hero-overlay { position: absolute; inset: 0; z-index: 1; background: rgba(10, 1, 23, .4); }
-.hero-content { position: relative; z-index: 2; width: 100%; }
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  /* flush at the 1200px content-box edge; bottom padding mimics the hidden
+     button row under the live title, which biases its centering up 16px */
+  padding: 0 0 32px;
+}
 .hero h1 {
   color: #fff;
   font-size: 57px;
   max-width: 546px;
-  text-shadow: 0 2px 18px rgba(0, 0, 0, .35);
 }
 
 /* ==========================================================================
@@ -243,8 +248,8 @@
    Video promo (Conócenos)
    ========================================================================== */
 .video-promo { min-height: 520px; display: flex; align-items: center; }
+/* no overlay: the dark navy tint is baked into bg-sim itself (same as POC) */
 .video-promo .parallax-bg { background-position: 0 80%; }
-.video-overlay { position: absolute; inset: 0; z-index: 1; background: rgba(0, 47, 73, .62); }
 .video-content { position: relative; z-index: 2; text-align: center; padding: 110px 20px; }
 .video-content h2 { color: #fff; font-size: 42px; max-width: 17em; margin: 0 auto 36px; }
 .btn-video {
@@ -307,12 +312,6 @@
    Revista VAMOS
    ========================================================================== */
 .revista { min-height: 480px; display: flex; align-items: center; }
-.revista-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: linear-gradient(90deg, rgba(10, 1, 23, .78) 0%, rgba(10, 1, 23, .35) 70%, rgba(10, 1, 23, .15) 100%);
-}
 .revista-content {
   position: relative;
   z-index: 2;
@@ -418,10 +417,13 @@
    or before hydration — nothing is ever hidden. */
 .js-anim .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
 .js-anim .reveal.visible { opacity: 1; transform: none; }
+/* live hero title uses Elementor fadeIn: opacity only, no movement, 1.25s */
+.js-anim .hero-content.reveal { transform: none; transition: opacity 1.25s ease; }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
-  .parallax-bg { inset: 0; transform: none !important; }
+  .parallax-bg { transform: none !important; }
+  html { scroll-behavior: auto; }
 }
 
 /* ==========================================================================
@@ -429,6 +431,7 @@
    ========================================================================== */
 @media (max-width: 1024px) {
   .section-title { font-size: 34px; }
+  .hero { min-height: 600px; }
   .hero h1 { font-size: 44px; }
   .video-content h2, .revista-content h2 { font-size: 34px; }
   .cards, .posts { grid-template-columns: 1fr 1fr; }
@@ -437,9 +440,8 @@
 
 @media (max-width: 768px) {
   .section { padding: 60px 0; }
-  /* Compact banner matching the live mobile hero (~330px at 375w keeps the
-     same crop as the desktop `cover`, so the scene isn't over-zoomed). */
-  .hero { min-height: 330px; margin-top: var(--header-h); padding: 40px 0; }
+  /* live site collapses the hero to a compact banner on mobile */
+  .hero { min-height: auto; padding: 100px 10px 40px; }
   .hero h1 { font-size: 32px; }
   .section-title { font-size: 28px; }
   .about-title { font-size: 20px; }

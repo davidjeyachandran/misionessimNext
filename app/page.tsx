@@ -24,7 +24,7 @@ export default async function Home() {
     <div className="sim-home">
       {/* ============ HERO ============ */}
       <section className="hero" id="hero">
-        <div className="parallax-bg" data-parallax="0">
+        <div className="parallax-bg" data-parallax="0.8">
           <Image
             src="/home/banner-sim-home_.webp"
             alt=""
@@ -34,7 +34,6 @@ export default async function Home() {
             className="object-cover"
           />
         </div>
-        <div className="hero-overlay" />
         <div className="hero-content container reveal">
           <h1>¡Estamos al servicio del movimiento misionero latino!</h1>
         </div>
@@ -217,10 +216,8 @@ export default async function Home() {
       <section className="revista" id="revista">
         <div
           className="parallax-bg"
-          data-parallax="0.3"
           style={{ backgroundImage: "url('/home/foto-revista2.webp')" }}
         />
-        <div className="revista-overlay" />
         <div className="container revista-content reveal">
           <p className="eyebrow eyebrow-light">Recurso gratuito</p>
           <h2>Revista VAMOS</h2>

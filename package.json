@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "build:url-inventory": "tsx scripts/build-url-inventory.ts",
+    "build:media-map": "node --env-file=.env.local node_modules/.bin/tsx scripts/build-media-redirect-map.ts",
+    "build:revista-rewrites": "node --env-file=.env.local node_modules/.bin/tsx scripts/build-revista-pdf-rewrites.ts",
     "capture:baselines": "tsx scripts/capture-baselines.ts",
     "capture:local": "tsx scripts/capture-local.ts",
     "mirror:site": "bash scripts/mirror-site.sh",

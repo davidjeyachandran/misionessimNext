@@ -16,12 +16,9 @@ export function ScrollEffects() {
       revealEls.forEach((el) => el.classList.add("visible"));
     } else {
       // Content is visible by default (see home.css); the hide+animate styles
-      // only apply under html.js-anim. Mark anything already on screen as
-      // visible BEFORE enabling them, so hydration never hides the hero.
-      const vh = window.innerHeight;
-      revealEls.forEach((el) => {
-        if (el.getBoundingClientRect().top < vh) el.classList.add("visible");
-      });
+      // only apply under html.js-anim, so nothing is hidden without JS or
+      // before hydration. Above-fold elements (the hero title) fade in right
+      // after mount: the observer fires immediately for them.
       document.documentElement.classList.add("js-anim");
       io = new IntersectionObserver(
         (entries) => {
@@ -38,12 +35,27 @@ export function ScrollEffects() {
     }
 
     // ---- Parallax ----
-    // Only translate layers with a non-zero speed. data-parallax="0" (the
-    // hero) opts out entirely so its `cover` crop stays pinned to the box.
+    // Same math as jarallax (used by ElementsKit on the live site) with
+    // speed 0.8: the layer is barely taller than its section and drifts at
+    // 0.8x scroll speed, staying centered on the viewport. Layers without
+    // data-parallax (video-promo, revista) stay static covers, as in the POC.
     const layers = Array.from(
-      document.querySelectorAll<HTMLElement>(".parallax-bg"),
-    ).filter((el) => (parseFloat(el.dataset.parallax ?? "0.3") || 0) !== 0);
+      document.querySelectorAll<HTMLElement>(".parallax-bg[data-parallax]"),
+    );
     let ticking = false;
+
+    function sizeParallax() {
+      const vh = window.innerHeight;
+      layers.forEach((layer) => {
+        const parent = layer.parentElement;
+        if (!parent) return;
+        const speed = parseFloat(layer.dataset.parallax ?? "") || 0.8;
+        const contH = parent.getBoundingClientRect().height;
+        const bgH = contH + Math.abs(vh - contH) * (1 - speed);
+        layer.style.height = bgH.toFixed(1) + "px";
+        layer.style.marginTop = ((vh - bgH) / 2).toFixed(1) + "px";
+      });
+    }
 
     function updateParallax() {
       ticking = false;
@@ -52,11 +64,12 @@ export function ScrollEffects() {
         const parent = layer.parentElement;
         if (!parent) return;
         const rect = parent.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > vh) return;
-        const speed = parseFloat(layer.dataset.parallax ?? "0.3") || 0.3;
-        const progress =
-          (rect.top + rect.height / 2 - vh / 2) / (vh / 2 + rect.height / 2);
-        layer.style.transform = `translate3d(0,${(-progress * speed * rect.height / 2).toFixed(1)}px,0)`;
+        const speed = parseFloat(layer.dataset.parallax ?? "") || 0.8;
+        const scrollDist = (speed * (rect.height + vh)) / 2;
+        const fromViewportCenter =
+          1 - 2 * ((vh - rect.top) / (vh + rect.height));
+        const y = scrollDist * fromViewportCenter - rect.top;
+        layer.style.transform = `translate3d(0,${y.toFixed(1)}px,0)`;
       });
     }
 
@@ -67,16 +80,23 @@ export function ScrollEffects() {
       }
     }
 
+    function relayoutParallax() {
+      sizeParallax();
+      updateParallax();
+    }
+
     if (!reducedMotion && layers.length) {
       window.addEventListener("scroll", requestParallax, { passive: true });
-      window.addEventListener("resize", requestParallax);
-      updateParallax();
+      window.addEventListener("resize", relayoutParallax);
+      window.addEventListener("load", relayoutParallax);
+      relayoutParallax();
     }
 
     return () => {
       io?.disconnect();
       window.removeEventListener("scroll", requestParallax);
-      window.removeEventListener("resize", requestParallax);
+      window.removeEventListener("resize", relayoutParallax);
+      window.removeEventListener("load", relayoutParallax);
     };
   }, []);
 
