@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "../_components/PageHero";
+import { AreasSlider } from "./AreasSlider";
 import { HistoryTimeline } from "./HistoryTimeline";
 
 export const metadata: Metadata = {
@@ -34,48 +35,58 @@ const PILLARS = [
   },
 ];
 
-const ICONS = ["/pages/ico-cora.png", "/pages/ico-flor.png", "/pages/ico-msg.png"];
-
+// Icons are assigned per area exactly as live assigns them — the three
+// glyphs repeat, but not on a clean 3-cycle.
 const AREAS = [
   {
     title: "Evangelismo, plantación y crecimiento",
     text: "SIM está comprometida a testificar desarrollando lazos de amistad con personas. Luego que la semilla de la Palabra de Dios ha sido sembrada y ha dado fruto, el discipulado continúa a través de la iglesia local donde el nuevo creyente puede crecer espiritualmente.",
+    icon: "/pages/ico-cora.png",
   },
   {
     title: "Ayuda Médica",
     text: "SIM está involucrada en varios hospitales y clínicas públicos y particulares. Doctores, enfermeras y otros profesionales médicos capacitan trabajadores locales al cuidado de salud comunitaria, incluso la enseñanza y prevención del SIDA.",
+    icon: "/pages/ico-flor.png",
   },
   {
     title: "Formación Teológica",
     text: "La Iglesia local necesita a líderes. Por eso enviamos hombres y mujeres a enseñar en los seminarios, institutos bíblicos, y programas de Educación Teológica por extensión.",
+    icon: "/pages/ico-msg.png",
   },
   {
     title: "Educación",
     text: "Los profesores imparten clases a niños de la comunidad local y a los hijos de misioneros. Se realiza en escuelas de SIM o en colegios del gobierno. Esta interacción diaria provee muchas oportunidades de presentar el Evangelio a los estudiantes.",
+    icon: "/pages/ico-flor.png",
   },
   {
     title: "Lingüística, Traducción y Alfabetización",
     text: "SIM está dedicado a la expansión del evangelio a través de lingüística, traducción bíblica, y programas de alfabetización. Por medio del esfuerzo de misioneros y nacionales, muchos están experimentando el gozo y la libertad de poder leer y conocer la Palabra de Dios en su propio idioma.",
+    icon: "/pages/ico-cora.png",
   },
   {
     title: "Medios de comunicación",
     text: "Ministerios de televisión, video y radio han ayudado a transformar miles de vidas para Cristo. Estos ministerios, así como el material impreso de SIM, llevan en sí mismos el medio más vital de todo: la Palabra de Dios.",
+    icon: "/pages/ico-msg.png",
   },
   {
     title: "Administración, Negocios y liderazgo",
     text: "Muchos talentos diferentes - incluyendo administración, servicios financieros, y de personal - permiten a SIM alcanzar personas para Cristo y ayudan en el desarrollo de la Iglesia en todo el mundo.",
+    icon: "/pages/ico-flor.png",
   },
   {
     title: "Servicio Técnico",
     text: "Especialistas en computadoras, electricistas, ingenieros mecánicos y electrónicos. Todos estos dones en el mundo de hoy, son herramientas muy útiles para la extensión del Reino de Dios.",
+    icon: "/pages/ico-cora.png",
   },
   {
     title: "Trabajo con niños y jóvenes",
     text: "Es estratégico trabajar con los niños y jóvenes en todo lugar. Muchas veces se puede alcanzar a toda la familia por los hijos primero. SIM está comprometida a invertir en los futuros líderes.",
+    icon: "/pages/ico-msg.png",
   },
   {
     title: "Desarrollo y Rescate",
     text: "Cuando la crisis ha pasado, los misioneros de SIM proveen entrenamiento en agricultura, ganadería, y asistencia en el inicio de pequeños negocios. Esto se hace para que las comunidades se encaminen a una estabilidad de largo plazo.",
+    icon: "/pages/ico-flor.png",
   },
 ];
 
@@ -223,41 +234,20 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* Áreas de servicios */}
-      <section className="bg-navy">
+      {/* Áreas de servicios — live continues the cream band from the pillars
+          above and runs the areas as a slider of dark-red cards. */}
+      <section className="bg-cream">
         <div className="mx-auto max-w-6xl px-4 py-16">
-          <p className="text-sm font-semibold uppercase tracking-widest text-cream">
-            Conoce nuestras
-          </p>
-          <h2 className="font-heading mt-2 text-4xl font-bold text-white">
-            Áreas de servicios
-          </h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {AREAS.map((area, i) => (
-              <article key={area.title} className="rounded-lg bg-white/95 p-6">
-                {/*
-                 * The source PNGs are cream artwork drawn for live's dark-red
-                 * cards; they vanish on these white ones. Paint brand red
-                 * through the glyph as a mask rather than tint it with filters.
-                 */}
-                <span
-                  aria-hidden
-                  className="block h-12 w-12 bg-brand"
-                  style={{
-                    maskImage: `url(${ICONS[i % ICONS.length]})`,
-                    maskRepeat: "no-repeat",
-                    maskPosition: "center",
-                    maskSize: "contain",
-                    WebkitMaskImage: `url(${ICONS[i % ICONS.length]})`,
-                    WebkitMaskRepeat: "no-repeat",
-                    WebkitMaskPosition: "center",
-                    WebkitMaskSize: "contain",
-                  }}
-                />
-                <h3 className="font-heading mt-4 text-lg font-bold text-ink">{area.title}</h3>
-                <p className="mt-2 text-sm text-muted">{area.text}</p>
-              </article>
-            ))}
+          <div className="text-center">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand">
+              Conoce nuestras
+            </p>
+            <h2 className="font-heading mt-2 text-4xl font-bold text-navy">
+              Áreas de servicios
+            </h2>
+          </div>
+          <div className="mt-10">
+            <AreasSlider areas={AREAS} />
           </div>
         </div>
       </section>

@@ -380,3 +380,47 @@ a `.hover` class); ours is **click-driven** per the feedback.
   pane renders blank screenshots when scrolled below the fold (same symptom
   that blocked browsing live last round — it's the pane, not the site);
   DOM queries still work, and Playwright covers the visual proof.
+
+## 2026-08-16 — /nosotros/ "Áreas de servicios" aligned to live
+
+Our rebuild had this as a navy band with a 3-column grid of 10 white cards.
+Live (widget `4a8a4ef` in `reference/mirror/nosotros/index.html`) is an
+**ElementsKit testimonial slider** — `ekit_testimonial_style_5` /
+`block-style-two` — on the same cream band the pillars sit on, with dark-red
+cards. Rebuilt to match; ground truth is the mirror's element CSS plus
+`reference/baselines/nosotros/tablet.full-page.png` (the desktop baseline is
+truncated right at this slider).
+
+- New client component `app/nosotros/AreasSlider.tsx`: a scroll-snap track
+  (no Swiper) whose scroll position drives the dots. Slides per view and
+  spacing copied from live's swiper config — 3 @ 1024+ / 2 @ 768 / 1 below,
+  gap 15px / 10px / 10px — via `basis-[calc((100%-30px)/3)]` etc., with the
+  DOM measured (`slide[1].offsetLeft - slide[0].offsetLeft`) so those classes
+  stay the single source of truth for scroll steps and dot count.
+  `clientWidth/step` is one gap short of the visible count, hence `Math.round`.
+- Card = live's element CSS verbatim: `#900201` (brand-dark), 24px padding,
+  15px `#FFF` body, 17px `#FEF1D5` (cream) title, 60px icon. `block-style-two`
+  is `column-reverse`, so icon + title sit **above** the body copy. Cards are
+  `h-full` in a flex row instead of live's 220px min-height on the body — same
+  uniform-height result without a magic number.
+- Icons are now per-area (live's order is cora, flor, msg, flor, cora, msg,
+  flor, cora, msg, flor — not a clean 3-cycle, which is what our `i % 3` was
+  doing). They're used as plain images again: the PNGs are cream artwork drawn
+  for exactly these dark-red cards, so the brand-red mask hack the white cards
+  needed is gone.
+- Section: `bg-navy` → `bg-cream` (live's `#FFEFD2`; continuous with the
+  pillars band above), heading centered, title navy — all as live.
+- Deliberate deviations: (1) live floats 15px arrow circles at `left:-6%` /
+  `right:-6%`; ours sit beside the dots, which can't overlap a card or
+  overflow at any width. (2) live's eyebrow here is teal `#167E92` — as are
+  *all* four eyebrows on live's /nosotros/ — while our whole page uses brand
+  red. Left red for internal consistency; switching the page to teal is a
+  separate call.
+- Verified with Playwright at 1440 / 768 / 375: per-view 3/2/1, gaps 15/10/10,
+  dots 8/9/10 (= slides − perView + 1), arrows disable at both ends, the last
+  dot lands exactly on `scrollWidth - clientWidth`, card heights equal within
+  a view, `docOverflow` 0 everywhere, no page errors. NB the Browser pane
+  produces no animation frames, so `behavior:"smooth"` never advances and
+  `scroll` events never fire there — measure this component in Playwright, not
+  the pane. `goTo` also sets the page state directly so the dots answer a
+  click immediately rather than waiting on the scroll to settle.
