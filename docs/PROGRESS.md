@@ -341,3 +341,42 @@ David reviewed the Vercel preview against live and flagged three items on
 - Verified no clipping at 375 / 768 / 1024 / 1440 by measuring, per tile,
   `p.scrollHeight` (transition-independent) against the space left after
   padding and title. Tightest case is 1024 (needs 96px, has 99px).
+
+## 2026-08-16 — /nosotros/ "Conoce nuestra historia" as live's horizontal timeline
+
+Feedback: the historia section looked "muy diferente al actual" — our rebuild was
+a vertical rail list, but live renders an **ElementsKit horizontal timeline**
+(widget `be53595` in `reference/mirror/nosotros/index.html`). Rebuilt to match,
+with one requested behavior change: live reveals cards on *hover* (jQuery toggles
+a `.hover` class); ours is **click-driven** per the feedback.
+
+- New client component `app/nosotros/HistoryTimeline.tsx` (`useState` active
+  index). Desktop (lg+): 4 columns — year, continuous hairline (per-column
+  segments joined via `-mx-3` against the column's `px-3`), 14px pin (solid
+  brand; active = white fill + 2px brand ring), title below the bar (hidden
+  with `opacity-0` on the active column, as live does — the card repeats it),
+  and the active column's cream card below with an up-caret at the pin.
+  Inactive panels stay in the DOM at `h-0 invisible` so the reveal can
+  transition; buttons carry `aria-expanded`/`aria-controls`, so the switch is
+  keyboard-accessible for free.
+- Below lg: every entry renders expanded (year, bar+pin, caret, card),
+  `sm:grid-cols-2`, matching live's tablet/mobile fallback exactly — live only
+  has the per-column reveal at desktop widths.
+- Card styling taken from `reference/baselines/nosotros/tablet.full-page.png`:
+  the **desktop full-page baseline is truncated** right after the áreas slider
+  (4933px capture ends there), so the tablet capture is the ground truth for
+  this section. Card `#FEF1D5` (cream token), brand-red rounded-square icon
+  with a cream flag glyph (inline SVG standing in for ElementsKit `icon-flag1`),
+  navy title, muted body.
+- Deliberate deviation: default active item is **1893** (chronological start).
+  Live's server-rendered default is 1902 — an arbitrary editor leftover.
+- `page.tsx` historia section: heading centered (live is `text_center`),
+  container widened `max-w-4xl` → `max-w-6xl` for the 4-across row; `HISTORY`
+  data unchanged, `<ol>` rail removed.
+- Verified: eslint/tsc clean (only pre-existing `tests/e2e` errors);
+  aria-expanded flips and exactly one panel has height on click (measured in
+  the browser); Playwright screenshots at 1440 (default + after clicking
+  "2000"), 768, and 375 — no horizontal overflow at any width. NB the Browser
+  pane renders blank screenshots when scrolled below the fold (same symptom
+  that blocked browsing live last round — it's the pane, not the site);
+  DOM queries still work, and Playwright covers the visual proof.

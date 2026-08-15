@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "../_components/PageHero";
+import { HistoryTimeline } from "./HistoryTimeline";
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -261,22 +262,17 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* Historia */}
-      <section className="mx-auto max-w-4xl px-4 py-16">
-        <p className="text-sm font-semibold uppercase tracking-widest text-brand">Somos SIM</p>
-        <h2 className="font-heading mt-2 text-4xl font-bold text-ink">
-          Conoce nuestra historia
-        </h2>
-        <ol className="mt-10 space-y-10 border-l-2 border-brand/30 pl-8">
-          {HISTORY.map((item) => (
-            <li key={item.year} className="relative">
-              <span className="absolute -left-[41px] top-1 h-4 w-4 rounded-full bg-brand" />
-              <p className="font-heading text-2xl font-bold text-brand">{item.year}</p>
-              <h3 className="font-heading mt-1 text-xl font-bold text-ink">{item.title}</h3>
-              <p className="mt-2 text-muted">{item.text}</p>
-            </li>
-          ))}
-        </ol>
+      {/* Historia — live's horizontal timeline, but click-driven (see HistoryTimeline) */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <div className="text-center">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand">Somos SIM</p>
+          <h2 className="font-heading mt-2 text-4xl font-bold text-ink">
+            Conoce nuestra historia
+          </h2>
+        </div>
+        <div className="mt-12">
+          <HistoryTimeline items={HISTORY} />
+        </div>
       </section>
 
       {/* FAQ */}
