@@ -3,7 +3,7 @@ wpId: 33835
 slug: mundial-2026-misiones-y-evangelismo
 title: 'El Mundial y la Gran Comisión: una oportunidad para compartir esperanza'
 date: '2026-06-16T00:31:32Z'
-modified: '2026-06-16T00:33:11Z'
+modified: '2026-07-07T16:52:16Z'
 legacyUrl: 'https://misionessim.org/blog/2026-06/mundial-2026-misiones-y-evangelismo/'
 excerpt: >-
   Cada cuatro años, el mundo se detiene para mirar el fútbol. Personas de

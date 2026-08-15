@@ -32,6 +32,7 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { readFileSync } from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
 import { markdownToRichText, type RichTextNode } from "./lib/markdown-to-richtext";
 
@@ -101,7 +102,10 @@ function cleanExcerpt(excerpt: string): string {
 
 // Walk a RichText document and make misionessim.org absolute links relative,
 // and rewrite /la-revista/ paths to the new /revistavamos/ route.
-function rewriteInternalLinks(
+// Exported so scripts/diff-cms-bodies.ts can apply the identical rewrite
+// before comparing local markdown against stored Contentful bodies —
+// otherwise every post containing an internal link reads as a false diff.
+export function rewriteInternalLinks(
   doc: ReturnType<typeof markdownToRichText>,
 ): ReturnType<typeof markdownToRichText> {
   function walk(nodes: RichTextNode[]): RichTextNode[] {
@@ -486,7 +490,13 @@ async function main() {
   console.log("Done.");
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+// Guard against running on import — scripts/diff-cms-bodies.ts imports
+// rewriteInternalLinks from this module, and without this check that import
+// would execute a full import run (and, with the wrong argv, a live write)
+// as a side effect. Same pattern as scripts/export-wp.ts.
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

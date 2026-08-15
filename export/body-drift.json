@@ -1,0 +1,2354 @@
+{
+  "generatedAt": "2026-08-15T07:23:31.460Z",
+  "counts": {
+    "identical": 304,
+    "no-cf-match": 31
+  },
+  "entries": [
+    {
+      "slug": "10-consejos-para-lograr-un-buen-trabajo-en-equipo-en-la-era-del-individualismo",
+      "verdict": "identical",
+      "contentfulEntryId": "2qntDU70o021Xj0F7CyB0J",
+      "localTextChars": 2799,
+      "cfTextChars": 2799
+    },
+    {
+      "slug": "10-cosas-que-debes-saber-al-compartir-tu-fe-con-un-musulman",
+      "verdict": "identical",
+      "contentfulEntryId": "42IMvLb3mxrlWTBStc3QOQ",
+      "localTextChars": 3276,
+      "cfTextChars": 3276
+    },
+    {
+      "slug": "10-cosas-valiosas-que-aprendemos-de-la-plantacion-de-iglesias",
+      "verdict": "identical",
+      "contentfulEntryId": "7JvLK0syzMjUce4vGTXoVV",
+      "localTextChars": 3158,
+      "cfTextChars": 3158
+    },
+    {
+      "slug": "10-cualidades-de-un-discipulador",
+      "verdict": "identical",
+      "contentfulEntryId": "ZrPPP37H3gQewPrJ0qq37",
+      "localTextChars": 4198,
+      "cfTextChars": 4198
+    },
+    {
+      "slug": "10-devocionales-en-youversion-sobre-trabajo-y-fe",
+      "verdict": "identical",
+      "contentfulEntryId": "7qri9cwdDNNhbbxG32L2p6",
+      "localTextChars": 5676,
+      "cfTextChars": 5676
+    },
+    {
+      "slug": "10-hijos-30-anos-en-mision",
+      "verdict": "identical",
+      "contentfulEntryId": "5e9dypiVjAsu2uqGLerMyF",
+      "localTextChars": 4318,
+      "cfTextChars": 4318
+    },
+    {
+      "slug": "10-maneras-de-conversar-con-tu-amigo-musulman",
+      "verdict": "identical",
+      "contentfulEntryId": "6mbBSlC00rKUyovVsrxow1",
+      "localTextChars": 4338,
+      "cfTextChars": 4338
+    },
+    {
+      "slug": "10-puntos-que-debes-saber-sobre-el-mundo-budista",
+      "verdict": "identical",
+      "contentfulEntryId": "1lOGLVjj56VRyzHKFG9i18",
+      "localTextChars": 3011,
+      "cfTextChars": 3011
+    },
+    {
+      "slug": "12-puntos-a-tomar-en-cuenta-para-ministrar-comunidades",
+      "verdict": "identical",
+      "contentfulEntryId": "7nZm4qba7ZclV8yvrIJLA4",
+      "localTextChars": 2661,
+      "cfTextChars": 2661
+    },
+    {
+      "slug": "13-signos-de-que-existen-dificultades-en-el-equipo",
+      "verdict": "identical",
+      "contentfulEntryId": "63shjGQKrH8ues5GdgsOj0",
+      "localTextChars": 4512,
+      "cfTextChars": 4512
+    },
+    {
+      "slug": "3-barreras-que-existen-entre-los-no-alcanzados",
+      "verdict": "identical",
+      "contentfulEntryId": "4VLshfUVh5dhAvKfAP2nHg",
+      "localTextChars": 3497,
+      "cfTextChars": 3497
+    },
+    {
+      "slug": "3-jovenes-que-hicieron-historia",
+      "verdict": "identical",
+      "contentfulEntryId": "01JbCcON4tv6wEkFp9wGsq",
+      "localTextChars": 3907,
+      "cfTextChars": 3907
+    },
+    {
+      "slug": "4-etapas-en-el-desarrollo-de-un-equipo-de-trabajo-multicultural",
+      "verdict": "identical",
+      "contentfulEntryId": "4g9hRP8pWarDAEqVfA2oxy",
+      "localTextChars": 3187,
+      "cfTextChars": 3187
+    },
+    {
+      "slug": "4-puntos-claves-para-elegir-correctamente-una-herramienta-tecnologica",
+      "verdict": "identical",
+      "contentfulEntryId": "1U3wpyRjX87TIoZ0bktdwF",
+      "localTextChars": 3058,
+      "cfTextChars": 3058
+    },
+    {
+      "slug": "4-razones-para-aprender-el-lenguaje-del-corazon",
+      "verdict": "identical",
+      "contentfulEntryId": "49iKOAfOHYSyWI9bk7HB2O",
+      "localTextChars": 3222,
+      "cfTextChars": 3222
+    },
+    {
+      "slug": "4-razones-por-las-que-los-cristianos-no-discipulan",
+      "verdict": "identical",
+      "contentfulEntryId": "3p7OVDCGvZpOcFnCRXE2OY",
+      "localTextChars": 2967,
+      "cfTextChars": 2967
+    },
+    {
+      "slug": "4-verdades-alentadoras-para-aquellos-con-enfermedades-mentales",
+      "verdict": "identical",
+      "contentfulEntryId": "4Zhfs66gwdtvbAoUNrkm3e",
+      "localTextChars": 3107,
+      "cfTextChars": 3107
+    },
+    {
+      "slug": "5-aplicaciones-para-tu-caminar-con-cristo",
+      "verdict": "identical",
+      "contentfulEntryId": "3MY0iI8vw2Z0vze8v2AX94",
+      "localTextChars": 3745,
+      "cfTextChars": 3745
+    },
+    {
+      "slug": "5-caracteristicas-de-una-familia-en-mision",
+      "verdict": "identical",
+      "contentfulEntryId": "2rz1jFtl8Qsarluip1ccDX",
+      "localTextChars": 3403,
+      "cfTextChars": 3403
+    },
+    {
+      "slug": "5-consejos-para-alguien-con-llamado-a-plantar-iglesias",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3012,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "5-preguntas-sobre-el-envio-al-medio-oriente",
+      "verdict": "identical",
+      "contentfulEntryId": "vCb2LZGYsDCQ70K1Emakx",
+      "localTextChars": 3843,
+      "cfTextChars": 3843
+    },
+    {
+      "slug": "7-cosas-que-toda-familia-misionera-debe-considerar",
+      "verdict": "identical",
+      "contentfulEntryId": "2Dta3UctQlilFA4YBuNNjU",
+      "localTextChars": 3371,
+      "cfTextChars": 3371
+    },
+    {
+      "slug": "7-cosas-sobre-tener-una-relacion-sentimental-con-un-no-cristiano",
+      "verdict": "identical",
+      "contentfulEntryId": "18JrTi8ynKs77EiqtIVwJg",
+      "localTextChars": 4308,
+      "cfTextChars": 4308
+    },
+    {
+      "slug": "7-formas-para-mejorar-tu-equipo",
+      "verdict": "identical",
+      "contentfulEntryId": "5UUrldrzvWGS8Z3qolL6O3",
+      "localTextChars": 2636,
+      "cfTextChars": 2636
+    },
+    {
+      "slug": "7-maneras-de-utilizar-el-arte-en-las-misiones",
+      "verdict": "identical",
+      "contentfulEntryId": "7w3fSPC7aFTRbm2KwezJYj",
+      "localTextChars": 6936,
+      "cfTextChars": 6936
+    },
+    {
+      "slug": "a-dios-le-importa-mas-tener-el-100-de-mi-corazon-que-darme-el-100-de-mi-sustento",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 4599,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "a-liderar-bien",
+      "verdict": "identical",
+      "contentfulEntryId": "uYquvW1ih3p9nENAynUFq",
+      "localTextChars": 2225,
+      "cfTextChars": 2225
+    },
+    {
+      "slug": "abuelas-a-distancia",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3295,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "accionar-y-no-solo-sonar",
+      "verdict": "identical",
+      "contentfulEntryId": "29TjB23yTSPUo4t1wHaqRU",
+      "localTextChars": 4263,
+      "cfTextChars": 4263
+    },
+    {
+      "slug": "adaptandose-a-las-nuevas-formas-de-hacer-ministerio",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3874,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "al-judio-primero",
+      "verdict": "identical",
+      "contentfulEntryId": "4FtzcGUPsKAJVilhV9rw0w",
+      "localTextChars": 2954,
+      "cfTextChars": 2954
+    },
+    {
+      "slug": "alaba-a-dios-tambien-con-tu-mente",
+      "verdict": "identical",
+      "contentfulEntryId": "2SzYG5G9XrEhQ9S1Mo1GKY",
+      "localTextChars": 3724,
+      "cfTextChars": 3724
+    },
+    {
+      "slug": "alcanzando-a-la-comunidad-del-hip-hop",
+      "verdict": "identical",
+      "contentfulEntryId": "2Ad4W2GTwt5rvnqeEO3kfZ",
+      "localTextChars": 3315,
+      "cfTextChars": 3315
+    },
+    {
+      "slug": "alcanzando-a-los-hijos-de-david",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2943,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "alcanzando-a-los-maninka",
+      "verdict": "identical",
+      "contentfulEntryId": "4kt3lEmyKxUUoWbP7uG1cU",
+      "localTextChars": 2281,
+      "cfTextChars": 2281
+    },
+    {
+      "slug": "alemania-una-puerta-abierta-para-profesionales-estudiantes-y-jovenes-con-llamado-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "TZQ58QePucyzvdRES0Uex",
+      "localTextChars": 5347,
+      "cfTextChars": 5347
+    },
+    {
+      "slug": "algo-esta-pasando-en-el-himalaya",
+      "verdict": "identical",
+      "contentfulEntryId": "5kwBzhVSKMfcerXtRbHFqw",
+      "localTextChars": 3931,
+      "cfTextChars": 3931
+    },
+    {
+      "slug": "algo-que-no-debemos-satanizar-ni-ignorar",
+      "verdict": "identical",
+      "contentfulEntryId": "6sjF3ESWOPtA7tRcnw3rGZ",
+      "localTextChars": 2986,
+      "cfTextChars": 2986
+    },
+    {
+      "slug": "amistades-profundas",
+      "verdict": "identical",
+      "contentfulEntryId": "6qcdJlT8CrYFHDEvA55vlR",
+      "localTextChars": 3320,
+      "cfTextChars": 3320
+    },
+    {
+      "slug": "amor-en-el-campo-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "15F6NxO8vgB6HMzcMaEzss",
+      "localTextChars": 3447,
+      "cfTextChars": 3447
+    },
+    {
+      "slug": "apologetica-para-las-religiones-del-mundo",
+      "verdict": "identical",
+      "contentfulEntryId": "6KULaqPs6aq9n0Z8UILi8h",
+      "localTextChars": 3300,
+      "cfTextChars": 3300
+    },
+    {
+      "slug": "aprendiendo-a-comunicarnos-en-un-equipo-intercultural",
+      "verdict": "identical",
+      "contentfulEntryId": "6nez9wgWpY9szaQqXsafNo",
+      "localTextChars": 3039,
+      "cfTextChars": 3039
+    },
+    {
+      "slug": "aprendiendo-a-convivir",
+      "verdict": "identical",
+      "contentfulEntryId": "6MO3fTA2peYI81b2WkUPvL",
+      "localTextChars": 2861,
+      "cfTextChars": 2861
+    },
+    {
+      "slug": "aqui-hay-un-lugar-para-todos",
+      "verdict": "identical",
+      "contentfulEntryId": "4ihQ0OV5TwR7rGFvh9EG5a",
+      "localTextChars": 4049,
+      "cfTextChars": 4049
+    },
+    {
+      "slug": "autocuidado-antes-de-ir-al-campo-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "5lRE7Ka1EQVjcqtqmBMZoG",
+      "localTextChars": 2688,
+      "cfTextChars": 2688
+    },
+    {
+      "slug": "autocuidado-el-gran-desafio-para-el-obrero",
+      "verdict": "identical",
+      "contentfulEntryId": "4yv9CsuBeFucsQjdyvyuN2",
+      "localTextChars": 5015,
+      "cfTextChars": 5015
+    },
+    {
+      "slug": "ayuda-a-tu-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "nFLc6j9EQeZ1YnHNsx3M9",
+      "localTextChars": 3113,
+      "cfTextChars": 3113
+    },
+    {
+      "slug": "ayuda-mi-conyuge-no-se-siente-llamado",
+      "verdict": "identical",
+      "contentfulEntryId": "gkZR8nSxRdMuT52nMlzBD",
+      "localTextChars": 3321,
+      "cfTextChars": 3321
+    },
+    {
+      "slug": "ayudando-al-misionero-a-reintegrarse",
+      "verdict": "identical",
+      "contentfulEntryId": "7ETmEV0SzktqEEsE7wO942",
+      "localTextChars": 4274,
+      "cfTextChars": 4274
+    },
+    {
+      "slug": "busca-la-ayuda-adecuada-un-misionero-y-su-diagnostico-de-depresion",
+      "verdict": "identical",
+      "contentfulEntryId": "xTqkAv3DFbtYnmKvbHMsA",
+      "localTextChars": 2954,
+      "cfTextChars": 2954
+    },
+    {
+      "slug": "buscando-la-luz-verdadera",
+      "verdict": "identical",
+      "contentfulEntryId": "4xUMxrBPEnABzOYkciWGQ1",
+      "localTextChars": 3289,
+      "cfTextChars": 3289
+    },
+    {
+      "slug": "cambiando-nuestro-pensamiento-sobre-la-generosidad",
+      "verdict": "identical",
+      "contentfulEntryId": "57m1BxQZ6RADhtFycTuEVA",
+      "localTextChars": 2506,
+      "cfTextChars": 2506
+    },
+    {
+      "slug": "cambios-significativos-que-estamos-viviendo",
+      "verdict": "identical",
+      "contentfulEntryId": "y7LnF0HGwKSnHo1Ry0sd4",
+      "localTextChars": 1926,
+      "cfTextChars": 1926
+    },
+    {
+      "slug": "caracteristicas-de-un-matrimonio-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "74PZOlBYBHPEe4NJBOQan4",
+      "localTextChars": 3126,
+      "cfTextChars": 3126
+    },
+    {
+      "slug": "celebraciones-judias",
+      "verdict": "identical",
+      "contentfulEntryId": "3rDFAtxuD2ZmzhdwbKpt1x",
+      "localTextChars": 2471,
+      "cfTextChars": 2471
+    },
+    {
+      "slug": "club-conversatorio-en-ingles-impacta-a-jovenes-para-cristo",
+      "verdict": "identical",
+      "contentfulEntryId": "3uTwyFMUmwkMJIAvjLJhph",
+      "localTextChars": 3480,
+      "cfTextChars": 3480
+    },
+    {
+      "slug": "cocinando-para-su-gloria",
+      "verdict": "identical",
+      "contentfulEntryId": "1ooKlGytAUqZyLowWrtHqF",
+      "localTextChars": 2860,
+      "cfTextChars": 2860
+    },
+    {
+      "slug": "comence-con-voluntarios-y-termine-con-hermanos-de-corazon",
+      "verdict": "identical",
+      "contentfulEntryId": "3VjuWwlpiJHAgKPxQJupTe",
+      "localTextChars": 3296,
+      "cfTextChars": 3296
+    },
+    {
+      "slug": "comibam-promueve-alcanzando-a-las-etnias-no-alcanzadas",
+      "verdict": "identical",
+      "contentfulEntryId": "3s65UPMObqsOHtNt7g5HSl",
+      "localTextChars": 3039,
+      "cfTextChars": 3039
+    },
+    {
+      "slug": "como-aprender-una-nueva-cultura",
+      "verdict": "identical",
+      "contentfulEntryId": "3RhFxaZzi0jeZjNfG5ipUt",
+      "localTextChars": 5145,
+      "cfTextChars": 5145
+    },
+    {
+      "slug": "como-descubrir-el-adn-de-un-equipo",
+      "verdict": "identical",
+      "contentfulEntryId": "6453cqaeqzul6m97OSrynI",
+      "localTextChars": 2895,
+      "cfTextChars": 2895
+    },
+    {
+      "slug": "como-el-voluntariado-ha-marcado-tu-vida",
+      "verdict": "identical",
+      "contentfulEntryId": "1fV0aKUqY4hZDxNlhzX5DG",
+      "localTextChars": 4481,
+      "cfTextChars": 4481
+    },
+    {
+      "slug": "como-movilizar-a-las-personas-a-dar-para-las-misiones",
+      "verdict": "identical",
+      "contentfulEntryId": "5PWLuYva1sHuJBHbfFV3Mc",
+      "localTextChars": 3156,
+      "cfTextChars": 3156
+    },
+    {
+      "slug": "como-orar-por-los-papas-de-los-misioneros",
+      "verdict": "identical",
+      "contentfulEntryId": "9rPxnx0pgwwd9COHEYuQl",
+      "localTextChars": 4396,
+      "cfTextChars": 4396
+    },
+    {
+      "slug": "como-ser-sal-y-luz-en-el-trabajo",
+      "verdict": "identical",
+      "contentfulEntryId": "3Z4z3f66jNCbmDyxJOmqTd",
+      "localTextChars": 2650,
+      "cfTextChars": 2650
+    },
+    {
+      "slug": "como-seria-el-mundo-sin-la-influencia-de-mordecai-ham",
+      "verdict": "identical",
+      "contentfulEntryId": "7EQymWH0wAhq4Wq2vEhy1w",
+      "localTextChars": 2515,
+      "cfTextChars": 2515
+    },
+    {
+      "slug": "como-un-equipo-en-campo-de-juego",
+      "verdict": "identical",
+      "contentfulEntryId": "6wiGZOhYpmkXuU8K2V7jV",
+      "localTextChars": 2318,
+      "cfTextChars": 2318
+    },
+    {
+      "slug": "comprometiendo-a-las-universidades-globalmente",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2927,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "conociendo-a-un-htc",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2868,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "conociendo-sobre-los-tca",
+      "verdict": "identical",
+      "contentfulEntryId": "24tCFaWNOxX9ZQ7jtNiobm",
+      "localTextChars": 2994,
+      "cfTextChars": 2994
+    },
+    {
+      "slug": "consejeria-en-tiempo-de-crisis",
+      "verdict": "identical",
+      "contentfulEntryId": "7AXkZzq6Sxci8F8hPlcWdL",
+      "localTextChars": 4514,
+      "cfTextChars": 4514
+    },
+    {
+      "slug": "consejos-a-los-influencers",
+      "verdict": "identical",
+      "contentfulEntryId": "3uFZBZMW5vJnpuWxOoENjf",
+      "localTextChars": 2823,
+      "cfTextChars": 2823
+    },
+    {
+      "slug": "consejos-para-los-matrimonios-misioneros-interculturales",
+      "verdict": "identical",
+      "contentfulEntryId": "4hxeGqG5YbujOkdx39b4lJ",
+      "localTextChars": 3555,
+      "cfTextChars": 3555
+    },
+    {
+      "slug": "consejos-para-los-matrimonios-que-van-al-campo-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "2P1B4bKJQkJNoWz2PTqXD5",
+      "localTextChars": 3333,
+      "cfTextChars": 3333
+    },
+    {
+      "slug": "consejos-practicos-para-involucrar-a-los-jovenes-en-misiones",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3558,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "consejos-si-no-quieres-ser-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "6CAFe9aqInseRoK2tAWant",
+      "localTextChars": 2258,
+      "cfTextChars": 2258
+    },
+    {
+      "slug": "construyendo-una-cabana-con-papa-y-re-construyendo-mi-vida",
+      "verdict": "identical",
+      "contentfulEntryId": "5uTkcyAlmNUvKaPMlit5qO",
+      "localTextChars": 4263,
+      "cfTextChars": 4263
+    },
+    {
+      "slug": "conviertete-en-un-misionero-en-linea-en-5-pasos",
+      "verdict": "identical",
+      "contentfulEntryId": "5VBtvZg8J3IqBFKgNlQOCw",
+      "localTextChars": 3899,
+      "cfTextChars": 3899
+    },
+    {
+      "slug": "coordinando-el-regreso",
+      "verdict": "identical",
+      "contentfulEntryId": "gB2db4sO51t60rnqlN6bQ",
+      "localTextChars": 3547,
+      "cfTextChars": 3547
+    },
+    {
+      "slug": "cosas-a-considerar-antes-de-presentar-el-evangelio",
+      "verdict": "identical",
+      "contentfulEntryId": "6eTsnqpD2G1gSlIBvXXMr3",
+      "localTextChars": 3956,
+      "cfTextChars": 3956
+    },
+    {
+      "slug": "crisis-esperadas-vs-crisis-inesperadas",
+      "verdict": "identical",
+      "contentfulEntryId": "1nsQq3as8WWZoG8tSvuESE",
+      "localTextChars": 4314,
+      "cfTextChars": 4314
+    },
+    {
+      "slug": "cristocentricos-o-egocentricos",
+      "verdict": "identical",
+      "contentfulEntryId": "2a4EkMYIEWyBBXTA506NCa",
+      "localTextChars": 4224,
+      "cfTextChars": 4224
+    },
+    {
+      "slug": "cual-es-el-problema-solo-esta-volviendo-a-casa",
+      "verdict": "identical",
+      "contentfulEntryId": "2HaDQwN1fiKQmP1BRn4XDv",
+      "localTextChars": 3744,
+      "cfTextChars": 3744
+    },
+    {
+      "slug": "cuenta-conmigo-para-ir-llamado-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "2oRcyUwRf2Nv0VnzgXdYvZ",
+      "localTextChars": 3079,
+      "cfTextChars": 3079
+    },
+    {
+      "slug": "cuidando-del-matrimonio-de-manera-horizontal-y-vertical",
+      "verdict": "identical",
+      "contentfulEntryId": "4DZwVekSn9sta6MVB9woI1",
+      "localTextChars": 3705,
+      "cfTextChars": 3705
+    },
+    {
+      "slug": "curando-fisica-y-espiritualmente",
+      "verdict": "identical",
+      "contentfulEntryId": "3wuBC5VDCM2r6ZLH6qgQ1c",
+      "localTextChars": 4067,
+      "cfTextChars": 4067
+    },
+    {
+      "slug": "dar-con-las-dos-manos",
+      "verdict": "identical",
+      "contentfulEntryId": "5QbB54GxFGgS9H1Dekm1qN",
+      "localTextChars": 2383,
+      "cfTextChars": 2383
+    },
+    {
+      "slug": "de-afectada-a-involucrada-e-infectada",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3879,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "de-la-selva-su-gente",
+      "verdict": "identical",
+      "contentfulEntryId": "2q6zT7yvgxNBNraBTptRil",
+      "localTextChars": 2563,
+      "cfTextChars": 2563
+    },
+    {
+      "slug": "de-sufi-a-discipulo-de-jesus",
+      "verdict": "identical",
+      "contentfulEntryId": "8gKncBi7Xeqn6makoiLkq",
+      "localTextChars": 2925,
+      "cfTextChars": 2925
+    },
+    {
+      "slug": "de-una-familia-ordinaria-a-una-familia-misionera",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2713,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "deberiamos-ser-voluntarios-todos",
+      "verdict": "identical",
+      "contentfulEntryId": "3p6hZY84f2S04DpFnMLgr0",
+      "localTextChars": 2626,
+      "cfTextChars": 2626
+    },
+    {
+      "slug": "decidio-destruir-sus-idolos",
+      "verdict": "identical",
+      "contentfulEntryId": "6kJfnEpf8U6CMs533HJ4LC",
+      "localTextChars": 3723,
+      "cfTextChars": 3723
+    },
+    {
+      "slug": "desafiados-a-revitalizar-una-iglesia",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3848,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "dios-esta-invitando-a-su-iglesia-a-servir-a-musulmanes",
+      "verdict": "identical",
+      "contentfulEntryId": "3WTuDGigT44zTAd2tcyjTS",
+      "localTextChars": 3439,
+      "cfTextChars": 3439
+    },
+    {
+      "slug": "dios-llama-y-la-iglesia-envia",
+      "verdict": "identical",
+      "contentfulEntryId": "7a4WmBRQKSI3iLr4KVHKmC",
+      "localTextChars": 3007,
+      "cfTextChars": 3007
+    },
+    {
+      "slug": "dios-no-ha-terminado-conmigo-aun",
+      "verdict": "identical",
+      "contentfulEntryId": "2f9FRb0C44seJRBHXws7Se",
+      "localTextChars": 3885,
+      "cfTextChars": 3885
+    },
+    {
+      "slug": "dios-revela-la-mision-de-la-familia",
+      "verdict": "identical",
+      "contentfulEntryId": "6yzr0ENhtbQ6poLQMbmUR4",
+      "localTextChars": 3670,
+      "cfTextChars": 3670
+    },
+    {
+      "slug": "discipulado-en-el-desierto-como-dios-esta-obrando-en-el-norte-de-africa",
+      "verdict": "identical",
+      "contentfulEntryId": "4Qc87k6weFAB3nhjDd21PY",
+      "localTextChars": 2790,
+      "cfTextChars": 2790
+    },
+    {
+      "slug": "discipulando-a-los-dadores",
+      "verdict": "identical",
+      "contentfulEntryId": "QHVPv3T2YS4fTONhYsTak",
+      "localTextChars": 2420,
+      "cfTextChars": 2420
+    },
+    {
+      "slug": "dolor-con-proposito",
+      "verdict": "identical",
+      "contentfulEntryId": "3KsGq2P1LuXCdRtsJJujJ2",
+      "localTextChars": 3647,
+      "cfTextChars": 3647
+    },
+    {
+      "slug": "el-arte-es-importante-para-dios",
+      "verdict": "identical",
+      "contentfulEntryId": "7nCq6fyfwS8WH0q0oGyW4j",
+      "localTextChars": 3772,
+      "cfTextChars": 3772
+    },
+    {
+      "slug": "el-caleidoscopio-del-budismo",
+      "verdict": "identical",
+      "contentfulEntryId": "6OYfrlUx14FpUKjWbu4UmD",
+      "localTextChars": 2903,
+      "cfTextChars": 2903
+    },
+    {
+      "slug": "el-caracter-se-pone-a-prueba-en-prisma",
+      "verdict": "identical",
+      "contentfulEntryId": "7cTPErygRxyz9BcoM8JbdW",
+      "localTextChars": 3410,
+      "cfTextChars": 3410
+    },
+    {
+      "slug": "el-corazon-y-la-oracion-de-una-madre-apasionada",
+      "verdict": "identical",
+      "contentfulEntryId": "F9r0HfCHhPDV06ixqbBnN",
+      "localTextChars": 4227,
+      "cfTextChars": 4227
+    },
+    {
+      "slug": "el-cuidado-de-las-familias-de-los-misioneros",
+      "verdict": "identical",
+      "contentfulEntryId": "3x5TCopDi7wbzFcS4BrX94",
+      "localTextChars": 3366,
+      "cfTextChars": 3366
+    },
+    {
+      "slug": "el-cuidado-integral-no-solo-es-para-el-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "1EfFAYHnPFB56jldjeeBNm",
+      "localTextChars": 2191,
+      "cfTextChars": 2191
+    },
+    {
+      "slug": "el-desafio-de-compartir-la-fe-como-quimico",
+      "verdict": "identical",
+      "contentfulEntryId": "311cQwsedYNQQHuARh4kp2",
+      "localTextChars": 5803,
+      "cfTextChars": 5803
+    },
+    {
+      "slug": "el-devocional-es-el-que-se-vive-cada-dia",
+      "verdict": "identical",
+      "contentfulEntryId": "4nFPMA3T6Y0JRzBZze0U7d",
+      "localTextChars": 2950,
+      "cfTextChars": 2950
+    },
+    {
+      "slug": "el-envio-de-misioneros-una-practica-constante-desde-la-iglesia-primitiva",
+      "verdict": "identical",
+      "contentfulEntryId": "1bSWmEa87ckclFlgFza7ge",
+      "localTextChars": 3707,
+      "cfTextChars": 3707
+    },
+    {
+      "slug": "el-envio-de-responsables-de-obreros-preparados",
+      "verdict": "identical",
+      "contentfulEntryId": "27v7eeByjWee7cd3T1NzYr",
+      "localTextChars": 4570,
+      "cfTextChars": 4570
+    },
+    {
+      "slug": "el-equipo-pastoral-discipula-y-moviliza",
+      "verdict": "identical",
+      "contentfulEntryId": "20qgF1thOkuvHUmK1mctqy",
+      "localTextChars": 3574,
+      "cfTextChars": 3574
+    },
+    {
+      "slug": "el-error-de-no-hablar",
+      "verdict": "identical",
+      "contentfulEntryId": "1ZL8CD0GlkB3UQwQWV3cEY",
+      "localTextChars": 2913,
+      "cfTextChars": 2913
+    },
+    {
+      "slug": "el-exito-en-circunstancias-inusuales",
+      "verdict": "identical",
+      "contentfulEntryId": "3suaU5zeLTLdH7pRbHipcy",
+      "localTextChars": 3312,
+      "cfTextChars": 3312
+    },
+    {
+      "slug": "el-feminismo-afecta-a-las-mujeres",
+      "verdict": "identical",
+      "contentfulEntryId": "7cmqurI6A3eAZZb8TN5L9m",
+      "localTextChars": 4640,
+      "cfTextChars": 4640
+    },
+    {
+      "slug": "el-intelectualismo-y-los-cristianos",
+      "verdict": "identical",
+      "contentfulEntryId": "4KR6SV2qSU699OhwAQpT61",
+      "localTextChars": 3217,
+      "cfTextChars": 3217
+    },
+    {
+      "slug": "el-judaismo-en-si",
+      "verdict": "identical",
+      "contentfulEntryId": "4TJx6qgPV0dzKTDszpIv3w",
+      "localTextChars": 3094,
+      "cfTextChars": 3094
+    },
+    {
+      "slug": "el-liderazgo-y-las-peras-del-vecino",
+      "verdict": "identical",
+      "contentfulEntryId": "G53XztmeHxwJfjniiU0eJ",
+      "localTextChars": 3088,
+      "cfTextChars": 3088
+    },
+    {
+      "slug": "el-medio-oriente-te-espera",
+      "verdict": "identical",
+      "contentfulEntryId": "ppuNGZp8umn8Pb6IYbm4I",
+      "localTextChars": 4308,
+      "cfTextChars": 4308
+    },
+    {
+      "slug": "el-nuevo-obrero-iberoamericano",
+      "verdict": "identical",
+      "contentfulEntryId": "8knHLWhne9jfxja5n06Jt",
+      "localTextChars": 3067,
+      "cfTextChars": 3067
+    },
+    {
+      "slug": "el-perfil-del-plantador-de-iglesias",
+      "verdict": "identical",
+      "contentfulEntryId": "2dh1EgzXD6TVfUDh5u6q5h",
+      "localTextChars": 3558,
+      "cfTextChars": 3558
+    },
+    {
+      "slug": "el-que-viene-a-mi-no-lo-echo-fuera",
+      "verdict": "identical",
+      "contentfulEntryId": "3aZN7dfBtXTaK1BhVCefgH",
+      "localTextChars": 4028,
+      "cfTextChars": 4028
+    },
+    {
+      "slug": "el-recurso-apologetico-mas-grande-que-existe-la-biblia",
+      "verdict": "identical",
+      "contentfulEntryId": "1zGZFYBgR13ut5yyuC1VDc",
+      "localTextChars": 3722,
+      "cfTextChars": 3722
+    },
+    {
+      "slug": "el-regreso-a-israel",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2515,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "el-reto-de-reclutar-seleccionar-voluntarios",
+      "verdict": "identical",
+      "contentfulEntryId": "46Tq5wykrR1qKuII4kls0T",
+      "localTextChars": 2673,
+      "cfTextChars": 2673
+    },
+    {
+      "slug": "el-rol-de-la-mujer-en-la-gran-comision-es-igual-al-del-hombre",
+      "verdict": "identical",
+      "contentfulEntryId": "qq8o02EUCZLO904HgBrYT",
+      "localTextChars": 4112,
+      "cfTextChars": 4112
+    },
+    {
+      "slug": "el-rol-de-la-mujer-en-la-traduccion-biblica",
+      "verdict": "identical",
+      "contentfulEntryId": "2pc7TdcZTV85vJSH5tI5AS",
+      "localTextChars": 3028,
+      "cfTextChars": 3028
+    },
+    {
+      "slug": "el-rostro-de-las-misiones-tiene-un-nuevo-rostro",
+      "verdict": "identical",
+      "contentfulEntryId": "3szYir4Ip83XrE3I1KaPA4",
+      "localTextChars": 2854,
+      "cfTextChars": 2854
+    },
+    {
+      "slug": "emanando-la-fragancia-dulce-de-cristo",
+      "verdict": "identical",
+      "contentfulEntryId": "6Mi6AqdkaGWqx9zwioWOwD",
+      "localTextChars": 3362,
+      "cfTextChars": 3362
+    },
+    {
+      "slug": "en-busca-del-verdadero-nirvana",
+      "verdict": "identical",
+      "contentfulEntryId": "47764gNJbyYvvDhRbI8nZ9",
+      "localTextChars": 5468,
+      "cfTextChars": 5468
+    },
+    {
+      "slug": "en-esto-conoceran-que-somos-uno",
+      "verdict": "identical",
+      "contentfulEntryId": "4XMIhV7rUSt6UaKTUJlwG4",
+      "localTextChars": 3160,
+      "cfTextChars": 3160
+    },
+    {
+      "slug": "en-tiempos-de-crisis-mundial",
+      "verdict": "identical",
+      "contentfulEntryId": "2t2fgmhPCUMnhskHmx565x",
+      "localTextChars": 2639,
+      "cfTextChars": 2639
+    },
+    {
+      "slug": "entendiendo-el-por-que-detras-de-las-preguntas",
+      "verdict": "identical",
+      "contentfulEntryId": "4r9KdlycykHpIdG6aCXmkK",
+      "localTextChars": 3189,
+      "cfTextChars": 3189
+    },
+    {
+      "slug": "enviando-desde-latinoamerica",
+      "verdict": "identical",
+      "contentfulEntryId": "5x9kz1SxtbBihAIotnTxtr",
+      "localTextChars": 3100,
+      "cfTextChars": 3100
+    },
+    {
+      "slug": "errores-comunes-sobre-los-judios",
+      "verdict": "identical",
+      "contentfulEntryId": "EJobGSVYneGH2fSwZbRbj",
+      "localTextChars": 4781,
+      "cfTextChars": 4781
+    },
+    {
+      "slug": "es-un-peligro-no-dominar-el-idioma",
+      "verdict": "identical",
+      "contentfulEntryId": "6VPP2iS1RTJpZfO84rpahr",
+      "localTextChars": 2856,
+      "cfTextChars": 2856
+    },
+    {
+      "slug": "espacios-que-ofrecen-oportunidades-y-bendicion",
+      "verdict": "identical",
+      "contentfulEntryId": "840M13XSYyqP77etkNYJJ",
+      "localTextChars": 3769,
+      "cfTextChars": 3769
+    },
+    {
+      "slug": "esperanza-y-comunidad-a-traves-del-arte",
+      "verdict": "identical",
+      "contentfulEntryId": "c12Adv9wMiR4EzQu7tQEq",
+      "localTextChars": 4056,
+      "cfTextChars": 4056
+    },
+    {
+      "slug": "estamos-equipados-para-dialogar-con-el-mundo-de-hoy",
+      "verdict": "identical",
+      "contentfulEntryId": "3Mm29epTtjgkSwS4E4xeG3",
+      "localTextChars": 4743,
+      "cfTextChars": 4743
+    },
+    {
+      "slug": "estamos-limitando-a-otros-en-su-compromiso-en-las-misiones",
+      "verdict": "identical",
+      "contentfulEntryId": "47OmjXwQUmVwqIcK4yMT6F",
+      "localTextChars": 4577,
+      "cfTextChars": 4577
+    },
+    {
+      "slug": "estoy-en-pecado-si-estoy-deprimido",
+      "verdict": "identical",
+      "contentfulEntryId": "2Y5Ib2g9HMA5OpghrKV2wg",
+      "localTextChars": 4523,
+      "cfTextChars": 4523
+    },
+    {
+      "slug": "evolucion-del-concepto-de-autocuidado",
+      "verdict": "identical",
+      "contentfulEntryId": "2DpvTgySvBb0hgHdvlFD6t",
+      "localTextChars": 3771,
+      "cfTextChars": 3771
+    },
+    {
+      "slug": "exitoso-pastor-deja-su-propia-iglesia",
+      "verdict": "identical",
+      "contentfulEntryId": "7cJAXdFBodQlYaJnnGPpF0",
+      "localTextChars": 2812,
+      "cfTextChars": 2812
+    },
+    {
+      "slug": "expansion-y-desarrollo-del-budismo",
+      "verdict": "identical",
+      "contentfulEntryId": "47oGV0v1GqIHQNJg2Ct9lZ",
+      "localTextChars": 3027,
+      "cfTextChars": 3027
+    },
+    {
+      "slug": "experimentando-el-servir-a-dios-en-familia",
+      "verdict": "identical",
+      "contentfulEntryId": "1UPVOByE03q9LgFgZFD0f4",
+      "localTextChars": 3261,
+      "cfTextChars": 3261
+    },
+    {
+      "slug": "familias-misionales-en-la-biblia",
+      "verdict": "identical",
+      "contentfulEntryId": "2tXSBmoy7jTeTNoM6z0Dhq",
+      "localTextChars": 1140,
+      "cfTextChars": 1140
+    },
+    {
+      "slug": "formas-en-que-la-iglesia-puede-fortalecer-a-los-obreros",
+      "verdict": "identical",
+      "contentfulEntryId": "107hdPUIZGUB9T7QLZ5POT",
+      "localTextChars": 3434,
+      "cfTextChars": 3434
+    },
+    {
+      "slug": "formas-practicas-para-comunicarte-con-familias-budista",
+      "verdict": "identical",
+      "contentfulEntryId": "dSaE1AAxi3nNvfgYILg25",
+      "localTextChars": 3166,
+      "cfTextChars": 3166
+    },
+    {
+      "slug": "gane-un-debate-pero-perdi-mi-corazon",
+      "verdict": "identical",
+      "contentfulEntryId": "bnYwowEMHfkdh08uICTZb",
+      "localTextChars": 4967,
+      "cfTextChars": 4967
+    },
+    {
+      "slug": "glorificamos-a-dios-a-traves-del-arte",
+      "verdict": "identical",
+      "contentfulEntryId": "7MajpsTb780nd27UFEWyRA",
+      "localTextChars": 4197,
+      "cfTextChars": 4197
+    },
+    {
+      "slug": "guiando-a-los-interesados",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3659,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "guiando-a-los-misioneros-solteros",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 4401,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "hablando-con-mi-pastor-sobre-mi-llamado",
+      "verdict": "identical",
+      "contentfulEntryId": "3OR9whZOyaGmN0M7ASxhEF",
+      "localTextChars": 3672,
+      "cfTextChars": 3672
+    },
+    {
+      "slug": "hagamos-viral-el-evangelio",
+      "verdict": "identical",
+      "contentfulEntryId": "3yAdMgPWJrCGjg4O4osIbp",
+      "localTextChars": 4532,
+      "cfTextChars": 4532
+    },
+    {
+      "slug": "hambre-por-el-evangelio",
+      "verdict": "identical",
+      "contentfulEntryId": "5XqUJfQ9CwgNnD4ZtUZq9O",
+      "localTextChars": 3005,
+      "cfTextChars": 3005
+    },
+    {
+      "slug": "hay-que-ser-mas-que-un-medico",
+      "verdict": "identical",
+      "contentfulEntryId": "9L0covziyhhKqVPYjohGP",
+      "localTextChars": 4308,
+      "cfTextChars": 4308
+    },
+    {
+      "slug": "hay-tranquilidad-en-el-corazon-del-obrero",
+      "verdict": "identical",
+      "contentfulEntryId": "yfXqGQwn75HLEbzL1Qetm",
+      "localTextChars": 3980,
+      "cfTextChars": 3980
+    },
+    {
+      "slug": "idiomas-y-su-efecto-en-el-equipo",
+      "verdict": "identical",
+      "contentfulEntryId": "7t0vmTAKl4anx4zJCsdjpT",
+      "localTextChars": 2431,
+      "cfTextChars": 2431
+    },
+    {
+      "slug": "involucrandose-con-guinea-ecuatorial",
+      "verdict": "identical",
+      "contentfulEntryId": "1E0ekEMkHVx93Nm6OmrAgb",
+      "localTextChars": 3043,
+      "cfTextChars": 3043
+    },
+    {
+      "slug": "involucrar-a-mis-hijos-en-la-mision",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3168,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "jerusalen-corazon-de-una-nacion",
+      "verdict": "identical",
+      "contentfulEntryId": "65TVqcUv8n8B07bIdlGTFS",
+      "localTextChars": 4740,
+      "cfTextChars": 4740
+    },
+    {
+      "slug": "jesus-no-andaria-en-un-burro-en-pleno-siglo-xxi",
+      "verdict": "identical",
+      "contentfulEntryId": "YsEA3oP3PPKyqfqRCpad3",
+      "localTextChars": 1842,
+      "cfTextChars": 1842
+    },
+    {
+      "slug": "juntos-por-una-misma-causa",
+      "verdict": "identical",
+      "contentfulEntryId": "2t5kWT4IdApFfpsHV9gqtk",
+      "localTextChars": 2898,
+      "cfTextChars": 2898
+    },
+    {
+      "slug": "la-biblia-y-la-salud-mental",
+      "verdict": "identical",
+      "contentfulEntryId": "6JOlyMR9xsKBiuWFD7WuHD",
+      "localTextChars": 3155,
+      "cfTextChars": 3155
+    },
+    {
+      "slug": "la-buena-noticia-se-extiende-de-un-fulani-a-toda-una-aldea-fulani",
+      "verdict": "identical",
+      "contentfulEntryId": "6CMSce0otsThyHaE8ouboI",
+      "localTextChars": 3424,
+      "cfTextChars": 3424
+    },
+    {
+      "slug": "la-caja-del-diablo",
+      "verdict": "identical",
+      "contentfulEntryId": "76AWYN83BEamCDl9254sj8",
+      "localTextChars": 1408,
+      "cfTextChars": 1408
+    },
+    {
+      "slug": "la-capacitacion-misionera-integral",
+      "verdict": "identical",
+      "contentfulEntryId": "3YMBVP1pkz8ri7tq8ryvOw",
+      "localTextChars": 4872,
+      "cfTextChars": 4872
+    },
+    {
+      "slug": "la-era-de-la-colaboracion-o-del-individualismo",
+      "verdict": "identical",
+      "contentfulEntryId": "43bIClW5yRjzF602czBecn",
+      "localTextChars": 3588,
+      "cfTextChars": 3588
+    },
+    {
+      "slug": "la-gente-pensaba-que-nos-habiamos-vuelto-locos",
+      "verdict": "identical",
+      "contentfulEntryId": "7lRpr7JwA8TeWAxlYfTRWP",
+      "localTextChars": 3051,
+      "cfTextChars": 3051
+    },
+    {
+      "slug": "la-iglesia-dio-un-giro-total",
+      "verdict": "identical",
+      "contentfulEntryId": "1E5dxcUM1uOXKRF7qGt1gX",
+      "localTextChars": 3090,
+      "cfTextChars": 3090
+    },
+    {
+      "slug": "la-iglesia-y-su-rol-influenciador",
+      "verdict": "identical",
+      "contentfulEntryId": "141TBRXtIIK9Y02rQTUMUZ",
+      "localTextChars": 3061,
+      "cfTextChars": 3061
+    },
+    {
+      "slug": "la-importancia-del-muro-de-los-lamentos",
+      "verdict": "identical",
+      "contentfulEntryId": "1DcaXsvsmoqTZICJCJZ3gq",
+      "localTextChars": 2511,
+      "cfTextChars": 2511
+    },
+    {
+      "slug": "la-juventud-una-generacion-equipada",
+      "verdict": "identical",
+      "contentfulEntryId": "6Ay6MmTcSfUld3LfNtqLTX",
+      "localTextChars": 4776,
+      "cfTextChars": 4776
+    },
+    {
+      "slug": "la-mentoria-una-aliada-en-el-ministerio",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2334,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "la-mision-es-en-equipo-10-razones-para-unirte-a-una-agencia-misionera",
+      "verdict": "identical",
+      "contentfulEntryId": "5Ncfqy929j3WTvzpO4OvJZ",
+      "localTextChars": 4740,
+      "cfTextChars": 4740
+    },
+    {
+      "slug": "la-necesidad-misionera-es-grande-y-la-clave-es-la-iglesia-local",
+      "verdict": "identical",
+      "contentfulEntryId": "7JxeOK11zJ6PcL9MnZG4n7",
+      "localTextChars": 3359,
+      "cfTextChars": 3359
+    },
+    {
+      "slug": "la-nueva-cara-de-las-misiones-medicas",
+      "verdict": "identical",
+      "contentfulEntryId": "3ySDTd2Ti50JrIwUIweMQ",
+      "localTextChars": 3996,
+      "cfTextChars": 3996
+    },
+    {
+      "slug": "la-palabra-de-dios-nos-ayuda-en-la-transicion",
+      "verdict": "identical",
+      "contentfulEntryId": "5wfyJ7zDrvuPgmSVm5PhIo",
+      "localTextChars": 4379,
+      "cfTextChars": 4379
+    },
+    {
+      "slug": "la-seleccion-de-un-equipo",
+      "verdict": "identical",
+      "contentfulEntryId": "H4XS21U2kLcQvhxIiWeBp",
+      "localTextChars": 4026,
+      "cfTextChars": 4026
+    },
+    {
+      "slug": "la-traduccion-biblica-y-la-multiculturalidad-del-cuerpo-de-cristo",
+      "verdict": "identical",
+      "contentfulEntryId": "1BA9ELseUtk4bRpplfXkax",
+      "localTextChars": 5232,
+      "cfTextChars": 5232
+    },
+    {
+      "slug": "la-triada-emocional-mas-comun-en-los-misioneros",
+      "verdict": "identical",
+      "contentfulEntryId": "1MolHHVQRNl0xAXFxQJ0FL",
+      "localTextChars": 3781,
+      "cfTextChars": 3781
+    },
+    {
+      "slug": "las-crisis-afectan-nuestro-todo",
+      "verdict": "identical",
+      "contentfulEntryId": "1Y71FM5FmTMC2HxguL0Rmu",
+      "localTextChars": 4256,
+      "cfTextChars": 4256
+    },
+    {
+      "slug": "las-diferencias-culturales",
+      "verdict": "identical",
+      "contentfulEntryId": "1s8q0XGoIb8sIADur5yg1r",
+      "localTextChars": 2743,
+      "cfTextChars": 2743
+    },
+    {
+      "slug": "las-migraciones-la-nueva-ola-de-las-misiones-2",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 4300,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "las-migraciones-la-nueva-ola-de-las-misiones",
+      "verdict": "identical",
+      "contentfulEntryId": "641Z5FIBEhqpK0SOzYEK1l",
+      "localTextChars": 3831,
+      "cfTextChars": 3831
+    },
+    {
+      "slug": "las-mujeres-intrepidas-de-sim",
+      "verdict": "identical",
+      "contentfulEntryId": "2sjLRzxm7mjIFafa3tE8yn",
+      "localTextChars": 3131,
+      "cfTextChars": 3131
+    },
+    {
+      "slug": "las-raices-de-los-negocios-misioneros",
+      "verdict": "identical",
+      "contentfulEntryId": "5GcZ9O9MFaFDwpraOVSBZI",
+      "localTextChars": 2432,
+      "cfTextChars": 2432
+    },
+    {
+      "slug": "latinos-plantando-iglesias-en-etnias-no-alcanzadas",
+      "verdict": "identical",
+      "contentfulEntryId": "4VWcAfJrniFYvsDkbklJda",
+      "localTextChars": 3365,
+      "cfTextChars": 3365
+    },
+    {
+      "slug": "llamados-a-plantar",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3007,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "lo-extraordinario-de-ser-latino-en-el-campo-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "1bYuGCAbSv7flbmHBshGJX",
+      "localTextChars": 3039,
+      "cfTextChars": 3039
+    },
+    {
+      "slug": "lo-que-la-iglesia-ha-recibido-de-los-judios-2",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2702,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "lo-que-mi-corazon-esconde-tras-hacer-mucho-a-la-vez",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 4255,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "lo-que-nos-cuesta-a-los-latinos-en-el-campo-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "3aInz7AiLyxppMBXJqoD6w",
+      "localTextChars": 4330,
+      "cfTextChars": 4330
+    },
+    {
+      "slug": "los-10-mandamientos-para-fortalecer-tu-matrimonio",
+      "verdict": "identical",
+      "contentfulEntryId": "2z9UUMOBWoLKM296CSgRRz",
+      "localTextChars": 2676,
+      "cfTextChars": 2676
+    },
+    {
+      "slug": "los-circulos-que-dibujo-jesus",
+      "verdict": "identical",
+      "contentfulEntryId": "42zNUyZwptJbLJVoTLGfto",
+      "localTextChars": 2652,
+      "cfTextChars": 2652
+    },
+    {
+      "slug": "los-creativos-tienen-un-papel-en-la-mision-global-de-dios",
+      "verdict": "identical",
+      "contentfulEntryId": "3oQaIvJw1Z6VgRaIhsZwpg",
+      "localTextChars": 2895,
+      "cfTextChars": 2895
+    },
+    {
+      "slug": "los-equipos-pequenos-y-el-valor-de-la-vision",
+      "verdict": "identical",
+      "contentfulEntryId": "2hHBa6EfJ09yeAbqQ47eFO",
+      "localTextChars": 4438,
+      "cfTextChars": 4438
+    },
+    {
+      "slug": "los-htc-como-puente-de-amistad",
+      "verdict": "identical",
+      "contentfulEntryId": "dqISF8L06jesfsEU7Lo5x",
+      "localTextChars": 4326,
+      "cfTextChars": 4326
+    },
+    {
+      "slug": "los-htc-son-pequenos-misioneros",
+      "verdict": "identical",
+      "contentfulEntryId": "67gjcd4VfRAYS4rCb3wQh3",
+      "localTextChars": 4406,
+      "cfTextChars": 4406
+    },
+    {
+      "slug": "los-judios-en-latinoamerica",
+      "verdict": "identical",
+      "contentfulEntryId": "5BRaoK2Ur3cRCp6HpHHutP",
+      "localTextChars": 2769,
+      "cfTextChars": 2769
+    },
+    {
+      "slug": "los-milenials-quieren-involucrarse",
+      "verdict": "identical",
+      "contentfulEntryId": "5Cwe29FCOcaWS4c3sUKlN1",
+      "localTextChars": 3290,
+      "cfTextChars": 3290
+    },
+    {
+      "slug": "los-movimientos-de-plantacion-de-iglesias",
+      "verdict": "identical",
+      "contentfulEntryId": "3ofO6Qmsmnbpl15M77la5G",
+      "localTextChars": 2722,
+      "cfTextChars": 2722
+    },
+    {
+      "slug": "los-primeros-anos-en-el-campo",
+      "verdict": "identical",
+      "contentfulEntryId": "2nBA6VRJa9ljb4bgSZGKqL",
+      "localTextChars": 2688,
+      "cfTextChars": 2688
+    },
+    {
+      "slug": "los-verdaderos-casos-de-exito-en-la-traduccion-biblica",
+      "verdict": "identical",
+      "contentfulEntryId": "72Y9TSHr3AanUiKKMwhH4P",
+      "localTextChars": 3026,
+      "cfTextChars": 3026
+    },
+    {
+      "slug": "luz-en-medio-de-la-oscuridad",
+      "verdict": "identical",
+      "contentfulEntryId": "3AvWIZoXz23KKLfoC1Um0X",
+      "localTextChars": 4150,
+      "cfTextChars": 4150
+    },
+    {
+      "slug": "mas-que-simples-paises-petroleros-y-de-conflicto",
+      "verdict": "identical",
+      "contentfulEntryId": "39OCMuG5gZAS9q5DDLSvMK",
+      "localTextChars": 2664,
+      "cfTextChars": 2664
+    },
+    {
+      "slug": "me-anima-a-seguir-practicando",
+      "verdict": "identical",
+      "contentfulEntryId": "6rrf4RIQKoXC1UvbyrXsgi",
+      "localTextChars": 2928,
+      "cfTextChars": 2928
+    },
+    {
+      "slug": "me-perdieron",
+      "verdict": "identical",
+      "contentfulEntryId": "5dM0bYwdm0qWyGWD3vdwjY",
+      "localTextChars": 3550,
+      "cfTextChars": 3550
+    },
+    {
+      "slug": "mi-parte-en-la-gran-comision",
+      "verdict": "identical",
+      "contentfulEntryId": "5r33rtIfvWDPu4gWdCYY3o",
+      "localTextChars": 3290,
+      "cfTextChars": 3290
+    },
+    {
+      "slug": "mi-posicion-en-el-juego",
+      "verdict": "identical",
+      "contentfulEntryId": "4H689pipF5vmYrfyFtUbgB",
+      "localTextChars": 2555,
+      "cfTextChars": 2555
+    },
+    {
+      "slug": "miles-de-millones-aun-esperan",
+      "verdict": "identical",
+      "contentfulEntryId": "mgjx4Mm1ZgBlPnVdtD4WL",
+      "localTextChars": 3994,
+      "cfTextChars": 3994
+    },
+    {
+      "slug": "mis-papas-no-aceptaban",
+      "verdict": "identical",
+      "contentfulEntryId": "4Jf8ecScOeT9c3pJUub2k",
+      "localTextChars": 3082,
+      "cfTextChars": 3082
+    },
+    {
+      "slug": "misiones-con-los-medios",
+      "verdict": "identical",
+      "contentfulEntryId": "6lXFESGz3wgjAZ8Vbn6ywL",
+      "localTextChars": 1838,
+      "cfTextChars": 1838
+    },
+    {
+      "slug": "misiones-medicas-en-el-medio-oriente",
+      "verdict": "identical",
+      "contentfulEntryId": "7eq8eY6yCqCYdqOxMndJgk",
+      "localTextChars": 4263,
+      "cfTextChars": 4263
+    },
+    {
+      "slug": "moldeada-por-el-senor-lecciones-de-caracter-en-asia",
+      "verdict": "identical",
+      "contentfulEntryId": "183vryCOmOa6oi6t87ggBu",
+      "localTextChars": 2521,
+      "cfTextChars": 2521
+    },
+    {
+      "slug": "movilizar-alcanzar-no-alcanzados",
+      "verdict": "identical",
+      "contentfulEntryId": "70BD5kue33Jgf0z28BkdhB",
+      "localTextChars": 3764,
+      "cfTextChars": 3764
+    },
+    {
+      "slug": "movilizar-es-mover-recursos",
+      "verdict": "identical",
+      "contentfulEntryId": "5vYGudfN1CDaDxwtsc7CMj",
+      "localTextChars": 3504,
+      "cfTextChars": 3504
+    },
+    {
+      "slug": "mundial-2026-misiones-y-evangelismo",
+      "verdict": "identical",
+      "contentfulEntryId": "2o8O1suy1Tpi2aLr26ND8K",
+      "localTextChars": 4568,
+      "cfTextChars": 4568
+    },
+    {
+      "slug": "netflix-convierte-una-maraton-en-un-ministerio",
+      "verdict": "identical",
+      "contentfulEntryId": "3zdfjpfIDNm5UDCQK6lOvg",
+      "localTextChars": 4339,
+      "cfTextChars": 4339
+    },
+    {
+      "slug": "no-ataques-ni-te-defiendas-concentrate-en-tu-ministerio",
+      "verdict": "identical",
+      "contentfulEntryId": "5L82OROw9v3uqd0M5QYcxc",
+      "localTextChars": 2963,
+      "cfTextChars": 2963
+    },
+    {
+      "slug": "no-desmayes-toma-accion",
+      "verdict": "identical",
+      "contentfulEntryId": "hJJwxLgbFsQYEnnILpUrg",
+      "localTextChars": 4679,
+      "cfTextChars": 4679
+    },
+    {
+      "slug": "no-estas-solo-yo-estoy-contigo",
+      "verdict": "identical",
+      "contentfulEntryId": "3L4nUKO2LO8z2XghKrfweA",
+      "localTextChars": 3547,
+      "cfTextChars": 3547
+    },
+    {
+      "slug": "no-fuera-de-circulacion-sino-bajar-las-revoluciones-un-poco",
+      "verdict": "identical",
+      "contentfulEntryId": "6DpTNu3P7yMus1KRCwK3Fy",
+      "localTextChars": 2328,
+      "cfTextChars": 2328
+    },
+    {
+      "slug": "no-ha-sido-un-sacrificio-si-no-un-regalo",
+      "verdict": "identical",
+      "contentfulEntryId": "5KWbnyb6uGlnbbjJFiUcMM",
+      "localTextChars": 4274,
+      "cfTextChars": 4274
+    },
+    {
+      "slug": "no-hay-limitaciones-para-las-solteras",
+      "verdict": "identical",
+      "contentfulEntryId": "6nF1CQBReoHAOFTaAPIixl",
+      "localTextChars": 1856,
+      "cfTextChars": 1856
+    },
+    {
+      "slug": "no-hay-recursos",
+      "verdict": "identical",
+      "contentfulEntryId": "43o3ZO3QXGjOVmIPAK8E2T",
+      "localTextChars": 1730,
+      "cfTextChars": 1730
+    },
+    {
+      "slug": "no-olvides-crear-verdaderas-conexiones",
+      "verdict": "identical",
+      "contentfulEntryId": "1NpvyDDEOJk82doimlWGhs",
+      "localTextChars": 4808,
+      "cfTextChars": 4808
+    },
+    {
+      "slug": "no-quedarnos-quietos",
+      "verdict": "identical",
+      "contentfulEntryId": "1E4AtBiyjcVxybQFdjGW7W",
+      "localTextChars": 2932,
+      "cfTextChars": 2932
+    },
+    {
+      "slug": "no-se-necesitan-actividades-millonarias",
+      "verdict": "identical",
+      "contentfulEntryId": "7JXtURPCjA2M4D5ixZTBis",
+      "localTextChars": 4351,
+      "cfTextChars": 4351
+    },
+    {
+      "slug": "no-te-escuchamos-orar",
+      "verdict": "identical",
+      "contentfulEntryId": "58ujn0NA6gGADhFWduRfoY",
+      "localTextChars": 3334,
+      "cfTextChars": 3334
+    },
+    {
+      "slug": "no-tienes-por-que-caminar-solo-2",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2652,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "no-tienes-por-que-caminar-solo",
+      "verdict": "identical",
+      "contentfulEntryId": "14JKbYMDKIx5eUS9EKx4wK",
+      "localTextChars": 2689,
+      "cfTextChars": 2689
+    },
+    {
+      "slug": "nos-llamaron-locos",
+      "verdict": "identical",
+      "contentfulEntryId": "KjZH72D921V0yX9gqvKSY",
+      "localTextChars": 3787,
+      "cfTextChars": 3787
+    },
+    {
+      "slug": "nos-tenemos-que-amar-a-nosotros-mismos-para-poder-amar-a-los-demas",
+      "verdict": "identical",
+      "contentfulEntryId": "4YbBHqipUlJtixsoDYAlyD",
+      "localTextChars": 4060,
+      "cfTextChars": 4060
+    },
+    {
+      "slug": "nuestra-identidad-no-esta-en-nuestro-ministerio",
+      "verdict": "identical",
+      "contentfulEntryId": "3a1zbcxSwYN7C1abejbgDC",
+      "localTextChars": 2086,
+      "cfTextChars": 2086
+    },
+    {
+      "slug": "nuestro-llamado-hacia-al-pueblo-judio",
+      "verdict": "identical",
+      "contentfulEntryId": "yuTT5u4GPkWg3WVJnt7LP",
+      "localTextChars": 2842,
+      "cfTextChars": 2842
+    },
+    {
+      "slug": "nuestro-testimonio-como-llave-ante-la-cerradura-de-la-desconfianza",
+      "verdict": "identical",
+      "contentfulEntryId": "41wBGFHP3Iheb4Z9QWSQGS",
+      "localTextChars": 2813,
+      "cfTextChars": 2813
+    },
+    {
+      "slug": "obediencia-que-marco-la-historia",
+      "verdict": "identical",
+      "contentfulEntryId": "68JGwkz1yeaJoCz53T3jtE",
+      "localTextChars": 3305,
+      "cfTextChars": 3305
+    },
+    {
+      "slug": "olas-del-llamado-de-dios",
+      "verdict": "identical",
+      "contentfulEntryId": "2D5KnL4PQH9SxKJP9DLzbC",
+      "localTextChars": 3361,
+      "cfTextChars": 3361
+    },
+    {
+      "slug": "ondas-de-esperanza-nuevamente-inundan-loja-en-fm",
+      "verdict": "identical",
+      "contentfulEntryId": "5A9rMK3l7H1N4JRNUW5b0b",
+      "localTextChars": 3025,
+      "cfTextChars": 3025
+    },
+    {
+      "slug": "oro-para-que-dios-llene-el-vacio-que-sienten",
+      "verdict": "identical",
+      "contentfulEntryId": "4mYiifiI5R3bmqyoTJoNSQ",
+      "localTextChars": 2440,
+      "cfTextChars": 2440
+    },
+    {
+      "slug": "pais-pequeno-grandes-hechos",
+      "verdict": "identical",
+      "contentfulEntryId": "5xEepZ5Am0A1dqfRq9M90O",
+      "localTextChars": 2562,
+      "cfTextChars": 2562
+    },
+    {
+      "slug": "pastor-lideres-cuentan-con-ustedes",
+      "verdict": "identical",
+      "contentfulEntryId": "3D07fRGqDli5FJWiq7UDzJ",
+      "localTextChars": 4411,
+      "cfTextChars": 4411
+    },
+    {
+      "slug": "peligros-en-la-plantacion-de-iglesias",
+      "verdict": "identical",
+      "contentfulEntryId": "4VpwW7bJZ94iWHviQdbkYa",
+      "localTextChars": 2766,
+      "cfTextChars": 2766
+    },
+    {
+      "slug": "peruanos-aprenden-sobre-el-agua-potable-y-el-agua-viva",
+      "verdict": "identical",
+      "contentfulEntryId": "4XGLb8riDltW2rIY8DRDc4",
+      "localTextChars": 4047,
+      "cfTextChars": 4047
+    },
+    {
+      "slug": "pinturas-caballetes-y-amistades",
+      "verdict": "identical",
+      "contentfulEntryId": "2z5NZx9x6TsgYoLuzg7Ez1",
+      "localTextChars": 4435,
+      "cfTextChars": 4435
+    },
+    {
+      "slug": "planeando-el-regreso-a-casa",
+      "verdict": "identical",
+      "contentfulEntryId": "1TodnuAdfxBs3cmOnj157T",
+      "localTextChars": 2917,
+      "cfTextChars": 2917
+    },
+    {
+      "slug": "plantar-iglesias-la-mejor-forma-de-extender-el-reino",
+      "verdict": "identical",
+      "contentfulEntryId": "67NMzkBz49QWj3uOMjJKJ5",
+      "localTextChars": 3757,
+      "cfTextChars": 3757
+    },
+    {
+      "slug": "plantar-o-revitalizar-iglesias-en-crisis",
+      "verdict": "identical",
+      "contentfulEntryId": "26XLOLE5H11MNtZqks1L8V",
+      "localTextChars": 2847,
+      "cfTextChars": 2847
+    },
+    {
+      "slug": "por-esos-1100-versiculos",
+      "verdict": "identical",
+      "contentfulEntryId": "34QvMusnk0nlYDzSuKtmft",
+      "localTextChars": 3538,
+      "cfTextChars": 3538
+    },
+    {
+      "slug": "por-que-debemos-conocer-la-cultura-y-su-cosmovision",
+      "verdict": "identical",
+      "contentfulEntryId": "55nsnSpSkoikhy371SNYvI",
+      "localTextChars": 4750,
+      "cfTextChars": 4750
+    },
+    {
+      "slug": "por-que-los-obreros-deben-ser-enviados-a-etnias-aun-no-alcanzadas",
+      "verdict": "identical",
+      "contentfulEntryId": "5PFR9zzKrTHXBVPmN6s6WY",
+      "localTextChars": 3000,
+      "cfTextChars": 3000
+    },
+    {
+      "slug": "por-que-plantar-iglesias",
+      "verdict": "identical",
+      "contentfulEntryId": "4nedN6UivtoOJoXGCs2ApB",
+      "localTextChars": 3304,
+      "cfTextChars": 3304
+    },
+    {
+      "slug": "practicas-para-recibir-a-tu-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "4iZpOnJuGlv0xexMJYNYSC",
+      "localTextChars": 3186,
+      "cfTextChars": 3186
+    },
+    {
+      "slug": "preparando-a-los-ninos-para-el-tiempo-de-licencia",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3385,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "principios-de-la-mision-urbana",
+      "verdict": "identical",
+      "contentfulEntryId": "6y4ip4fIGSNnKIkgK7ki0A",
+      "localTextChars": 4679,
+      "cfTextChars": 4679
+    },
+    {
+      "slug": "principios-para-compartir-el-evangelio",
+      "verdict": "identical",
+      "contentfulEntryId": "1PucyXgOCVZVbSMpqimtnS",
+      "localTextChars": 3264,
+      "cfTextChars": 3264
+    },
+    {
+      "slug": "privilegio-y-tension-en-el-servicio",
+      "verdict": "identical",
+      "contentfulEntryId": "4J6zG8MzCKiwC84S2I0yxE",
+      "localTextChars": 2878,
+      "cfTextChars": 2878
+    },
+    {
+      "slug": "puedo-tener-novioa-en-un-viaje-de-corto-plazo",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2854,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "puentes-para-la-evangelizacion-de-los-budistas",
+      "verdict": "identical",
+      "contentfulEntryId": "78epzOfot6XW84XtyYYoA0",
+      "localTextChars": 3202,
+      "cfTextChars": 3202
+    },
+    {
+      "slug": "que-dice-la-biblia-sobre-el-trabajo",
+      "verdict": "identical",
+      "contentfulEntryId": "3busByjlASS4RzvkDoG0Us",
+      "localTextChars": 2960,
+      "cfTextChars": 2960
+    },
+    {
+      "slug": "que-es-y-que-no-es-una-iglesia",
+      "verdict": "identical",
+      "contentfulEntryId": "14ZFu2J1VHsNY4iZQqVMKX",
+      "localTextChars": 2630,
+      "cfTextChars": 2630
+    },
+    {
+      "slug": "que-hace-que-jerusalen-sea-tan-especial",
+      "verdict": "identical",
+      "contentfulEntryId": "3EaWfxmkQEs1u1yzJih4xG",
+      "localTextChars": 3086,
+      "cfTextChars": 3086
+    },
+    {
+      "slug": "que-les-llama-la-atencion-a-los-musulmanes-sobre-jesus",
+      "verdict": "identical",
+      "contentfulEntryId": "1zE04mJuEo6k4A4GBwakfa",
+      "localTextChars": 2720,
+      "cfTextChars": 2720
+    },
+    {
+      "slug": "que-pasa-con-los-conflictos-mal-manejados",
+      "verdict": "identical",
+      "contentfulEntryId": "1va6mysgisxJJOb0bx59LM",
+      "localTextChars": 2691,
+      "cfTextChars": 2691
+    },
+    {
+      "slug": "que-puedo-hacer-para-superar-la-soledad",
+      "verdict": "identical",
+      "contentfulEntryId": "11axZ8gJiWoj06barXscwf",
+      "localTextChars": 3508,
+      "cfTextChars": 3508
+    },
+    {
+      "slug": "que-son-las-misiones-urbanas-2",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2849,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "que-tragico-desperdicio-de-potencial-humano",
+      "verdict": "identical",
+      "contentfulEntryId": "216IZxmw6jbhjDCJDmIrXI",
+      "localTextChars": 2851,
+      "cfTextChars": 2851
+    },
+    {
+      "slug": "querida-mama-misionera",
+      "verdict": "identical",
+      "contentfulEntryId": "1g2wyJRvue3tXJnN4YInZu",
+      "localTextChars": 2402,
+      "cfTextChars": 2402
+    },
+    {
+      "slug": "quiero-involucrarme-en-misiones-por-donde-empiezo",
+      "verdict": "identical",
+      "contentfulEntryId": "N0Jvisk9ibduYC3kqexW6",
+      "localTextChars": 3910,
+      "cfTextChars": 3910
+    },
+    {
+      "slug": "reconocer-el-llamado-de-dios",
+      "verdict": "identical",
+      "contentfulEntryId": "1X1HJTN1srN0HXeQDJqA2W",
+      "localTextChars": 4919,
+      "cfTextChars": 4919
+    },
+    {
+      "slug": "reenfocandonos-en-la-tarea-principal",
+      "verdict": "identical",
+      "contentfulEntryId": "5W9ZpIBCKYBEYo55GfQk4f",
+      "localTextChars": 2916,
+      "cfTextChars": 2916
+    },
+    {
+      "slug": "representando-a-cristo-en-vivo",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3283,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "requisitos-y-pasos-para-ser-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "1zx2zjWer9BL1kwMx2uahk",
+      "localTextChars": 2270,
+      "cfTextChars": 2270
+    },
+    {
+      "slug": "retos-para-los-misioneros-autoctonos",
+      "verdict": "identical",
+      "contentfulEntryId": "3GFGyh9Iab6iHcwZaM86TK",
+      "localTextChars": 3909,
+      "cfTextChars": 3909
+    },
+    {
+      "slug": "salen-motivados-a-involucrarse",
+      "verdict": "identical",
+      "contentfulEntryId": "21Wyd4K0AGAZvHXmzIS7d2",
+      "localTextChars": 3603,
+      "cfTextChars": 3603
+    },
+    {
+      "slug": "salidas-dolorosas-saber-cuando-es-tiempo-de-irse",
+      "verdict": "identical",
+      "contentfulEntryId": "47VoaqQLWZzNM2Bh2a3wCe",
+      "localTextChars": 3314,
+      "cfTextChars": 3314
+    },
+    {
+      "slug": "salir-del-campo-y-en-busca-de-un-nuevo-hogar",
+      "verdict": "identical",
+      "contentfulEntryId": "3tc5Q48JK7ZAL35M3yGFqj",
+      "localTextChars": 3672,
+      "cfTextChars": 3672
+    },
+    {
+      "slug": "salud-y-evangelio-en-las-minas",
+      "verdict": "identical",
+      "contentfulEntryId": "jMIIBSJqCP1bMInpNdLsM",
+      "localTextChars": 4250,
+      "cfTextChars": 4250
+    },
+    {
+      "slug": "seamos-uno-para-que-el-mundo-crea",
+      "verdict": "identical",
+      "contentfulEntryId": "2akxrfcnqe0oF3dGHqryOt",
+      "localTextChars": 2872,
+      "cfTextChars": 2872
+    },
+    {
+      "slug": "ser-soltero-un-14-de-febrero",
+      "verdict": "identical",
+      "contentfulEntryId": "Q5m4WS2YvLkQy31oNkIev",
+      "localTextChars": 3081,
+      "cfTextChars": 3081
+    },
+    {
+      "slug": "si-estas-respirando-tienes-un-senor-a-quien-glorificar",
+      "verdict": "identical",
+      "contentfulEntryId": "3Kli4vaxVnTXjyVytSWpu9",
+      "localTextChars": 2774,
+      "cfTextChars": 2774
+    },
+    {
+      "slug": "siempre-sera-un-desafio-2",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2662,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "siempre-sera-un-desafio",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3420,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "sim-en-latinoamerica",
+      "verdict": "identical",
+      "contentfulEntryId": "41Bu8CUlWYsRSSgLHXmEDX",
+      "localTextChars": 10661,
+      "cfTextChars": 10661
+    },
+    {
+      "slug": "sim-ofrece-ayuda-del-covid-19-a-hospitales-alrededor-del-mundo",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 4837,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "sin-amistad-genuina-no-llegaras-a-ningun-lado",
+      "verdict": "identical",
+      "contentfulEntryId": "75vFvEIBDETqRaDNV4If7w",
+      "localTextChars": 4135,
+      "cfTextChars": 4135
+    },
+    {
+      "slug": "sin-discipulado-no-hay-mision-2",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 2690,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "sin-discipulado-no-hay-mision",
+      "verdict": "identical",
+      "contentfulEntryId": "7MDa20L3tUqjY3vfabiNH7",
+      "localTextChars": 3940,
+      "cfTextChars": 3940
+    },
+    {
+      "slug": "sin-perder-el-enfoque",
+      "verdict": "identical",
+      "contentfulEntryId": "1nKkTsMXp2ZelkLYxeAiki",
+      "localTextChars": 3182,
+      "cfTextChars": 3182
+    },
+    {
+      "slug": "somos-trigo-y-debemos-multiplicarnos",
+      "verdict": "identical",
+      "contentfulEntryId": "2HdeZZxOSCiHctzhj3QplJ",
+      "localTextChars": 3028,
+      "cfTextChars": 3028
+    },
+    {
+      "slug": "su-influencia-marco-la-historia",
+      "verdict": "identical",
+      "contentfulEntryId": "2mhhGZorRwHztkAOFrhTcD",
+      "localTextChars": 4536,
+      "cfTextChars": 4536
+    },
+    {
+      "slug": "te-enviare-a-cazar-personas-los-peligros-de-la-traduccion-biblica",
+      "verdict": "identical",
+      "contentfulEntryId": "7BcO5C2sgQ4Dj2dFezsWBq",
+      "localTextChars": 2724,
+      "cfTextChars": 2724
+    },
+    {
+      "slug": "tema-principal",
+      "verdict": "identical",
+      "contentfulEntryId": "6MAaAWnyhmw8NOCiGhSAJM",
+      "localTextChars": 3585,
+      "cfTextChars": 3585
+    },
+    {
+      "slug": "tiene-importancia-local-y-mundial",
+      "verdict": "identical",
+      "contentfulEntryId": "DGPXhwilfbVmYTpPv3TGR",
+      "localTextChars": 3432,
+      "cfTextChars": 3432
+    },
+    {
+      "slug": "todo-cristiano-forma-parte",
+      "verdict": "identical",
+      "contentfulEntryId": "3Wh4JYpwj5kAVrkoRYK6WN",
+      "localTextChars": 3235,
+      "cfTextChars": 3235
+    },
+    {
+      "slug": "todo-se-trata-de-las-relaciones",
+      "verdict": "identical",
+      "contentfulEntryId": "4Q5eFOogboZ4WXoGIZbHco",
+      "localTextChars": 3713,
+      "cfTextChars": 3713
+    },
+    {
+      "slug": "trabajadores-del-reino",
+      "verdict": "identical",
+      "contentfulEntryId": "15vZatX9BwztjFBcIRkljp",
+      "localTextChars": 4276,
+      "cfTextChars": 4276
+    },
+    {
+      "slug": "trabajo-conproposito",
+      "verdict": "identical",
+      "contentfulEntryId": "BKDGSQv33kNHLyF3Iar3D",
+      "localTextChars": 2963,
+      "cfTextChars": 2963
+    },
+    {
+      "slug": "transformados-para-servir-ministerio-de-prisiones-de-sim-en-peru",
+      "verdict": "identical",
+      "contentfulEntryId": "4v0BB9QYOpBRB0U9zhW42L",
+      "localTextChars": 4353,
+      "cfTextChars": 4353
+    },
+    {
+      "slug": "transiciones-mensaje-para-los-pastores-y-lideres",
+      "verdict": "identical",
+      "contentfulEntryId": "1TtjJ8qWKaQFo8jR9NXd1H",
+      "localTextChars": 3508,
+      "cfTextChars": 3508
+    },
+    {
+      "slug": "tres-jovenes-un-mismo-pastor",
+      "verdict": "identical",
+      "contentfulEntryId": "7bB8r4XoGLvFmiEnm9i7Ny",
+      "localTextChars": 6073,
+      "cfTextChars": 6073
+    },
+    {
+      "slug": "tu-influencia-eres-sal-insipida-2",
+      "verdict": "identical",
+      "contentfulEntryId": "7aBOnaqRMdtZF0BCHo4aju",
+      "localTextChars": 2438,
+      "cfTextChars": 2438
+    },
+    {
+      "slug": "ultima-tecnologia-hasta-lo-ultimo-de-la-tierra",
+      "verdict": "identical",
+      "contentfulEntryId": "6Yx9Q3ZAxqJGHl1zbd6ILX",
+      "localTextChars": 2491,
+      "cfTextChars": 2491
+    },
+    {
+      "slug": "un-corazon-envanecido-por-la-sabiduria",
+      "verdict": "identical",
+      "contentfulEntryId": "5oqESSGHJRQFA7UfgTKeCL",
+      "localTextChars": 3739,
+      "cfTextChars": 3739
+    },
+    {
+      "slug": "un-equipo-unido-enviando-misioneros",
+      "verdict": "identical",
+      "contentfulEntryId": "5ciwlbmFj5xkIxgoKeAXKd",
+      "localTextChars": 3425,
+      "cfTextChars": 3425
+    },
+    {
+      "slug": "un-llamado-de-la-selva",
+      "verdict": "identical",
+      "contentfulEntryId": "7jlXUy1VHagYWR0CQmGRXM",
+      "localTextChars": 2591,
+      "cfTextChars": 2591
+    },
+    {
+      "slug": "un-llamado-desde-las-profundidades-de-la-selva",
+      "verdict": "identical",
+      "contentfulEntryId": "5shxWh9xPK0SaHqOJTd1Ad",
+      "localTextChars": 3248,
+      "cfTextChars": 3248
+    },
+    {
+      "slug": "un-llamado-para-restaurar-al-pueblo-de-dios",
+      "verdict": "identical",
+      "contentfulEntryId": "7dpY1Ghq2fk4ESSREQCvfd",
+      "localTextChars": 4384,
+      "cfTextChars": 4384
+    },
+    {
+      "slug": "un-ministerio-sin-igual",
+      "verdict": "identical",
+      "contentfulEntryId": "3g19y2r6HkstkLDTHv7uS5",
+      "localTextChars": 2139,
+      "cfTextChars": 2139
+    },
+    {
+      "slug": "un-oasis-de-esperanza-para-los-ninos-fulani",
+      "verdict": "identical",
+      "contentfulEntryId": "hk4ixRXi20Ud98bJORx0X",
+      "localTextChars": 4958,
+      "cfTextChars": 4958
+    },
+    {
+      "slug": "un-tercio-de-nosotros-no-alcanzado",
+      "verdict": "identical",
+      "contentfulEntryId": "5fOeyRTKFaPy1JrstdiLsN",
+      "localTextChars": 3717,
+      "cfTextChars": 3717
+    },
+    {
+      "slug": "un-trabajo-arduo-en-equipo-por-el-reino-de-los-cielos",
+      "verdict": "identical",
+      "contentfulEntryId": "4uN6YmoEBd1lXMse9CUCrL",
+      "localTextChars": 4588,
+      "cfTextChars": 4588
+    },
+    {
+      "slug": "una-accion-intencionada",
+      "verdict": "identical",
+      "contentfulEntryId": "70DDStneWbs3QdKZWJ5qTj",
+      "localTextChars": 2218,
+      "cfTextChars": 2218
+    },
+    {
+      "slug": "una-empleada-domestica-rescato-huerfanos",
+      "verdict": "identical",
+      "contentfulEntryId": "oZmPEhoRkw1SY4ITYPfUs",
+      "localTextChars": 4348,
+      "cfTextChars": 4348
+    },
+    {
+      "slug": "una-fiesta-misionera",
+      "verdict": "identical",
+      "contentfulEntryId": "53wdFVEhohzPvvi2e8zYAY",
+      "localTextChars": 3047,
+      "cfTextChars": 3047
+    },
+    {
+      "slug": "una-generacion-destinada-a-morir",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3494,
+      "cfTextChars": 0
+    },
+    {
+      "slug": "una-historia-con-raices-profundas",
+      "verdict": "identical",
+      "contentfulEntryId": "2m6FrUkI7SFVsIvA0Q2JBU",
+      "localTextChars": 2446,
+      "cfTextChars": 2446
+    },
+    {
+      "slug": "una-labor-llena-de-desafios",
+      "verdict": "identical",
+      "contentfulEntryId": "pZzKbOB34ssnX3vJiUjq9",
+      "localTextChars": 3441,
+      "cfTextChars": 3441
+    },
+    {
+      "slug": "una-labor-que-nacio-en-el-corazon-de-dios",
+      "verdict": "identical",
+      "contentfulEntryId": "3tq5trzFQPHmk1Wmk2AVAv",
+      "localTextChars": 3391,
+      "cfTextChars": 3391
+    },
+    {
+      "slug": "una-lucha-contra-las-expectativas",
+      "verdict": "identical",
+      "contentfulEntryId": "2WbOcHY8jTaY9AH98j6qom",
+      "localTextChars": 3838,
+      "cfTextChars": 3838
+    },
+    {
+      "slug": "una-lucha-interna-contra-las-expectativas",
+      "verdict": "identical",
+      "contentfulEntryId": "IFIa47nc6nj4FvgrrMy1S",
+      "localTextChars": 2631,
+      "cfTextChars": 2631
+    },
+    {
+      "slug": "una-profesion-tiene-sus-beneficios",
+      "verdict": "identical",
+      "contentfulEntryId": "5dwy9Xy92JnHB8AGkRb38p",
+      "localTextChars": 4104,
+      "cfTextChars": 4104
+    },
+    {
+      "slug": "unidos-con-un-solo-proposito",
+      "verdict": "identical",
+      "contentfulEntryId": "4O9uU0XC8FunmdiNz4xzOq",
+      "localTextChars": 4966,
+      "cfTextChars": 4966
+    },
+    {
+      "slug": "unidos-para-extender-su-reino",
+      "verdict": "identical",
+      "contentfulEntryId": "1I8CyZn6ccDhn6LcH3dyCv",
+      "localTextChars": 3689,
+      "cfTextChars": 3689
+    },
+    {
+      "slug": "unidos-por-un-solo-proposito",
+      "verdict": "identical",
+      "contentfulEntryId": "4yxmVva47QnXQuo8yhNgH8",
+      "localTextChars": 2853,
+      "cfTextChars": 2853
+    },
+    {
+      "slug": "uniendo-fuerzas-para-enviar-misioneros",
+      "verdict": "identical",
+      "contentfulEntryId": "tW3T8ZSdoSsQjqEdvmva9",
+      "localTextChars": 3663,
+      "cfTextChars": 3663
+    },
+    {
+      "slug": "ventajas-y-retos-de-ser-mujer-en-la-mision",
+      "verdict": "identical",
+      "contentfulEntryId": "6ZxMyd2rmWKMHSDD8V8XXz",
+      "localTextChars": 5108,
+      "cfTextChars": 5108
+    },
+    {
+      "slug": "verdades-sobre-la-unidad-segun-pablo",
+      "verdict": "identical",
+      "contentfulEntryId": "7DdOc6oPKVncxZw6W8altn",
+      "localTextChars": 3146,
+      "cfTextChars": 3146
+    },
+    {
+      "slug": "viajes-de-corto-plazo-y-noviazgo",
+      "verdict": "identical",
+      "contentfulEntryId": "mBCZk9CIJmT33QMq9gIFr",
+      "localTextChars": 3081,
+      "cfTextChars": 3081
+    },
+    {
+      "slug": "vivir-entre-los-fulani-el-viaje-de-alegria-de-christine",
+      "verdict": "identical",
+      "contentfulEntryId": "6yN6hoIlKOUNgWq3SK04TF",
+      "localTextChars": 6486,
+      "cfTextChars": 6486
+    },
+    {
+      "slug": "voluntarios-desarrollan-un-sistema-en-linea-para-alimentar-a-miles",
+      "verdict": "identical",
+      "contentfulEntryId": "476mvLaAuedVeI1VSLhqsj",
+      "localTextChars": 3715,
+      "cfTextChars": 3715
+    },
+    {
+      "slug": "y-el-teatro-y-la-danza-en-el-culto-misionero",
+      "verdict": "identical",
+      "contentfulEntryId": "nyBTxA4xT6UyjlR2d7DXG",
+      "localTextChars": 3433,
+      "cfTextChars": 3433
+    },
+    {
+      "slug": "y-si-llevamos-un-adolescente-al-campo",
+      "verdict": "identical",
+      "contentfulEntryId": "7BTb6REbUmX4DOK8ia0UHu",
+      "localTextChars": 4086,
+      "cfTextChars": 4086
+    },
+    {
+      "slug": "ya-quiero-volver-a-casa",
+      "verdict": "no-cf-match",
+      "contentfulEntryId": null,
+      "localTextChars": 3655,
+      "cfTextChars": 0
+    }
+  ]
+}
