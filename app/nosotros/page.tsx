@@ -33,14 +33,6 @@ const PILLARS = [
   },
 ];
 
-const PARTNERS = [
-  { name: "FEDEMEC", logo: "/pages/logo-fedemec.jpg" },
-  { name: "PROVISIÓN", logo: "/pages/logo-provision.jpg" },
-  { name: "MIES", logo: "/pages/logo-mies.jpg" },
-  { name: "COMIBAM", logo: "/pages/logo-comibam.jpg" },
-  { name: "FAMGUA", logo: "/pages/logo-famgua.jpg" },
-];
-
 const ICONS = ["/pages/ico-cora.png", "/pages/ico-flor.png", "/pages/ico-msg.png"];
 
 const AREAS = [
@@ -128,6 +120,36 @@ const FACTORS = [
   { term: "Buena Salud", text: "Con la medicina moderna se han disminuido los peligros de la vida misionera, pero la resistencia y buena salud son una ventaja, especialmente en un clima tropical." },
 ];
 
+/*
+ * Live renders these as image tiles with the title always visible and the
+ * description revealed on hover. `touch:` restores the description where
+ * there's no pointer to hover with — otherwise it's unreachable on phones.
+ */
+function PillarCard({ pillar }: { pillar: (typeof PILLARS)[number] }) {
+  return (
+    <article className="group relative aspect-[519/456] overflow-hidden rounded-xl">
+      <Image
+        src={pillar.image}
+        alt=""
+        fill
+        sizes="(min-width: 1024px) 288px, (min-width: 640px) 46vw, 92vw"
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent transition-colors duration-300 group-hover:from-ink/90 group-hover:via-ink/60" />
+      {/* inset-0 + justify-end, not bottom-0: keeps the caption from growing
+          past the top of the card once the description expands. */}
+      <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
+        <h3 className="font-heading text-xl font-bold leading-tight text-white xl:text-2xl">
+          {pillar.title}
+        </h3>
+        <p className="mt-2 max-h-0 overflow-hidden text-sm leading-snug text-white/90 opacity-0 transition-all duration-300 group-hover:max-h-40 group-hover:opacity-100 touch:max-h-40 touch:opacity-100">
+          {pillar.text}
+        </p>
+      </div>
+    </article>
+  );
+}
+
 function Faq({ question, children }: { question: string; children: React.ReactNode }) {
   return (
     <details className="group rounded-lg border border-hairline bg-white px-6 py-4">
@@ -164,54 +186,39 @@ export default function NosotrosPage() {
             áreas pioneras o de forma asociada en iglesias locales en los
             ministerios de discipulado, evangelismo o educación teológica.
           </p>
-          <p className="font-heading mt-8 text-2xl font-bold leading-snug text-navy">
-            Nadie debe vivir y morir sin haber escuchado las buenas nuevas de
-            Dios.
-          </p>
-          <p className="mt-4 text-muted">
-            Impulsados por el gran amor de Dios y con el poder del Espíritu
-            Santo, nosotros cruzamos barreras para proclamar a Cristo, hacemos
-            discípulos, trabajamos en conjunto con las iglesias y facilitamos la
-            participación en ministerios transculturales.
-          </p>
         </div>
       </section>
 
-      {/* 4 pillars */}
-      <section className="mx-auto max-w-6xl space-y-16 px-4 py-16">
-        {PILLARS.map((pillar, i) => (
-          <div
-            key={pillar.title}
-            className={`grid items-center gap-10 md:grid-cols-2 ${i % 2 ? "md:[&>*:first-child]:order-2" : ""}`}
-          >
-            <div>
-              <h2 className="font-heading text-3xl font-bold text-ink">{pillar.title}</h2>
-              <p className="mt-4 text-lg text-muted">{pillar.text}</p>
-            </div>
-            <Image
-              src={pillar.image}
-              alt={pillar.title}
-              width={640}
-              height={430}
-              className="w-full rounded-lg object-cover shadow-md"
-            />
+      {/* 4 pillars — quote on the left, staggered image tiles on the right */}
+      <section className="bg-cream">
+        {/* Splits at lg, not md: at 768 the two-up cards would be ~160px wide,
+            too narrow for the description to fit once revealed. */}
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 lg:grid-cols-2">
+          <div>
+            <h2 className="font-heading text-3xl font-bold leading-snug text-navy">
+              Nadie debe vivir y morir sin haber escuchado las buenas nuevas de
+              Dios.
+            </h2>
+            <p className="mt-5 text-muted">
+              Impulsados por el gran amor de Dios y con el poder del Espíritu
+              Santo, nosotros cruzamos barreras para proclamar a Cristo, hacemos
+              discípulos, trabajamos en conjunto con las iglesias y facilitamos
+              la participación en ministerios transculturales.
+            </p>
           </div>
-        ))}
-      </section>
-
-      {/* Partners */}
-      <section className="border-y border-hairline bg-white">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-10 px-4 py-10">
-          {PARTNERS.map((p) => (
-            <Image
-              key={p.name}
-              src={p.logo}
-              alt={p.name}
-              width={140}
-              height={70}
-              className="h-14 w-auto object-contain grayscale transition hover:grayscale-0"
-            />
-          ))}
+          <div className="grid gap-6 sm:grid-cols-2">
+            {/* Left column sits lower than the right — the stagger on live. */}
+            <div className="space-y-6 sm:mt-12">
+              {PILLARS.slice(0, 2).map((pillar) => (
+                <PillarCard key={pillar.title} pillar={pillar} />
+              ))}
+            </div>
+            <div className="space-y-6">
+              {PILLARS.slice(2).map((pillar) => (
+                <PillarCard key={pillar.title} pillar={pillar} />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -227,12 +234,24 @@ export default function NosotrosPage() {
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {AREAS.map((area, i) => (
               <article key={area.title} className="rounded-lg bg-white/95 p-6">
-                <Image
-                  src={ICONS[i % ICONS.length]}
-                  alt=""
-                  width={48}
-                  height={48}
-                  className="h-12 w-12 object-contain"
+                {/*
+                 * The source PNGs are cream artwork drawn for live's dark-red
+                 * cards; they vanish on these white ones. Paint brand red
+                 * through the glyph as a mask rather than tint it with filters.
+                 */}
+                <span
+                  aria-hidden
+                  className="block h-12 w-12 bg-brand"
+                  style={{
+                    maskImage: `url(${ICONS[i % ICONS.length]})`,
+                    maskRepeat: "no-repeat",
+                    maskPosition: "center",
+                    maskSize: "contain",
+                    WebkitMaskImage: `url(${ICONS[i % ICONS.length]})`,
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskPosition: "center",
+                    WebkitMaskSize: "contain",
+                  }}
                 />
                 <h3 className="font-heading mt-4 text-lg font-bold text-ink">{area.title}</h3>
                 <p className="mt-2 text-sm text-muted">{area.text}</p>

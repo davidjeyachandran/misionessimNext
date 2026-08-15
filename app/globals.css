@@ -2,6 +2,13 @@
 @import "./home.css";
 
 /*
+ * Tailwind's `hover:` variant is already gated behind `@media (hover: hover)`,
+ * so hover-revealed content silently disappears on touch devices. `touch:` is
+ * the inverse gate — use it to restore that content where a pointer can't.
+ */
+@custom-variant touch (@media (hover: none));
+
+/*
  * Brand tokens — same values as the live misionessim.org render and the
  * sim-blog / mi-movilicemos sister projects, so all three stay visually
  * consistent. See docs/nextjs-migration-analysis.md §2.3 / §4.

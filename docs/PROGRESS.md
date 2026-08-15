@@ -287,3 +287,57 @@ Follow-up to the 2026-07-04 content-fidelity audit (missing inline images). Comp
 - Image-only swap: `PageHero.tsx` and all three route files were left
   untouched (existing `title`/`intro`/`alt` copy still matches the new
   photos).
+
+## 2026-08-16 — /nosotros/ feedback round (Cruzamos barreras, logos, icon color)
+
+David reviewed the Vercel preview against live and flagged three items on
+`/nosotros/`. All three land in `app/nosotros/page.tsx` (plus one line in
+`app/globals.css`).
+
+- **"Cruzamos barreras" rebuilt to match live.** The rebuild had rendered the
+  four pillars as full-width alternating text/image rows; live has a single
+  two-column section — the "Nadie debe vivir y morir…" quote plus the
+  "Impulsados por el gran amor de Dios…" paragraph on the left, and a 2×2
+  **staggered** grid of image tiles on the right (left tile column sits ~50px
+  lower). Each tile shows its title over a gradient scrim with the description
+  revealed on hover, per live's ElementsKit `image-hover-effect` widget.
+  The quote moved out of "Lo que nos mueve" into this section, as on live.
+  Image mapping is unchanged: `foto-cruzamos`/`foto-nosotros3`/`foto-discipulos`/
+  `card1` on live = our `nosotros-cruzamos`/`-equipo`/`-discipulos`/`-facilitamos`.
+- **Organization logo strip removed.** Not a rebuild bug in the usual sense —
+  the container exists in live's HTML (`elementor-element-d3d82ac`, with the
+  strapline "Trabajamos a través de alianzas estratégicas…") but carries
+  `elementor-hidden-desktop elementor-hidden-tablet elementor-hidden-mobile`,
+  so it renders at *no* breakpoint. It was picked up from the markup during the
+  Phase 3 rebuild. Section and `PARTNERS` const deleted. **The five JPGs
+  (`public/pages/logo-{fedemec,provision,mies,comibam,famgua}.jpg`, ~134KB) were
+  deliberately kept** on David's call, in case the logos come back — they are
+  now unreferenced.
+- **Áreas de servicio icons recolored to brand red.** `ico-cora/flor/msg.png`
+  are *cream* artwork drawn for live's dark-red testimonial cards; our version
+  keeps a white card on the navy band, where they were all but invisible. A CSS
+  `filter` can't reach `#c91430` from cream, so the `<Image>` became a
+  `bg-brand` `<span>` with the PNG as a `mask-image`. Layout/grid untouched —
+  David explicitly wanted our grid kept over live's 3-up slider.
+
+### Touch fallback + the responsive bug it exposed
+- Live's hover-only description is unreachable on phones (no pointer). Added
+  `@custom-variant touch (@media (hover: none))` to `globals.css` — the inverse
+  of Tailwind's `hover:`, which is itself already gated behind
+  `@media (hover: hover)` — and the tiles use `touch:max-h-40 touch:opacity-100`
+  to show the description outright where hover doesn't exist.
+- **Gotcha:** a new `@custom-variant` is not picked up by a already-running
+  `next dev`; the utility is silently absent from the generated CSS until the
+  server restarts. Touching the file is not enough. Verified the syntax
+  independently with `npx @tailwindcss/cli@4.3.2 -i app/globals.css` before
+  concluding it was a staleness problem rather than a code one.
+- Enabling the fallback surfaced a **real layout bug**: at 375px the tiles were
+  160×140 and the caption block overflowed the tile completely (title bottom
+  measured 48px *above* the tile's top edge, clipped away by `overflow-hidden`).
+  Two fixes: the caption is now `absolute inset-0 flex flex-col justify-end`
+  rather than `bottom-0`, so it can never grow past the top; and the tile grid
+  is 1-up below `sm` with the text/tiles split moved from `md` to **`lg`** —
+  at 768 a two-up tile inside a half-width column is ~160px, far too narrow.
+- Verified no clipping at 375 / 768 / 1024 / 1440 by measuring, per tile,
+  `p.scrollHeight` (transition-independent) against the space left after
+  padding and title. Tightest case is 1024 (needs 96px, has 99px).
