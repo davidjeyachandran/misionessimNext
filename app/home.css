@@ -20,7 +20,6 @@
   --font-body-home: var(--font-work-sans), "Work Sans", sans-serif;
 }
 
-html { scroll-behavior: smooth; }
 body { overflow-x: hidden; }
 
 /* Pushes non-home page content clear of the fixed header. */
@@ -175,7 +174,7 @@ body { overflow-x: hidden; }
 /* ==========================================================================
    Parallax base
    ========================================================================== */
-.hero, .video-promo, .revista { position: relative; overflow: hidden; }
+.hero, .hero-page, .video-promo, .revista { position: relative; overflow: hidden; }
 /* Static cover layer by default. Only the hero parallaxes — video-promo and
    revista are static covers, same as the POC. */
 .parallax-bg {
@@ -199,33 +198,63 @@ body { overflow-x: hidden; }
 
 /* ==========================================================================
    Hero
+
+   Two variants of one hero: `.hero` on the homepage and `.hero-page` on every
+   inner page (see app/_components/PageHero.tsx). They share the parallax
+   layer, the content box and the responsive behaviour below; only the height
+   and the type scale differ, exactly as they do on the live site.
    ========================================================================== */
-.hero {
-  min-height: 95vh;
-  margin-top: var(--header-h); /* live hero sits below the header bar, not behind it */
+.hero, .hero-page {
   padding: 127px 0 60px;
   display: flex;
   align-items: center;
   background: var(--color-text);
 }
+.hero {
+  min-height: 95vh;
+  margin-top: var(--header-h); /* live hero sits below the header bar, not behind it */
+}
+/* Full screen below the header. The header offset is already applied by
+   .page-offset on the inner pages' <main>, so this only claims what's left. */
+.hero-page { min-height: calc(100vh - var(--header-h)); }
+
 .hero-content {
   position: relative;
   z-index: 2;
   width: 100%;
-  /* flush at the 1200px content-box edge; bottom padding mimics the live
-     title column's 20px/40px top/bottom padding, which biases its
-     centering up ~10px */
-  padding: 0 0 20px;
+  /* same content box as .header-inner, so the title lines up with the logo at
+     every width; bottom padding mimics the live title column's 20px/40px
+     top/bottom padding, which biases its centering up ~10px */
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px 20px;
 }
-.hero h1 {
+.hero h1, .hero-page h1 {
   color: #fff;
-  font-size: 59px;
+  font-family: var(--font-heading-home);
   font-weight: 800;
-  line-height: 1.017; /* live: 60px at 59px */
-  letter-spacing: -0.046em; /* live: -2.7px at 59px, in em so smaller sizes don't get crushed */
   word-spacing: 1px;
   max-width: 546px; /* reproduces live's line breaks by natural wrap, no hard <br> */
 }
+.hero h1 {
+  font-size: 59px;
+  line-height: 1.017; /* live: 60px at 59px */
+  letter-spacing: -0.046em; /* live: -2.7px at 59px, in em so smaller sizes don't get crushed */
+}
+.hero-page h1 {
+  font-size: 55px;
+  line-height: 1.2; /* live: 66px at 55px */
+  letter-spacing: -0.027em; /* live: -1.485px at 55px */
+}
+.hero-intro {
+  max-width: 450px;
+  margin-top: 12px; /* on the intro, so a title-only hero stays centred */
+  color: #fff;
+  font-family: var(--font-body-home);
+  font-size: 18px;
+  line-height: 1.75; /* live: 31.5px at 18px */
+}
+.hero-cta { margin-top: 32px; }
 
 /* ==========================================================================
    About
@@ -437,7 +466,6 @@ body { overflow-x: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .parallax-bg { transform: none !important; }
-  html { scroll-behavior: auto; }
 }
 
 /* ==========================================================================
@@ -445,8 +473,9 @@ body { overflow-x: hidden; }
    ========================================================================== */
 @media (max-width: 1024px) {
   .section-title { font-size: 34px; }
-  .hero { min-height: 600px; }
+  .hero, .hero-page { min-height: 600px; }
   .hero h1 { font-size: 44px; line-height: 1.09; }
+  .hero-page h1 { font-size: 40px; }
   .video-content h2, .revista-content h2 { font-size: 34px; }
   .cards, .posts { grid-template-columns: 1fr 1fr; }
   .about-grid, .yt-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -455,8 +484,10 @@ body { overflow-x: hidden; }
 @media (max-width: 768px) {
   .section { padding: 60px 0; }
   /* live site collapses the hero to a compact banner on mobile */
-  .hero { min-height: auto; padding: 100px 10px 40px; }
+  .hero, .hero-page { min-height: auto; padding: 100px 0 40px; }
   .hero h1 { font-size: 32px; line-height: 1.13; }
+  .hero-page h1 { font-size: 32px; }
+  .hero-intro { font-size: 16px; } /* live: 28px line-height at 16px */
   .section-title { font-size: 28px; }
   .about-title { font-size: 20px; }
   .video-content h2, .revista-content h2 { font-size: 28px; }

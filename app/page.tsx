@@ -29,12 +29,12 @@ export default async function Home() {
             src="/home/banner-sim-home-2026.webp"
             alt=""
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover"
           />
         </div>
-        <div className="hero-content container reveal">
+        <div className="hero-content reveal">
           <h1>¡Se parte de lo que Dios está haciendo en el mundo!</h1>
         </div>
       </section>
