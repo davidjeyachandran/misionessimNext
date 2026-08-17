@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
+import { VideoLightbox } from "./VideoLightbox";
 
 const VIDEO_ID = "zx8x6J7vPNI";
 
@@ -8,19 +9,7 @@ const VIDEO_ID = "zx8x6J7vPNI";
 // ElementsKit video popup). Client component because it owns the modal state.
 export function VideoPromo() {
   const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
-    if (!open) return;
-    function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setOpen(false);
-    }
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
-    };
-  }, [open]);
+  const close = useCallback(() => setOpen(false), []);
 
   return (
     <>
@@ -42,27 +31,7 @@ export function VideoPromo() {
       </section>
 
       {open && (
-        <div className="lightbox" role="dialog" aria-modal="true" aria-label="Video">
-          <div className="lightbox-backdrop" onClick={() => setOpen(false)} />
-          <div className="lightbox-frame">
-            <button
-              className="lightbox-close"
-              type="button"
-              aria-label="Cerrar video"
-              onClick={() => setOpen(false)}
-            >
-              &times;
-            </button>
-            <div className="lightbox-video">
-              <iframe
-                src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0`}
-                title="SIM Latinoamérica"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </div>
+        <VideoLightbox videoId={VIDEO_ID} label="SIM Latinoamérica" onClose={close} />
       )}
     </>
   );

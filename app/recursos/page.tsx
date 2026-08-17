@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "../_components/PageHero";
 import { ResourceTabs, type ResourceTab } from "./ResourceTabs";
+import { VideoThumbnail } from "./VideoThumbnail";
 
 export const metadata: Metadata = {
   title: "Recursos",
@@ -111,57 +112,100 @@ export default function RecursosPage() {
         </div>
       </section>
 
-      {/* YouTube */}
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
-        <div>
-          <h2 className="font-heading text-3xl font-bold text-ink">
-            Talleres, series, conversaciones y mucho más
-          </h2>
-          <p className="mt-4 text-muted">
-            En nuestro canal de YouTube, donde podrás conocer los rostros de
-            personas sirviendo en la misión local y global.
-          </p>
-          <a
-            href="https://www.youtube.com/c/SIMLatinoamérica"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
-          >
-            Mira más videos aquí
-          </a>
+      {/* Talleres / YouTube — lavender band (live: .elementor-element-42c5d91).
+          The Cursos card below overlaps up into it, so this section owns the
+          colour the card's top half sits on. Live reserves 380px of empty
+          bottom padding here purely to make room for that overlap; the rebuilt
+          Cursos section doesn't need it, so this is plain py-16. */}
+      <section className="bg-lavender">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
+          <div>
+            <Image
+              src="/pages/recursos-youtube-logo.png"
+              alt="YouTube"
+              width={176}
+              height={40}
+              unoptimized
+              className="h-[30px] w-auto"
+            />
+            <h2 className="font-heading mt-6 text-3xl font-bold text-navy sm:text-4xl lg:text-5xl">
+              Talleres, series, conversaciones y mucho más
+            </h2>
+            <p className="mt-6 max-w-[400px] text-muted">
+              En nuestro canal de YouTube, donde podrás conocer los rostros de
+              personas sirviendo en la misión local y global.
+            </p>
+            <a
+              href="https://www.youtube.com/c/SIMLatinoamérica"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+            >
+              Mira más videos aquí
+            </a>
+          </div>
+          <VideoThumbnail
+            image={{
+              src: "/pages/recursos-youtube.jpg",
+              alt: "Participantes de un taller de SIM conversan alrededor de una mesa",
+              width: 885,
+              height: 630,
+            }}
+            videoId="tZwOQbkjf5Q"
+            label="Talleres, series y conversaciones de SIM Latinoamérica"
+          />
         </div>
-        <Image
-          src="/pages/recursos-youtube.jpg"
-          alt="Canal de YouTube de SIM Latinoamérica"
-          width={768}
-          height={547}
-          unoptimized
-          className="w-full rounded-lg object-cover shadow-md"
-        />
       </section>
 
-      {/* Cursos */}
-      <section className="bg-cream/40">
-        <div className="mx-auto max-w-4xl px-4 py-16 text-center">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">
-            Recurso gratuito
-          </p>
-          <h2 className="font-heading mt-2 text-4xl font-bold text-ink">
-            Cursos online Movilicemos
-          </h2>
-          <p className="mt-5 text-muted">
-            Todos los cursos son 100% en línea, con clases pregrabadas a las que
-            tienes acceso de manera ilimitada. ¡Puedes desarrollarlos a tu propio
-            ritmo! ¡No son zoom o en vivos!
-          </p>
-          <a
-            href="https://cursos.movilicemos.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
-          >
-            Quiero saber más
-          </a>
+      {/* Cursos online Movilicemos — copy left, photo right in one dark-red card
+          (live: .elementor-element-19883c7).
+
+          Live straddles the card across the lavender/white seam by pulling it up
+          with a fixed `margin-top: -280px`, which only lines up because the band
+          above reserves ~400px of empty padding for it. Here the seam is painted
+          behind the card instead: the band ends at the section's midpoint, so the
+          straddle stays centred as the card grows or shrinks, and the section
+          above needs no dead space. Live drops the overlap under 768px; so do we. */}
+      <section className="relative">
+        <div
+          aria-hidden
+          className="absolute inset-x-0 top-0 hidden h-1/2 bg-lavender md:block"
+        />
+        <div className="relative mx-auto max-w-6xl px-4 py-16">
+          <div className="grid overflow-hidden rounded-2xl bg-brand-dark md:grid-cols-2">
+            <div className="px-5 py-12 lg:py-24 lg:pl-24 lg:pr-12">
+              <p className="text-lg font-medium text-cream">Recurso gratuito</p>
+              <h2 className="font-heading mt-3 text-3xl font-bold text-cream sm:text-4xl lg:text-5xl">
+                Cursos online Movilicemos
+              </h2>
+              <p className="mt-6 max-w-[380px] text-white lg:text-lg">
+                Todos los cursos son 100% en línea, con clases pregrabadas a las
+                que tienes acceso de manera ilimitada. ¡Puedes desarrollarlos a
+                tu propio ritmo! ¡No son zoom o en vivos!
+              </p>
+              <a
+                href="https://cursos.movilicemos.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-block rounded-full bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
+              >
+                Quiero saber más
+              </a>
+            </div>
+            {/* Live paints this half as a CSS background, so the photo is
+                invisible to assistive tech and never in the srcset. A filled
+                <Image> keeps the same crop while staying real content. */}
+            <div className="relative min-h-[300px]">
+              <Image
+                src="/pages/recursos-cursos.webp"
+                alt="Una mujer toma apuntes frente a su laptop mientras sigue un curso online de Movilicemos"
+                fill
+                unoptimized
+                sizes="(min-width: 768px) 50vw, 92vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
       </section>
     </main>
