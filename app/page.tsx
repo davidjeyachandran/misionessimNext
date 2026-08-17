@@ -30,6 +30,7 @@ export default async function Home() {
             alt=""
             fill
             preload
+            unoptimized
             sizes="100vw"
             className="object-cover"
           />
@@ -68,6 +69,7 @@ export default async function Home() {
               alt="Equipo misionero de SIM Latinoamérica"
               width={520}
               height={360}
+              unoptimized
               className="!w-full !h-auto"
             />
           </div>
@@ -87,6 +89,7 @@ export default async function Home() {
                   src="/home/foto-sim2_.webp"
                   alt="Sirve en la misión"
                   fill
+                  unoptimized
                   sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) calc((100vw - 70px) / 2), 380px"
                 />
               </div>
@@ -114,6 +117,7 @@ export default async function Home() {
                   src="/home/foto-da.webp"
                   alt="Da para la misión"
                   fill
+                  unoptimized
                   sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) calc((100vw - 70px) / 2), 380px"
                 />
               </div>
@@ -141,6 +145,7 @@ export default async function Home() {
                   src="/home/foto-ora.webp"
                   alt="Ora por la misión"
                   fill
+                  unoptimized
                   sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) calc((100vw - 70px) / 2), 380px"
                 />
               </div>
@@ -189,9 +194,8 @@ export default async function Home() {
                       <Image
                         src={post.heroImage.url}
                         alt={post.heroImage.description ?? post.title}
-                        width={400}
-                        height={210}
-                        style={{ width: "100%", height: "210px", objectFit: "cover" }}
+                        fill
+                        sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1023px) calc((100vw - 70px) / 2), 380px"
                       />
                     )}
                   </Link>
@@ -248,7 +252,13 @@ export default async function Home() {
               target="_blank"
               rel="noopener"
             >
-              <Image src="/home/logo-youtube.png" alt="" width={34} height={24} />
+              <Image
+                src="/home/logo-youtube.png"
+                alt=""
+                width={140}
+                height={30}
+                unoptimized
+              />
               Mira más videos aquí
             </a>
           </div>
@@ -258,6 +268,7 @@ export default async function Home() {
               alt="Canal de YouTube de SIM Latinoamérica"
               width={520}
               height={340}
+              unoptimized
               className="!w-full !h-auto"
             />
           </div>

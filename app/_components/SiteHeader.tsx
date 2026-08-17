@@ -25,6 +25,7 @@ export function SiteHeader() {
             width={195}
             height={32}
             priority
+            unoptimized
           />
         </Link>
         <nav className="main-nav" id="mainNav" aria-label="Menú principal">

@@ -96,6 +96,7 @@ export default function OraPage() {
                 alt={m.title}
                 width={512}
                 height={340}
+                unoptimized
                 className="h-52 w-full object-cover"
               />
               <div className="flex flex-1 flex-col p-6">
@@ -133,6 +134,7 @@ export default function OraPage() {
             alt="SIM a través de la oración — video"
             width={1024}
             height={573}
+            unoptimized
             className="w-full rounded-lg object-cover shadow-md"
           />
         </div>
@@ -145,6 +147,7 @@ export default function OraPage() {
           alt="Personas orando"
           width={768}
           height={699}
+          unoptimized
           className="w-full rounded-lg object-cover shadow-md"
         />
         <div>
@@ -193,6 +196,7 @@ export default function OraPage() {
             alt="Campaña de oración ORA 1002"
             width={640}
             height={640}
+            unoptimized
             className="w-full rounded-lg object-contain"
           />
         </div>
@@ -240,6 +244,7 @@ export default function OraPage() {
                     src={f.image}
                     alt={f.title}
                     fill
+                    unoptimized
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />

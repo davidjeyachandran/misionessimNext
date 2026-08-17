@@ -144,6 +144,7 @@ function PillarCard({ pillar }: { pillar: (typeof PILLARS)[number] }) {
         src={pillar.image}
         alt=""
         fill
+        unoptimized
         sizes="(min-width: 1024px) 288px, (min-width: 640px) 46vw, 92vw"
         className="object-cover"
       />
@@ -382,6 +383,7 @@ export default function NosotrosPage() {
                 alt=""
                 width={320}
                 height={220}
+                unoptimized
                 className="w-full rounded-lg object-cover"
               />
             ))}

@@ -28,6 +28,7 @@ export function PageHero({ title, intro, image, cta }: PageHeroProps) {
             alt={image.alt ?? ""}
             fill
             preload
+            unoptimized
             sizes="100vw"
             className="object-cover"
           />

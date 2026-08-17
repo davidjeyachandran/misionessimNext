@@ -15,6 +15,9 @@ export default function contentfulImageLoader({
   if (src.startsWith("https://images.ctfassets.net/")) {
     return `${src}?w=${width}&fm=webp&q=${quality ?? 70}`;
   }
-  // Local /public assets have no resizing service; serve as-is.
+  // Local /public assets have no resizing service; serve as-is. Because this
+  // ignores `width`, render those with <Image unoptimized> — otherwise Next
+  // warns ("loader ... does not implement width") and emits a srcset of
+  // identical URLs.
   return src;
 }

@@ -64,8 +64,9 @@ export function SiteFooter() {
           <Image
             src="/home/SIM-Logotipo-footer.png"
             alt="SIM Latinoamérica"
-            width={150}
-            height={73}
+            width={275}
+            height={45}
+            unoptimized
           />
           <p>
             Facilitamos la participación en ministerios transculturales de

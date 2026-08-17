@@ -95,7 +95,14 @@ export function AreasSlider({ areas }: { areas: Area[] }) {
             <article className="flex h-full flex-col rounded-xl bg-brand-dark p-6">
               {/* The source PNGs are cream artwork drawn for these dark-red
                   cards, so they're used as-is. */}
-              <Image src={area.icon} alt="" width={60} height={60} className="h-[60px] w-[60px]" />
+              <Image
+                src={area.icon}
+                alt=""
+                width={60}
+                height={60}
+                unoptimized
+                className="h-[60px] w-[60px]"
+              />
               <h3 className="font-heading mt-4 text-[17px] font-semibold leading-snug text-cream">
                 {area.title}
               </h3>

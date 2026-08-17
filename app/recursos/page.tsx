@@ -127,6 +127,7 @@ export default function RecursosPage() {
           alt="Canal de YouTube de SIM Latinoamérica"
           width={768}
           height={547}
+          unoptimized
           className="w-full rounded-lg object-cover shadow-md"
         />
       </section>
