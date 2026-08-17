@@ -34,6 +34,25 @@ const RESOURCE_TABS: ResourceTab[] = [
   },
 ];
 
+/**
+ * Spotify episodes featured in the podcast band, in live's order. Titles are
+ * only used for the iframe's accessible name — Spotify renders its own.
+ */
+const PODCAST_EPISODES = [
+  { id: "2CP1iLYpS7qyBC2MXYR3Ym", title: "Revista Soy Influencer para el Reino - Parte 1" },
+  { id: "54NEkbbfNuk0vGxpv7XH50", title: "Latina levantando fondos entre latinos" },
+  {
+    id: "7r8olcw377DXeQV6HkH5V1",
+    title: "Una respuesta bíblica sobre la pobreza urbana por Zacarías Powell",
+  },
+  { id: "6zPf2OgEsTuXztTH4R1txZ", title: "¿Aún existen lugares no alcanzados en México?" },
+  { id: "3dqJqqJPcDktF9yNwDsLXW", title: "Revista Latinos en adaptación - Parte 1" },
+  {
+    id: "47xNVq1uxg4LsPlBC5o9u8",
+    title: "No alcanzados: Un abrazo declara que tu presencia es importante",
+  },
+];
+
 export default function RecursosPage() {
   return (
     <main className="page-offset">
@@ -89,26 +108,68 @@ export default function RecursosPage() {
         </div>
       </section>
 
-      {/* Podcast */}
-      <section className="bg-navy">
-        <div className="mx-auto max-w-4xl px-4 py-16 text-center">
-          <h2 className="font-heading text-3xl font-bold text-white">
-            SIM Latinoamérica Podcast
-          </h2>
-          <p className="mt-4 text-white/80">
-            Escucha en cualquier momento reflexiones sobre la misión global de
-            Dios que serán de gran ánimo y bendición para ti. También puedes
-            escuchar nuestras nuevas audiorevistas de las ediciones de la Revista
-            Vamos.
-          </p>
-          <a
-            href="https://open.spotify.com/show/0vftsfjR9UP5tD2PG6jb5P"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-block rounded-full bg-white px-8 py-3 text-sm font-semibold text-navy transition hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            Escucha más en Spotify
-          </a>
+      {/* Podcast — white band between two lavender ones
+          (live: .elementor-element-38f90197). Heading and CTA are centred from
+          768px up and left-aligned below it, which is what live does.
+
+          Live wraps every player in a white card that carries a decorative
+          shape-6.svg background. On desktop the card is exactly the player's
+          size so the shape is covered; below 768px the shape is set to
+          `background-size: 0`. It is never visible at any width, and the card
+          itself is white-on-white — so both are dropped and the players sit
+          straight in the grid. */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          {/* Live caps the description at 1000px, which is what keeps the first
+              paragraph on a single line at 16px. */}
+          <div className="mx-auto max-w-[1000px] md:text-center">
+            <h2 className="font-heading text-3xl font-bold text-navy sm:text-4xl lg:text-5xl">
+              SIM Latinoamérica Podcast
+            </h2>
+            <p className="mt-6 text-muted">
+              Escucha en cualquier momento reflexiones sobre la misión global de
+              Dios que serán de gran ánimo y bendición para ti.
+            </p>
+            <p className="mt-2 text-muted">
+              También puedes escuchar nuestras nuevas audiorevistas de las
+              ediciones de la Revista Vamos.
+            </p>
+          </div>
+
+          {/* Live keeps three players per row all the way down to 768px, which
+              squeezes each one to 189px and truncates the episode title. Two-up
+              on tablet, three-up from 1024px. */}
+          <ul className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            {PODCAST_EPISODES.map((episode) => (
+              <li key={episode.id}>
+                {/* Live's embeds have no title, so a screen reader announces six
+                    unlabelled frames. Two of the six also carry `theme=0`, which
+                    flattens them to Spotify's neutral dark while the other four
+                    tint from the cover art — dropped so all six match. */}
+                <iframe
+                  src={`https://open.spotify.com/embed/episode/${episode.id}`}
+                  title={`Reproductor de Spotify: ${episode.title}`}
+                  width="100%"
+                  height="152"
+                  loading="lazy"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="block w-full rounded-xl"
+                />
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-10 md:text-center">
+            <a
+              href="https://open.spotify.com/show/0vftsfjR9UP5tD2PG6jb5P"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+            >
+              Escucha más en Spotify
+            </a>
+          </div>
         </div>
       </section>
 
