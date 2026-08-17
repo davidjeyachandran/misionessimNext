@@ -21,9 +21,23 @@
   --color-muted: #696f8c;
   --color-cream: #fef1d5;
   --color-hairline: #e6e8f0;
+  --color-teal: #167e92;
+  /* Pale lavender panel background (live: the Revista/Manual band). */
+  --color-lavender: #eaebf8;
 
   --font-sans: var(--font-work-sans), system-ui, sans-serif;
   --font-heading: var(--font-raleway), system-ui, sans-serif;
+
+  --animate-fade-in: fade-in 0.35s ease;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 :root {
