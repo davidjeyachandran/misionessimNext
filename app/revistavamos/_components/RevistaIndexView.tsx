@@ -6,6 +6,40 @@ import { fechaToEdicion } from "@/lib/dates";
 import { PageHero } from "@/app/_components/PageHero";
 import { PER_PAGE } from "@/app/revistavamos/_lib/config";
 import { Pagination } from "@/app/revistavamos/_components/Pagination";
+import { TestimoniosSlider } from "@/app/revistavamos/_components/TestimoniosSlider";
+
+const TESTIMONIOS = [
+  {
+    quote:
+      "¡La revista VAMOS ha bendecido tanto mi vida! Y gracias a ella fue que Dios sembró en mi corazón el ir a Turquía y trabajar con refugiados. La edición que habla sobre el retorno de los misioneros a casa, realmente llegó muy profundo a mi corazón. Hace unos meses que retorné a mi país y entiendo el sentimiento de soledad y el no ser comprendidos o el sentir que a nadie le importa oír lo que Dios estuvo haciendo estos años. Pero a pesar de que ha sido duro, Dios usó ese dolor para mostrarme que Él siempre estuvo conmigo. Que Él me ve y que a Él le importa.",
+    name: "Pamela",
+    location: "Bolivia",
+  },
+  {
+    quote:
+      "Agradecemos a Dios por su ministerio, aquí en Cuba disfrutamos y aprovechamos mucho de sus revistas VAMOS, los misioneros de nuestra agencia son capacitados con dichos recursos.",
+    name: "Ps Karrel",
+    location: "Cuba",
+  },
+  {
+    quote:
+      "En estos días estamos enseñando sobre la Familia en el Campo. Y es de mucha bendición tener los materiales de la Revista. Ha sido de mucha ayuda.",
+    name: "Julio",
+    location: "Colombia",
+  },
+  {
+    quote:
+      "Muchas gracias por la revista, excelente trabajo, me gusta porque presenta de manera muy clara que el trabajo es también parte de la extensión del Reino de Dios y tenemos la misma identidad como discípulos de Jesús, además creo que es una buena herramienta para educar a las iglesias y también usar el potencial y dones de los profesionales en el campo misionero, les agradezco y les felicito por todo ese esfuerzo para educar y motivar a la iglesia.",
+    name: "Karuna",
+    location: "Honduras",
+  },
+  {
+    quote:
+      "Queridos hermanos, nos sentimos muy honrados al recibir la revista VAMOS. Somos una familia voluntaria/misionera en Colombia. También nos gustó mucho la edición de autocuidado.",
+    name: "Yohanna",
+    location: "Colombia",
+  },
+];
 
 /**
  * Total number of paginated revista pages (>= 1). The newest issue is shown in
@@ -119,23 +153,12 @@ export async function RevistaIndexView({ page }: { page: number }) {
 
         <Pagination page={page} totalPages={totalPages} basePath="/revistavamos" />
 
-        {/* Testimonial */}
+        {/* Testimonios de lectores */}
         <section className="mt-16 -mx-4 bg-[#eef0f8] px-4 py-16">
-          <blockquote className="mx-auto max-w-3xl text-center">
-            <p className="text-lg leading-relaxed text-ink">
-              &ldquo;¡La revista VAMOS ha bendecido tanto mi vida! Y gracias a ella fue que Dios
-              sembró en mi corazón el ir a Turquía y trabajar con refugiados. La edición
-              que habla sobre el retorno de los misioneros a casa, realmente llegó muy
-              profundo a mi corazón. Hace unos meses que retorné a mi país y entiendo el
-              sentimiento de soledad y el no ser comprendidos o el sentir que a nadie le
-              importa oír lo que Dios estuvo haciendo estos años. Pero a pesar de que ha
-              sido duro, Dios usó ese dolor para mostrarme que Él siempre estuvo conmigo.
-              Que Él me ve y que a Él le importa.&rdquo;
-            </p>
-            <footer className="mt-6 font-semibold text-ink">
-              — Pamela, Bolivia
-            </footer>
-          </blockquote>
+          <h2 className="font-heading mb-10 text-center text-2xl font-bold text-ink">
+            Testimonios de lectores
+          </h2>
+          <TestimoniosSlider testimonios={TESTIMONIOS} />
         </section>
       </div>
     </main>
