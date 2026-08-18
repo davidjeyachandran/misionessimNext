@@ -180,11 +180,25 @@ export function ContactForm() {
         />
       </div>
 
-      {/* Honeypot. Hidden from sight and from assistive tech, and excluded from
-          tab order, so only a script ever reaches it. */}
+      {/* Two honeypots, because they catch different attacks.
+
+          `website` is ours and is enforced above, in the browser: a bot that
+          fills the rendered form never gets a request sent at all.
+
+          `botcheck` is Web3Forms' own, enforced on their server. It matters
+          because the endpoint and access key are both public in the bundle —
+          that is inherent to any static-site form service — so a bot can POST
+          straight past our JavaScript. It must be a checkbox with this exact
+          name, and Web3Forms strips it from the notification email.
+
+          Both are hidden from sight and from assistive tech and kept out of the
+          tab order, so only a script ever reaches them. Web3Forms' own docs
+          note honeypots are getting weak; if spam does start arriving, their
+          hCaptcha integration is the next step up. */}
       <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
         <label htmlFor="contact-website">No completar</label>
         <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+        <input id="contact-botcheck" name="botcheck" type="checkbox" tabIndex={-1} />
       </div>
 
       <div className="mt-5 flex items-start gap-3">
