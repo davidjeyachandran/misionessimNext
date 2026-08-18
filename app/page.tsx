@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ScrollEffects } from "./_components/ScrollEffects";
 import { VideoPromo } from "./_components/VideoPromo";
+import { VideoThumbnail } from "./_components/VideoThumbnail";
 import { getBlogPosts, publishDateToSegment } from "../lib/contentful";
 
 export const metadata: Metadata = {
@@ -218,60 +219,79 @@ export default async function Home() {
 
       {/* ============ REVISTA VAMOS ============ */}
       <section className="revista" id="revista">
-        <div
-          className="parallax-bg"
-          style={{ backgroundImage: "url('/home/foto-revista2.webp')" }}
-        />
-        <div className="container revista-content reveal">
-          <p className="eyebrow eyebrow-light">Recurso gratuito</p>
-          <h2>Revista VAMOS</h2>
-          <p className="revista-desc">
-            Una revista con pasión por las misiones. Queremos reflejar la voz de
-            los obreros que se encuentran en el campo y la realidad de la Iglesia
-            latina. Tenemos más de 110 ediciones publicadas en formato digital y
-            gratis.
-          </p>
-          <Link className="btn btn-primary" href="/revistavamos/">
-            Ver ediciones
-          </Link>
+        <div className="container">
+          <div className="revista-card reveal">
+            <div className="revista-text">
+              <p className="eyebrow eyebrow-light">Recurso gratuito</p>
+              <h2>Revista VAMOS</h2>
+              <p className="revista-desc">
+                Una revista con pasión por las misiones. Queremos reflejar la voz
+                de los obreros que se encuentran en el campo y la realidad de la
+                Iglesia latina. Tenemos más de 110 ediciones publicadas en formato
+                digital y gratis.
+              </p>
+              {/* Live opens this internal link with target="_blank"; kept in-tab
+                  here, same as every other in-site link on the page. */}
+              <Link className="btn btn-cream" href="/revistavamos/">
+                Ver ediciones
+              </Link>
+            </div>
+            <div className="revista-media">
+              <Image
+                src="/home/foto-revista2.webp"
+                /* decorative: live paints it as a CSS background, and the copy
+                   beside it already carries the section's meaning */
+                alt=""
+                fill
+                unoptimized
+                sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1199px) 50vw, 580px"
+                className="object-cover"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
       {/* ============ YOUTUBE PROMO ============ */}
-      <section className="yt-promo section section-dark">
+      <section className="yt-promo">
         <div className="container yt-grid">
           <div className="yt-text reveal">
+            {/* Live renders this logo from a missing Elementor thumbnail, so it
+                404s and collapses to 0×0; served from /public here. */}
+            <Image
+              src="/home/logo-youtube.png"
+              alt="YouTube"
+              width={140}
+              height={30}
+              unoptimized
+              className="yt-logo"
+            />
             <h2>¡Estamos al servicio del movimiento misionero Latino!</h2>
             <p>
               No te pierdas el contenido diverso en nuestro canal de YouTube para
               conocer más sobre la misión de Dios.
             </p>
             <a
-              className="btn btn-yt"
-              href="https://www.youtube.com/c/SIMLatinoamérica"
+              className="btn btn-primary"
+              href="https://www.youtube.com/c/SIMLatinoam%C3%A9rica"
               target="_blank"
               rel="noopener"
             >
-              <Image
-                src="/home/logo-youtube.png"
-                alt=""
-                width={140}
-                height={30}
-                unoptimized
-              />
               Mira más videos aquí
             </a>
           </div>
-          <div className="yt-media reveal">
-            <Image
-              src="/home/foto-sim-video.jpg"
-              alt="Canal de YouTube de SIM Latinoamérica"
-              width={520}
-              height={340}
-              unoptimized
-              className="!w-full !h-auto"
-            />
-          </div>
+          <VideoThumbnail
+            className="yt-media reveal"
+            image={{
+              src: "/home/foto-sim-video.jpg",
+              alt: "Un joven enseña de pie ante un grupo reunido en un salón",
+              width: 885,
+              height: 630,
+            }}
+            videoId="zx8x6J7vPNI"
+            label="SIM Latinoamérica"
+            sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1199px) 52vw, 600px"
+          />
         </div>
       </section>
 

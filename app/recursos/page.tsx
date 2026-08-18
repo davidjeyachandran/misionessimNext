@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "../_components/PageHero";
 import { ResourceTabs, type ResourceTab } from "./ResourceTabs";
-import { VideoThumbnail } from "./VideoThumbnail";
+import { VideoThumbnail } from "../_components/VideoThumbnail";
 
 export const metadata: Metadata = {
   title: "Recursos",

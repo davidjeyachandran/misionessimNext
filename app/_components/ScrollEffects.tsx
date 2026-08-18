@@ -41,7 +41,7 @@ export function ScrollEffects() {
     // from CSS (.parallax-bg[data-parallax] slack in home.css), and the offset
     // is anchored so it's 0 at scrollY 0. That way the first frame this script
     // paints is identical to the server-rendered one, with no jump or rescale
-    // when it takes over. Layers without data-parallax (video-promo, revista)
+    // when it takes over. Layers without data-parallax (video-promo)
     // stay static covers, as in the POC.
     const layers = Array.from(
       document.querySelectorAll<HTMLElement>(".parallax-bg[data-parallax]"),

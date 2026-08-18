@@ -8,6 +8,7 @@
 
 :root {
   --color-primary: #c91430;   /* SIM red */
+  --color-primary-deep: #900201; /* darker red, live's Revista VAMOS card */
   --color-secondary: #002f49; /* dark blue */
   --color-text: #0a0117;
   --color-cream: #fef1d5;
@@ -88,6 +89,8 @@ body { overflow-x: hidden; }
   background: transparent;
 }
 .btn-outline:hover { background: var(--color-primary); color: #fff; }
+.btn-cream { background: var(--color-cream); color: var(--color-primary-deep); }
+.btn-cream:hover { background: #fff; box-shadow: 0 8px 20px rgba(0, 0, 0, .25); }
 
 /* ==========================================================================
    Header (global)
@@ -174,9 +177,9 @@ body { overflow-x: hidden; }
 /* ==========================================================================
    Parallax base
    ========================================================================== */
-.hero, .hero-page, .video-promo, .revista { position: relative; overflow: hidden; }
-/* Static cover layer by default. Only the hero parallaxes — video-promo and
-   revista are static covers, same as the POC. */
+.hero, .hero-page, .video-promo { position: relative; overflow: hidden; }
+/* Static cover layer by default. Only the hero parallaxes — video-promo is a
+   static cover, same as the POC. */
 .parallax-bg {
   position: absolute;
   inset: 0;
@@ -355,40 +358,37 @@ body { overflow-x: hidden; }
 /* ==========================================================================
    Revista VAMOS
    ========================================================================== */
-.revista { min-height: 480px; display: flex; align-items: center; }
-.revista-content {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  padding-top: 100px;
-  padding-bottom: 100px;
-  max-width: var(--home-container);
+/* Live is a boxed card, not the full-bleed parallax band the POC used: a
+   rounded 50/50 split with the copy on deep red and the cover photo filling
+   the other half (.elementor-element-fbf8e58). */
+.revista-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--color-primary-deep);
+  border-radius: 15px;
+  overflow: hidden;
 }
-.revista-content h2 { color: #fff; font-size: 42px; margin-bottom: 18px; }
-.revista-desc { color: #fff; font-size: 18px; max-width: 34em; margin-bottom: 30px; }
+.revista-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 100px 40px 100px 80px;
+}
+.revista-card h2 { color: var(--color-cream); font-size: 40px; margin-bottom: 18px; }
+.revista-desc { color: #fff; font-size: 18px; margin-bottom: 30px; }
+/* The other half of the card: <Image fill> needs a positioned box, and the
+   grid row gives it its height on desktop. */
+.revista-media { position: relative; min-height: 300px; }
 
 /* ==========================================================================
    YouTube promo
    ========================================================================== */
-.yt-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 60px; align-items: center; }
-.yt-text h2 { color: #fff; font-size: 36px; margin-bottom: 18px; }
-.yt-text p { font-size: 17px; margin-bottom: 28px; color: #d7e2ea; }
-.yt-media img { border-radius: 10px; box-shadow: 0 18px 40px rgba(0, 0, 0, .35); }
-.btn-yt {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  background: #fff;
-  color: var(--color-secondary);
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 13px 26px;
-  border-radius: 40px;
-  transition: transform .25s ease, box-shadow .25s ease;
-}
-.btn-yt:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 0, 0, .3); }
-.btn-yt img { width: 34px; height: auto; }
+.yt-promo { padding: 80px 0; }
+.yt-grid { display: grid; grid-template-columns: 1fr 1.08fr; gap: 40px; align-items: center; }
+.yt-logo { width: 140px; height: auto; margin-bottom: 30px; }
+.yt-text h2 { font-size: 40px; margin-bottom: 18px; }
+.yt-text p { font-size: 18px; margin-bottom: 30px; color: var(--color-nav); max-width: 400px; }
 
 /* ==========================================================================
    Footer (global)
@@ -477,9 +477,12 @@ body { overflow-x: hidden; }
   .hero, .hero-page { min-height: 600px; }
   .hero h1 { font-size: 44px; line-height: 1.09; }
   .hero-page h1 { font-size: 40px; }
-  .video-content h2, .revista-content h2 { font-size: 34px; }
+  .video-content h2, .revista-card h2, .yt-text h2 { font-size: 34px; }
   .cards, .posts { grid-template-columns: 1fr 1fr; }
   .about-grid, .yt-grid { grid-template-columns: 1fr; gap: 40px; }
+  .yt-text p { max-width: none; }
+  /* card stays a 50/50 split down to phones, as on live */
+  .revista-text { padding: 50px 20px; }
 }
 
 @media (max-width: 768px) {
@@ -491,8 +494,10 @@ body { overflow-x: hidden; }
   .hero-intro { font-size: 16px; } /* live: 28px line-height at 16px */
   .section-title { font-size: 28px; }
   .about-title { font-size: 20px; }
-  .video-content h2, .revista-content h2 { font-size: 28px; }
+  .video-content h2, .revista-card h2 { font-size: 28px; }
   .yt-text h2 { font-size: 26px; }
+  .yt-promo { padding: 40px 0; }
+  .revista-card { grid-template-columns: 1fr; }
 
   .nav-toggle { display: flex; }
   .main-nav {
