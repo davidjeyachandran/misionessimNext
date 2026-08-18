@@ -116,14 +116,17 @@ export default async function OraPage() {
         </div>
       </section>
 
-      {/* SIM a través de la Oración */}
-      <section className="bg-cream/40">
+      {/* SIM a través de la Oración — live paints this band red (#a90000) with a
+          white heading over cream body copy. The palette collapses live's reds
+          into brand/brand-dark, so this reuses the same dark-red band token as
+          the /recursos and /sirve-con-sim cards. */}
+      <section className="bg-brand-dark">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
           <div>
-            <h2 className="font-heading text-3xl font-bold text-ink">
+            <h2 className="font-heading text-3xl font-bold text-white">
               SIM a través de la Oración
             </h2>
-            <p className="mt-4 text-muted">
+            <p className="mt-4 text-cream">
               La historia de SIM es una historia de oración. Mientras una madre
               de Sudán oraba, Dios llamó al hijo de esta mujer y a sus dos amigos
               a formar SIM.
@@ -132,7 +135,7 @@ export default async function OraPage() {
               href="https://www.youtube.com/watch?v=fHHGEC23OTk"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+              className="mt-6 inline-block rounded-full bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
             >
               Mira el video aquí
             </a>
@@ -154,28 +157,29 @@ export default async function OraPage() {
         </div>
       </section>
 
-      {/* Ora 1002 */}
-      <section className="bg-navy">
+      {/* Ora 1002 — a white band on live, with the campaign name in brand red
+          (the page's other headings are navy there). */}
+      <section className="bg-white">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-cream">
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand">
               Guía de oración
             </p>
-            <h2 className="font-heading mt-2 text-4xl font-bold text-white">Ora 1002</h2>
-            <p className="mt-4 text-white/80">
+            <h2 className="font-heading mt-2 text-4xl font-bold text-brand">Ora 1002</h2>
+            <p className="mt-4 text-muted">
               Esta campaña de oración ORA 1002 está basada en{" "}
-              <strong className="font-semibold text-white">Lucas 10:02</strong>{" "}
+              <strong className="font-semibold text-ink">Lucas 10:02</strong>{" "}
               <em>
                 &ldquo;Les dijo: «Ciertamente, es mucha la mies, pero son pocos
                 los segadores. Por tanto, pidan al Señor de la mies que envíe
                 segadores a cosechar la mies&rdquo;.
               </em>
             </p>
-            <p className="mt-4 text-white/80">
+            <p className="mt-4 text-muted">
               Pon en práctica esta campaña de manera personal, en tu grupo
               pequeño o como iglesia.
             </p>
-            <p className="mt-4 font-semibold text-white">
+            <p className="mt-4 font-semibold text-ink">
               ¡Haz una pausa para orar a las 10:02 de la mañana y/o de la noche,
               pidiendo por más obreros para el campo misionero!
               <br />
@@ -185,7 +189,7 @@ export default async function OraPage() {
               href="/ora/ora-1002.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-block rounded-full bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
+              className="mt-8 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
             >
               Descargar PDF
             </a>
