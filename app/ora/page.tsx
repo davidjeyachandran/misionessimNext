@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "../_components/PageHero";
+import { VideoThumbnail } from "../_components/VideoThumbnail";
 import { getBlogPostCardsBySlugs, publishDateToSegment } from "../../lib/contentful";
 import { formatPostDate } from "../../lib/dates";
 
@@ -136,13 +137,19 @@ export default async function OraPage() {
               Mira el video aquí
             </a>
           </div>
-          <Image
-            src="/pages/ora-video.png"
-            alt="SIM a través de la oración — video"
-            width={1024}
-            height={573}
-            unoptimized
-            className="w-full rounded-lg object-cover shadow-md"
+          {/* Live overlays an ElementsKit video popup on the still; its play
+              button is pinned 30px from the top-left corner, where it covers a
+              face. VideoThumbnail centres it, as on /recursos and the
+              homepage. */}
+          <VideoThumbnail
+            image={{
+              src: "/pages/ora-video.png",
+              alt: "Obreros de SIM leen juntos alrededor de una mesa",
+              width: 1024,
+              height: 573,
+            }}
+            videoId="fHHGEC23OTk"
+            label="SIM a través de la oración"
           />
         </div>
       </section>
