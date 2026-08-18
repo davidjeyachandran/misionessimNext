@@ -3,7 +3,6 @@ import Image from "next/image";
 import { PageHero } from "../_components/PageHero";
 import { VideoPromo } from "../_components/VideoPromo";
 import { ContactForm } from "./ContactForm";
-import { CONTACT_EMAIL, WHATSAPP_URL } from "./contact";
 
 export const metadata: Metadata = {
   title: "Sirve con SIM",
@@ -83,52 +82,45 @@ export default function SirveConSimPage() {
         </div>
       </section>
 
-      {/* Escríbenos — heading, enquiry form, direct-contact fallbacks
+      {/* Escríbenos — heading, then a rounded band split down the middle:
+          cream form card on the left, photo on the right
           (live: .elementor-element-7f99889 + .elementor-element-21f526f).
 
-          Live keeps the two contact rows inside the <form>, between the consent
-          checkbox and the submit button — they're links, not form controls, and
-          they'd disappear along with the form if it ever failed to render. They
-          sit outside it here, which also means they still show when no form
-          endpoint is configured (see ContactForm). */}
-      <section className="mx-auto max-w-3xl px-4 py-16">
+          Live paints the right half as a CSS background on an empty container,
+          so the photo is invisible to assistive tech and never in the srcset;
+          a filled <Image> keeps the crop while staying real content. The band
+          stacks below md, photo underneath, exactly as live does.
+
+          The direct-contact rows sit inside the card, above the submit button,
+          where live puts them — see ContactForm, which also keeps them on the
+          page when no form endpoint is configured. */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="font-heading text-center text-3xl font-extrabold text-navy sm:text-4xl lg:text-5xl">
           Escríbenos para iniciar la conversación
         </h2>
         <p className="mt-4 text-center text-muted">
-          Si tienes un país, grupo étnico, o un ministerio con el que buscas
-          servir, escríbenos y conversemos más detalles.
+          Si tienes un{" "}
+          <strong className="font-semibold">
+            país, grupo étnico, o un ministerio
+          </strong>{" "}
+          con el que buscas servir, escríbenos y conversemos más detalles.
         </p>
 
-        <div className="mt-10">
-          <ContactForm />
+        <div className="mt-10 grid overflow-hidden rounded-2xl md:grid-cols-2">
+          <div className="bg-linen px-5 py-12 lg:px-12 lg:pb-24">
+            <ContactForm />
+          </div>
+          <div className="relative min-h-[374px]">
+            <Image
+              src="/pages/sirve-formulario.webp"
+              alt="Un hombre y una mujer masái, envueltos en mantas tradicionales, sentados en el umbral de su casa junto a un niño pequeño"
+              fill
+              unoptimized
+              sizes="(min-width: 768px) 50vw, 92vw"
+              className="object-cover"
+            />
+          </div>
         </div>
-
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2">
-          <li className="flex items-center gap-3">
-            <Image src="/pages/ico-sobre.png" alt="" width={36} height={37} unoptimized />
-            <span className="text-sm text-muted">
-              También puedes escribirnos a{" "}
-              <a className="font-semibold text-brand underline" href={`mailto:${CONTACT_EMAIL}`}>
-                {CONTACT_EMAIL}
-              </a>
-            </span>
-          </li>
-          <li className="flex items-center gap-3">
-            <Image src="/pages/ico-wsp.png" alt="" width={36} height={37} unoptimized />
-            <span className="text-sm text-muted">
-              O sumarte a nuestro chat de difusión en{" "}
-              <a
-                className="font-semibold text-brand underline"
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                WhatsApp
-              </a>
-            </span>
-          </li>
-        </ul>
       </section>
 
       {/* ¡Tu iglesia te envía! — dark-red card straddling a lavender band

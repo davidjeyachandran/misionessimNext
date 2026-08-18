@@ -24,6 +24,9 @@
   --color-teal: #167e92;
   /* Pale lavender panel background (live: the Revista/Manual band). */
   --color-lavender: #eaebf8;
+  /* Warm off-white panel background (live: the Sirve con SIM form card).
+     Distinct from --color-cream, which is the yellower card on dark bands. */
+  --color-linen: #fdf7f4;
 
   --font-sans: var(--font-work-sans), system-ui, sans-serif;
   --font-heading: var(--font-raleway), system-ui, sans-serif;
