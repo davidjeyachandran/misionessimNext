@@ -104,6 +104,11 @@ test.describe("Sirve con SIM", () => {
       });
 
       const form = page.locator("main form");
+
+      // Web3Forms' own honeypot must be a checkbox with this exact name, and
+      // is what guards the endpoint against bots that skip our JavaScript.
+      await expect(form.locator("input[name=botcheck]")).toHaveAttribute("type", "checkbox");
+
       await form.getByLabel(/Nombre y apellido/).fill("Bot");
       await form.getByLabel(/Teléfono/).fill("000");
       await form.getByLabel(/^Email/).fill("bot@example.com");
@@ -114,6 +119,132 @@ test.describe("Sirve con SIM", () => {
 
       await expect(page.locator("main").getByRole("status")).toBeVisible();
       expect(posted).toBe(0);
+
+    });
+
+    test("degrades to a native POST when JavaScript never runs", async ({ browser }) => {
+      const ctx = await browser.newContext({ javaScriptEnabled: false });
+      const page = await ctx.newPage();
+      let native: { method: string; contentType?: string; body: string | null } | null = null;
+      await page.route("**/api.web3forms.com/**", async (route) => {
+        native = {
+          method: route.request().method(),
+          contentType: route.request().headers()["content-type"],
+          body: route.request().postData(),
+        };
+        await route.fulfill({
+          status: 303,
+          headers: { location: "http://localhost:3000/sirve-con-sim/gracias/" },
+          body: "",
+        });
+      });
+
+      await page.goto("http://localhost:3000/sirve-con-sim/", { waitUntil: "domcontentloaded" });
+      const form = page.locator("main form");
+      // Without these the form is inert with JS off: there is no `action` for
+      // the browser to post to.
+      await expect(form).toHaveAttribute("action", /web3forms\.com|formspree\.io/);
+      await expect(form).toHaveAttribute("method", /post/i);
+      for (const name of ["access_key", "subject", "from_name", "redirect"]) {
+        await expect(form.locator(`input[type=hidden][name=${name}]`)).toHaveCount(1);
+      }
+
+      await form.locator("#contact-name").fill("Sin JavaScript");
+      await form.locator("#contact-phone").fill("+51 999 111 222");
+      await form.locator("#contact-email").fill("nojs@example.com");
+      await form.locator("#contact-country").selectOption("Perú");
+      await form.locator("#contact-consent").check();
+      await form.locator("button[type=submit]").click();
+
+      await page.waitForURL("**/gracias/");
+      await expect(page.locator("main h1")).toHaveText("¡Gracias por escribirnos!");
+      expect(native!.method).toBe("POST");
+      expect(native!.contentType).toContain("application/x-www-form-urlencoded");
+      expect(native!.body).toContain("nombre=Sin+JavaScript");
+      await ctx.close();
+    });
+
+    test("does not also fire the native POST when JavaScript is available", async ({ page }) => {
+      let json = 0;
+      let formEncoded = 0;
+      await page.route("**/api.web3forms.com/**", async (route) => {
+        const ct = route.request().headers()["content-type"] ?? "";
+        if (ct.includes("application/json")) json += 1;
+        else formEncoded += 1;
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ success: true }),
+        });
+      });
+
+      const form = page.locator("main form");
+      await form.getByLabel(/Nombre y apellido/).fill("Con JavaScript");
+      await form.getByLabel(/Teléfono/).fill("1");
+      await form.getByLabel(/^Email/).fill("js@example.com");
+      await form.getByLabel(/^País/).selectOption("Chile");
+      await form.getByRole("checkbox").check();
+      await form.getByRole("button", { name: "Enviar" }).click();
+      await expect(page.locator("main").getByRole("status")).toBeVisible();
+
+      expect({ json, formEncoded }).toEqual({ json: 1, formEncoded: 0 });
+      expect(new URL(page.url()).pathname).toBe("/sirve-con-sim/");
+    });
+
+    test("sends the field names and reserved keys the endpoint expects", async ({ page }) => {
+      let payload: Record<string, unknown> | null = null;
+      await page.route("**/api.web3forms.com/**", async (route) => {
+        payload = JSON.parse(route.request().postData() ?? "{}");
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ success: true }),
+        });
+      });
+
+      const form = page.locator("main form");
+      await form.getByLabel(/Nombre y apellido/).fill("María Pérez");
+      await form.getByLabel(/Teléfono/).fill("+56 9 8765 4321");
+      await form.getByLabel(/^Email/).fill("maria@example.com");
+      await form.getByLabel(/^País/).selectOption("Chile");
+      await form.getByRole("checkbox").check();
+      await form.getByRole("button", { name: "Enviar" }).click();
+      await expect(page.locator("main").getByRole("status")).toBeVisible();
+
+      // Web3Forms takes the field literally named `email` as the Reply-To, so
+      // renaming it would silently break replying to enquirers.
+      expect(payload).toMatchObject({
+        email: "maria@example.com",
+        nombre: "María Pérez",
+        subject: expect.any(String),
+        from_name: expect.any(String),
+      });
+      // Our own honeypot is enforced in the browser and never transmitted;
+      // theirs is only sent when a bot ticks it.
+      expect(payload).not.toHaveProperty("website");
+      expect(payload).not.toHaveProperty("botcheck");
+      // Only the no-JS path uses `redirect`; Web3Forms ignores it for JSON.
+      expect(payload).not.toHaveProperty("redirect");
+    });
+
+    test("treats a 200 carrying success:false as a failure", async ({ page }) => {
+      await page.route("**/api.web3forms.com/**", (route) =>
+        route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ success: false, message: "Invalid access key" }),
+        }),
+      );
+
+      const form = page.locator("main form");
+      await form.getByLabel(/Nombre y apellido/).fill("Prueba");
+      await form.getByLabel(/Teléfono/).fill("123");
+      await form.getByLabel(/^Email/).fill("prueba@example.com");
+      await form.getByLabel(/^País/).selectOption("Perú");
+      await form.getByRole("checkbox").check();
+      await form.getByRole("button", { name: "Enviar" }).click();
+
+      await expect(form.getByRole("alert")).toContainText(/No pudimos enviar tu consulta/);
     });
 
     test("keeps the form and explains the failure when the endpoint errors", async ({ page }) => {
