@@ -424,3 +424,51 @@ truncated right at this slider).
   `scroll` events never fire there — measure this component in Playwright, not
   the pane. `goTo` also sets the page state directly so the dots answer a
   click immediately rather than waiting on the scroll to settle.
+
+## 2026-08-18 — Legacy URL coverage: /wp-content/uploads/ + revista slug drift
+
+- **Verified `docs/routes.txt`** (187 URLs with real traffic on the WordPress
+  site) against `out/` + `vercel.json`. Before this session: 108 resolved
+  directly, 36 via an existing rule, **43 hard 404s**. Now **185/187**.
+- **`scripts/build-legacy-redirects.ts`** (`yarn build:legacy-redirects`) turns
+  the Phase 7b inventory (`data/media-redirect-map.json`) into 321 rules. Every
+  destination is a first-party URL — a raw `assets.ctfassets.net` link is never
+  what the visitor sees:
+  - magazine PDFs → `/revistavamos/<slug>/`, the edition page (cover, intro,
+    working PDF link, link equity stays on the domain);
+  - the other 132 migrated documents → `/recursos/<filename>`, proxied to the
+    Contentful asset by a companion rewrite (same trick as the revista PDFs).
+    All 132 targets HEAD-checked 200.
+- **`data/legacy-revista-aliases.json`** — frozen snapshot of the WordPress
+  `/la-revista/` URL space, captured 2026-08-18 by crawling the live site
+  before it is decommissioned. 15 legacy slugs drifted in the CMS and were
+  301ing into a 404 through the `/la-revista/:path*` wildcard.
+- **Three legacy slugs pointed at the WRONG edition**, silently: WP's
+  `la-oracion` is the 2010 issue (the new site's bare slug is 2014),
+  `plantacion-de-iglesias` is 2011 (new site: 2018), and `fondos-y-misiones`
+  is 2010-10 (new site: 2010-09 "Misión Integral", whose WP slug was
+  `mision-integral`). Aliased under `/la-revista/` only — mirroring them under
+  `/revistavamos/` would hijack a live canonical URL. Note this contradicts the
+  comment in `lib/contentful.ts` (`normalizeRevistaSlug`) claiming the legacy
+  site only exposed the newer of two same-slug editions; it exposed both, the
+  older under the bare slug.
+- `/portfolio-category/*` and `/portfolio/*` (the WP "serving opportunities"
+  post type) → `/sirve-con-sim/`.
+- **`build-revista-pdf-rewrites.ts` no longer clobbers foreign rewrites** — it
+  reassigned `config.rewrites` wholesale, so a re-run would have deleted the
+  132 `/recursos/**` rules. Now it replaces only `/revistavamos/**`. Its
+  docstring also claimed marker keys it never implemented; corrected.
+- Budget: 358 redirects (Vercel limit 2,048) + 251 rewrites. No duplicate
+  sources, no redirect chains, every destination resolves.
+- **Still 404 (2 with traffic, 15 total)** — the files exist on WordPress but
+  were never migrated, so there is nothing to point at:
+  `fortalezas_y_debilidades_de_las_misiones_iberoamericanas.pdf` and
+  `trabajando_tu_llamado_a_las_naciones_-_completo.pdf` (both trafficked), plus
+  `persecucionvamosmayo14.pdf` (the 2014-05 VAMOS edition is absent from
+  Contentful), `13leccionessobremisiones.pdf`, `engnewsmar14.pdf` and six more
+  `/2025/04/` study documents. **Fix = upload them to Contentful, then re-run
+  `yarn build:media-map && yarn build:legacy-redirects`.**
+- The two ORA campaign PDFs (`GuiadeOracion-ORA1002-SIM_compressed-1.pdf`,
+  `CampanaORA1002-SIMLatinoamerica-2026.pdf`) are also unresolved. `/ora/` now
+  ships `public/ora/ora-1002.pdf` locally — needs David to say which legacy
+  PDF that is before either can be pointed at it.

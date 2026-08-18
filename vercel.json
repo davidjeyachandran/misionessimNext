@@ -3,6 +3,1621 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/la-revista/al-100-el-latino-en-misiones",
+      "destination": "/revistavamos/latinos-al-100/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/al-100-el-latino-en-misiones",
+      "destination": "/revistavamos/latinos-al-100/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/alcanzando-a-los-aprendices-de-orales",
+      "destination": "/revistavamos/alcanzando-los-aprendices-de-orales/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/alcanzando-a-los-aprendices-de-orales",
+      "destination": "/revistavamos/alcanzando-los-aprendices-de-orales/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/de-pastor-a-pastor",
+      "destination": "/revistavamos/de-pastor-pastor/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/de-pastor-a-pastor",
+      "destination": "/revistavamos/de-pastor-pastor/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/equipos-multiculturales-2",
+      "destination": "/revistavamos/equipos-multiculturales-2024/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/equipos-multiculturales-2",
+      "destination": "/revistavamos/equipos-multiculturales-2024/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/fondos-misioneros-2",
+      "destination": "/revistavamos/fondos-misioneros-2022/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/fondos-misioneros-2",
+      "destination": "/revistavamos/fondos-misioneros-2022/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/fondos-y-misiones",
+      "destination": "/revistavamos/fondos-y-misiones-orig/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/idioma-y-cultura-0",
+      "destination": "/revistavamos/idioma-y-cultura-2022/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/idioma-y-cultura-0",
+      "destination": "/revistavamos/idioma-y-cultura-2022/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/involucrar-a-tu-iglesia",
+      "destination": "/revistavamos/involucrar-tu-iglesia/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/involucrar-a-tu-iglesia",
+      "destination": "/revistavamos/involucrar-tu-iglesia/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/la-oracion",
+      "destination": "/revistavamos/la-oracion-2010/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/la-oracion-2",
+      "destination": "/revistavamos/la-oracion/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/la-oracion-2",
+      "destination": "/revistavamos/la-oracion/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/mision-integral",
+      "destination": "/revistavamos/fondos-y-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/mision-integral",
+      "destination": "/revistavamos/fondos-y-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/movilizacion",
+      "destination": "/revistavamos/mobilizacion/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/movilizacion",
+      "destination": "/revistavamos/mobilizacion/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/movilizando-a-la-juventud",
+      "destination": "/revistavamos/movilizando-la-juventud/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/movilizando-a-la-juventud",
+      "destination": "/revistavamos/movilizando-la-juventud/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/plantacion-de-iglesias",
+      "destination": "/revistavamos/plantacion-de-iglesias-0/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/plantacion-de-iglesias-2",
+      "destination": "/revistavamos/plantacion-de-iglesias/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/plantacion-de-iglesias-2",
+      "destination": "/revistavamos/plantacion-de-iglesias/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/recibiendo-a-las-naciones",
+      "destination": "/revistavamos/recibiendo-las-naciones-0/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/recibiendo-a-las-naciones",
+      "destination": "/revistavamos/recibiendo-las-naciones-0/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/traduccion-biblica",
+      "destination": "/revistavamos/traduccion-bibilica/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/traduccion-biblica",
+      "destination": "/revistavamos/traduccion-bibilica/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/volviendo-a-casa",
+      "destination": "/revistavamos/volviendo-casa/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/volviendo-a-casa",
+      "destination": "/revistavamos/volviendo-casa/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/alianzasvamosjulio14_0.pdf",
+      "destination": "/revistavamos/alianzas-estrategicas/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/amorenmisionesvamosjunio19.pdf",
+      "destination": "/revistavamos/amor-en-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/aniversariosimvamosnov18.pdf",
+      "destination": "/revistavamos/aniversario-de-sim/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/apolgeticavamosoct21.pdf",
+      "destination": "/revistavamos/apologetica/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/arteenmisionvamosoct19_0.pdf",
+      "destination": "/revistavamos/arte-en-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/arteenmisionvamosoct19.pdf",
+      "destination": "/revistavamos/arte-en-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/asiajunio2013.pdf",
+      "destination": "/revistavamos/oscuridad-en-los-colores-vibrantes-asia/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/autocuidadovamosfeb22.pdf",
+      "destination": "/revistavamos/autocuidado/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/bamvamosoct15.pdf",
+      "destination": "/revistavamos/negocios-como-mision/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/budismovamosdic17.pdf",
+      "destination": "/revistavamos/el-budismo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/capactiacionvamosjunio16.pdf",
+      "destination": "/revistavamos/la-capacitacion-misionera/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/conferenciamisioneravamosjun24.pdf",
+      "destination": "/revistavamos/conferencias-misioneras/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/contextualizacionvamosoct16.pdf",
+      "destination": "/revistavamos/la-contextualizacion/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/creatividadvamosago14_0.pdf",
+      "destination": "/revistavamos/evangelismo-creativo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/creatividadvamosago14.pdf",
+      "destination": "/revistavamos/evangelismo-creativo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/crisisvamosago20.pdf",
+      "destination": "/revistavamos/misiones-en-tiempos-de-crisis/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/cuidadoivamosdic15.pdf",
+      "destination": "/revistavamos/cuidado-integral-del-misionero/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/desarollocomunitariofebrero14.pdf",
+      "destination": "/revistavamos/desarrollo-comunitario/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/diasporavamosfeb17.pdf",
+      "destination": "/revistavamos/recibiendo-las-naciones-0/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/discipuladoenero14_0.pdf",
+      "destination": "/revistavamos/el-discipulado/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/equiposmisionerosmarzo14.pdf",
+      "destination": "/revistavamos/equipos-de-corto-plazo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/equiposmulticulturalesvamosjun23.pdf",
+      "destination": "/revistavamos/equipos-multiculturales-2024/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/evangelismovamosago16.pdf",
+      "destination": "/revistavamos/evangelismo-eficaz/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/familiamisioneravamosfeb20.pdf",
+      "destination": "/revistavamos/familias-misioneras/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/fondosenmisionvamosdic22.pdf",
+      "destination": "/revistavamos/fondos-misioneros-2022/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/fondosvamosfeb16.pdf",
+      "destination": "/revistavamos/fondos-misioneros/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/fondosvamosoct10.pdf",
+      "destination": "/revistavamos/fondos-y-misiones-orig/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/glocalvamosdic14_0.pdf",
+      "destination": "/revistavamos/mision-local-y-global/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/glocalvamosdic14.pdf",
+      "destination": "/revistavamos/mision-local-y-global/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/grandesnecesidadesvamosfeb18_0.pdf",
+      "destination": "/revistavamos/grandes-necesidades/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/grandesnecesidadesvamosfeb18.pdf",
+      "destination": "/revistavamos/grandes-necesidades/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/hinduismovamosjun21.pdf",
+      "destination": "/revistavamos/hinduismo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/htcvamosjun20.pdf",
+      "destination": "/revistavamos/hijos-de-la-tercera-cultura/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/idiomaculturavamossep22_0.pdf",
+      "destination": "/revistavamos/idioma-y-cultura-2022/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/idiomayculturadiciembre2012.pdf",
+      "destination": "/revistavamos/idioma-y-cultura/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/influencersvamosmar24.pdf",
+      "destination": "/revistavamos/soy-influencer/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/islamvamosfeb15_0.pdf",
+      "destination": "/revistavamos/conociendo-el-mundo-musulman/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/islamvamosfeb15.pdf",
+      "destination": "/revistavamos/conociendo-el-mundo-musulman/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/jovenesenmisionvamosoct18_0.pdf",
+      "destination": "/revistavamos/jovenes-en-mision/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/jovenesenmisionvamosoct18.pdf",
+      "destination": "/revistavamos/jovenes-en-mision/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/judaismovamosago18.pdf",
+      "destination": "/revistavamos/judaismo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/latinosal100.pdf",
+      "destination": "/revistavamos/latinos-al-100/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/liderazgovamosnov13.pdf",
+      "destination": "/revistavamos/liderazgo-y-capacitacion-de-lideres/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/limitesvamosnov14.pdf",
+      "destination": "/revistavamos/limitaciones-que-no-limitan/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/llamadovamosset14.pdf",
+      "destination": "/revistavamos/llamado-y-voluntad-de-dios/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/losquequedanvamosago19.pdf",
+      "destination": "/revistavamos/cuidando-de-los-que-se-quedan/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/matrimoniosvamosoct20.pdf",
+      "destination": "/revistavamos/matrimonio-misionero/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/medioorientevamosabril18.pdf",
+      "destination": "/revistavamos/luz-para-el-medio-oriente/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/mediosenmisionvamosagosto17.pdf",
+      "destination": "/revistavamos/los-medios-en-mision/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/misionesmedicasvamosabril20.pdf",
+      "destination": "/revistavamos/misiones-medicas/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/misionesurbanasvamosjunio17_0.pdf",
+      "destination": "/revistavamos/misiones-urbanas/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/movilizacionesdiscipuladovamosjago21.pdf",
+      "destination": "/revistavamos/la-movilizacion-es-discipulado/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/movilizacionvamosdic13_0.pdf",
+      "destination": "/revistavamos/la-movilizacion-misionera/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/moviljuventudvamosabril14.pdf",
+      "destination": "/revistavamos/movilizando-la-juventud/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/mujeresenmisionvamosdic19_0.pdf",
+      "destination": "/revistavamos/mujeres-en-mision/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/noalcanzadosvamossep23.pdf",
+      "destination": "/revistavamos/no-alcanzados/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/ocupacion_vamos_0.pdf",
+      "destination": "/revistavamos/usando-tu-ocupacion-para-el-reino/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/ocupacion_vamos_1.pdf",
+      "destination": "/revistavamos/usando-tu-ocupacion-para-el-reino/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/ocupacion_vamos.pdf",
+      "destination": "/revistavamos/usando-tu-ocupacion-para-el-reino/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/oracionvamosjunio14.pdf",
+      "destination": "/revistavamos/la-oracion/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/pastor_es_clave_vamos.pdf",
+      "destination": "/revistavamos/el-pastor-es-clave/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/plantacionvamosjunio18.pdf",
+      "destination": "/revistavamos/plantacion-de-iglesias/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/procesosvamosdic20_0.pdf",
+      "destination": "/revistavamos/envio-responsable/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/regresoacasavamosdic23.pdf",
+      "destination": "/revistavamos/regresando-a-casa/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/saludmentalvamosfeb21.pdf",
+      "destination": "/revistavamos/salud-mental/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/solteriavamosabr16_0.pdf",
+      "destination": "/revistavamos/la-solteria-un-regalo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/tecnologiavamosabr21.pdf",
+      "destination": "/revistavamos/tecnologia-en-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/trabajoequipovamosabril19.pdf",
+      "destination": "/revistavamos/trabajo-en-equipo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/trabajoyfevamosjunio22.pdf",
+      "destination": "/revistavamos/tu-trabajo-en-el-reino/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/traduccionvamosoct17_0.pdf",
+      "destination": "/revistavamos/traduccion-bibilica/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/traduccionvamosoct17.pdf",
+      "destination": "/revistavamos/traduccion-bibilica/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/traficohumanovamos.pdf",
+      "destination": "/revistavamos/trafico-humano/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/transicionesvamosmar23.pdf",
+      "destination": "/revistavamos/termina-bien/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosabr2010.pdf",
+      "destination": "/revistavamos/misiones-en-zonas-de-conflicto/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosabr2011.pdf",
+      "destination": "/revistavamos/misiones-y-jovenes/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosabr2013.pdf",
+      "destination": "/revistavamos/hijos-de-misioneros/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosabril2011.pdf",
+      "destination": "/revistavamos/misiones-y-jovenes/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosabril2012.pdf",
+      "destination": "/revistavamos/trabajando-con-ninos/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosago2010.pdf",
+      "destination": "/revistavamos/biocupacionales/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosago2011.pdf",
+      "destination": "/revistavamos/mobilizacion/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosago2012.pdf",
+      "destination": "/revistavamos/trabajo-en-paises-restringidos/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosagosto13.pdf",
+      "destination": "/revistavamos/redes-sociales/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosagosto2011.pdf",
+      "destination": "/revistavamos/mobilizacion/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosdic09iglesia.pdf",
+      "destination": "/revistavamos/iglesia-y-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosdic2009.pdf",
+      "destination": "/revistavamos/iglesia-y-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosdic2010.pdf",
+      "destination": "/revistavamos/sida/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosdic2011.pdf",
+      "destination": "/revistavamos/comunicacion-integral/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosene2010.pdf",
+      "destination": "/revistavamos/la-solteria/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosene2011.pdf",
+      "destination": "/revistavamos/volviendo-casa/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosene2012.pdf",
+      "destination": "/revistavamos/resolucion-de-conflictos/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosene2013.pdf",
+      "destination": "/revistavamos/antes-de-ir/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosenero2011.pdf",
+      "destination": "/revistavamos/volviendo-casa/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosfeb2011.pdf",
+      "destination": "/revistavamos/misiones-de-corto-plazo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/Vamosfeb2012.pdf",
+      "destination": "/revistavamos/conferencia-misionera/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosfeb2013.pdf",
+      "destination": "/revistavamos/seguridad-en-el-campo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosfebrero2011.pdf",
+      "destination": "/revistavamos/misiones-de-corto-plazo/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjul2010.pdf",
+      "destination": "/revistavamos/preparacion-misionera/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjul2011.pdf",
+      "destination": "/revistavamos/equipos-multiculturales/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjul2012.pdf",
+      "destination": "/revistavamos/agotamiento/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjul2013.pdf",
+      "destination": "/revistavamos/africa/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjulio2011.pdf",
+      "destination": "/revistavamos/equipos-multiculturales/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjun2010.pdf",
+      "destination": "/revistavamos/la-oracion/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjun2011.pdf",
+      "destination": "/revistavamos/guerra-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjun2012-nuevo.pdf",
+      "destination": "/revistavamos/salud-fisica/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjun2012.pdf",
+      "destination": "/revistavamos/salud-fisica/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjun2013.pdf",
+      "destination": "/revistavamos/oscuridad-en-los-colores-vibrantes-asia/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosjunio2011.pdf",
+      "destination": "/revistavamos/guerra-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmar2010.pdf",
+      "destination": "/revistavamos/familia-en-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmar2011.pdf",
+      "destination": "/revistavamos/cuidado-pastoral/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmar2012.pdf",
+      "destination": "/revistavamos/de-pastor-pastor/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmar2013.pdf",
+      "destination": "/revistavamos/esperanza-para-las-mujeres-valiosas/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmarzo2011.pdf",
+      "destination": "/revistavamos/cuidado-pastoral/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmay2010.pdf",
+      "destination": "/revistavamos/el-llamado/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmay2011.pdf",
+      "destination": "/revistavamos/negocio-como-mision/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmay2012.pdf",
+      "destination": "/revistavamos/mentoria/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmay2013.pdf",
+      "destination": "/revistavamos/vida-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosmayo2011.pdf",
+      "destination": "/revistavamos/negocio-como-mision/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosnov2010.pdf",
+      "destination": "/revistavamos/agencias-misioneras/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosnov2011.pdf",
+      "destination": "/revistavamos/traduccion-de-la-biblia/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosnov2012.pdf",
+      "destination": "/revistavamos/involucrar-tu-iglesia/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosoct13.pdf",
+      "destination": "/revistavamos/caballeros-de-dios/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosoct2010.pdf",
+      "destination": "/revistavamos/fondos-y-misiones-orig/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosoct2011.pdf",
+      "destination": "/revistavamos/plantacion-de-iglesias-0/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosoct2012.pdf",
+      "destination": "/revistavamos/emocionalmente-libres/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamosselvaabril17.pdf",
+      "destination": "/revistavamos/trabajo-en-la-selva/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossep2010.pdf",
+      "destination": "/revistavamos/fondos-y-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossep2011.pdf",
+      "destination": "/revistavamos/donde-cristo-ya-no-es-conocido/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossep2012.pdf",
+      "destination": "/revistavamos/obstaculos-y-perseverancia/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossept13_0.pdf",
+      "destination": "/revistavamos/alcanzando-los-aprendices-de-orales/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossept2011.pdf",
+      "destination": "/revistavamos/donde-cristo-ya-no-es-conocido/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimabril10.pdf",
+      "destination": "/revistavamos/misiones-en-zonas-de-conflicto/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimagosto10.pdf",
+      "destination": "/revistavamos/biocupacionales/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimdic09.pdf",
+      "destination": "/revistavamos/iglesia-y-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimdic10.pdf",
+      "destination": "/revistavamos/sida/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimenero10.pdf",
+      "destination": "/revistavamos/la-solteria/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimjulio10.pdf",
+      "destination": "/revistavamos/preparacion-misionera/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimjunio10.pdf",
+      "destination": "/revistavamos/la-oracion-2010/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimmarzo10.pdf",
+      "destination": "/revistavamos/familia-en-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimmayo10.pdf",
+      "destination": "/revistavamos/el-llamado/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimnov10.pdf",
+      "destination": "/revistavamos/agencias-misioneras/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vamossimsept10.pdf",
+      "destination": "/revistavamos/fondos-y-misiones/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vidaespiritualvamosdic16_0.pdf",
+      "destination": "/revistavamos/mi-vida-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/vidaespiritualvamosdic16.pdf",
+      "destination": "/revistavamos/mi-vida-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2024/11/voluntariadovamosfeb19_0.pdf",
+      "destination": "/revistavamos/voluntariado/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/100dxven.pdf",
+      "destination": "/recursos/100dxven.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/3_jovenes_un_mismo_pastor.docx",
+      "destination": "/recursos/3_jovenes_un_mismo_pastor.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/30_formas_de_expresar_gratitud.pdf",
+      "destination": "/recursos/30_formas_de_expresar_gratitud.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/AdaptacionVAMOSdic24.pdf",
+      "destination": "/revistavamos/latinos-en-adaptacion/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/aspectos_fundamentales_del_modelo_de_discipulado_de_jesucristo.doc",
+      "destination": "/recursos/aspectos_fundamentales_del_modelo_de_discipulado_de_jesucristo.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/ayudando_al_que_es_diferente_0.docx",
+      "destination": "/recursos/ayudando_al_que_es_diferente_0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/budismo_en_asia.docx",
+      "destination": "/recursos/budismo_en_asia.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/budismo_fedemec.doc",
+      "destination": "/recursos/budismo_fedemec.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/budismo_spanish.ppt",
+      "destination": "/recursos/budismo_spanish.ppt",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/campana_de_oracion-_7_dias_por_siria_0.docx",
+      "destination": "/recursos/campana_de_oracion-_7_dias_por_siria_0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/campana_fondos_1.docx",
+      "destination": "/recursos/campana_fondos_1.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/chatarra_0.pptx",
+      "destination": "/recursos/chatarra_0.pptx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/comibam_articulo_para_enciclopedia.docx",
+      "destination": "/recursos/comibam_articulo_para_enciclopedia.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/como_discipular_a_un_creyente_0.docx",
+      "destination": "/recursos/como_discipular_a_un_creyente_0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/como_hacer_el_discipulado.docx",
+      "destination": "/recursos/como_hacer_el_discipulado.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/como_murieron_los_discipulos.docx",
+      "destination": "/recursos/como_murieron_los_discipulos.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/como_orar_por_los_pueblos_no_alcanzados.docx",
+      "destination": "/recursos/como_orar_por_los_pueblos_no_alcanzados.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/conociendo_los_dones_y_talentos.docx",
+      "destination": "/recursos/conociendo_los_dones_y_talentos.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/consejos_para_jovenes_predicadores.docx",
+      "destination": "/recursos/consejos_para_jovenes_predicadores.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/cronologia_de_proyecto_misionero_0.docx",
+      "destination": "/recursos/cronologia_de_proyecto_misionero_0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/cuestionario_de_parejas_-_cuan_bien_conoces_a_tu_pareja.pdf",
+      "destination": "/recursos/cuestionario_de_parejas_-_cuan_bien_conoces_a_tu_pareja.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/cuestionario_de_parejas_-_que_tan_saludable_es_tu_matrimonio_.pdf",
+      "destination": "/recursos/cuestionario_de_parejas_-_que_tan_saludable_es_tu_matrimonio_.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/CuidadoIntegralMarzo25.pdf",
+      "destination": "/revistavamos/cuidado-integral-biblico-y-solidario/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/cuidando_integral_de_las_familias_misioneras.docx",
+      "destination": "/recursos/cuidando_integral_de_las_familias_misioneras.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/curso_basico_sobre_etnias.docx",
+      "destination": "/recursos/curso_basico_sobre_etnias.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/desarrollar_una_visionbam.docx",
+      "destination": "/recursos/desarrollar_una_visionbam.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/desde_la_iglesia_como_facilitamos_el_levantamiento_de_nuevos_misioneros_iglesia_local_y_la_mision_mundial_0.docx",
+      "destination": "/recursos/desde_la_iglesia_como_facilitamos_el_levantamiento_de_nuevos_misioneros_iglesia_local_y_la_mision_mundial_0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/devo_raim_kids_orando_por_los_hijos_de_los_misioneros.pdf",
+      "destination": "/recursos/devo_raim_kids_orando_por_los_hijos_de_los_misioneros.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/discerniendo_la_voluntad_de_dios.docx",
+      "destination": "/recursos/discerniendo_la_voluntad_de_dios.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/discipulado_en_las_familias_-_ministerio_confines.docx",
+      "destination": "/recursos/discipulado_en_las_familias_-_ministerio_confines.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/discipulos_que_hacen_discipulos.docx",
+      "destination": "/recursos/discipulos_que_hacen_discipulos.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/dudas_de_los_jovenes.docx",
+      "destination": "/recursos/dudas_de_los_jovenes.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_agente_secreto_de_misiones_por_dr.docx",
+      "destination": "/recursos/el_agente_secreto_de_misiones_por_dr.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_budismo_occidental.docx",
+      "destination": "/recursos/el_budismo_occidental.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_budismo.pdf",
+      "destination": "/recursos/el_budismo.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_cuidado_de_dios_por_los_desplazados_los_refugiados_y_los_migrantes__0.docx",
+      "destination": "/recursos/el_cuidado_de_dios_por_los_desplazados_los_refugiados_y_los_migrantes__0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_discipulo_en_crecimiento.pdf",
+      "destination": "/recursos/el_discipulo_en_crecimiento.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_legado_tesalonico.docx",
+      "destination": "/recursos/el_legado_tesalonico.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_mensaje_de_jesus.pdf",
+      "destination": "/recursos/el_mensaje_de_jesus.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_pastoreado_del_rebano_de_dios.docx",
+      "destination": "/recursos/el_pastoreado_del_rebano_de_dios.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_perfil_del_misionero_transcultural_ideal.doc",
+      "destination": "/recursos/el_perfil_del_misionero_transcultural_ideal.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_plan_maestro_del_evangelismo.docx",
+      "destination": "/recursos/el_plan_maestro_del_evangelismo.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/el_poder_de_los_individuos.docx",
+      "destination": "/recursos/el_poder_de_los_individuos.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/en_que_estas_gastando.docx",
+      "destination": "/recursos/en_que_estas_gastando.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/encontrando_tus_dones.pdf",
+      "destination": "/recursos/encontrando_tus_dones.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/ensenando_misiones_a_los_ninos.ppt",
+      "destination": "/recursos/ensenando_misiones_a_los_ninos.ppt",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/envio_misionero_responsable.pdf",
+      "destination": "/recursos/envio_misionero_responsable.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/evaluacion_de_los_proyectos_locales_de_la_iglesia.docx",
+      "destination": "/recursos/evaluacion_de_los_proyectos_locales_de_la_iglesia.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/evangelizando_a_los_judios_por_apolos_landa.pdf",
+      "destination": "/recursos/evangelizando_a_los_judios_por_apolos_landa.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/experiencia_familiar_de_corto_plazo_1.docx",
+      "destination": "/recursos/experiencia_familiar_de_corto_plazo_1.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/feria_de_misiones.pdf",
+      "destination": "/recursos/feria_de_misiones.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/ficha_de_compromiso_y_cronograma_mensual_1.docx",
+      "destination": "/recursos/ficha_de_compromiso_y_cronograma_mensual_1.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/ficha_de_compromiso_y_cronograma_mensual_2.docx",
+      "destination": "/recursos/ficha_de_compromiso_y_cronograma_mensual_2.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/finanzas_misioneras_omar.docx",
+      "destination": "/recursos/finanzas_misioneras_omar.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/finanzas_para_las_misiones_mundiales.pdf",
+      "destination": "/recursos/finanzas_para_las_misiones_mundiales.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/folleto_promesa_de_fe.doc",
+      "destination": "/recursos/folleto_promesa_de_fe.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/folletosamm.pdf",
+      "destination": "/recursos/folletosamm.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/fundamentos_de_la_capacitacion_misionera_transcultural.doc",
+      "destination": "/recursos/fundamentos_de_la_capacitacion_misionera_transcultural.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/GenteQueNoVemosVAMOSsept24.pdf",
+      "destination": "/revistavamos/la-gente-que-no-vemos/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/gran_historia.doc",
+      "destination": "/recursos/gran_historia.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/gran_historia.pdf",
+      "destination": "/recursos/gran_historia.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/grupos_budistas_no_alcanzados.pdf",
+      "destination": "/recursos/grupos_budistas_no_alcanzados.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/guia_para_lideres_-_trabajo_con_personas_con_discapacidad._fundacion_sendas.ppt",
+      "destination": "/recursos/guia_para_lideres_-_trabajo_con_personas_con_discapacidad._fundacion_sendas.ppt",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/honor_y_verguenza_en_las_relaciones_transculturales.pdf",
+      "destination": "/recursos/honor_y_verguenza_en_las_relaciones_transculturales.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/hora_misionera_de_ninos.doc",
+      "destination": "/recursos/hora_misionera_de_ninos.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/incluyendo_a_las_personas_con_discapacidad_en_la_iglesia_-_ministerio_amistad.docx",
+      "destination": "/recursos/incluyendo_a_las_personas_con_discapacidad_en_la_iglesia_-_ministerio_amistad.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/integridad_y_cooperacion_en_la_mision.pdf",
+      "destination": "/recursos/integridad_y_cooperacion_en_la_mision.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/juntos_con_un_mismo_objetivo.docx",
+      "destination": "/recursos/juntos_con_un_mismo_objetivo.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/la_discapacidad_es_voluntad_de_dios.docx",
+      "destination": "/recursos/la_discapacidad_es_voluntad_de_dios.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/la_historia_del_budismo.doc",
+      "destination": "/recursos/la_historia_del_budismo.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/la_voluntad_de_dios_nunca_te_llevara_poesia.docx",
+      "destination": "/recursos/la_voluntad_de_dios_nunca_te_llevara_poesia.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/lagranomision.pdf",
+      "destination": "/recursos/lagranomision.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/las_asociaciones_en_las_misiones.docx",
+      "destination": "/recursos/las_asociaciones_en_las_misiones.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/lineadetiemposim_0.pdf",
+      "destination": "/recursos/lineadetiemposim_0.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/lineadetiemposim.pdf",
+      "destination": "/recursos/lineadetiemposim.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/lo_que_el_pastor_debe_saber_y_hacer.doc",
+      "destination": "/recursos/lo_que_el_pastor_debe_saber_y_hacer.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/lo_que_ellos_ven_en_los_cristianos_0.docx",
+      "destination": "/recursos/lo_que_ellos_ven_en_los_cristianos_0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/los_bebes_en_cristo.docx",
+      "destination": "/recursos/los_bebes_en_cristo.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/los_inicios_de_un_movimiento.pdf",
+      "destination": "/recursos/los_inicios_de_un_movimiento.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/los_jovenes_preguntan.docx",
+      "destination": "/recursos/los_jovenes_preguntan.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/luchando_contra_una_fragmentada.docx",
+      "destination": "/recursos/luchando_contra_una_fragmentada.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/maestria_alfarero.pdf",
+      "destination": "/recursos/maestria_alfarero.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/maneras_de_servir.docx",
+      "destination": "/recursos/maneras_de_servir.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/manual_del_maestro_gran_historiaesp.doc",
+      "destination": "/recursos/manual_del_maestro_gran_historiaesp.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/manualhavamos_0.pdf",
+      "destination": "/recursos/manualhavamos_0.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/mapa_de_oracion.doc",
+      "destination": "/recursos/mapa_de_oracion.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/mefi-boset_-_ministerio_confines_paraguay.docx",
+      "destination": "/recursos/mefi-boset_-_ministerio_confines_paraguay.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/mejor_en_la_cancha.pdf",
+      "destination": "/recursos/mejor_en_la_cancha.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/metodos_misioneros_0.doc",
+      "destination": "/recursos/metodos_misioneros_0.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/misionero_ante_las_culturas-reichel_dolmatoff.pdf",
+      "destination": "/recursos/misionero_ante_las_culturas-reichel_dolmatoff.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/misiones_latinas_siglo_xxi.pdf",
+      "destination": "/recursos/misiones_latinas_siglo_xxi.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/moduloesp.doc",
+      "destination": "/recursos/moduloesp.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/nancy_guthrie_-_aferrandose_a_la_esperanza.pdf",
+      "destination": "/recursos/nancy_guthrie_-_aferrandose_a_la_esperanza.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/narracion_por_que.docx",
+      "destination": "/recursos/narracion_por_que.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/nuevo_obrero_v8_.pdf",
+      "destination": "/recursos/nuevo_obrero_v8_.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/ofrenda_de_promesa_de_fe.doc",
+      "destination": "/recursos/ofrenda_de_promesa_de_fe.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/oralidad_-_estilos_de_aprendizaje.doc",
+      "destination": "/recursos/oralidad_-_estilos_de_aprendizaje.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/orando_pro_los_budistas.pdf",
+      "destination": "/recursos/orando_pro_los_budistas.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/orientacion_inicial_para_candidatos_a_misioneros.doc",
+      "destination": "/recursos/orientacion_inicial_para_candidatos_a_misioneros.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/pablo_y_timoteo.docx",
+      "destination": "/recursos/pablo_y_timoteo.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/paraquesirven.doc",
+      "destination": "/recursos/paraquesirven.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/partnership_y_el_dinero.doc",
+      "destination": "/recursos/partnership_y_el_dinero.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/plan_para_feria_de_misiones.pdf",
+      "destination": "/recursos/plan_para_feria_de_misiones.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/planear_un_viaje_misionero_comunidades_0.docx",
+      "destination": "/recursos/planear_un_viaje_misionero_comunidades_0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/planear_un_viaje_misionero_comunidades_1.docx",
+      "destination": "/recursos/planear_un_viaje_misionero_comunidades_1.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/predica_2.docx",
+      "destination": "/recursos/predica_2.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/predica_3.docx",
+      "destination": "/recursos/predica_3.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/predica_4.docx",
+      "destination": "/recursos/predica_4.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/preguntas_frecuentes_material_vamos.docx",
+      "destination": "/recursos/preguntas_frecuentes_material_vamos.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/preparandose_para_contar_la_historia.docx",
+      "destination": "/recursos/preparandose_para_contar_la_historia.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/presupuesto_misionero.xls",
+      "destination": "/recursos/presupuesto_misionero.xls",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/promesa_de_fe.docx",
+      "destination": "/recursos/promesa_de_fe.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/promesa_de_fe.pdf",
+      "destination": "/recursos/promesa_de_fe.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/quien_dice_mision_dice_capacitacion.docx",
+      "destination": "/recursos/quien_dice_mision_dice_capacitacion.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/realizar_alianzas_estrategicas_para_el_envio_de_misioneros.doc",
+      "destination": "/recursos/realizar_alianzas_estrategicas_para_el_envio_de_misioneros.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/relaciones_y_alianzas.docx",
+      "destination": "/recursos/relaciones_y_alianzas.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/religiones_del_mundo.docx",
+      "destination": "/recursos/religiones_del_mundo.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/repensando_nuestra_capacitacion_misionera.pdf",
+      "destination": "/recursos/repensando_nuestra_capacitacion_misionera.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/seis_llaves_para_abrir_la_puerta_a_las_misiones.docx",
+      "destination": "/recursos/seis_llaves_para_abrir_la_puerta_a_las_misiones.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/seminario_de_mov_misio_de_la_igl_local.doc",
+      "destination": "/recursos/seminario_de_mov_misio_de_la_igl_local.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/sufrimiento_el_costo_del_discipulado.docx",
+      "destination": "/recursos/sufrimiento_el_costo_del_discipulado.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/tallerdemanoschiquitas.doc",
+      "destination": "/recursos/tallerdemanoschiquitas.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/tengo_dones_para_servir_en_1.doc",
+      "destination": "/recursos/tengo_dones_para_servir_en_1.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/test_dones_espirituales.pdf",
+      "destination": "/recursos/test_dones_espirituales.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/testimonios_ministerio_amistad_compatibility_mode.pdf",
+      "destination": "/recursos/testimonios_ministerio_amistad_compatibility_mode.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/tomando_buenas_decisiones.docx",
+      "destination": "/recursos/tomando_buenas_decisiones.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/tripticocomo_me_preparo_0.pdf",
+      "destination": "/recursos/tripticocomo_me_preparo_0.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/tripticocomo_me_preparo.pdf",
+      "destination": "/recursos/tripticocomo_me_preparo.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/tripticofondos_0.pdf",
+      "destination": "/recursos/tripticofondos_0.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/tripticooracion.pdf",
+      "destination": "/recursos/tripticooracion.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/un_ano_de_misiones.pdf",
+      "destination": "/recursos/un_ano_de_misiones.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/un_modelo_de_cooperacion_f.doc",
+      "destination": "/recursos/un_modelo_de_cooperacion_f.doc",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/un_motivo_para_orar.docx",
+      "destination": "/recursos/un_motivo_para_orar.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/una_leccion_en_milagros.docx",
+      "destination": "/recursos/una_leccion_en_milagros.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/04/verdaderas_asociaciones_eclesiales_transculturales.docx",
+      "destination": "/recursos/verdaderas_asociaciones_eclesiales_transculturales.docx",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/05/DiscipuladoVAMOSjunio25.pdf",
+      "destination": "/revistavamos/discipulos-que-hacen-discipulos/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/08/CaracterVAMOSseptiembre25.pdf",
+      "destination": "/revistavamos/caracter-misionero/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2025/11/SIMLaEnvio25.pdf",
+      "destination": "/revistavamos/envio-responsable-2/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2026/02/LuchaEspiritualVamosMarzo26-1.pdf",
+      "destination": "/revistavamos/lucha-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2026/02/LuchaEspiritualVamosMarzo26-2.pdf",
+      "destination": "/revistavamos/lucha-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2026/02/LuchaEspiritualVamosMarzo26-3.pdf",
+      "destination": "/revistavamos/lucha-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2026/02/LuchaEspiritualVamosMarzo26-4.pdf",
+      "destination": "/revistavamos/lucha-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2026/02/LuchaEspiritualVamosMarzo26.pdf",
+      "destination": "/revistavamos/lucha-espiritual/",
+      "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/2026/05/LlamadoMacedonioJun26.pdf",
+      "destination": "/revistavamos/el-clamor-macedonio/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio-category/:path*",
+      "destination": "/sirve-con-sim/",
+      "permanent": true
+    },
+    {
+      "source": "/portfolio/:path*",
+      "destination": "/sirve-con-sim/",
+      "permanent": true
+    },
+    {
       "source": "/blog/author/:path*",
       "destination": "/blog/",
       "permanent": true
@@ -654,6 +2269,534 @@
     {
       "source": "/revistavamos/volviendo-casa/2011-01-VolviendoacasaVAMOS.pdf",
       "destination": "https://assets.ctfassets.net/i46buyptg48q/3Uld3cyHmfB17q6baWlrke/ac7fb592276f1a1b35b078a06ec27083/2011-01-VolviendoacasaVAMOS.pdf"
+    },
+    {
+      "source": "/recursos/100dxven.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1eABw2yi89Ft9KdRsxp5NB/2a6280cfc5b621b7242d00626bf17246/100dxven.pdf"
+    },
+    {
+      "source": "/recursos/3_jovenes_un_mismo_pastor.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/41nrQSfn0Z4a0GF1ow6u5x/49868ff4afa43ba8abf51b4a62d01002/3_jovenes_un_mismo_pastor.docx"
+    },
+    {
+      "source": "/recursos/30_formas_de_expresar_gratitud.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/Hh6xcVQfUR5Fow5aO2yyZ/27fd8a6e6e1ed06152aeeec5482bd749/30_formas_de_expresar_gratitud.pdf"
+    },
+    {
+      "source": "/recursos/aspectos_fundamentales_del_modelo_de_discipulado_de_jesucristo.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/g7MYHUuMRl5tpICuCtjAv/70796a4b70d91fb8182776761fbffae3/aspectos_fundamentales_del_modelo_de_discipulado_de_jesucristo.doc"
+    },
+    {
+      "source": "/recursos/ayudando_al_que_es_diferente_0.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3iWGjjQepXB7a05GEQhC15/b70dfa347b99c7499cd2e9d1e77e5e2a/ayudando_al_que_es_diferente_0.docx"
+    },
+    {
+      "source": "/recursos/budismo_en_asia.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3Et4MAIIxnZQR1WPQ9C9QS/f7f3961f3f7e860d406c1aacb7edda57/budismo_en_asia.docx"
+    },
+    {
+      "source": "/recursos/budismo_fedemec.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2BewQOUW7jVeLNUiu0gDqT/197197bb766c93269945f5a50883d2e9/budismo_fedemec.doc"
+    },
+    {
+      "source": "/recursos/budismo_spanish.ppt",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/sN3d2ol0Px3Ii4tsuZk7x/45726687675db7e7b4ff83db987b6d85/budismo_spanish.ppt"
+    },
+    {
+      "source": "/recursos/campana_de_oracion-_7_dias_por_siria_0.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3Nq0vaZgHfHG50jmROpAYV/36ae1245252dd07bbddc962dd6e9ded5/campana_de_oracion-_7_dias_por_siria_0.docx"
+    },
+    {
+      "source": "/recursos/campana_fondos_1.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5EGjK8DOAK8a1RZZG8BMxL/1441a99629fc933d2f65dbb0b5d148b0/campana_fondos_1.docx"
+    },
+    {
+      "source": "/recursos/chatarra_0.pptx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1UNcOynSrDac5cm4ZZkLgB/0648b49be27ef02f11c3bf2a6fd416b1/chatarra_0.pptx"
+    },
+    {
+      "source": "/recursos/comibam_articulo_para_enciclopedia.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2PRtbZb4TZ3azCSgSlXrSc/60d23b15c55c80fb16b15cb605ca285b/comibam_articulo_para_enciclopedia.docx"
+    },
+    {
+      "source": "/recursos/como_discipular_a_un_creyente_0.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7nrFG4kcpg1grJfwnKXpCq/da8de62901a1fd6636dcd0482aa65ced/como_discipular_a_un_creyente_0.docx"
+    },
+    {
+      "source": "/recursos/como_hacer_el_discipulado.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6Tzrz9SgDQYQ6EVYbFaokO/c757fea64d630a912662636328b05939/como_hacer_el_discipulado.docx"
+    },
+    {
+      "source": "/recursos/como_murieron_los_discipulos.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/10vIuP4IDLDKalXrWO74HP/08c1c49159def3fa714b4c8d289e9f55/como_murieron_los_discipulos.docx"
+    },
+    {
+      "source": "/recursos/como_orar_por_los_pueblos_no_alcanzados.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/56UKur6JQYp9iUqy2TpGtO/82aa01bc290e3885a512b621642db9ef/como_orar_por_los_pueblos_no_alcanzados.docx"
+    },
+    {
+      "source": "/recursos/conociendo_los_dones_y_talentos.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2HEsEBZ1iBVg9Iu4y6TJxi/4b5d6092970af90609dda51638dd1e6a/conociendo_los_dones_y_talentos.docx"
+    },
+    {
+      "source": "/recursos/consejos_para_jovenes_predicadores.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3rP3ATxBliHMOCwuCLB5Ef/1b9a41aa4cb00b05b5a95a7537773f56/consejos_para_jovenes_predicadores.docx"
+    },
+    {
+      "source": "/recursos/cronologia_de_proyecto_misionero_0.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4dBANx4aOgEBWH5LywEhTu/581ec19948f08e2409d2dd5642594da0/cronologia_de_proyecto_misionero_0.docx"
+    },
+    {
+      "source": "/recursos/cuestionario_de_parejas_-_cuan_bien_conoces_a_tu_pareja.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5DmuTaRZpfSMoKCijVCdyZ/69f559271351d5aa2174bae9a0d3186b/cuestionario_de_parejas_-_cuan_bien_conoces_a_tu_pareja.pdf"
+    },
+    {
+      "source": "/recursos/cuestionario_de_parejas_-_que_tan_saludable_es_tu_matrimonio_.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1hFUvH1KGezcbzcacnhhrF/fe2eb947b30cc750625427d9bd82fcf3/cuestionario_de_parejas_-_que_tan_saludable_es_tu_matrimonio_.pdf"
+    },
+    {
+      "source": "/recursos/cuidando_integral_de_las_familias_misioneras.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/fhv33anm1gS18SSxV33cE/c58fbd4145c4f8cbed400551038f3365/cuidando_integral_de_las_familias_misioneras.docx"
+    },
+    {
+      "source": "/recursos/curso_basico_sobre_etnias.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2QVZWzHBeVbYZINMpRoyCx/1ebad268baf795eb2cea3785406d2430/curso_basico_sobre_etnias.docx"
+    },
+    {
+      "source": "/recursos/desarrollar_una_visionbam.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/gG3wYCDwx2gSZJAFs8K0I/ae0c6d2a02c7b1110c561bf2773d3b3e/desarrollar_una_visionbam.docx"
+    },
+    {
+      "source": "/recursos/desde_la_iglesia_como_facilitamos_el_levantamiento_de_nuevos_misioneros_iglesia_local_y_la_mision_mundial_0.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1jlDlYqD1B62PdHtxt0anu/67ee49e3f067d2e5c07169922d4aae19/desde_la_iglesia_como_facilitamos_el_levantamiento_de_nuevos_misioneros_iglesia_local_y_la_mision_mundial_0.docx"
+    },
+    {
+      "source": "/recursos/devo_raim_kids_orando_por_los_hijos_de_los_misioneros.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/kMmHXiWvlweja6FTK2jSH/6db29e9a3e02ec6f7d12052d9bb3d6b1/devo_raim_kids_orando_por_los_hijos_de_los_misioneros.pdf"
+    },
+    {
+      "source": "/recursos/discerniendo_la_voluntad_de_dios.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5J0RmilhPSCEx1bJ0WKTae/530cddf83488356663f19232c7a0c679/discerniendo_la_voluntad_de_dios.docx"
+    },
+    {
+      "source": "/recursos/discipulado_en_las_familias_-_ministerio_confines.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4ezjXyXYO4e7H2DfYOFcbk/8c171b1d4f2a1ca8c1ff4f3eec9867d3/discipulado_en_las_familias_-_ministerio_confines.docx"
+    },
+    {
+      "source": "/recursos/discipulos_que_hacen_discipulos.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2tVITxkLmQnqvCBujVaKDC/86a944c37a5cdaa664880c233e300e6a/discipulos_que_hacen_discipulos.docx"
+    },
+    {
+      "source": "/recursos/dudas_de_los_jovenes.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4NlyQtayiYr4Rzmz8f3c9a/45c6acd7a5c56d38ba726b88974a74b6/dudas_de_los_jovenes.docx"
+    },
+    {
+      "source": "/recursos/el_agente_secreto_de_misiones_por_dr.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4ZaoIZTxvLO3pvCH0mp1Gp/72a1462301d4cb7f0506f8ec21b25bb6/el_agente_secreto_de_misiones_por_dr.docx"
+    },
+    {
+      "source": "/recursos/el_budismo_occidental.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4YgiFTFZE8N7XrhrWMqAfA/31b147af0064f5b174c2cc2c38e9ada2/el_budismo_occidental.docx"
+    },
+    {
+      "source": "/recursos/el_budismo.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1xIUnKEVcFrwOojBusjkba/2f7ae2190ed8034157509533618b2b57/el_budismo.pdf"
+    },
+    {
+      "source": "/recursos/el_cuidado_de_dios_por_los_desplazados_los_refugiados_y_los_migrantes__0.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4FAJImUr0TElK0RNwr170S/7ab2ec3c0a7b7c1ba435ba376a6d494e/el_cuidado_de_dios_por_los_desplazados_los_refugiados_y_los_migrantes__0.docx"
+    },
+    {
+      "source": "/recursos/el_discipulo_en_crecimiento.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1Nq2El3x75EQehNWskENZW/865bc4811c6424ad792687596ae543a8/el_discipulo_en_crecimiento.pdf"
+    },
+    {
+      "source": "/recursos/el_legado_tesalonico.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4eaVK4uBOct6aPdSRrUqYP/8c03ab69a31f6d4f48ed231a2418dfad/el_legado_tesalonico.docx"
+    },
+    {
+      "source": "/recursos/el_mensaje_de_jesus.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3oXPGTJOMHGOba4jwHoCa5/7f2c3aba1ab8af91949a5b9246c82263/el_mensaje_de_jesus.pdf"
+    },
+    {
+      "source": "/recursos/el_pastoreado_del_rebano_de_dios.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/XLBVWcn613grvtd1RvLOH/f2757b36421f2b074d59839e775489f8/el_pastoreado_del_rebano_de_dios.docx"
+    },
+    {
+      "source": "/recursos/el_perfil_del_misionero_transcultural_ideal.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4LKlEFBj7HcUZqeiNcW0BY/a5040feaf744b25c935f56f428a9b300/el_perfil_del_misionero_transcultural_ideal.doc"
+    },
+    {
+      "source": "/recursos/el_plan_maestro_del_evangelismo.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/426ra3sACqqN38QxupUv4E/33b9eeb464e67a300e25898ab6e1b45c/el_plan_maestro_del_evangelismo.docx"
+    },
+    {
+      "source": "/recursos/el_poder_de_los_individuos.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5iyhT6KjjLILxhOZF31Rz6/6c961c82c592295fe9833d88e6a2bf43/el_poder_de_los_individuos.docx"
+    },
+    {
+      "source": "/recursos/en_que_estas_gastando.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6LlzNNYSCGszFOPo3hISPB/cdf3cdd2e7a266623c7519305954e7c3/en_que_estas_gastando.docx"
+    },
+    {
+      "source": "/recursos/encontrando_tus_dones.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1EZNS91hQMFAYFYgzrxAKU/d1aa57ad53d4370e48856aa4d687fc86/encontrando_tus_dones.pdf"
+    },
+    {
+      "source": "/recursos/ensenando_misiones_a_los_ninos.ppt",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5IRISZ6028Lr7qlc4DNCTc/8e7a6f3f6ca18e0807799998b6da8234/ensenando_misiones_a_los_ninos.ppt"
+    },
+    {
+      "source": "/recursos/envio_misionero_responsable.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/44y014T3UzvUIIG6m8c1Db/24b0ab563bcb80fad61da951ba28cdc1/envio_misionero_responsable.pdf"
+    },
+    {
+      "source": "/recursos/evaluacion_de_los_proyectos_locales_de_la_iglesia.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5YSTolZflQFRP19bAoni4g/e65c63017f1c3248eb0a19b9d0523882/evaluacion_de_los_proyectos_locales_de_la_iglesia.docx"
+    },
+    {
+      "source": "/recursos/evangelizando_a_los_judios_por_apolos_landa.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/BkDN3WZtbItXEYXffhNuw/2857d1aba4fb234d5b9c8884ebcb7bd8/evangelizando_a_los_judios_por_apolos_landa.pdf"
+    },
+    {
+      "source": "/recursos/experiencia_familiar_de_corto_plazo_1.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6UN8cvFnpttNZIPaPfF8Eg/bcc4d6033c7885924fae9b7812f4e6fc/experiencia_familiar_de_corto_plazo_1.docx"
+    },
+    {
+      "source": "/recursos/feria_de_misiones.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2DoqTdbq5aHOzQsfcSWbKe/445882c9df0f1c3250968460155cfaa3/feria_de_misiones.pdf"
+    },
+    {
+      "source": "/recursos/ficha_de_compromiso_y_cronograma_mensual_1.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2zlqmAhliFjYTvNyfswjmr/ff04e56263ec0358bbcc5b893169dbbc/ficha_de_compromiso_y_cronograma_mensual_1.docx"
+    },
+    {
+      "source": "/recursos/ficha_de_compromiso_y_cronograma_mensual_2.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2zlqmAhliFjYTvNyfswjmr/ff04e56263ec0358bbcc5b893169dbbc/ficha_de_compromiso_y_cronograma_mensual_1.docx"
+    },
+    {
+      "source": "/recursos/finanzas_misioneras_omar.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/25Rw86CglgiNKT1yhSaOcK/37cf659c8dcf726f56cd1ee6b414b71e/finanzas_misioneras_omar.docx"
+    },
+    {
+      "source": "/recursos/finanzas_para_las_misiones_mundiales.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6WKxJ3bCb1PT6mkqcqTBjC/95e4a60740b3542486cdc4e40791f4b5/finanzas_para_las_misiones_mundiales.pdf"
+    },
+    {
+      "source": "/recursos/folleto_promesa_de_fe.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/11RJ0twxzZl7IwCDJErsfF/55abe8523a8095531ed99f03662bad65/folleto_promesa_de_fe.doc"
+    },
+    {
+      "source": "/recursos/folletosamm.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/rMkspyQanuZJowt3c8C4E/5c28e70b00aa6504d3c4c772f78f089e/folletosamm.pdf"
+    },
+    {
+      "source": "/recursos/fundamentos_de_la_capacitacion_misionera_transcultural.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6VqWQ9sPXQQLnnY5LKlGWN/3e3b9e33beb5519f079093f96a939200/fundamentos_de_la_capacitacion_misionera_transcultural.doc"
+    },
+    {
+      "source": "/recursos/gran_historia.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7tyAgbeVdxCMYevQxG4lWp/9a7a7d719a998a5ed57f2d003cf27def/gran_historia.doc"
+    },
+    {
+      "source": "/recursos/gran_historia.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7tyAgbeVdxCMYevQxG4lWp/9a7a7d719a998a5ed57f2d003cf27def/gran_historia.doc"
+    },
+    {
+      "source": "/recursos/grupos_budistas_no_alcanzados.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/53EsLgvqIv6hPh1jruWPji/bf407c782fb9889a9eb197da6598b8eb/grupos_budistas_no_alcanzados.pdf"
+    },
+    {
+      "source": "/recursos/guia_para_lideres_-_trabajo_con_personas_con_discapacidad._fundacion_sendas.ppt",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3N8Bm0bmjXCPDSe7ENbiSE/be2c21b8a9494c048b5aca4262eb1d9c/guia_para_lideres_-_trabajo_con_personas_con_discapacidad._fundacion_sendas.ppt"
+    },
+    {
+      "source": "/recursos/honor_y_verguenza_en_las_relaciones_transculturales.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7nJCbyIVJ4m1kLx27zNZwn/7a8e2d6bf9771ed9c45eb7e720508d14/honor_y_verguenza_en_las_relaciones_transculturales.pdf"
+    },
+    {
+      "source": "/recursos/hora_misionera_de_ninos.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2IihGPvFiiR21L58XrZhQI/ff0f8a799c3d1e3f2aa9d41a66b643e4/hora_misionera_de_ninos.doc"
+    },
+    {
+      "source": "/recursos/incluyendo_a_las_personas_con_discapacidad_en_la_iglesia_-_ministerio_amistad.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3PMY6tevN5XfuUgHDPlH1h/d1cc54e595f88455e119eafd2553bd40/incluyendo_a_las_personas_con_discapacidad_en_la_iglesia_-_ministerio_amistad.docx"
+    },
+    {
+      "source": "/recursos/integridad_y_cooperacion_en_la_mision.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/J10s1rKi5RYj1LNCt67RM/f5087c93241fef0dac1695aada3ca874/integridad_y_cooperacion_en_la_mision.pdf"
+    },
+    {
+      "source": "/recursos/juntos_con_un_mismo_objetivo.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4Z866PpIestN7HkNqbMlqO/db68cdbe306b997b1d27be107e536488/juntos_con_un_mismo_objetivo.docx"
+    },
+    {
+      "source": "/recursos/la_discapacidad_es_voluntad_de_dios.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/703pKvtLw268wtsN6u6uT0/b966f81ee54b0cf94cf055c34f837a75/la_discapacidad_es_voluntad_de_dios.docx"
+    },
+    {
+      "source": "/recursos/la_historia_del_budismo.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/opodyOnQmAWjsGxMhgBt8/a0eabe55b932ea6f30656f35d150950a/la_historia_del_budismo.doc"
+    },
+    {
+      "source": "/recursos/la_voluntad_de_dios_nunca_te_llevara_poesia.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3wJRZTRlIkVngjTsm0yJ8Z/a2ac141ce90662e6ca083e1b8a5147ca/la_voluntad_de_dios_nunca_te_llevara_poesia.docx"
+    },
+    {
+      "source": "/recursos/lagranomision.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3LPqHcGqUa1ZOKqer4hMP4/e5fc36624034e325003bfdbae916c8b6/lagranomision.pdf"
+    },
+    {
+      "source": "/recursos/las_asociaciones_en_las_misiones.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/quzq3fLBEVGL3ToVmzCJ3/9bf82685e80260f363c7a26c01130abd/las_asociaciones_en_las_misiones.docx"
+    },
+    {
+      "source": "/recursos/lineadetiemposim_0.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1xkbxd8eNEt938KsD4Usus/152098f7c913c1bfb74fe9f51fb7cf81/lineadetiemposim.pdf"
+    },
+    {
+      "source": "/recursos/lineadetiemposim.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1xkbxd8eNEt938KsD4Usus/152098f7c913c1bfb74fe9f51fb7cf81/lineadetiemposim.pdf"
+    },
+    {
+      "source": "/recursos/lo_que_el_pastor_debe_saber_y_hacer.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6mCuLBlMfjyj0Jai2m5YFA/70223bc81eafee1bf380176b9418c3dc/lo_que_el_pastor_debe_saber_y_hacer.doc"
+    },
+    {
+      "source": "/recursos/lo_que_ellos_ven_en_los_cristianos_0.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7FlhK8QV4QGFh49itKB7dK/995c8912b5dc657445de38c645effc24/lo_que_ellos_ven_en_los_cristianos_0.docx"
+    },
+    {
+      "source": "/recursos/los_bebes_en_cristo.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/yjajPgSuMY1v4PTwYqxIs/373b19fba247fab70c3311837997df86/los_bebes_en_cristo.docx"
+    },
+    {
+      "source": "/recursos/los_inicios_de_un_movimiento.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1MxqxuG6AXZ9YSB3jfU1Zc/049edf3a2a27cb077674c49879c531fa/los_inicios_de_un_movimiento.pdf"
+    },
+    {
+      "source": "/recursos/los_jovenes_preguntan.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5ydxSPdu0vWK1zSrGPSJF3/0ace6a25d7acb826e9cccc8b614e2fc1/los_jovenes_preguntan.docx"
+    },
+    {
+      "source": "/recursos/luchando_contra_una_fragmentada.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/573TopPS3d8irP4FFj8O1z/70b1d1da5fd1c7cf3571b6da70d29390/luchando_contra_una_fragmentada.docx"
+    },
+    {
+      "source": "/recursos/maestria_alfarero.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2KTmguRxn9Zo6ZRGab4AG3/f53a79baa815539527169fa8767522bf/maestria_alfarero.pdf"
+    },
+    {
+      "source": "/recursos/maneras_de_servir.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/18QV3ji9zTPuIzbS0cqMd8/0cfcf6db08040def85891aac5f2f0eeb/maneras_de_servir.docx"
+    },
+    {
+      "source": "/recursos/manual_del_maestro_gran_historiaesp.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5kYB4re66UBvCvTJe3kj5o/e58837fcffd0334bd59282525534abc1/manual_del_maestro_gran_historiaesp.doc"
+    },
+    {
+      "source": "/recursos/manualhavamos_0.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2FxknyCZI7HxiqSWxlnOYi/2384d8336c160c05722aa043b986e8c4/manualhavamos_0.pdf"
+    },
+    {
+      "source": "/recursos/mapa_de_oracion.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5J51xrRnRDwPninMDHsUaS/b8856bf57ec0d1bb9f968b6a9599f9a8/mapa_de_oracion.doc"
+    },
+    {
+      "source": "/recursos/mefi-boset_-_ministerio_confines_paraguay.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2nxv8ac0cfY81C06zK0tXR/8c4c582216abc2dd76ce987151e2fbe3/mefi-boset_-_ministerio_confines_paraguay.docx"
+    },
+    {
+      "source": "/recursos/mejor_en_la_cancha.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6LyUikoTyjSxudbEauraPT/18a8f66640ef33414fe1c88e047971e9/mejor_en_la_cancha.pdf"
+    },
+    {
+      "source": "/recursos/metodos_misioneros_0.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/58o9p77eeft9guMdPZof68/3191938d59f04fba1216b54d349023ae/metodos_misioneros_0.doc"
+    },
+    {
+      "source": "/recursos/misionero_ante_las_culturas-reichel_dolmatoff.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/13IYF2QnnGKk8rqyhbgMbQ/c992717a481dde4228e1eb881f588fbc/misionero_ante_las_culturas-reichel_dolmatoff.pdf"
+    },
+    {
+      "source": "/recursos/misiones_latinas_siglo_xxi.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6nvvBhEme7SGdvAAlCSbo9/79582c6a30e15614b7a0666c7345d584/misiones_latinas_siglo_xxi.pdf"
+    },
+    {
+      "source": "/recursos/moduloesp.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6CL34TrPpYMd2AzLPaXsTD/b6cd9d45d2e3eb4056aa1c4fd098ab2c/moduloesp.doc"
+    },
+    {
+      "source": "/recursos/nancy_guthrie_-_aferrandose_a_la_esperanza.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5ePYmfGwtYox9TCxygGQcB/2e30bf3d4fca54a4e7b1945bcf3cd40a/nancy_guthrie_-_aferrandose_a_la_esperanza.pdf"
+    },
+    {
+      "source": "/recursos/narracion_por_que.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2BkZGdNoVuf6MFYxLvoY36/aa1eef555fbffe02502a9acf14b24fa2/narracion_por_que.docx"
+    },
+    {
+      "source": "/recursos/nuevo_obrero_v8_.pdf",
+      "destination": "https://downloads.ctfassets.net/i46buyptg48q/5DjyQr5k0eQE4odwY4aTom/1d436a87c089d321b6359a3750697b07/nuevo_obrero_v8_.pdf"
+    },
+    {
+      "source": "/recursos/ofrenda_de_promesa_de_fe.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4xcUDFx4nav9e5FjbtKgIv/18ad4487e1fe8733ddc0249ed2f5bdba/ofrenda_de_promesa_de_fe.doc"
+    },
+    {
+      "source": "/recursos/oralidad_-_estilos_de_aprendizaje.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/63Ru77ZggZyGblWvGs9Wa9/93936e731bcf866e4523613d41e1a41a/oralidad_-_estilos_de_aprendizaje.doc"
+    },
+    {
+      "source": "/recursos/orando_pro_los_budistas.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7GsMaf5Ckz6YBTZy6X7hZI/515bb037836bba768b3f83d9c5b4eb22/orando_pro_los_budistas.pdf"
+    },
+    {
+      "source": "/recursos/orientacion_inicial_para_candidatos_a_misioneros.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2KknfHLcQm2TLTLMnCnKsz/2bd56ea04a58c62b8401993cf2353cf1/orientacion_inicial_para_candidatos_a_misioneros.doc"
+    },
+    {
+      "source": "/recursos/pablo_y_timoteo.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4MiUfNQMCVIOAiFiVZouXz/2e8b9ee627043a64441a3d3c6e38c6f9/pablo_y_timoteo.docx"
+    },
+    {
+      "source": "/recursos/paraquesirven.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2YzRL6ihLjxnD3lXIwZmZN/8a09d7d2fc45ccb1aa2db6c434f3325a/paraquesirven.doc"
+    },
+    {
+      "source": "/recursos/partnership_y_el_dinero.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/TzGIsFUDIcTnAGgmYYIyV/06d89a85a91c3e4ababee1da6c6f4444/partnership_y_el_dinero.doc"
+    },
+    {
+      "source": "/recursos/plan_para_feria_de_misiones.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/muRPYBgWtq625GAgVTx0v/dd7cc541c7d7d010fc3c3948fd42d001/plan_para_feria_de_misiones.pdf"
+    },
+    {
+      "source": "/recursos/planear_un_viaje_misionero_comunidades_0.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/74mZTCix6wdPegw7WNlG81/02440a6d354cba6fecded6f1ce96f326/planear_un_viaje_misionero_comunidades_0.docx"
+    },
+    {
+      "source": "/recursos/planear_un_viaje_misionero_comunidades_1.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/74mZTCix6wdPegw7WNlG81/02440a6d354cba6fecded6f1ce96f326/planear_un_viaje_misionero_comunidades_0.docx"
+    },
+    {
+      "source": "/recursos/predica_2.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4tmVLJsGJciQEMC0GXG72U/e8292497c31c4e6a3e1858a47865d782/predica_3.docx"
+    },
+    {
+      "source": "/recursos/predica_3.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4tmVLJsGJciQEMC0GXG72U/e8292497c31c4e6a3e1858a47865d782/predica_3.docx"
+    },
+    {
+      "source": "/recursos/predica_4.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4tmVLJsGJciQEMC0GXG72U/e8292497c31c4e6a3e1858a47865d782/predica_3.docx"
+    },
+    {
+      "source": "/recursos/preguntas_frecuentes_material_vamos.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6oC1CUOwEONYmbnKB5P0yy/f98a9ba2e131991ec3ac035b36eee2ce/preguntas_frecuentes_material_vamos.docx"
+    },
+    {
+      "source": "/recursos/preparandose_para_contar_la_historia.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1qypbnfIjPaV7sndbQN50I/843bfe15a33164df2b30c360873108ba/preparandose_para_contar_la_historia.docx"
+    },
+    {
+      "source": "/recursos/presupuesto_misionero.xls",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2rBBWbRxzsHWQwSQPdp1EY/d6e758bdd64ff329fd0b72eef22d9e8d/presupuesto_misionero.xls"
+    },
+    {
+      "source": "/recursos/promesa_de_fe.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7lmJCtLnquMIcpX4xYwgnm/ee2907b0d62fe015f01cf76b95984743/promesa_de_fe.docx"
+    },
+    {
+      "source": "/recursos/promesa_de_fe.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7lmJCtLnquMIcpX4xYwgnm/ee2907b0d62fe015f01cf76b95984743/promesa_de_fe.docx"
+    },
+    {
+      "source": "/recursos/quien_dice_mision_dice_capacitacion.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1uyDfKd6QRSj3eWkX1UUC6/4afad198575d787a2eabd1b6cef7b472/quien_dice_mision_dice_capacitacion.docx"
+    },
+    {
+      "source": "/recursos/realizar_alianzas_estrategicas_para_el_envio_de_misioneros.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6RikDreBnMvJRhhhaQicuW/c049c52a0336e8a30110e372176290c9/realizar_alianzas_estrategicas_para_el_envio_de_misioneros.doc"
+    },
+    {
+      "source": "/recursos/relaciones_y_alianzas.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5rhMqqoP2VFlyAWyjE2BXS/d1884e951f3738bb1ae737d6d01bfc88/relaciones_y_alianzas.docx"
+    },
+    {
+      "source": "/recursos/religiones_del_mundo.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6irqnkdov6ScUtCd9UcWS2/ce6c9ceed8c644a7b0caa260b3fdf46e/religiones_del_mundo.docx"
+    },
+    {
+      "source": "/recursos/repensando_nuestra_capacitacion_misionera.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5yPK03VTrE0FVebGMWzWTe/d036ffd69dfb3a066dd34f5c20bea2a0/repensando_nuestra_capacitacion_misionera.pdf"
+    },
+    {
+      "source": "/recursos/seis_llaves_para_abrir_la_puerta_a_las_misiones.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1R8YkJtlCS4xbcUf9zLB0c/11ea4e74e6c5e79855f18b6a0244314f/seis_llaves_para_abrir_la_puerta_a_las_misiones.docx"
+    },
+    {
+      "source": "/recursos/seminario_de_mov_misio_de_la_igl_local.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2afHYXj0KklHBo3sDYzeMA/1d86c70ce35bc89696c08866001175ea/seminario_de_mov_misio_de_la_igl_local.doc"
+    },
+    {
+      "source": "/recursos/sufrimiento_el_costo_del_discipulado.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2vzZtP9uEjNzEdFLHXOLNZ/ca91215dd76d3b1be1f1c310bfb09991/sufrimiento_el_costo_del_discipulado.docx"
+    },
+    {
+      "source": "/recursos/tallerdemanoschiquitas.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2kSTL5vkHuvh47R2ARXSvz/11ff92bcacb10fee7a12e95a8a7c1dda/tallerdemanoschiquitas.doc"
+    },
+    {
+      "source": "/recursos/tengo_dones_para_servir_en_1.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3PH4BbtBkzQ0VVfyWN4QgI/a7f2f592726fe2e234af74e620463151/tengo_dones_para_servir_en_1.doc"
+    },
+    {
+      "source": "/recursos/test_dones_espirituales.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/57pEf6pPOvVJF3eAedAEy6/6cebb12953914f5e24d3fd78e0508ca3/test_dones_espirituales.pdf"
+    },
+    {
+      "source": "/recursos/testimonios_ministerio_amistad_compatibility_mode.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6bZsUvL7zd9v8Pt08ed72y/c03f27e1b515939b6672d923c0a304dc/testimonios_ministerio_amistad_compatibility_mode.pdf"
+    },
+    {
+      "source": "/recursos/tomando_buenas_decisiones.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7cqPl6xkyPpldFKNzYRlML/4fb0c962d7fc2f2f121a97eaff8ee304/tomando_buenas_decisiones.docx"
+    },
+    {
+      "source": "/recursos/tripticocomo_me_preparo_0.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3sgCIT51TYl6dO54cBAVe0/694f82bc8280cd81a36ea94898b94d5a/tripticocomo_me_preparo.pdf"
+    },
+    {
+      "source": "/recursos/tripticocomo_me_preparo.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3sgCIT51TYl6dO54cBAVe0/694f82bc8280cd81a36ea94898b94d5a/tripticocomo_me_preparo.pdf"
+    },
+    {
+      "source": "/recursos/tripticofondos_0.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4fcGxvGkeC3wzw6GeiRb5v/6d17c27aa6010e722c0ce784baef2072/tripticofondos_0.pdf"
+    },
+    {
+      "source": "/recursos/tripticooracion.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/671D5AMf0awps2EmQ4WdGM/c759718db42f46ddacabdb915f45cf22/tripticooracion.pdf"
+    },
+    {
+      "source": "/recursos/un_ano_de_misiones.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2wVydNo021SZwTI6vaR1Th/97e11b59cf308e4dd879b1aab0e6cf02/un_ano_de_misiones.pdf"
+    },
+    {
+      "source": "/recursos/un_modelo_de_cooperacion_f.doc",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/abgdL6ALdRWLrPVjfLdQW/0def415fc900e24740ff574e246994ae/un_modelo_de_cooperacion_f.doc"
+    },
+    {
+      "source": "/recursos/un_motivo_para_orar.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4Ti0f0ytLnX651s5f8XQHK/48e9c4fce9153255665c426f60615106/un_motivo_para_orar.docx"
+    },
+    {
+      "source": "/recursos/una_leccion_en_milagros.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/49z8pMNba1yaB1q5s4OJgN/e42aac33a8efb7649592ed147f21d76b/una_leccion_en_milagros.docx"
+    },
+    {
+      "source": "/recursos/verdaderas_asociaciones_eclesiales_transculturales.docx",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2rQjrgVfqlgdrvtCiXTPMF/4ce6300995d6c49de652dcf54526e6c7/verdaderas_asociaciones_eclesiales_transculturales.docx"
     }
   ]
 }
