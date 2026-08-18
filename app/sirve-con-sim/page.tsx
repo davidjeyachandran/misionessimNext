@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PageHero } from "../_components/PageHero";
 import { VideoPromo } from "../_components/VideoPromo";
 import { ContactForm } from "./ContactForm";
+import { REQUISITOS } from "./requisitos";
 
 export const metadata: Metadata = {
   title: "Sirve con SIM",
@@ -10,24 +11,6 @@ export const metadata: Metadata = {
     "¡Hay lugar para ti en SIM! Tus dones, profesión o talentos pueden ser usados para alcanzar con el mensaje de Jesús a los no alcanzados.",
   alternates: { canonical: "/sirve-con-sim/" },
 };
-
-/**
- * Live writes each of these titles with a trailing colon ("Relación con Dios:")
- * — punctuation baked into a heading. It's dropped here; the card layout
- * already separates the title from its text.
- */
-const REQUISITOS = [
-  { term: "Relación con Dios", text: "Tener una relación íntima y creciente con Dios. Estar viviendo una vida cristiana fuerte y sana." },
-  { term: "Recomendación pastoral", text: "Tener una recomendación pastoral y el compromiso de tu iglesia enviadora." },
-  { term: "Experiencia en el ministerio", text: "Tener varios años de experiencia en el ministerio, trabajando con una iglesia." },
-  { term: "Preparación teológica", text: "Haber cumplido los estudios teológicos necesarios para el puesto ministerial." },
-  { term: "Apoyo en oración y finanzas", text: "Estar dispuesto a levantar tu propio equipo de apoyo en oración y sustento económico." },
-  { term: "Estado físico y mental", text: "Estar en buen estado físico y mental para trabajar en el campo misionero." },
-  { term: "Habilidades y talentos", text: "Tener habilidades, dones, talentos y cualidades para servir en el campo misionero. En algunos casos, contar con una profesión y/u oficio." },
-  { term: "Idiomas", text: "Dependiendo del caso, tener un nivel intermedio o superior de inglés y estar dispuesto a aprender otros idiomas." },
-  { term: "Comprometido al servicio en equipo con SIM", text: "Estar dispuesto a desarrollar su carácter y colaborar con un equipo ministerial." },
-  { term: "Proceso de candidato", text: "Estar dispuesto a completar los procesos y capacitaciones requeridas." },
-];
 
 export default function SirveConSimPage() {
   return (
@@ -182,39 +165,50 @@ export default function SirveConSimPage() {
           (live: .elementor-element-5f19b6a).
 
           Live marks the heading up as a second <h1> on the page; it's an h2
-          here. The ten items are a checklist, not a sequence — the previous
-          numbered badges implied an order that "Idiomas" or "Estado físico"
-          don't have — so they carry a check mark instead. */}
+          here. Each item is a flat block on the band — live gives them a
+          border-radius and 40px of padding but leaves them transparent, so
+          the padding reads purely as gutter and is folded into the grid gap
+          here. Live also pads the grid out to 12 cells with two empty
+          containers so the last row keeps its shape; a real grid doesn't
+          need them.
+
+          The icons are live's own, one per requisito (see ./requisitos).
+          They're decorative — the term beside each one already names it —
+          so they're hidden from assistive tech. */}
       <section className="bg-lavender">
         <div className="mx-auto max-w-6xl px-4 py-16">
           <h2 className="font-heading text-center text-3xl font-bold text-navy sm:text-4xl lg:text-5xl">
             Requisitos para servir con SIM
           </h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {REQUISITOS.map((r) => (
-              <article
-                key={r.term}
-                className="flex gap-4 rounded-lg border border-hairline bg-white p-6 shadow-sm"
-              >
-                <svg
-                  className="mt-1 h-6 w-6 shrink-0 text-brand"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
+              <li key={r.term} className="flex items-start gap-4">
+                <span className="flex h-13 w-13 shrink-0 items-center justify-center rounded-full bg-brand text-white">
+                  <svg
+                    viewBox={r.icon.viewBox}
+                    className="h-[26px] w-[26px]"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    {r.icon.paths.map((path) => (
+                      <path
+                        key={path.d}
+                        d={path.d}
+                        fillRule={path.evenOdd ? "evenodd" : undefined}
+                        clipRule={path.evenOdd ? "evenodd" : undefined}
+                      />
+                    ))}
+                  </svg>
+                </span>
                 <div>
-                  <h3 className="font-heading text-lg font-bold text-ink">{r.term}</h3>
-                  <p className="mt-1 text-sm text-muted">{r.text}</p>
+                  <h3 className="font-heading text-xl leading-[1.25] font-medium text-ink">
+                    {r.term}
+                  </h3>
+                  <p className="mt-1.5 text-ink">{r.text}</p>
                 </div>
-              </article>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
     </main>

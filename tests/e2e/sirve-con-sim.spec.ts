@@ -41,6 +41,21 @@ test.describe("Sirve con SIM", () => {
     expect(await items.count()).toBeGreaterThanOrEqual(10);
   });
 
+  test("gives each requisito live's own icon", async ({ page }) => {
+    const badges = page.locator("main ul li > span:has(svg)");
+    await expect(badges).toHaveCount(10);
+
+    // Live draws a different icon per requisito; a repeated one would mean
+    // the artwork got flattened back to a single generic glyph.
+    const shapes = await badges.locator("svg").evaluateAll((svgs) =>
+      svgs.map((svg) => svg.innerHTML),
+    );
+    expect(new Set(shapes).size).toBe(10);
+
+    // Decorative — the term beside each icon already names it.
+    await expect(badges.locator("svg[aria-hidden='true']")).toHaveCount(10);
+  });
+
   test("uses the same contact address as the footer", async ({ page }) => {
     await expect(
       page.locator("main a[href='mailto:sim.preguntas@sim.org']").first(),
