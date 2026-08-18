@@ -127,7 +127,7 @@ export function ResourceTabs({ tabs }: { tabs: ResourceTab[] }) {
  */
 function ResourceCta({ label, href }: { label: string; href: string }) {
   const className =
-    "mt-6 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark";
+    "mt-6 inline-block rounded-btn bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark";
   return href.startsWith("/") ? (
     <Link href={href} className={className}>
       {label}

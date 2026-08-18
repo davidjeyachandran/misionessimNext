@@ -22,7 +22,7 @@ export default function GraciasPage() {
       <ThankYou as="h1" headingClassName="font-heading text-4xl font-bold text-navy md:text-5xl" />
       <Link
         href="/sirve-con-sim/"
-        className="mt-10 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+        className="mt-10 inline-block rounded-btn bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
       >
         Volver a Sirve con SIM
       </Link>

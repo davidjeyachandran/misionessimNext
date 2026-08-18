@@ -132,7 +132,7 @@ export default function SirveConSimPage() {
                 href="https://cursos.movilicemos.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-block rounded-full bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
+                className="mt-8 inline-block rounded-btn bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
               >
                 Ver cursos
               </a>
