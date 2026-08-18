@@ -245,6 +245,20 @@ export const getAllBlogPostSlugs = cache(
   },
 );
 
+// Cards for a hand-picked set of posts, in the order given. Used by editorial
+// pages (e.g. /ora/) that feature specific articles: the copy stays in the CMS
+// so titles, dates and excerpts can't drift from the blog.
+export const getBlogPostCardsBySlugs = cache(
+  async (slugs: string[]): Promise<BlogPostCard[]> => {
+    const entries = await getCanonicalEntries();
+    const bySlug = new Map(entries.map((e) => [e.slug, e]));
+    return slugs
+      .map((slug) => bySlug.get(slug))
+      .filter((e): e is RawEntry => Boolean(e))
+      .map(toCard);
+  },
+);
+
 export const getBlogPosts = cache(
   async (limit = 12, skip = 0): Promise<{ total: number; items: BlogPostCard[] }> => {
     const entries = await getCanonicalEntries();

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "../_components/PageHero";
+import { getBlogPostCardsBySlugs, publishDateToSegment } from "../../lib/contentful";
+import { formatPostDate } from "../../lib/dates";
 
 export const metadata: Metadata = {
   title: "Ora",
@@ -20,22 +22,38 @@ const MOTIVOS = [
     image: "/pages/ora-carolina.jpeg",
   },
   {
-    title: "Ora por Venezuela",
-    text: "A la luz de los devastadores terremotos que han afectado a Venezuela, nos sumamos en oración por consuelo y fortaleza para las familias afectadas, por los rescatistas, personal médico y autoridades y por la iglesia en Venezuela.",
-    image: "/pages/ora-venezuela.avif",
+    title: "Ora por Colombia",
+    text: "A la luz del devastador terremoto que ha afectado a Colombia, nos sumamos en oración por consuelo y fortaleza para las familias afectadas, por los rescatistas, personal médico y autoridades y por la iglesia en Colombia.",
+    image: "/pages/ora-colombia.jpeg",
   },
   {
-    title: "Ora por la Conferencia misionera",
-    text: "Este mes tendremos una Conferencia con diferentes líderes de SIM Latinoamérica en Lima, Perú. Ora por este tiempo compartiendo con líderes, pastores e interesados en la misión global.",
-    image: "/pages/ora-conferencia.jpeg",
+    title: "Ora por la Próxima edición de Revista VAMOS",
+    text: "En el mes de septiembre publicaremos una nueva edición de la revista donde veremos historias de obreros latinoamericanos sirviendo a través de las relaciones.",
+    image: "/pages/ora-revista-vamos.webp",
   },
 ];
 
 const SUMATE = [
-  "Además, por el equipo de liderazgo de la oficina de SIM Latinoamérica.",
-  "Principalmente con las agencias e iglesias enviadoras desde y en Latinoamérica.",
-  "Especialmente, por aquellos que sirven actualmente en el campo.",
-  "Aquellos que han sido enviados, cuidados y sostenidos por sus iglesias, con la bendición de Dios.",
+  {
+    title: "Ora por el actual director de envío de Gio",
+    text: "Además, por el equipo de liderazgo de la oficina de SIM Latinoamérica.",
+  },
+  {
+    title: "Por unidad entre SIM",
+    text: "Principalmente con las agencias e iglesias enviadoras desde y en Latinoamérica.",
+  },
+  {
+    title: "Por el buen cuidado integral de los obreros latinos",
+    text: "Especialmente, por aquellos que sirven actualmente en el campo.",
+  },
+  {
+    title:
+      "Por sabiduría y desarrollo de buenos materiales para caminar con la Iglesia Latina.",
+  },
+  {
+    title: "Por más obreros latinos",
+    text: "Aquellos que han sido enviados, cuidados y sostenidos por sus iglesias, con la bendición de Dios.",
+  },
 ];
 
 const RECURSOS_ORACION = [
@@ -53,28 +71,17 @@ const RECURSOS_ORACION = [
   },
 ];
 
-const FULANI = [
-  {
-    title: "Un oasis de esperanza para los niños fulani",
-    text: "La esperanza del evangelio está siendo ofrecida a una comunidad muy especial en Benín: los talibés, niños pequeños —principalmente del pueblo fulani— que mendigan en las calles.",
-    image: "/pages/fulani-oasis.jpg",
-    href: "/blog/2025-10/un-oasis-de-esperanza-para-los-ninos-fulani/",
-  },
-  {
-    title: "Vivir entre los fulani: El viaje lleno de gozo de Christine",
-    text: "Christine se unió a una comunidad fulani en África Occidental hace cuatro años, movida por amor. Ella comparte su experiencia con las mujeres que la ayudaron a integrarse.",
-    image: "/pages/fulani-christine.jpg",
-    href: "/blog/2025-10/vivir-entre-los-fulani-el-viaje-de-alegria-de-christine/",
-  },
-  {
-    title: "La Buena Noticia se extiende de un fulani a toda una aldea fulani",
-    text: "Obed* quería profundizar en su fe musulmana. Él es fulani, parte de un grupo nómada que cuenta con 45 millones de personas en más de 20 países de África Occidental y Central.",
-    image: "/pages/fulani-aldea.jpg",
-    href: "/blog/2025-10/la-buena-noticia-se-extiende-de-un-fulani-a-toda-una-aldea-fulani/",
-  },
+// The three featured articles; title, date, excerpt and image all come from
+// the CMS so this page can't drift from the posts themselves.
+const FULANI_SLUGS = [
+  "un-oasis-de-esperanza-para-los-ninos-fulani",
+  "vivir-entre-los-fulani-el-viaje-de-alegria-de-christine",
+  "la-buena-noticia-se-extiende-de-un-fulani-a-toda-una-aldea-fulani",
 ];
 
-export default function OraPage() {
+export default async function OraPage() {
+  const fulani = await getBlogPostCardsBySlugs(FULANI_SLUGS);
+
   return (
     <main className="page-offset">
       <PageHero
@@ -140,31 +147,6 @@ export default function OraPage() {
         </div>
       </section>
 
-      {/* Sumarte a orar */}
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
-        <Image
-          src="/pages/ora-sumate.jpg"
-          alt="Personas orando"
-          width={768}
-          height={699}
-          unoptimized
-          className="w-full rounded-lg object-cover shadow-md"
-        />
-        <div>
-          <h2 className="font-heading text-3xl font-bold text-ink">
-            ¿Quieres sumarte a orar por SIM Latinoamérica?
-          </h2>
-          <ul className="mt-6 space-y-4">
-            {SUMATE.map((item) => (
-              <li key={item} className="flex gap-3 text-muted">
-                <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       {/* Ora 1002 */}
       <section className="bg-navy">
         <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
@@ -174,22 +156,32 @@ export default function OraPage() {
             </p>
             <h2 className="font-heading mt-2 text-4xl font-bold text-white">Ora 1002</h2>
             <p className="mt-4 text-white/80">
-              Esta campaña de oración ORA 1002 está basada en Lucas 10:02
-              &ldquo;Les dijo: «Ciertamente, es mucha la mies, pero son pocos los
-              segadores. Por tanto, pidan al Señor de la mies que envíe segadores
-              a cosechar la mies&rdquo;.
+              Esta campaña de oración ORA 1002 está basada en{" "}
+              <strong className="font-semibold text-white">Lucas 10:02</strong>{" "}
+              <em>
+                &ldquo;Les dijo: «Ciertamente, es mucha la mies, pero son pocos
+                los segadores. Por tanto, pidan al Señor de la mies que envíe
+                segadores a cosechar la mies&rdquo;.
+              </em>
             </p>
             <p className="mt-4 text-white/80">
-              Únete a cientos de creyentes orando para llevar estas grandes
-              necesidades delante de Dios, y así clamar por más obreros. Pon en
-              práctica esta campaña de manera personal, en tu grupo pequeño o
-              como iglesia.
+              Pon en práctica esta campaña de manera personal, en tu grupo
+              pequeño o como iglesia.
             </p>
             <p className="mt-4 font-semibold text-white">
-              ¡Haz una pausa para orar 1 minuto al día a las 10:02 de la mañana
-              y/o de la noche, pidiendo por más obreros para el campo misionero!
-              ¿Te unes?
+              ¡Haz una pausa para orar a las 10:02 de la mañana y/o de la noche,
+              pidiendo por más obreros para el campo misionero!
+              <br />
+              ¿Te unes a este clamor?
             </p>
+            <a
+              href="/ora/ora-1002.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block rounded-full bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
+            >
+              Descargar PDF
+            </a>
           </div>
           <Image
             src="/pages/ora-1002.png"
@@ -199,6 +191,36 @@ export default function OraPage() {
             unoptimized
             className="w-full rounded-lg object-contain"
           />
+        </div>
+      </section>
+
+      {/* Sumarte a orar */}
+      <section className="bg-cream/40">
+        <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
+          <Image
+            src="/pages/ora-sumate.jpg"
+            alt="Personas orando"
+            width={768}
+            height={699}
+            unoptimized
+            className="w-full rounded-lg object-cover shadow-md"
+          />
+          <div>
+            <h2 className="font-heading text-3xl font-bold text-ink">
+              ¿Quieres sumarte a orar por SIM Latinoamérica?
+            </h2>
+            <ul className="mt-6 space-y-5">
+              {SUMATE.map((item) => (
+                <li key={item.title} className="flex gap-3">
+                  <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-brand" />
+                  <div>
+                    <p className="font-semibold text-ink">{item.title}</p>
+                    {item.text && <p className="mt-1 text-muted">{item.text}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -230,33 +252,58 @@ export default function OraPage() {
       {/* Fulani */}
       <section className="bg-cream/40">
         <div className="mx-auto max-w-6xl px-4 py-16">
-          <p className="text-sm font-semibold uppercase tracking-widest text-brand">
-            ¿Te sumas a orar por el grupo nómada más grande del mundo?
-          </p>
-          <h2 className="font-heading mt-2 text-4xl font-bold text-ink">
-            Oremos por los Fulani
-          </h2>
+          <div className="flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-widest text-brand">
+                ¿Te sumas a orar por el grupo nómada más grande del mundo?
+              </p>
+              <h2 className="font-heading mt-2 text-4xl font-bold text-ink">
+                Oremos por los Fulani
+              </h2>
+            </div>
+            <Link
+              href="/blog/"
+              className="text-sm font-semibold text-brand transition-colors hover:text-brand-dark"
+            >
+              Mira más artículos aquí →
+            </Link>
+          </div>
           <div className="mt-10 grid gap-8 md:grid-cols-3">
-            {FULANI.map((f) => (
-              <article key={f.title} className="group flex flex-col gap-3">
-                <Link href={f.href} className="relative block aspect-[3/2] overflow-hidden rounded-md">
-                  <Image
-                    src={f.image}
-                    alt={f.title}
-                    fill
-                    unoptimized
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </Link>
-                <h3 className="font-heading text-lg font-bold leading-snug text-ink">
-                  <Link href={f.href} className="transition-colors hover:text-brand">
-                    {f.title}
+            {fulani.map((post) => {
+              const href = `/blog/${publishDateToSegment(post.publishDate)}/${post.slug}/`;
+              return (
+                <article key={post.slug} className="group flex flex-col gap-3">
+                  {post.heroImage?.url && (
+                    <Link href={href} className="relative block aspect-[3/2] overflow-hidden rounded-md">
+                      <Image
+                        src={post.heroImage.url}
+                        alt={post.heroImage.description ?? post.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                      />
+                    </Link>
+                  )}
+                  <time dateTime={post.publishDate} className="text-xs text-muted">
+                    {formatPostDate(post.publishDate)}
+                  </time>
+                  <h3 className="font-heading text-lg font-bold leading-snug text-ink">
+                    <Link href={href} className="transition-colors hover:text-brand">
+                      {post.title}
+                    </Link>
+                  </h3>
+                  {post.description && (
+                    <p className="line-clamp-4 text-sm text-muted">{post.description}</p>
+                  )}
+                  <Link
+                    href={href}
+                    className="mt-auto pt-1 text-sm font-semibold text-brand transition-colors hover:text-brand-dark"
+                  >
+                    Leer más →
                   </Link>
-                </h3>
-                <p className="text-sm text-muted">{f.text}</p>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
