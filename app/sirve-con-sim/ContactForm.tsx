@@ -1,8 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { SITE_URL } from "../../lib/site";
-import { CONTACT_EMAIL } from "./contact";
+import { CONTACT_EMAIL, WHATSAPP_URL } from "./contact";
 import { COUNTRIES } from "./countries";
 import { ThankYou } from "./ThankYou";
 
@@ -32,9 +33,52 @@ const SUBJECT = "Nueva consulta desde Sirve con SIM";
 const FROM_NAME = "Sirve con SIM — misionessim.org";
 const REDIRECT = `${SITE_URL}/sirve-con-sim/gracias/`;
 
-const FIELD =
-  "mt-2 w-full rounded-lg border border-hairline bg-white px-4 py-3 text-ink outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/30";
+const FIELD_BASE =
+  "w-full rounded-2xl border border-hairline bg-white text-ink outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/30";
+const FIELD = `${FIELD_BASE} mt-2 px-5 py-3`;
+const TEXTAREA = `${FIELD_BASE} p-5`;
 const LABEL = "block text-sm font-semibold text-ink";
+/**
+ * "Datos" and "Comentario o consulta" — live styles both as body-font headings
+ * rather than the Raleway used for section headings, so they override the
+ * `font-heading` that globals.css puts on every h1-h6.
+ */
+const FORM_TITLE = "font-sans text-xl font-medium tracking-tight text-ink";
+
+/**
+ * Email and WhatsApp, the two ways to reach us without the form. Live keeps
+ * them inside the <form>, between the consent checkbox and the submit button;
+ * they render there too, and on their own when there is no endpoint to post to.
+ */
+function ContactFallbacks({ className }: { className?: string }) {
+  return (
+    <ul className={`space-y-3 ${className ?? ""}`}>
+      <li className="flex items-center gap-3">
+        <Image src="/pages/ico-sobre.png" alt="" width={36} height={37} unoptimized />
+        <span className="text-sm text-ink">
+          También puedes escribirnos a{" "}
+          <a className="font-semibold text-brand underline" href={`mailto:${CONTACT_EMAIL}`}>
+            {CONTACT_EMAIL}
+          </a>
+        </span>
+      </li>
+      <li className="flex items-center gap-3">
+        <Image src="/pages/ico-wsp.png" alt="" width={36} height={37} unoptimized />
+        <span className="text-sm text-ink">
+          O sumarte a nuestro chat de difusión en{" "}
+          <a
+            className="font-semibold text-brand underline"
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
+        </span>
+      </li>
+    </ul>
+  );
+}
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -42,7 +86,7 @@ export function ContactForm() {
 
   // Nothing to post to yet — render only the direct-contact fallbacks rather
   // than a form whose submit button silently does nothing.
-  if (!ENDPOINT) return null;
+  if (!ENDPOINT) return <ContactFallbacks />;
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -98,10 +142,7 @@ export function ContactForm() {
 
   if (status === "sent") {
     return (
-      <div
-        role="status"
-        className="rounded-2xl border border-hairline bg-white p-8 text-center shadow-sm"
-      >
+      <div role="status">
         <ThankYou headingClassName="font-heading text-2xl font-bold text-ink" />
       </div>
     );
@@ -118,7 +159,7 @@ export function ContactForm() {
       action={ENDPOINT}
       method="POST"
       onSubmit={onSubmit}
-      className="relative rounded-2xl border border-hairline bg-white p-6 text-left shadow-sm sm:p-8"
+      className="relative text-left"
     >
       {ACCESS_KEY && <input type="hidden" name="access_key" value={ACCESS_KEY} />}
       <input type="hidden" name="subject" value={SUBJECT} />
@@ -127,9 +168,13 @@ export function ContactForm() {
           cross-domain redirects need a paid plan. */}
       <input type="hidden" name="redirect" value={REDIRECT} />
 
-      <h3 className="font-heading text-xl font-bold text-ink">Datos</h3>
+      <h3 className={FORM_TITLE}>Datos</h3>
 
-      <div className="mt-6 grid gap-5 sm:grid-cols-2">
+      {/* One field per row at every width, as live has them. Live labels each
+          one with a fake placeholder that sits inside the box and vanishes on
+          focus, leaving a filled field with no visible label and no
+          `for`/`id` pairing for assistive tech; these are real labels. */}
+      <div className="mt-4 grid gap-5">
         <div>
           <label className={LABEL} htmlFor="contact-name">
             Nombre y apellido <span aria-hidden="true">*</span>
@@ -189,15 +234,17 @@ export function ContactForm() {
         </div>
       </div>
 
-      <div className="mt-5">
-        <label className={LABEL} htmlFor="contact-message">
+      <h3 className={`${FORM_TITLE} mt-8`}>Comentario o consulta</h3>
+
+      <div className="mt-4">
+        <label className="sr-only" htmlFor="contact-message">
           Comentario o consulta
         </label>
         <textarea
-          className={FIELD}
+          className={TEXTAREA}
           id="contact-message"
           name="comentario"
-          rows={6}
+          rows={5}
           maxLength={2000}
           placeholder="Escríbenos..."
         />
@@ -224,7 +271,7 @@ export function ContactForm() {
         <input id="contact-botcheck" name="botcheck" type="checkbox" tabIndex={-1} />
       </div>
 
-      <div className="mt-5 flex items-start gap-3">
+      <div className="mt-4 flex items-start gap-3">
         <input
           className="mt-1 h-4 w-4 shrink-0 accent-[var(--color-brand)]"
           id="contact-consent"
@@ -242,6 +289,8 @@ export function ContactForm() {
         </label>
       </div>
 
+      <ContactFallbacks className="mt-5" />
+
       {status === "error" && (
         <p role="alert" className="mt-5 rounded-lg bg-brand/10 px-4 py-3 text-sm text-brand-dark">
           No pudimos enviar tu consulta ({error}). Vuelve a intentarlo o
@@ -256,7 +305,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="mt-6 rounded-full bg-brand px-10 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-6 w-full rounded-2xl bg-brand px-6 py-4 text-base font-medium text-white transition-colors hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
       >
         {status === "sending" ? "Enviando…" : "Enviar"}
       </button>

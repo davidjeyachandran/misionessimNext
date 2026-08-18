@@ -31,8 +31,10 @@ test.describe("Sirve con SIM", () => {
   });
 
   test("lists all ten requisitos without live's trailing colons", async ({ page }) => {
-    const items = page.locator("main h3", { hasText: /./ }).filter({
-      hasNotText: /Datos/,
+    // The enquiry form contributes two h3s of its own ("Datos" and
+    // "Comentario o consulta"); count only the requisito cards.
+    const items = page.locator("main section h3", { hasText: /./ }).filter({
+      hasNotText: /^(Datos|Comentario o consulta)$/,
     });
     await expect(page.getByRole("heading", { level: 3, name: "Relación con Dios" })).toBeVisible();
     await expect(page.getByRole("heading", { level: 3, name: "Proceso de candidato" })).toBeVisible();
