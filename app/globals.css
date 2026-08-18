@@ -28,6 +28,10 @@
      Distinct from --color-cream, which is the yellower card on dark bands. */
   --color-linen: #fdf7f4;
 
+  /* Button corner. Live rounds every button to 10px (its pagination to 15px);
+     one token keeps the whole site on a single rounded-rectangle. */
+  --radius-btn: 10px;
+
   --font-sans: var(--font-work-sans), system-ui, sans-serif;
   --font-heading: var(--font-raleway), system-ui, sans-serif;
 

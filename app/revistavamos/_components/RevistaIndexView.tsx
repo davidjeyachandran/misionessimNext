@@ -109,7 +109,7 @@ export async function RevistaIndexView({ page }: { page: number }) {
                     href={newest.pdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block self-start rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+                    className="inline-block self-start rounded-btn bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
                   >
                     Leer la revista (PDF)
                   </a>

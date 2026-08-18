@@ -44,7 +44,7 @@ export function PostGrid({
           {page > 1 && (
             <a
               href={pageHref(page - 1)}
-              className="rounded border border-hairline px-4 py-2 text-sm text-ink hover:bg-cream transition-colors"
+              className="rounded-btn border border-hairline px-4 py-2 text-sm text-ink hover:bg-cream transition-colors"
             >
               ← Anterior
             </a>
@@ -55,7 +55,7 @@ export function PostGrid({
           {page < totalPages && (
             <a
               href={pageHref(page + 1)}
-              className="rounded border border-hairline px-4 py-2 text-sm text-ink hover:bg-cream transition-colors"
+              className="rounded-btn border border-hairline px-4 py-2 text-sm text-ink hover:bg-cream transition-colors"
             >
               Siguiente →
             </a>

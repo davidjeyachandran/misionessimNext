@@ -86,7 +86,7 @@ export default async function RevistaPage({ params }: Props) {
                 href={revista.pdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+                className="inline-block rounded-btn bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
               >
                 Leer la revista (PDF)
               </a>

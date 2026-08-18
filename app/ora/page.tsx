@@ -135,7 +135,7 @@ export default async function OraPage() {
               href="https://www.youtube.com/watch?v=fHHGEC23OTk"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-block rounded-full bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
+              className="mt-6 inline-block rounded-btn bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
             >
               Mira el video aquí
             </a>
@@ -189,7 +189,7 @@ export default async function OraPage() {
               href="/ora/ora-1002.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+              className="mt-8 inline-block rounded-btn bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
             >
               Descargar PDF
             </a>

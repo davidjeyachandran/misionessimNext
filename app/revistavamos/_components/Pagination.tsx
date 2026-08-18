@@ -41,7 +41,7 @@ export function Pagination({ page, totalPages, basePath }: PaginationProps) {
         <Link
           href={href(page - 1)}
           rel="prev"
-          className="rounded border border-hairline px-4 py-2 text-sm text-ink transition-colors hover:bg-cream"
+          className="rounded-btn border border-hairline px-4 py-2 text-sm text-ink transition-colors hover:bg-cream"
         >
           ← Anterior
         </Link>
@@ -56,7 +56,7 @@ export function Pagination({ page, totalPages, basePath }: PaginationProps) {
           <span
             key={n}
             aria-current="page"
-            className="rounded border border-brand bg-brand px-4 py-2 text-sm font-semibold text-white"
+            className="rounded-btn border border-brand bg-brand px-4 py-2 text-sm font-semibold text-white"
           >
             {n}
           </span>
@@ -65,7 +65,7 @@ export function Pagination({ page, totalPages, basePath }: PaginationProps) {
             key={n}
             href={href(n)}
             aria-label={`Página ${n}`}
-            className="rounded border border-hairline px-4 py-2 text-sm text-ink transition-colors hover:bg-cream"
+            className="rounded-btn border border-hairline px-4 py-2 text-sm text-ink transition-colors hover:bg-cream"
           >
             {n}
           </Link>
@@ -76,7 +76,7 @@ export function Pagination({ page, totalPages, basePath }: PaginationProps) {
         <Link
           href={href(page + 1)}
           rel="next"
-          className="rounded border border-hairline px-4 py-2 text-sm text-ink transition-colors hover:bg-cream"
+          className="rounded-btn border border-hairline px-4 py-2 text-sm text-ink transition-colors hover:bg-cream"
         >
           Siguiente →
         </Link>

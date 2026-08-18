@@ -94,7 +94,7 @@ export default function RecursosPage() {
             href="https://movilicemos.org/recursos"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+            className="mt-8 inline-block rounded-btn bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
           >
             Recursos aquí
           </a>
@@ -165,7 +165,7 @@ export default function RecursosPage() {
               href="https://open.spotify.com/show/0vftsfjR9UP5tD2PG6jb5P"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+              className="inline-block rounded-btn bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
             >
               Escucha más en Spotify
             </a>
@@ -200,7 +200,7 @@ export default function RecursosPage() {
               href="https://www.youtube.com/c/SIMLatinoamérica"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-block rounded-full bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+              className="mt-8 inline-block rounded-btn bg-brand px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
             >
               Mira más videos aquí
             </a>
@@ -248,7 +248,7 @@ export default function RecursosPage() {
                 href="https://cursos.movilicemos.org/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-block rounded-full bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
+                className="mt-8 inline-block rounded-btn bg-cream px-8 py-3 text-sm font-semibold text-brand-dark transition-colors hover:bg-white"
               >
                 Quiero saber más
               </a>
