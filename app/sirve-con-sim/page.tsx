@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PageHero } from "../_components/PageHero";
 import { VideoPromo } from "../_components/VideoPromo";
 import { ContactForm } from "./ContactForm";
+import { CONTACT_EMAIL, WHATSAPP_URL } from "./contact";
 
 export const metadata: Metadata = {
   title: "Sirve con SIM",
@@ -28,9 +29,6 @@ const REQUISITOS = [
   { term: "Comprometido al servicio en equipo con SIM", text: "Estar dispuesto a desarrollar su carácter y colaborar con un equipo ministerial." },
   { term: "Proceso de candidato", text: "Estar dispuesto a completar los procesos y capacitaciones requeridas." },
 ];
-
-const CONTACT_EMAIL = "sim.preguntas@sim.org";
-const WHATSAPP_URL = "https://chat.whatsapp.com/FfwZVyN09pA49SpPhyITWd";
 
 export default function SirveConSimPage() {
   return (

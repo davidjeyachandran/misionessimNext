@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { SITE_URL } from "../../lib/site";
+import { CONTACT_EMAIL } from "./contact";
 import { COUNTRIES } from "./countries";
+import { ThankYou } from "./ThankYou";
 
 /**
  * Where the enquiry is POSTed. The site is a static export (`output: "export"`
@@ -18,6 +21,16 @@ const ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT;
 const ACCESS_KEY = process.env.NEXT_PUBLIC_CONTACT_ACCESS_KEY;
 
 type Status = "idle" | "sending" | "sent" | "error";
+
+/**
+ * Reserved Web3Forms keys, sent both ways: as hidden inputs for the no-JS
+ * submit, and explicitly in the JSON body so the fetch path does not depend on
+ * the markup. `redirect` is the exception — it is documented as no-JS-only, so
+ * the fetch path strips it rather than shipping a dead field to the inbox.
+ */
+const SUBJECT = "Nueva consulta desde Sirve con SIM";
+const FROM_NAME = "Sirve con SIM — misionessim.org";
+const REDIRECT = `${SITE_URL}/sirve-con-sim/gracias/`;
 
 const FIELD =
   "mt-2 w-full rounded-lg border border-hairline bg-white px-4 py-3 text-ink outline-none transition-colors focus:border-brand focus:ring-2 focus:ring-brand/30";
@@ -43,6 +56,9 @@ export function ContactForm() {
       return;
     }
     delete data.website;
+    // Only the native submit below uses this; sending it here would just add a
+    // stray field to the notification email.
+    delete data.redirect;
 
     setStatus("sending");
     setError(null);
@@ -58,8 +74,8 @@ export function ContactForm() {
           // "Notifications"). It also takes the `email` field as the Reply-To
           // by default, so replying in the inbox reaches the enquirer — that
           // only holds while that field stays named `email`.
-          subject: "Nueva consulta desde Sirve con SIM",
-          from_name: "Sirve con SIM — misionessim.org",
+          subject: SUBJECT,
+          from_name: FROM_NAME,
         }),
       });
 
@@ -86,24 +102,31 @@ export function ContactForm() {
         role="status"
         className="rounded-2xl border border-hairline bg-white p-8 text-center shadow-sm"
       >
-        <h3 className="font-heading text-2xl font-bold text-ink">¡Gracias por escribirnos!</h3>
-        <p className="mt-3 text-muted">
-          Recibimos tu consulta y te responderemos a la brevedad. Si es urgente,
-          escríbenos directamente a{" "}
-          <a className="text-brand underline" href="mailto:sim.preguntas@sim.org">
-            sim.preguntas@sim.org
-          </a>
-          .
-        </p>
+        <ThankYou headingClassName="font-heading text-2xl font-bold text-ink" />
       </div>
     );
   }
 
   return (
+    /* `action`/`method` make this a working plain HTML form when JavaScript
+       never runs — the endpoint's own documented usage. `onSubmit` calls
+       preventDefault(), so the native post stays dormant whenever the fetch
+       path is available and only takes over when it isn't. The two paths send
+       the same fields; the no-JS one lands on /sirve-con-sim/gracias/ via the
+       `redirect` field instead of swapping in the panel below. */
     <form
+      action={ENDPOINT}
+      method="POST"
       onSubmit={onSubmit}
       className="relative rounded-2xl border border-hairline bg-white p-6 text-left shadow-sm sm:p-8"
     >
+      {ACCESS_KEY && <input type="hidden" name="access_key" value={ACCESS_KEY} />}
+      <input type="hidden" name="subject" value={SUBJECT} />
+      <input type="hidden" name="from_name" value={FROM_NAME} />
+      {/* Absolute and same-origin: Web3Forms rejects relative URLs, and
+          cross-domain redirects need a paid plan. */}
+      <input type="hidden" name="redirect" value={REDIRECT} />
+
       <h3 className="font-heading text-xl font-bold text-ink">Datos</h3>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
@@ -223,8 +246,8 @@ export function ContactForm() {
         <p role="alert" className="mt-5 rounded-lg bg-brand/10 px-4 py-3 text-sm text-brand-dark">
           No pudimos enviar tu consulta ({error}). Vuelve a intentarlo o
           escríbenos a{" "}
-          <a className="underline" href="mailto:sim.preguntas@sim.org">
-            sim.preguntas@sim.org
+          <a className="underline" href={`mailto:${CONTACT_EMAIL}`}>
+            {CONTACT_EMAIL}
           </a>
           .
         </p>
