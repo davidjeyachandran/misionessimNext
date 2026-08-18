@@ -133,9 +133,9 @@ export default async function Home() {
                 <p>
                   ¿Deseas apoyar a SIM Latinoamérica o algún misionero de SIM?
                   Escríbenos a{" "}
-                  <a href="mailto:info@misionessim.org">info@misionessim.org</a>
+                  <a href="mailto:sim.preguntas@sim.org">sim.preguntas@sim.org</a>
                 </p>
-                <a className="btn btn-outline" href="mailto:info@misionessim.org">
+                <a className="btn btn-outline" href="mailto:sim.preguntas@sim.org">
                   Descúbre cómo
                 </a>
               </div>
