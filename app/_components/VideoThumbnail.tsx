@@ -57,7 +57,7 @@ export function VideoThumbnail({
         aria-label={`Reproducir video: ${label}`}
         /* the white ring is live's (1px solid #fff); without it the translucent
            disc disappears into a light still, as it does on the YouTube promo */
-        className="absolute left-1/2 top-1/2 grid h-[82px] w-[82px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/90 bg-white/20 text-white shadow-lg transition-colors hover:bg-white/35 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        className="absolute left-1/2 top-1/2 grid h-[82px] w-[82px] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/90 bg-white/20 text-white shadow-lg transition-colors hover:bg-white hover:text-brand focus-visible:bg-white focus-visible:text-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
       >
         <span
           aria-hidden
