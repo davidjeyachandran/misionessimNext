@@ -6,6 +6,7 @@ const MENU_LINKS = [
   { label: "Recursos", href: "/recursos/", external: false },
   { label: "Revista Vamos", href: "/revistavamos/", external: false },
   { label: "Blog", href: "/blog/", external: false },
+  { label: "Historias", href: "https://historias.misionessim.org/", external: true },
   { label: "Ora", href: "/ora/", external: false },
   { label: "Servir con SIM", href: "/sirve-con-sim/", external: false },
 ];
@@ -114,7 +115,8 @@ export function SiteFooter() {
         <div className="container footer-bottom-inner">
           <p>
             Copyright © {new Date().getFullYear()} SIM Latinoamérica INC. Todos
-            los derechos reservados
+            los derechos reservados ·{" "}
+            <Link href="/privacidad/">Política de privacidad</Link>
           </p>
           <p>Sirve · Ora · Da</p>
         </div>
