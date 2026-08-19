@@ -1,65 +1,25 @@
 import type { Document as RichTextDocument } from "@contentful/rich-text-types";
 import { cache } from "react";
-
-const SPACE_ID = process.env.CONTENTFUL_SPACE_ID!;
-const ACCESS_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN!;
-const GQL_URL = `https://graphql.contentful.com/content/v1/spaces/${SPACE_ID}`;
+import { buildBlogCatalogue } from "./content/blog-catalogue";
+import {
+  buildRevistaCatalogue,
+  normalizeRevistaSlug as normalizeStoredRevistaSlug,
+} from "./content/revista-catalogue";
+import { createContentfulClient } from "./contentful/client";
+import { revistaPdfPath as buildRevistaPdfPath } from "./publishing/paths";
 
 // Contentful GraphQL caps collection `limit` at 100, so the full-catalogue
 // fetch pages through in chunks of this size.
 const PAGE_SIZE = 100;
 
-interface GqlError {
-  extensions?: { contentful?: { code?: string } };
-}
 
-const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+const contentfulClient = createContentfulClient({
+  spaceId: process.env.CONTENTFUL_SPACE_ID ?? "",
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN ?? "",
+});
 
-// Contentful rate-limits the GraphQL API. A full static export prerenders
-// hundreds of posts (one query each) across parallel workers, which bursts
-// past the limit and returns 429. Retry transient failures with exponential
-// backoff, honouring the Retry-After header when present.
-const MAX_RETRIES = 6;
-const RETRYABLE = new Set([429, 502, 503, 504]);
-
-async function fetchGqlWithRetry(body: string): Promise<Response> {
-  for (let attempt = 0; ; attempt++) {
-    const res = await fetch(GQL_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-      },
-      body,
-      next: { tags: ["contentful"] },
-    });
-    if (res.ok || !RETRYABLE.has(res.status) || attempt >= MAX_RETRIES) return res;
-
-    const retryAfter = Number(res.headers.get("retry-after"));
-    const backoff = Number.isFinite(retryAfter) && retryAfter > 0
-      ? retryAfter * 1000
-      : Math.min(2 ** attempt * 500, 15_000);
-    // Jitter avoids all workers retrying in lockstep.
-    await sleep(backoff + Math.random() * 250);
-  }
-}
-
-async function gql<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
-  const res = await fetchGqlWithRetry(JSON.stringify({ query, variables }));
-  if (!res.ok) throw new Error(`Contentful GraphQL error: ${res.status}`);
-  const { data, errors } = (await res.json()) as { data: T; errors?: GqlError[] };
-  if (errors?.length) {
-    // UNRESOLVABLE_LINK is data quality, not failure: a linked entry is
-    // archived/deleted (e.g. revista.blogPosts still pointing at blogPost
-    // rows archived in the 2026-07-04 duplicate cleanup). Contentful returns
-    // the rest of the data with a null in the collection — callers already
-    // filter nulls, so use the data rather than failing the whole page.
-    const fatal = errors.filter(
-      (e) => e.extensions?.contentful?.code !== "UNRESOLVABLE_LINK",
-    );
-    if (fatal.length) throw new Error(`GraphQL errors: ${JSON.stringify(fatal)}`);
-  }
-  return data;
+function gql<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
+  return contentfulClient.query<T>(query, variables);
 }
 
 // ---------------------------------------------------------------------------
@@ -133,34 +93,6 @@ interface RawEntry {
   revista?: { slug: string; title: string } | null;
 }
 
-// Normalise a title for duplicate grouping: lowercase, strip accents and
-// punctuation, collapse whitespace. Two entries with the same normalised
-// title are treated as the same article.
-function normalizeTitle(title: string): string {
-  return (title || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^\w\s]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-// "Richest entry" score for choosing the winner within a duplicate group,
-// per the agreed heuristic: heroImage dominates, then a revista link, then
-// body length (approximated by the description/excerpt, which is far cheaper
-// to fetch than every RichText body), tie-broken toward the WordPress import
-// (WP entries carry categories/author/SEO metadata the VAMOS rows lack).
-function richness(e: RawEntry): number {
-  let score = 0;
-  if (e.heroImage?.url) score += 1_000_000;
-  if (e.revista?.slug) score += 100_000;
-  score += Math.min((e.description ?? "").length, 9_999);
-  const looksLikeWpImport = Boolean(e.categories?.length || e.author);
-  if (looksLikeWpImport) score += 0.5;
-  return score;
-}
-
 const CATALOGUE_FIELDS = `
   slug
   title
@@ -216,23 +148,7 @@ function toCard(e: RawEntry): BlogPostCard {
 // /blog/[date]/[slug] URL); they remain reachable by direct slug.
 const getCanonicalEntries = cache(async (): Promise<RawEntry[]> => {
   const all = await getAllEntries();
-  const groups = new Map<string, RawEntry[]>();
-  for (const e of all) {
-    const key = normalizeTitle(e.title) || e.slug;
-    const group = groups.get(key);
-    if (group) group.push(e);
-    else groups.set(key, [e]);
-  }
-
-  const canonical: RawEntry[] = [];
-  for (const group of groups.values()) {
-    group.sort((a, b) => richness(b) - richness(a));
-    canonical.push(group[0]);
-  }
-
-  return canonical
-    .filter((e) => e.publishDate)
-    .sort((a, b) => (b.publishDate ?? "").localeCompare(a.publishDate ?? ""));
+  return buildBlogCatalogue(all);
 });
 
 // ---------------------------------------------------------------------------
@@ -422,7 +338,7 @@ export interface Revista extends RevistaCard {
 // edition year (newest keeps the base slug — matching the legacy site,
 // where only the newer edition was reachable).
 export function normalizeRevistaSlug(storedSlug: string): string {
-  return (storedSlug ?? "").trim().replace(/^\/+|\/+$/g, "");
+  return normalizeStoredRevistaSlug(storedSlug);
 }
 
 const REVISTA_CARD_FIELDS = `
@@ -456,11 +372,7 @@ export function revistaPdfPath(
   urlSlug: string,
   assetUrl: string | null | undefined,
 ): string | null {
-  if (!assetUrl) return null;
-  const absolute = assetUrl.startsWith("//") ? `https:${assetUrl}` : assetUrl;
-  const fileName = new URL(absolute).pathname.split("/").pop();
-  if (!fileName) return null;
-  return `/revistavamos/${urlSlug}/${fileName}`;
+  return buildRevistaPdfPath(urlSlug, assetUrl);
 }
 
 function toRevistaCard(r: RawRevista, urlSlug: string): RevistaCard {
@@ -498,19 +410,9 @@ export const getAllRevistas = cache(async (): Promise<RevistaCard[]> => {
     skip += PAGE_SIZE;
   }
 
-  const taken = new Set<string>();
-  return all.map((r) => {
-    const base = normalizeRevistaSlug(r.slug) || r.sys.id;
-    let urlSlug = base;
-    if (taken.has(urlSlug)) {
-      const year = new Date(r.fecha).getUTCFullYear();
-      urlSlug = `${base}-${year}`;
-      let i = 2;
-      while (taken.has(urlSlug)) urlSlug = `${base}-${year}-${i++}`;
-    }
-    taken.add(urlSlug);
-    return toRevistaCard(r, urlSlug);
-  });
+  return buildRevistaCatalogue(all.map((entry) => ({ ...entry, id: entry.sys.id }))).map(
+    ({ entry, slug }) => toRevistaCard(entry, slug),
+  );
 });
 
 export const getRevistaBySlug = cache(async (slug: string): Promise<Revista | null> => {

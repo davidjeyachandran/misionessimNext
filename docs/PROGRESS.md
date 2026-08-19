@@ -472,3 +472,29 @@ truncated right at this slider).
   `CampanaORA1002-SIMLatinoamerica-2026.pdf`) are also unresolved. `/ora/` now
   ships `public/ora/ora-1002.pdf` locally — needs David to say which legacy
   PDF that is before either can be pointed at it.
+
+## 2026-08-19 — Content seam hardening, slice 1
+
+- Added a single-context domain glossary and engineering-skill configuration:
+  `CONTEXT.md`, `docs/adr/`, and `docs/agents/`. Project work state remains in
+  this progress log.
+- Extracted the pure **published Blog catalogue** policy from `lib/contentful.ts`
+  into `lib/content/blog-catalogue.ts`. It now has an isolated fixture test for
+  title-equivalent articles: listings keep the richer public record rather than
+  rendering duplicate cards.
+- Extracted the pure **published Revista catalogue** slug policy into
+  `lib/content/revista-catalogue.ts`. Its test verifies that a stored-slug
+  collision is sorted by edition date before paths are assigned, so the newest
+  edition keeps the canonical base path independent of GraphQL ordering.
+- Moved Contentful GraphQL transport, retry/backoff, configuration validation,
+  and partial `UNRESOLVABLE_LINK` handling to `lib/contentful/client.ts`.
+  `lib/contentful.ts` remains the route-facing compatibility module; no public
+  path or query was intentionally changed.
+- Added `lib/publishing/paths.ts` as the shared first-party Revista PDF-path
+  policy. Both the runtime module and `build-revista-pdf-rewrites.ts` now use
+  it, alongside the shared Revista collision policy, eliminating the two
+  derivations that previously had to remain manually synchronized.
+- Verification: `yarn test:unit` passes (**67 tests**) and `yarn lint` has no
+  errors (11 pre-existing warnings outside this work). `npx tsc --noEmit`
+  remains blocked only by existing Playwright image-locator typings in three
+  e2e specs; the new modules add no TypeScript errors.

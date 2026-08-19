@@ -28,6 +28,8 @@
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildRevistaCatalogue } from "../lib/content/revista-catalogue";
+import { revistaPdfPath } from "../lib/publishing/paths";
 
 const SPACE_ID = process.env.CONTENTFUL_SPACE_ID;
 const CDA_TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN;
@@ -38,21 +40,15 @@ interface Rewrite {
   destination: string;
 }
 
-/** Mirrors normalizeRevistaSlug() in lib/contentful.ts — CMS slugs carry a
- * leading slash from the Drupal-era import. */
-function normalizeSlug(slug: string): string {
-  return slug.replace(/^\/+/, "").replace(/\/+$/, "");
-}
-
 async function fetchRevistaPdfs(): Promise<
-  Array<{ slug: string; fileName: string; url: string; fecha: string }>
+  Array<{ id: string; slug: string; url: string; fecha: string }>
 > {
   if (!SPACE_ID || !CDA_TOKEN) {
     throw new Error("CONTENTFUL_SPACE_ID / CONTENTFUL_ACCESS_TOKEN not set");
   }
   const query = `{
     revistaCollection(order: fecha_DESC, limit: 200) {
-      items { slug fecha revistaPdf { url fileName } }
+      items { sys { id } slug fecha revistaPdf { url } }
     }
   }`;
   const res = await fetch(
@@ -71,9 +67,10 @@ async function fetchRevistaPdfs(): Promise<
     data: {
       revistaCollection: {
         items: Array<{
+          sys: { id: string };
           slug: string;
           fecha: string;
-          revistaPdf?: { url: string; fileName: string } | null;
+          revistaPdf?: { url: string } | null;
         }>;
       };
     };
@@ -86,14 +83,7 @@ async function fetchRevistaPdfs(): Promise<
       const url = r.revistaPdf!.url.startsWith("//")
         ? `https:${r.revistaPdf!.url}`
         : r.revistaPdf!.url;
-      // Take the filename from the asset URL's last segment rather than from
-      // the `fileName` field. Contentful has already made the URL segment
-      // ASCII-safe (`ÁfricaVAMOS.pdf` -> `A_fricaVAMOS.pdf`), whereas the
-      // raw field keeps the accent — and a literal non-ASCII byte in a
-      // vercel.json `source` will not match the percent-encoded path a
-      // browser actually requests.
-      const fileName = new URL(url).pathname.split("/").pop() ?? "";
-      return { slug: normalizeSlug(r.slug), fileName, url, fecha: r.fecha };
+      return { id: r.sys.id, slug: r.slug, url, fecha: r.fecha };
     });
 }
 
@@ -102,30 +92,11 @@ async function main() {
   const revistas = await fetchRevistaPdfs();
   console.log(`  -> ${revistas.length} editions with a PDF`);
 
-  // Assign URL slugs with the SAME algorithm as getAllRevistas() in
-  // lib/contentful.ts: newest-first, and a colliding slug gets the edition
-  // year appended. Two editions genuinely share a stored slug ("La Oración",
-  // 2010 and 2014). If this drifts from the runtime, the rewrite source will
-  // name a path the site never links to and the pretty URL 404s — so the
-  // duplication is deliberate and must stay in step.
-  const taken = new Set<string>();
-  const rewrites: Rewrite[] = [];
-  for (const r of revistas) {
-    const base = r.slug;
-    let urlSlug = base;
-    if (taken.has(urlSlug)) {
-      const year = new Date(r.fecha).getUTCFullYear();
-      urlSlug = `${base}-${year}`;
-      let i = 2;
-      while (taken.has(urlSlug)) urlSlug = `${base}-${year}-${i++}`;
-      console.log(`  slug collision: "${base}" -> "${urlSlug}" (${r.fecha.slice(0, 10)})`);
-    }
-    taken.add(urlSlug);
-    rewrites.push({
-      source: `/revistavamos/${urlSlug}/${r.fileName}`,
-      destination: r.url,
-    });
-  }
+  const rewrites = buildRevistaCatalogue(revistas).map(({ entry, slug }) => {
+    const source = revistaPdfPath(slug, entry.url);
+    if (!source) throw new Error(`Could not derive PDF path for ${entry.id}`);
+    return { source, destination: entry.url };
+  });
 
   rewrites.sort((a, b) => a.source.localeCompare(b.source));
 
