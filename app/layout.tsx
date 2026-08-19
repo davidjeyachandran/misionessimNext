@@ -4,6 +4,8 @@ import "./globals.css";
 import { SiteHeader } from "./_components/SiteHeader";
 import { SiteFooter } from "./_components/SiteFooter";
 import { SITE_URL } from "../lib/site";
+import { GoogleAnalytics } from "@next/third-parties/google";
+import { ANALYTICS_ENABLED, GA_MEASUREMENT_ID } from "../lib/analytics";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -49,6 +51,13 @@ export default function RootLayout({
         {children}
         <SiteFooter />
       </body>
+      {/*
+        Loads gtag.js after hydration. Route changes are counted by GA4's
+        enhanced measurement ("page changes based on browser history events"),
+        since this component only fires `config` once on mount — that setting
+        has to stay on in the property or an SPA navigation goes uncounted.
+      */}
+      {ANALYTICS_ENABLED && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
     </html>
   );
 }
