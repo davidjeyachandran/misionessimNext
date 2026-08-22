@@ -521,3 +521,33 @@ truncated right at this slider).
   and no redirect chains in `vercel.json`; all 118 destinations HEAD-check
   `200 application/pdf` on the deployed site. Budget unchanged at 358
   redirects + 251 rewrites.
+
+## 2026-08-22 — Audiorevista VAMOS band on the Revista index
+
+- Ported live's **Audiorevista VAMOS** band (live:
+  `.elementor-element-0ab7303`) to the bottom of `/revistavamos/`. It closes
+  every paginated page, as it does on live: centred navy heading, the line
+  "Ahora también puedes escuchar toda la Revista VAMOS desde cualquier lugar",
+  and three Spotify episode players (Soy Influencer p.1, Tecnología en
+  misiones p.1, Latinos en adaptación p.1) in live's order.
+- The player markup is now one component, `app/_components/SpotifyEpisodes.tsx`,
+  shared with the `/recursos` podcast band, which previously hand-rolled the
+  same iframe. Both bands lay out one/two/three across at 375/768/1024.
+- Live bugs deliberately **not** copied:
+  - Its heading and each card fade in via an ElementsKit animation that starts
+    them at `visibility: hidden`, so the whole band renders blank when that
+    script doesn't run — reproducible today by loading the live page with JS
+    disabled. Nothing here needs JS to be visible (covered by a test).
+  - The embeds carry no `title`, so a screen reader announces three unlabelled
+    frames. Each player is now named after its episode.
+  - Dropped the `?utm_source=generator` on every embed, the deprecated
+    `frameBorder`, and the white-on-white card with its `shape-6.svg`
+    background, which is covered on desktop and `background-size: 0` below
+    768px — never visible at any width.
+- Performance: the players stay `loading="lazy"`, so the three third-party
+  iframes are not fetched until the reader nears the bottom of the index; the
+  band adds no JavaScript and no render-blocking work of its own.
+- Verified: `tests/e2e/revista-audiorevista.spec.ts` (4 tests) and the existing
+  `recursos-podcast.spec.ts` (3) pass; `yarn lint` clean; `npx tsc --noEmit`
+  adds no new errors (the 6 remaining are the pre-existing Playwright image
+  typings in `revista-cards.spec.ts`). Screenshotted at 375/768/1440.

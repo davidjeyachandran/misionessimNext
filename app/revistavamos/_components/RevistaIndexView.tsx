@@ -7,6 +7,10 @@ import { PageHero } from "@/app/_components/PageHero";
 import { PER_PAGE } from "@/app/revistavamos/_lib/config";
 import { Pagination } from "@/app/revistavamos/_components/Pagination";
 import { TestimoniosSlider } from "@/app/revistavamos/_components/TestimoniosSlider";
+import {
+  SpotifyEpisodes,
+  type SpotifyEpisode,
+} from "@/app/_components/SpotifyEpisodes";
 
 const TESTIMONIOS = [
   {
@@ -39,6 +43,13 @@ const TESTIMONIOS = [
     name: "Yohanna",
     location: "Colombia",
   },
+];
+
+/** Audiorevista episodes featured under the index, in live's order. */
+const AUDIOREVISTA_EPISODES: SpotifyEpisode[] = [
+  { id: "2CP1iLYpS7qyBC2MXYR3Ym", title: "Revista Soy Influencer para el Reino - Parte 1" },
+  { id: "1saGQiYDIGdlZaXsGn3KCP", title: "Revista Tecnología en misiones - Parte 1" },
+  { id: "3dqJqqJPcDktF9yNwDsLXW", title: "Revista Latinos en adaptación - Parte 1" },
 ];
 
 /**
@@ -161,6 +172,41 @@ export async function RevistaIndexView({ page }: { page: number }) {
           <TestimoniosSlider testimonios={TESTIMONIOS} />
         </section>
       </div>
+
+      {/* Audiorevista — white band closing the index, on every paginated page
+          just as live does (live: .elementor-element-0ab7303).
+
+          Live wraps each player in a white card carrying a decorative
+          shape-6.svg background. The card is white-on-white and sized to the
+          player, so the shape is covered on desktop and set to
+          `background-size: 0` below 768px — never visible at any width. Both
+          are dropped and the players sit straight in the grid, the same way
+          the /recursos podcast band is built.
+
+          Live also fades the heading and each card in with an ElementsKit
+          animation that starts them at `visibility: hidden`. When that script
+          doesn't run the whole band stays blank, which is what live does today
+          on a slow connection. Nothing here depends on JS to become visible. */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          {/* Live caps the description at 1000px and centres the block from
+              768px up, left-aligning it below — same as the podcast band. */}
+          <div className="mx-auto max-w-[1000px] md:text-center">
+            <h2 className="font-heading text-3xl font-bold text-navy sm:text-4xl lg:text-5xl">
+              Audiorevista VAMOS
+            </h2>
+            <p className="mt-6 text-muted">
+              Ahora también puedes escuchar toda la Revista VAMOS desde
+              cualquier lugar
+            </p>
+          </div>
+
+          {/* Live keeps three players per row down to 768px, squeezing each to
+              189px and truncating the episode title. Two-up on tablet,
+              three-up from 1024px. */}
+          <SpotifyEpisodes episodes={AUDIOREVISTA_EPISODES} className="mt-12" />
+        </div>
+      </section>
     </main>
   );
 }

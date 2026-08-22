@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PageHero } from "../_components/PageHero";
 import { ResourceTabs, type ResourceTab } from "./ResourceTabs";
 import { VideoThumbnail } from "../_components/VideoThumbnail";
+import { SpotifyEpisodes, type SpotifyEpisode } from "../_components/SpotifyEpisodes";
 
 export const metadata: Metadata = {
   title: "Recursos",
@@ -34,11 +35,8 @@ const RESOURCE_TABS: ResourceTab[] = [
   },
 ];
 
-/**
- * Spotify episodes featured in the podcast band, in live's order. Titles are
- * only used for the iframe's accessible name — Spotify renders its own.
- */
-const PODCAST_EPISODES = [
+/** Spotify episodes featured in the podcast band, in live's order. */
+const PODCAST_EPISODES: SpotifyEpisode[] = [
   { id: "2CP1iLYpS7qyBC2MXYR3Ym", title: "Revista Soy Influencer para el Reino - Parte 1" },
   { id: "54NEkbbfNuk0vGxpv7XH50", title: "Latina levantando fondos entre latinos" },
   {
@@ -139,26 +137,7 @@ export default function RecursosPage() {
           {/* Live keeps three players per row all the way down to 768px, which
               squeezes each one to 189px and truncates the episode title. Two-up
               on tablet, three-up from 1024px. */}
-          <ul className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            {PODCAST_EPISODES.map((episode) => (
-              <li key={episode.id}>
-                {/* Live's embeds have no title, so a screen reader announces six
-                    unlabelled frames. Two of the six also carry `theme=0`, which
-                    flattens them to Spotify's neutral dark while the other four
-                    tint from the cover art — dropped so all six match. */}
-                <iframe
-                  src={`https://open.spotify.com/embed/episode/${episode.id}`}
-                  title={`Reproductor de Spotify: ${episode.title}`}
-                  width="100%"
-                  height="152"
-                  loading="lazy"
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="block w-full rounded-xl"
-                />
-              </li>
-            ))}
-          </ul>
+          <SpotifyEpisodes episodes={PODCAST_EPISODES} className="mt-12" />
 
           <div className="mt-10 md:text-center">
             <a
