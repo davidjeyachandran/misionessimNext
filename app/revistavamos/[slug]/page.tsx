@@ -46,17 +46,20 @@ export default async function RevistaPage({ params }: Props) {
 
       <header className="mb-12 flex flex-col gap-8 sm:flex-row">
         {revista.coverImage?.url && (
+          // The cover keeps its own proportions: editions vary slightly around
+          // 543x768, so a fixed ratio with object-cover would crop the artwork.
           <a
             href={revista.pdfUrl ?? undefined}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative aspect-[3/4] w-full shrink-0 overflow-hidden rounded-md shadow-md sm:w-[460px]"
+            className="block w-full shrink-0 sm:w-[460px]"
           >
             <Image
               src={revista.coverImage.url}
               alt={revista.coverImage.description ?? `Portada: ${revista.title}`}
-              fill
-              className="object-cover"
+              width={revista.coverImage.width ?? 543}
+              height={revista.coverImage.height ?? 768}
+              className="h-auto w-full rounded-md shadow-md"
               priority
               sizes="(max-width: 640px) 100vw, 460px"
             />
