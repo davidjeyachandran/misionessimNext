@@ -86,10 +86,11 @@ export async function RevistaIndexView({ page }: { page: number }) {
               Nueva edición
             </p>
             <div className="flex flex-col gap-8 sm:flex-row sm:items-start">
-              <a
-                href={newest.pdfUrl ?? undefined}
-                target="_blank"
-                rel="noopener noreferrer"
+              {/* The cover goes to the issue's own page, not straight to the
+                  PDF, so readers land on the related blog posts first. The
+                  PDF stays one click away on the button below. */}
+              <Link
+                href={`/revistavamos/${newest.slug}/`}
                 className="relative aspect-[543/768] w-full shrink-0 overflow-hidden rounded-md shadow-md sm:w-1/3"
               >
                 {newest.coverImage?.url && (
@@ -102,7 +103,7 @@ export async function RevistaIndexView({ page }: { page: number }) {
                     sizes="(max-width: 640px) 100vw, 33vw"
                   />
                 )}
-              </a>
+              </Link>
               <div className="flex flex-col justify-center gap-3">
                 <h2 className="font-heading text-3xl font-bold text-brand">
                   {newest.title}
