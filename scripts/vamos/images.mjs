@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-import { ARTICLES, SKIP_PAGES, LIVE, WORK, HTML, EXTRA_FURNITURE } from './issue.mjs';
+import { ARTICLES, SKIP_PAGES, ROW_PAGES, LIVE, WORK, HTML, EXTRA_FURNITURE } from './issue.mjs';
 
 const MIN_AREA = 20000;               // px² — below this it's a logo or icon
 const MAX_ASPECT = 3.2;               // wider than this is a banner or rule
@@ -45,10 +45,18 @@ const MASTHEAD = EXTRA_FURNITURE
   ? { test: t => MASTHEAD_BASE.test(t) || EXTRA_FURNITURE.test(t) }
   : MASTHEAD_BASE;
 const BYLINE = /^[A-ZÁÉÍÓÚÑ][\wáéíóúñ.]*(\s+[A-ZÁÉÍÓÚÑ][\wáéíóúñ.]*)?,\s/;
+/**
+ * A numbered or bulleted list is set one frame per item, and the items are
+ * short. Without this the short-frame rule eats the list and leaves the
+ * article as its own introduction — «Guía de oración» (sep 2024) lost all
+ * ten of its points that way.
+ */
+const LIST_ITEM = /^([•▪‣]|\d{1,2}[.)])\s*[¿¡"“'‘\wáéíóúñÁÉÍÓÚÑ]/;
 const MIN_BLOCK_WORDS = 12;
 
 const isFurniture = (t, words) => {
   if (MASTHEAD.test(t)) return true;
+  if (LIST_ITEM.test(t)) return false;
   // A contact line is furniture only when it IS the frame. Body text that
   // merely cites an address or URL stays — dropping the whole block on a
   // single link cost three articles their entire text.
@@ -79,7 +87,9 @@ for (const { page, blocks } of pages) {
   const edges = [];
   for (let i = 1; i < xs.length; i++) if (xs[i] - xs[i - 1] > 60) edges.push((xs[i] + xs[i - 1]) / 2);
   const col = b => edges.filter(e => b.x > e).length;
-  const ordered = [...blocks].sort((a, b) => (col(a) - col(b)) || (a.y - b.y))
+  const byColumn = (a, b) => (col(a) - col(b)) || (a.y - b.y);
+  const byRow = (a, b) => (a.y - b.y) || (a.x - b.x);
+  const ordered = [...blocks].sort(ROW_PAGES.has(page) ? byRow : byColumn)
     .filter(b => { const f = norm(b.text); return f && !isCredit(f) && !isChrome(f); });
   ordered.forEach((b, i) => {
     const flat = norm(b.text);

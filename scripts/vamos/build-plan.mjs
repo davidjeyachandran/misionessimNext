@@ -8,7 +8,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 
 import {
-  WORK as DIR, HTML, REVISTA_ID, COVER_ASSET_ID, COVER_HERO, NO_HERO_SKIP, DATE,
+  WORK as DIR, HTML, REVISTA_ID, COVER_ASSET_ID, COVER_HERO, NO_HERO_SKIP, DROP_ARTICLES, DATE,
 } from './issue.mjs';
 
 const slugify = t => t
@@ -23,7 +23,7 @@ const slugify = t => t
  * docs/PROGRESS.md, and those are not reproduced here.
  */
 function describe(body) {
-  const first = body.split('\n').find(l => l.trim().length > 60) ?? body;
+  const first = paragraphs(body).find(l => l.length > 60) ?? body;
   const sentences = first.replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s+/);
   let out = '';
   for (const s of sentences) {
@@ -33,11 +33,28 @@ function describe(body) {
   return out || sentences[0].slice(0, 160);
 }
 
+/**
+ * A justified opening line can leave one or two words stranded on their own
+ * line, which the indent reflow then reads as a paragraph («¡Qué» /
+ * «emocionantes son las conferencias misioneras!»). A sentence carrying on
+ * into the next paragraph cannot be a paragraph of its own.
+ */
+function paragraphs(body) {
+  const out = [];
+  for (const p of body.split('\n').map(t => t.trim()).filter(Boolean)) {
+    const prev = out[out.length - 1];
+    if (prev && prev.split(/\s+/).length <= 3 && /^[a-záéíóúñü]/.test(p)) {
+      out[out.length - 1] = `${prev} ${p}`;
+    } else out.push(p);
+  }
+  return out;
+}
+
 /** Contentful RichText: one paragraph node per source paragraph. */
 const toRichText = body => ({
   nodeType: 'document',
   data: {},
-  content: body.split('\n').map(p => p.trim()).filter(Boolean).map(text => ({
+  content: paragraphs(body).map(text => ({
     nodeType: 'paragraph',
     data: {},
     content: [{ nodeType: 'text', value: text, marks: [], data: {} }],
@@ -48,7 +65,7 @@ const rows = JSON.parse(readFileSync(`${DIR}/with-images.json`, 'utf8'));
 const plan = [];
 
 for (const r of rows) {
-  if (NO_HERO_SKIP.has(r.title)) continue;
+  if (NO_HERO_SKIP.has(r.title) || DROP_ARTICLES.has(r.title)) continue;
   const useCover = COVER_HERO.has(r.title);
   if (!r.image && !useCover) continue;
 

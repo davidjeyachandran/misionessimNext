@@ -146,9 +146,16 @@ const pages = pageChunks.map((chunk, i) => {
   return { page: i + 1, blocks };
 });
 
+/**
+ * The bullet in these layouts is a symbol-font glyph that lands in the text
+ * layer as U+0086, a C1 control character: invisible everywhere downstream,
+ * so a bulleted list imports as run-together prose and an anchor written on
+ * its first item never matches. Other C1s carry no meaning and go.
+ */
 function decode(s) {
   return s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-          .replace(/&quot;/g, '"').replace(/&apos;/g, "'");
+          .replace(/&quot;/g, '"').replace(/&apos;/g, "'")
+          .replace(/\u0086/g, '\u2022').replace(/[\u0080-\u009f]/g, '');
 }
 
 writeFileSync(path.join(WORK, 'blocks.json'), JSON.stringify(pages, null, 2));

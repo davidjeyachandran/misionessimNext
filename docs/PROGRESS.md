@@ -697,3 +697,91 @@ is worth repeating before any future change to the extractor.
   the edition. No other field on any `revista` was touched.
 - `.gitignore` now ignores `export/vamos-*/` rather than just
   `export/vamos-118/`. The judgement — the issue files — is committed.
+
+## 2026-08-23 — Four more VAMOS editions imported as drafts
+
+Extends the previous entry back four more editions. Everything created is
+**unpublished**, as before.
+
+| Edition | `--issue=` | Drafts created | Already live |
+|---|---|---|---|
+| La gente que no vemos · sep 2024 | `la-gente-que-no-vemos` | 35 | 0 |
+| Conferencias misioneras · jun 2024 | `conferencias-misioneras` | 34 | 5 |
+| Soy influencer · mar 2024 | `soy-influencer` | 20 | 24 |
+| Regresando a casa · dic 2023 | `regresando-a-casa` | 22 | 17 |
+
+Run oldest first, so the 5 cross-edition slug collisions were filed under
+their first appearance and skipped here — 4 in Regresando a casa
+(`ayuda-a-tu-misionero`, `ayudando-al-misionero-a-reintegrarse`,
+`cual-es-el-problema-solo-esta-volviendo-a-casa`,
+`planeando-el-regreso-a-casa`) and 1 in Soy influencer
+(`circulos-de-influencia-de-las-familias-misionales`).
+
+### Regresando a casa needed sign-off, and got it
+
+Its `revista.blogPosts` array feeds the "Regresando a casa" learning route
+in mi-movilicemos, and was deliberately left alone in July 2026 for that
+reason. David approved extending it on 2026-08-23 before the import ran;
+the array went 17 → 39.
+
+### Two new per-issue knobs, both reading-order problems
+
+- **`rowPages`.** Blocks were ordered whole-left-column-then-whole-right.
+  That is right for parallel columns and wrong for the layout VAMOS uses
+  constantly — a two-column article above a second, shorter one set in one
+  column — where the spread's right half lands *inside* the item underneath.
+  It cost «Los marginados e ignorados» (sep 2024 p5) 127 of its words, which
+  turned up inside the testimony below it and dropped the article under the
+  150-word floor. Nine pages across the four editions needed it. The symptom
+  to look for is a word count far above what the page's frames hold.
+- **`dropArticles`.** The per-frame counterpart of `skipPages`, for a page
+  where only one frame is defeated by a narrow label column. Without an
+  anchor that text is silently appended to the preceding article; with one
+  it can be isolated and dropped.
+
+### Three extractor fixes, all found by reading output
+
+- **The bullet in these PDFs is U+0086**, a C1 control character from a
+  symbol font — invisible everywhere downstream, so bulleted lists imported
+  as run-together prose and an anchor written on a list's first item never
+  matched. `extract.mjs` now maps it to `•` and strips the other C1s.
+- **Numbered and bulleted list items were being eaten as furniture.** The
+  short-frame rule is right about captions and wrong about list items, which
+  are set one frame each. «Guía de oración» (sep 2024) lost all ten of its
+  points that way. Nº 118 gains three interview questions from the fix.
+- **A justified opening line can strand one or two words**, which the indent
+  reflow then reads as its own paragraph («¡Qué» / «emocionantes son las
+  conferencias misioneras!»), and `describe()` skipped past it, so the post
+  opened mid-sentence. `build-plan.mjs` now rejoins them.
+
+Nº 118 remains the regression test: its whole chain was re-run after every
+edit and still plans the same 27 posts with the same 26 heroes — the only
+diff is the three questions above.
+
+### Traps worth knowing
+
+- **`live` must list the magazine headline.** Soy influencer had 24 posts
+  already live and Regresando a casa 17, so this edition pair is mostly a
+  matching exercise. The reliable method is to read the live bodies out of
+  Contentful and match their opening sentence against the text layer — the
+  contents-page title is often not the published title, and sometimes not
+  the page headline either («Retorno del misionero» ran as
+  `sindrome-general-de-adaptacion-y-retorno-del-misionero`, «Commúnicate
+  bien» as `como-te-fue`).
+- **«Aprendiendo a convivir» is linked to Soy influencer but is not in that
+  PDF** — verified by grep for Astrid Duarte and Chortí, its subjects. Same
+  case as «Consejos si NO quieres ser misionero» in Envío responsable.
+- **Black-and-white photographs score as greyscale furniture** and lose to
+  whatever colour image is nearest, or to nothing. Two pages needed
+  `heroOverride` for this: sep 2024 p29 (a duotone portrait) and mar 2024
+  p21, an archive spread where *every* photo is black and white and the
+  automatic pick fell through to a blank white panel.
+- **Vector-art headlines still need a human eye.** Four titles in Soy
+  influencer were not in the contents page and not in the text layer; they
+  were read off page renders (`pdftoppm -png -r 55 -f N -l N`).
+
+### For review before publishing
+
+- Five posts take the issue cover as their hero (`coverHero`): they are
+  sidebars set beside an article that owns the page's only photograph.
+- Titles are the magazine headlines verbatim, per the Nº 118 convention.

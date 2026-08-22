@@ -15,6 +15,10 @@ August 2026 to run any issue. Run against `master` so far:
 | Discípulos que hacen discípulos · jun 2025 | `discipulos` | 29, draft |
 | Cuidado Integral · mar 2025 | `cuidado-integral` | 25, draft |
 | Latinos en adaptación · dic 2024 | `latinos-adaptacion` | 34, draft |
+| La gente que no vemos · sep 2024 | `la-gente-que-no-vemos` | 35, draft |
+| Conferencias misioneras · jun 2024 | `conferencias-misioneras` | 34, draft |
+| Soy influencer · mar 2024 | `soy-influencer` | 20, draft |
+| Regresando a casa · dic 2023 | `regresando-a-casa` | 22, draft |
 
 ## Why this is not the sim-blog pipeline
 
@@ -77,6 +81,8 @@ It also declares:
 - `skipPages` — cover, TOC, house ads, and pages the text layer cannot be
   trusted on (see below)
 - `furniture` — masthead names and straplines, which are reset every issue
+- `rowPages` — pages read row by row rather than column by column
+- `dropArticles` — anchors that exist only to isolate text, then drop it
 - `coverHero`, `noHeroSkip`, `heroOverride` — hero exceptions
 
 ### Pages worth skipping
@@ -93,6 +99,22 @@ spliced together:
 
 Plain two-column frames are *not* in this category — `extract.mjs` cuts
 those apart at the gutter automatically.
+
+When only one frame on the page is affected, skipping the whole page costs
+too much. Anchor a throwaway article on that frame and name it in
+`dropArticles`: without an anchor its text is silently appended to whichever
+article precedes it.
+
+### Reading order: `rowPages`
+
+Blocks are ordered whole-left-column-then-whole-right, which is right for a
+page of parallel columns and wrong for the common VAMOS layout where a
+two-column article sits above a second, shorter one set in a single column.
+The spread's right half then lands *inside* the item underneath it — the
+symptom is an article whose word count is far above what its frames hold,
+ending in prose that belongs to its neighbour. Name such pages in
+`rowPages` and they are ordered by y instead. The two layouts cannot be
+told apart from geometry, so this is a per-page judgement like `skipPages`.
 
 ### One trap worth knowing
 
