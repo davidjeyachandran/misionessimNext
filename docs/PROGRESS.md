@@ -498,3 +498,26 @@ truncated right at this slider).
   errors (11 pre-existing warnings outside this work). `npx tsc --noEmit`
   remains blocked only by existing Playwright image-locator typings in three
   e2e specs; the new modules add no TypeScript errors.
+
+## 2026-08-20 — Legacy magazine PDF URLs open the PDF, not the edition page
+
+- **Bug:** `/wp-content/uploads/2024/11/evangelismovamosago16.pdf` 301'd to
+  `/revistavamos/evangelismo-eficaz/` — a PDF URL landing on an HTML page.
+  Anyone who shared or bookmarked the file (or clicked a "download the issue"
+  link) got the page and had to hunt for the download.
+- **Fix** in `scripts/build-legacy-redirects.ts`: magazine PDFs now redirect to
+  the edition's first-party PDF path, e.g.
+  `/revistavamos/evangelismo-eficaz/2016-08-EvangelismoVAMOS.pdf`, which the
+  existing `/revistavamos/**.pdf` rewrite proxies to Contentful. The slug stays
+  in the path, so link equity still lands on the edition.
+- The asset filename is only known to `build-revista-pdf-rewrites.ts`, so the
+  script reads it back from the `/revistavamos/**.pdf` rewrites already in
+  `vercel.json` — **run `yarn build:revista-rewrites` before
+  `yarn build:legacy-redirects`** when an edition is added. An edition with no
+  PDF rewrite falls back to the edition page and is listed in the run output.
+- Applies to all **156** magazine redirects (118 distinct PDFs), including the
+  15 `pdfToSlug` aliases. None needed the fallback.
+- Verified: every PDF destination has a matching rewrite, no duplicate sources
+  and no redirect chains in `vercel.json`; all 118 destinations HEAD-check
+  `200 application/pdf` on the deployed site. Budget unchanged at 358
+  redirects + 251 rewrites.

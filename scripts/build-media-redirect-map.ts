@@ -10,11 +10,14 @@
  * anything not redirected here becomes a hard 404 at cutover.
  *
  * Resolution rules, in priority order:
- *   1. VAMOS magazine PDFs -> `/revistavamos/<slug>/`. The filename encodes
- *      theme + month + year (`judaismovamosago18.pdf`), which resolves to an
- *      edition by publication month. We deliberately target the edition PAGE
- *      rather than the raw Contentful asset: it keeps link equity on our
- *      domain and gives the visitor a cover, context and a working PDF link.
+ *   1. VAMOS magazine PDFs -> the edition, identified here as
+ *      `/revistavamos/<slug>/`. The filename encodes theme + month + year
+ *      (`judaismovamosago18.pdf`), which resolves to an edition by publication
+ *      month. This map names the EDITION, not the final redirect target:
+ *      build-legacy-redirects.ts turns it into that edition's first-party PDF
+ *      path (`/revistavamos/<slug>/<file>.pdf`), so a URL that used to open a
+ *      PDF still opens one. Either way the raw Contentful asset URL is never
+ *      what the visitor sees, and link equity stays on our domain.
  *   2. Everything else -> the Contentful asset carrying the same filename.
  *      The import preserved filenames, so this is a mechanical join. WordPress
  *      re-upload suffixes (`-1`, `_0`) are normalised away, since those are

@@ -6,8 +6,13 @@
  * Every rule lands the visitor on a CLEAN first-party URL — a raw
  * `assets.ctfassets.net` link is never the visible destination:
  *
- *   1. Magazine PDFs -> `/revistavamos/<slug>/`, the edition page. It carries
- *      the cover, the intro and a working PDF link, and keeps link equity here.
+ *   1. Magazine PDFs -> `/revistavamos/<slug>/<file>.pdf`, the first-party PDF
+ *      path proxied to Contentful by build-revista-pdf-rewrites.ts. The old
+ *      URL was a PDF, so it must still open a PDF: landing on the edition page
+ *      instead breaks anyone deep-linking the file (and every "download the
+ *      issue" link out there). The edition slug is still in the path, so link
+ *      equity stays on the domain. Editions with no PDF rewrite fall back to
+ *      the edition page.
  *   2. Other migrated documents -> `/recursos/<filename>`, a first-party path
  *      that a companion rewrite proxies to the Contentful asset. Same trick as
  *      the revista PDFs in build-revista-pdf-rewrites.ts, same reason.
@@ -81,6 +86,21 @@ function ownsRewrite(source: string): boolean {
   return source.startsWith("/recursos/");
 }
 
+/**
+ * Edition slug -> its first-party PDF path, read back from the
+ * `/revistavamos/<slug>/<file>.pdf` rewrites. Those are generated from
+ * Contentful by build-revista-pdf-rewrites.ts, which is the only place the
+ * asset filename is known, so run that script first when an edition is added.
+ */
+function pdfPathsBySlug(rewrites: readonly Rewrite[]): Map<string, string> {
+  const bySlug = new Map<string, string>();
+  for (const { source } of rewrites) {
+    const match = /^\/revistavamos\/([^/]+)\/[^/]+\.pdf$/i.exec(source);
+    if (match) bySlug.set(match[1], source);
+  }
+  return bySlug;
+}
+
 async function main() {
   const media = JSON.parse(await readFile(MEDIA_MAP, "utf8")) as {
     entries: MediaEntry[];
@@ -88,6 +108,23 @@ async function main() {
   const aliases = JSON.parse(
     await readFile(REVISTA_ALIASES, "utf8"),
   ) as RevistaAliases;
+
+  const raw = await readFile(VERCEL_JSON, "utf8");
+  const config = JSON.parse(raw) as {
+    redirects?: Redirect[];
+    rewrites?: Rewrite[];
+    [k: string]: unknown;
+  };
+  const pdfBySlug = pdfPathsBySlug(config.rewrites ?? []);
+  const withoutPdf: string[] = [];
+
+  /** The PDF itself when we can serve it, else the edition page. */
+  const editionTarget = (slug: string, source: string): string => {
+    const pdf = pdfBySlug.get(slug);
+    if (pdf) return pdf;
+    withoutPdf.push(`${source} -> /revistavamos/${slug}/`);
+    return `/revistavamos/${slug}/`;
+  };
 
   const redirects: Redirect[] = [];
   const rewrites: Rewrite[] = [];
@@ -122,15 +159,16 @@ async function main() {
     if (editionSlug) {
       redirects.push({
         source: entry.path,
-        destination: `/revistavamos/${editionSlug}/`,
+        destination: editionTarget(editionSlug, entry.path),
         permanent: true,
       });
       continue;
     }
     if (entry.bucket === "vamos-pdf" && entry.destination) {
+      const slug = entry.destination.replace(/^\/revistavamos\/|\/$/g, "");
       redirects.push({
         source: entry.path,
-        destination: entry.destination,
+        destination: editionTarget(slug, entry.path),
         permanent: true,
       });
       continue;
@@ -143,13 +181,6 @@ async function main() {
     }
     unresolved.push(entry.path);
   }
-
-  const raw = await readFile(VERCEL_JSON, "utf8");
-  const config = JSON.parse(raw) as {
-    redirects?: Redirect[];
-    rewrites?: Rewrite[];
-    [k: string]: unknown;
-  };
 
   const keptRedirects = (config.redirects ?? []).filter(
     (r) => !ownsRedirect(r.source),
@@ -171,6 +202,13 @@ async function main() {
     `Budget: ${config.redirects.length} redirects (Vercel limit 2,048) + ` +
       `${config.rewrites.length} rewrites.`,
   );
+  if (withoutPdf.length) {
+    console.log(
+      `\n${withoutPdf.length} magazine URLs fell back to the edition page ` +
+        `(no PDF rewrite — run \`yarn build:revista-rewrites\` first):`,
+    );
+    for (const line of withoutPdf) console.log(`  ${line}`);
+  }
   if (unresolved.length) {
     console.log(
       `\n${unresolved.length} documents have no destination and will 404 ` +
