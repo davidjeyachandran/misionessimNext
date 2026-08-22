@@ -194,3 +194,11 @@ reference/mirror/
 # collision-diff*.json (smaller, no bodies) IS committed as an audit trail.
 export/import-plan.json
 export/import-plan.*.json
+
+# export/vamos-118/ holds the working set for the VAMOS Nº 118 import: the
+# PDF text layer (all.xml), 174 images pulled out by pdftohtml, the split
+# bodies, and plan.json (embeds full RichText, same reasoning as
+# import-plan.json above). All of it regenerates from the issue PDF via
+# scripts/vamos/ — see scripts/vamos/README.md. Contentful is the system of
+# record for the posts and their hero images now, so none of it is history.
+export/vamos-118/

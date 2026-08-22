@@ -557,3 +557,51 @@ truncated right at this slider).
   paints the band across the whole window. Moved out of the column into its own
   `<section>` with the content re-centred inside, and switched the one-off
   `#eef0f8` to the site's `lavender` token — `#eaebf8`, live's exact shade.
+
+## 2026-08-22 — VAMOS Nº 118 imported: 26 posts from the issue PDF
+
+- **26 `blogPost` entries created and published on `master`** from the Nº 118
+  PDF ("El clamor macedonio", June 2026), all linked to the existing
+  `el-clamor-macedonio` edition (`209B68PvjZddgXDI5KNbG3`), whose
+  `blogPosts` list went 3 → 29. Every post has a hero image and every hero
+  asset is published — verified after the run.
+- **New pipeline in `scripts/vamos/`** (README there). Deliberately *not*
+  sim-blog's vision-based `import-vamos-pdf.mjs`: VAMOS PDFs are InDesign
+  exports with a real text layer, so `pdftotext -bbox-layout` yields every
+  text frame with correct reading order and per-word geometry. Body text is
+  verbatim, no model involved. Hero images are the original embedded
+  JPEG/PNG assets pulled via `pdftohtml`, not page-render crops, so there is
+  no text bleed or re-compression.
+- **An editorial Word export is not needed for future issues.** One was
+  supplied for Nº 118 and proved near-redundant: the PDF gave 100% of the
+  body text, the page-3 TOC gave 6 of the 7 headlines that are set as
+  outlined vector art, and the Word file was itself missing five articles
+  (Sudán del Sur, Mozambique, Chad, Guía de estaciones de oración, Ruta de
+  formación misionera).
+- **Duplicate edition found and left alone.** Two `revista` entries exist for
+  this magazine: `el-clamor-macedonio` (published 2026-07-11, the canonical
+  one — cover, intro, PDF, now 29 posts) and `llamado-macedonico`
+  (`4RYziknCCJzMJw3DaZ5mlh`, draft, uploaded 2026-08-22, no cover/intro/posts,
+  byte-identical PDF re-uploaded). David: keep `el-clamor-macedonio`
+  unchanged. **The draft is an orphan and should be deleted.** Note
+  `yarn import:revistas` skips only on slug `el-clamor-macedonio`, so running
+  it now would create a *third* entry — don't.
+- **Not imported, deliberately:** 3 articles already published by hand from
+  this issue; `¿Buscas dónde Dios te puede usar?` (cross-issue republish —
+  same slug ran in 2022 under a different edition, and `lib/contentful.ts`
+  de-duplicates by title so a copy would be invisible); 3 articles whose
+  pages carry no photograph at all (p27–28 are pure typography) given the
+  every-post-needs-a-hero rule; and 11 items under the 150-word floor.
+  `Ocho países, nueve idiomas, un solo llamado` was rescued by assigning it
+  the issue cover (`COVER_HERO` in `build-plan.mjs`).
+- **Two defects caught in review before writing**, both worth knowing if this
+  is reused: (1) page furniture — masthead, footer strap, social handles —
+  was being appended to whichever article shared its page, and the first fix
+  was too broad, dropping three whole articles that merely cited a URL;
+  (2) centred text defeated the paragraph-indent heuristic, turning every
+  line into its own paragraph. Both are fixed in `extract.mjs`/`images.mjs`.
+- **Titles are the magazine headlines verbatim.** The three hand-published
+  posts use a more descriptive, SEO-leaning style; that was not applied
+  retroactively. Retitling is an in-place edit, no re-import needed.
+- `export/vamos-118/` (20MB working set) is gitignored — regenerable from the
+  issue PDF, and Contentful is the system of record now.
