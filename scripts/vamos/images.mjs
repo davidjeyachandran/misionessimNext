@@ -7,19 +7,22 @@
  * and rules (very wide and short) and logos (small) are not candidates.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
-import { ARTICLES, SKIP_PAGES, LIVE } from './manifest.mjs';
-
-import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-/** Derived artefacts live outside the repo history — see .gitignore. */
-const WORK = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../export/vamos-118');
+import { ARTICLES, SKIP_PAGES, LIVE, WORK, HTML, EXTRA_FURNITURE } from './issue.mjs';
 
-
-const SCALE = 892 / 595.276;          // pdftohtml px per PDF point
 const MIN_AREA = 20000;               // px² — below this it's a logo or icon
 const MAX_ASPECT = 3.2;               // wider than this is a banner or rule
 const KEEP_WORDS = 150;
+
+/**
+ * pdftohtml px per PDF point. Derived from the two renderings of page 1
+ * rather than hardcoded, so an issue on a different trim size still lines
+ * its image coordinates up with its text coordinates.
+ */
+const docXml = readFileSync(path.join(HTML, 'doc.xml'), 'utf8');
+const SCALE = +(/width="(\d+)"/.exec(docXml.split('<page ')[1])?.[1] ?? 892)
+            / +(/width="([\d.]+)"/.exec(readFileSync(path.join(WORK, 'all.xml'), 'utf8').split('<page ')[1])?.[1] ?? 595.276);
 
 const norm = s => s.replace(/\s+/g, ' ').replace(/^["“”'‘’¡\s]+/, '').trim();
 const isCredit = t => /^(pexels|unsplash|foto|photo)\s*[:.]/i.test(t);
@@ -32,7 +35,15 @@ const isChrome = t => /^(¡?Ahora nos toca a nosotros!?|EQUIPO VAMOS|Pasión lat
  * only when they read as a byline, which carries real attribution.
  */
 const CONTACT = /(sim\.org|www\.|https?:|@|\/SIM|movilicemos\.org|cursos\.)/i;
-const MASTHEAD = /^(Directora:|Director:|SIRVE CON NOSOTROS|Escríbenos|Cruzando barreras|VAMOS es una|Es la Iglesia quien envía|Jessica Bastidas|Evelyn Subuyuj|Luigi Sarmiento|Geraldyne Velasquez|Con una obediencia sencilla)/i;
+/**
+ * The masthead wording is reset every issue — staff names change, the
+ * strapline changes — so the shared pattern covers the recurring frames and
+ * each issue file adds its own in `furniture`.
+ */
+const MASTHEAD_BASE = /^(Directora:|Director:|Edición:|Diseño:|Redacción:|SIRVE CON NOSOTROS|Escríbenos|Cruzando barreras|VAMOS es una|Es la Iglesia quien envía|Síguenos|Suscríbete|Contáctanos)/i;
+const MASTHEAD = EXTRA_FURNITURE
+  ? { test: t => MASTHEAD_BASE.test(t) || EXTRA_FURNITURE.test(t) }
+  : MASTHEAD_BASE;
 const BYLINE = /^[A-ZÁÉÍÓÚÑ][\wáéíóúñ.]*(\s+[A-ZÁÉÍÓÚÑ][\wáéíóúñ.]*)?,\s/;
 const MIN_BLOCK_WORDS = 12;
 
@@ -46,6 +57,19 @@ const isFurniture = (t, words) => {
   return !BYLINE.test(t);           // short frames: keep bylines, drop the rest
 };
 
+/**
+ * The short-frame rule is right about captions and credits and wrong about
+ * one thing: a sentence set across two frames, where the opener is only a
+ * few words ("Como creyentes muy pocas veces" / "somos conscientes del
+ * mundo espiritual…"). Dropping the opener leaves an article beginning
+ * mid-sentence. Two exemptions, both cheap to check:
+ *
+ *   · the frame an article is anchored on — dropping it beheads the piece
+ *   · a frame whose successor starts lowercase, which is the sentence
+ *     carrying on and so cannot be a caption
+ */
+const runsOn = next => !!next && /^[a-záéíóúñü]/.test(norm(next));
+
 // ── rebuild the split, this time keeping block geometry ────────────────────
 const pages = JSON.parse(readFileSync(path.join(WORK, 'blocks.json'), 'utf8'));
 const stream = [];
@@ -55,11 +79,16 @@ for (const { page, blocks } of pages) {
   const edges = [];
   for (let i = 1; i < xs.length; i++) if (xs[i] - xs[i - 1] > 60) edges.push((xs[i] + xs[i - 1]) / 2);
   const col = b => edges.filter(e => b.x > e).length;
-  for (const b of [...blocks].sort((a, b) => (col(a) - col(b)) || (a.y - b.y))) {
+  const ordered = [...blocks].sort((a, b) => (col(a) - col(b)) || (a.y - b.y))
+    .filter(b => { const f = norm(b.text); return f && !isCredit(f) && !isChrome(f); });
+  ordered.forEach((b, i) => {
     const flat = norm(b.text);
-    if (!flat || isCredit(flat) || isChrome(flat)) continue;
-    stream.push({ page, block: b, text: b.text, flat, furniture: isFurniture(flat, b.words) });
-  }
+    const anchors = ARTICLES.some(a => flat.startsWith(norm(a.anchor)));
+    stream.push({
+      page, block: b, text: b.text, flat,
+      furniture: !anchors && !runsOn(ordered[i + 1]?.text) && isFurniture(flat, b.words),
+    });
+  });
 }
 
 const seen = new Set();
@@ -79,7 +108,7 @@ for (const a of arts) {
 }
 
 // ── image inventory ────────────────────────────────────────────────────────
-const xml = readFileSync('html/doc.xml', 'utf8');
+const xml = docXml;
 const byPage = new Map();
 xml.split('<page ').slice(1).forEach((p, i) => {
   const imgs = [...p.matchAll(/<image top="(-?\d+)" left="(-?\d+)" width="(\d+)" height="(\d+)" src="([^"]+)"/g)]

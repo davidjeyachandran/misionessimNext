@@ -1,29 +1,32 @@
 /**
- * Create the VAMOS Nº 118 blogPost entries in Contentful.
+ * Create one issue's blogPost entries in Contentful.
  *
  * Dry run by default; pass --live to write. Idempotent: an existing entry
  * with the same slug is left alone rather than duplicated, so a partial
  * failure can simply be re-run.
  *
+ * Entries are created as drafts. Pass --publish to publish them too — the
+ * default is deliberately the reversible one, since an editor reviewing 25
+ * machine-extracted articles is cheaper before publication than after.
+ * Hero assets are always published: Contentful refuses to publish an entry
+ * whose linked asset is still a draft, so leaving them unpublished would
+ * just move the work to whoever presses publish.
+ *
  * The revista entry itself is never modified apart from appending these
  * posts to its `blogPosts` list, which is the link the edition page reads.
+ * Appending drafts is safe — getRevistaBySlug in lib/contentful.ts drops
+ * links that do not resolve, so a draft stays invisible until published.
  */
 import { readFileSync } from 'node:fs';
 import { basename } from 'node:path';
 
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
+import { WORK as DIR, REVISTA_ID, KEY } from './issue.mjs';
 
-/** Derived artefacts live outside the repo history — see .gitignore. */
-const WORK = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../export/vamos-118');
-
-
-const DIR = WORK;
 const SPACE = 'i46buyptg48q';
 const ENV = 'master';
 const TOKEN = process.env.CONTENTFUL_MANAGEMENT_TOKEN;
 const LIVE = process.argv.includes('--live');
-const REVISTA_ID = '209B68PvjZddgXDI5KNbG3';
+const PUBLISH = process.argv.includes('--publish');
 
 if (!TOKEN) { console.error('Missing CONTENTFUL_MANAGEMENT_TOKEN'); process.exit(1); }
 
@@ -95,7 +98,7 @@ const collisions = plan.filter(p => existing.has(p.slug));
 if (collisions.length) console.log(`⚠️  ${collisions.length} slug collisions, will be skipped: ${collisions.map(c => c.slug).join(', ')}`);
 
 const todo = plan.filter(p => !existing.has(p.slug));
-console.log(`${todo.length} to create${LIVE ? '' : '  (dry run — pass --live to write)'}\n`);
+console.log(`${KEY}: ${todo.length} to create as ${PUBLISH ? 'PUBLISHED' : 'drafts'}${LIVE ? '' : '  (dry run — pass --live to write)'}\n`);
 
 if (!LIVE) {
   for (const p of todo) console.log(`  would create ${p.slug}  hero=${p.hero.kind}`);
@@ -123,11 +126,13 @@ for (const [i, p] of todo.entries()) {
         revista: { 'en-US': { sys: { type: 'Link', linkType: 'Entry', id: REVISTA_ID } } },
       } },
     });
-    await cma(`/entries/${entry.sys.id}/published`, {
-      method: 'PUT', headers: { 'X-Contentful-Version': String(entry.sys.version) },
-    });
+    if (PUBLISH) {
+      await cma(`/entries/${entry.sys.id}/published`, {
+        method: 'PUT', headers: { 'X-Contentful-Version': String(entry.sys.version) },
+      });
+    }
     created.push(entry.sys.id);
-    console.log('ok');
+    console.log(PUBLISH ? 'ok' : 'ok (draft)');
   } catch (e) {
     console.log(`FAILED\n    ${e.message}`);
   }
@@ -151,4 +156,4 @@ if (created.length) {
   console.log(`\nrevista blogPosts: ${cur.length} → ${merged.length}`);
 }
 
-console.log(`\ncreated ${created.length}/${todo.length}`);
+console.log(`\ncreated ${created.length}/${todo.length} as ${PUBLISH ? 'published entries' : 'drafts'}`);

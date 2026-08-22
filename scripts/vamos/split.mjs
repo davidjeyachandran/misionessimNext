@@ -7,16 +7,8 @@
  * miss would merge two articles without any visible symptom.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
-import { ARTICLES, SKIP_PAGES, LIVE } from './manifest.mjs';
 
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-
-/** Derived artefacts live outside the repo history — see .gitignore. */
-const WORK = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../export/vamos-118');
-
-
-const DIR = WORK;
+import { ARTICLES, SKIP_PAGES, LIVE, WORK as DIR } from './issue.mjs';
 // Leading quote marks vary (straight, curly) and must not defeat an anchor.
 const norm = s => s.replace(/\s+/g, ' ').replace(/^["“”'‘’¡\s]+/, '').trim();
 

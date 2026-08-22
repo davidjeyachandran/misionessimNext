@@ -11,16 +11,16 @@
  * otherwise from the page-3 table of contents.
  * `anchor` is the start of the article's first body block, verbatim.
  */
-export const SKIP_PAGES = new Set([1, 3, 30, 31, 32]);
+const skipPages = new Set([1, 3, 30, 31, 32]);
 
 /** Already imported and published by hand — never touched by this import. */
-export const LIVE = new Set([
+const live = new Set([
   'El llamado: más allá de la tarea',
   'Surfeando las olas en el Norte de África',
   'Una puerta para aprovechar en Alemania',
 ]);
 
-export const ARTICLES = [
+const articles = [
   { title: 'Un llamado macedónico para Latinoamérica',      anchor: 'En el silencio de la noche' },
   { title: 'El llamado macedonio sigue llamando',           anchor: 'Lo que queda por delante en la Misión de Dios' },
   { title: 'El llamado macedonio (Hechos 16:9)',            anchor: 'Es cuando un hombre clamó' },
@@ -67,3 +67,26 @@ export const ARTICLES = [
   { title: 'Las decisiones pasadas son el mejor predictor del comportamiento futuro', anchor: 'Necesitamos hacer preguntas que revelen' },
   { title: '¿Buscas dónde Dios te puede usar?',             anchor: 'Con frecuencia escucho la frase' },
 ];
+
+export default {
+  revistaId: '209B68PvjZddgXDI5KNbG3',
+  coverAssetId: '1NfWnShd2nCbOrogRFr5eS',
+  date: '2026-06-01',
+  skipPages,
+  live,
+  articles,
+  /** Articles whose page carries no photograph, given the cover instead. */
+  coverHero: new Set(['Ocho países, nueve idiomas, un solo llamado']),
+  /** No photo available and no cover fallback requested — not imported. */
+  noHeroSkip: new Set([
+    'Volver a la Escritura',
+    '¿Cómo evaluamos la "tolerancia al riesgo" de un candidato?',
+    'Las decisiones pasadas son el mejor predictor del comportamiento futuro',
+  ]),
+  /** Where the automatic pick is a logo or a cut-out on a stark background. */
+  heroOverride: {
+    'Un llamado macedónico para Latinoamérica': 'doc-2_4.jpg',
+    'El llamado macedonio sigue llamando':      'doc-4_4.jpg',
+  },
+  furniture: /^(Directora:|Director:|SIRVE CON NOSOTROS|Escríbenos|Cruzando barreras|VAMOS es una|Es la Iglesia quien envía|Jessica Bastidas|Evelyn Subuyuj|Luigi Sarmiento|Geraldyne Velasquez|Con una obediencia sencilla)/i,
+};

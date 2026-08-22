@@ -605,3 +605,95 @@ truncated right at this slider).
   retroactively. Retitling is an in-place edit, no re-import needed.
 - `export/vamos-118/` (20MB working set) is gitignored — regenerable from the
   issue PDF, and Contentful is the system of record now.
+
+## 2026-08-22 — Six more VAMOS editions imported as drafts
+
+Extends the Nº 118 import (previous entry) to the six most recent editions
+that still lacked articles. **Everything created is unpublished** — David
+asked for drafts so the extraction can be reviewed before it goes live.
+Hero assets *are* published, because Contentful refuses to publish an entry
+whose linked asset is still a draft, so leaving them would only move the
+work to whoever presses publish.
+
+| Edition | `--issue=` | Drafts created |
+|---|---|---|
+| Lucha espiritual · mar 2026 | `lucha-espiritual` | 29 |
+| Envío responsable · dic 2025 | `envio-responsable` | 23 |
+| Carácter misionero · sep 2025 | `caracter-misionero` | 24 |
+| Discípulos que hacen discípulos · jun 2025 | `discipulos` | 29 |
+| Cuidado Integral · mar 2025 | `cuidado-integral` | 25 |
+| Latinos en adaptación · dic 2024 | `latinos-adaptacion` | 34 |
+
+### The pipeline is now per-issue, and Nº 118 is the regression test
+
+`scripts/vamos/` was hardcoded to Nº 118. Every step now takes
+`--issue=<key>` and loads `issues/<key>.mjs`; `manifest.mjs` moved to
+`issues/118.mjs` unchanged. Nº 118's whole chain was re-run after every
+edit and still plans the same 27 posts with the same 26 heroes — that check
+is worth repeating before any future change to the extractor.
+
+### Three extractor defects, all found by reading output rather than counts
+
+- **Two-column frames.** `pdftotext` emits some frames spanning both
+  typeset columns, and it shreds the prose two ways at once: alternating
+  lines, and single `<line>`s carrying both columns' words run together.
+  `extract.mjs` now finds the gutter as a band no word crosses and deals the
+  words into one frame per column. The gutters in these issues run as tight
+  as **7pt**, so width alone cannot carry the decision — a column also has
+  to hold ≥20% of the frame's words and ≥4 lines. Lucha espiritual p7 was
+  the case that surfaced it.
+- **Beheaded articles.** The short-frame furniture rule was dropping opening
+  fragments (`"Como creyentes muy pocas veces"` / `"somos conscientes del
+  mundo espiritual…"`), leaving articles that begin mid-sentence. Two
+  exemptions in `images.mjs`: a frame that anchors an article is never
+  furniture, and neither is one whose successor starts lowercase — a
+  sentence carrying on cannot be a caption.
+- **Pages the text layer cannot carry.** Worksheet grids and narrow label
+  columns set inside the measure (Carácter misionero p9 is the clearest)
+  interleave word by word and cannot be fixed generically. Named per issue
+  in `skipPages` with the reason.
+
+### Traps worth knowing
+
+- **Cuidado Integral pages 25–45 are not that issue.** They are teaser
+  excerpts from *earlier* editions — its own contents page says so and every
+  such spread closes with "Lee la revista completa en". Importing them would
+  file another edition's writing under this one. Skipped.
+- **Envío responsable is a recruiting brochure**, not a magazine: course
+  adverts, institutional panels and one-paragraph testimonies. The 150-word
+  floor drops a large share of it, which is the rule working.
+- **`live` must list the magazine headline, not the published title.** The
+  editor retitles: «Vestida con la armadura cada día» ran as
+  `luz-en-medio-de-la-oscuridad`, «La dependencia del Señor me moldea» as
+  `moldeada-por-el-senor-lecciones-de-caracter-en-asia`. Matching on slug
+  alone would have duplicated both.
+- **«Consejos si NO quieres ser misionero»** (the one post already live from
+  Envío responsable) does not appear in that PDF at all — the editor wrote
+  it separately. Verified by grep before concluding it.
+- **Run issues oldest first.** VAMOS reruns material between neighbouring
+  editions — `listos-para-la-cancha` and
+  `toda-la-vida-misionera-pone-a-prueba-nuestro-caracter` both ran in dic
+  2024 and again in sep 2025. Oldest-first files a rerun under its first
+  appearance; the importer skips the second by slug collision.
+
+### For review before publishing
+
+- **34 of 168 heroes are under 200px on a side**, including the editorial
+  hero that recurs across four issues at 255×114. These are the embedded
+  images at source resolution — the pipeline picks the best photo on the
+  page, and on an editorial page the best photo is a small portrait. Worth
+  replacing by hand before those posts go live.
+- **Titles are the magazine headlines verbatim**, per the Nº 118 convention,
+  not the more descriptive style of the hand-published posts.
+- Two slugs collided with posts already live and were skipped:
+  `senor-hazme-un-multiplicador`, `guiando-a-los-interesados`.
+
+### Safety notes
+
+- Drafts are appended to each `revista.blogPosts` and the edition is
+  republished. That is safe: `getRevistaBySlug` in `lib/contentful.ts` drops
+  links that do not resolve, so a draft stays invisible on the site until
+  someone publishes it — and publishing a post then needs no second edit to
+  the edition. No other field on any `revista` was touched.
+- `.gitignore` now ignores `export/vamos-*/` rather than just
+  `export/vamos-118/`. The judgement — the issue files — is committed.

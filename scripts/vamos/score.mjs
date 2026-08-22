@@ -8,15 +8,9 @@
  */
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
-
-import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-/** Derived artefacts live outside the repo history — see .gitignore. */
-const WORK = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../export/vamos-118');
-
-
-const HTML = path.join(WORK, 'html');
+import { WORK, HTML, HERO_OVERRIDE } from './issue.mjs';
 const MIN_SATURATION = 0.06;   // below this it is greyscale furniture
 const FLAT_LUM = 0.30;         // above this it is likely a cut-out
 
@@ -43,12 +37,9 @@ xml.split('<page ').slice(1).forEach((p, i) => {
 
 /**
  * Where the automatic pick is a logo or a cut-out on a stark background,
- * the image is named outright. Keyed by article title.
+ * the issue file names the image outright. Keyed by article title.
  */
-const OVERRIDE = {
-  'Un llamado macedónico para Latinoamérica': 'doc-2_4.jpg',   // the issue cover, not the SIM logo
-  'El llamado macedonio sigue llamando':      'doc-4_4.jpg',   // photo, not the cut-out figure
-};
+const OVERRIDE = HERO_OVERRIDE;
 
 /** Logos and wordmarks: small, extremely saturated, very few tones. */
 const isLogo = (im, m) => im.w * im.h < 40000 && m.sat > 0.40 && m.lum > 0.35;

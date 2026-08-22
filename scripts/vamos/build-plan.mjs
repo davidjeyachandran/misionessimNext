@@ -7,29 +7,9 @@
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-
-/** Derived artefacts live outside the repo history — see .gitignore. */
-const WORK = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../export/vamos-118');
-
-
-const DIR = WORK;
-
-/** The published edition these posts belong to (never modified). */
-const REVISTA_ID = '209B68PvjZddgXDI5KNbG3';
-/** Already-published issue cover, reused rather than re-uploaded. */
-const COVER_ASSET_ID = '1NfWnShd2nCbOrogRFr5eS';
-
-/** Articles whose page carries no photograph, given the cover instead. */
-const COVER_HERO = new Set(['Ocho países, nueve idiomas, un solo llamado']);
-
-/** No photo available and no cover fallback requested — not imported. */
-const NO_HERO_SKIP = new Set([
-  'Volver a la Escritura',
-  '¿Cómo evaluamos la "tolerancia al riesgo" de un candidato?',
-  'Las decisiones pasadas son el mejor predictor del comportamiento futuro',
-]);
+import {
+  WORK as DIR, HTML, REVISTA_ID, COVER_ASSET_ID, COVER_HERO, NO_HERO_SKIP, DATE,
+} from './issue.mjs';
 
 const slugify = t => t
   .normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -80,10 +60,10 @@ for (const r of rows) {
     words: r.words,
     // All posts in an issue share its date; page order is kept in the
     // minute field so the feed reads in magazine order.
-    publishDate: `2026-06-01T00:${String(Math.min(59, r.page)).padStart(2, '0')}:00.000Z`,
+    publishDate: `${DATE}T00:${String(Math.min(59, r.page)).padStart(2, '0')}:00.000Z`,
     hero: useCover
       ? { kind: 'existing-asset', assetId: COVER_ASSET_ID }
-      : { kind: 'upload', file: `${DIR}/html/${r.image.src}` },
+      : { kind: 'upload', file: `${HTML}/${r.image.src}` },
     revistaId: REVISTA_ID,
     body: toRichText(r.body),
   });
