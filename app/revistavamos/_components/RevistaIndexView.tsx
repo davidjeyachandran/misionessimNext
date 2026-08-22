@@ -163,15 +163,20 @@ export async function RevistaIndexView({ page }: { page: number }) {
         </div>
 
         <Pagination page={page} totalPages={totalPages} basePath="/revistavamos" />
+      </div>
 
-        {/* Testimonios de lectores */}
-        <section className="mt-16 -mx-4 bg-[#eef0f8] px-4 py-16">
+      {/* Testimonios de lectores — the tint runs the full width of the window,
+          as it does on live (.elementor-element-db98677), so it reads as a band
+          rather than a card sitting inside the grid's column. Live's shade is
+          #eaebf8, which is already the site's `lavender` token. */}
+      <section className="bg-lavender">
+        <div className="mx-auto max-w-6xl px-4 py-16">
           <h2 className="font-heading mb-10 text-center text-2xl font-bold text-ink">
             Testimonios de lectores
           </h2>
           <TestimoniosSlider testimonios={TESTIMONIOS} />
-        </section>
-      </div>
+        </div>
+      </section>
 
       {/* Audiorevista — white band closing the index, on every paginated page
           just as live does (live: .elementor-element-0ab7303).

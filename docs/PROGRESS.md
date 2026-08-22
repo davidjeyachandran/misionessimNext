@@ -551,3 +551,9 @@ truncated right at this slider).
   `recursos-podcast.spec.ts` (3) pass; `yarn lint` clean; `npx tsc --noEmit`
   adds no new errors (the 6 remaining are the pre-existing Playwright image
   typings in `revista-cards.spec.ts`). Screenshotted at 375/768/1440.
+
+- **Testimonios de lectores** now runs full-bleed. It was a tinted card inside
+  the index's `max-w-6xl` column (`-mx-4` only cancelled the gutter), where live
+  paints the band across the whole window. Moved out of the column into its own
+  `<section>` with the content re-centred inside, and switched the one-off
+  `#eef0f8` to the site's `lavender` token — `#eaebf8`, live's exact shade.
