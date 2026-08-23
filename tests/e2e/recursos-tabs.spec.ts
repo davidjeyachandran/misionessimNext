@@ -15,7 +15,7 @@ test.describe("Recursos resource tabs", () => {
     const manualTab = page.getByRole("tab", { name: /Manual VAMOS/ });
 
     await expect(revistaTab).toHaveAttribute("aria-selected", "true");
-    await expect(page.getByRole("tabpanel")).toContainText("más de 110 ediciones");
+    await expect(page.getByRole("tabpanel")).toContainText("más de 100 ediciones");
 
     await manualTab.click();
     await expect(manualTab).toHaveAttribute("aria-selected", "true");

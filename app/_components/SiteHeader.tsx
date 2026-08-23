@@ -44,19 +44,6 @@ export function SiteHeader() {
               </li>
             ))}
             <li>
-              <button className="nav-search" type="button" aria-label="Buscar">
-                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15zm10 2.5-4.2-4.2"
-                  />
-                </svg>
-              </button>
-            </li>
-            <li>
               <Link
                 href="/sirve-con-sim/"
                 className="nav-cta"

@@ -62,6 +62,9 @@ function buildRichTextOptions(
       [BLOCKS.PARAGRAPH]: (_node, children) => (
         <p className="mb-4 leading-relaxed">{children}</p>
       ),
+      [BLOCKS.HEADING_1]: (_node, children) => (
+        <h2 className="font-heading mt-8 mb-3 text-2xl font-bold text-ink">{children}</h2>
+      ),
       [BLOCKS.HEADING_2]: (_node, children) => (
         <h2 className="font-heading mt-8 mb-3 text-2xl font-bold text-ink">{children}</h2>
       ),
@@ -122,14 +125,14 @@ function buildRichTextOptions(
         // YouTube embed (emitted by the iframe→[video](url) turndown rule)
         if (uri.includes("youtube.com/embed/")) {
           return (
-            <div className="relative my-6 aspect-video">
+            <span className="relative my-6 block aspect-video">
               <iframe
                 src={uri}
                 className="absolute inset-0 w-full h-full rounded-md"
                 allowFullScreen
                 title="Video"
               />
-            </div>
+            </span>
           );
         }
 

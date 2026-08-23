@@ -27,7 +27,8 @@ export function PageHero({ title, intro, image, cta }: PageHeroProps) {
             src={image.src}
             alt={image.alt ?? ""}
             fill
-            preload
+            fetchPriority="high"
+            loading="eager"
             unoptimized
             sizes="100vw"
             className="object-cover"

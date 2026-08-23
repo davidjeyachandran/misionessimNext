@@ -7,7 +7,9 @@ import { VideoThumbnail } from "./_components/VideoThumbnail";
 import { getBlogPosts, publishDateToSegment } from "../lib/contentful";
 
 export const metadata: Metadata = {
-  title: "Inicio",
+  title: {
+    absolute: "Misiones transculturales · SIM Latinoamérica",
+  },
   description:
     "SIM es una comunidad de seguidores de Dios. Tenemos una pasión por el Evangelio y buscamos cumplir la misión de Jesucristo en el mundo.",
 };
@@ -22,22 +24,23 @@ export default async function Home() {
   const { items: posts } = await getBlogPosts(3, 0);
 
   return (
-    <div className="sim-home">
+    <main className="sim-home">
       {/* ============ HERO ============ */}
       <section className="hero" id="hero">
         <div className="parallax-bg" data-parallax="0.8">
           <Image
-            src="/home/banner-sim-home-2026.webp"
+            src="/home/banner-sim-home-2026-1200.webp"
             alt=""
             fill
-            preload
+            fetchPriority="high"
+            loading="eager"
             unoptimized
             sizes="100vw"
             className="object-cover"
           />
         </div>
         <div className="hero-content reveal">
-          <h1>¡Se parte de lo que Dios está haciendo en el mundo!</h1>
+          <h1>¡Sé parte de lo que Dios está haciendo en el mundo!</h1>
         </div>
       </section>
 
@@ -45,9 +48,9 @@ export default async function Home() {
       <section className="about section">
         <div className="container about-grid">
           <div className="about-text reveal">
-            <h3 className="about-title">
+            <h2 className="about-title">
               SIM es una comunidad de <br />seguidores de Dios
-            </h3>
+            </h2>
             <p>
               Tenemos una pasión por el Evangelio y buscamos cumplir la misión de
               Jesucristo en el mundo.
@@ -136,7 +139,7 @@ export default async function Home() {
                   <a href="mailto:sim.preguntas@sim.org">sim.preguntas@sim.org</a>
                 </p>
                 <a className="btn btn-outline" href="mailto:sim.preguntas@sim.org">
-                  Descúbre cómo
+                  Descubre cómo
                 </a>
               </div>
             </article>
@@ -190,7 +193,11 @@ export default async function Home() {
               const href = `/blog/${publishDateToSegment(post.publishDate)}/${post.slug}/`;
               return (
                 <article className="post reveal" key={post.slug}>
-                  <Link className="post-media" href={href}>
+                  <Link
+                    className="post-media"
+                    href={href}
+                    aria-label={`Leer: ${post.title}`}
+                  >
                     {post.heroImage?.url && (
                       <Image
                         src={post.heroImage.url}
@@ -227,7 +234,7 @@ export default async function Home() {
               <p className="revista-desc">
                 Una revista con pasión por las misiones. Queremos reflejar la voz
                 de los obreros que se encuentran en el campo y la realidad de la
-                Iglesia latina. Tenemos más de 110 ediciones publicadas en formato
+                Iglesia latina. Tenemos más de 100 ediciones publicadas en formato
                 digital y gratis.
               </p>
               {/* Live opens this internal link with target="_blank"; kept in-tab
@@ -296,6 +303,6 @@ export default async function Home() {
       </section>
 
       <ScrollEffects />
-    </div>
+    </main>
   );
 }

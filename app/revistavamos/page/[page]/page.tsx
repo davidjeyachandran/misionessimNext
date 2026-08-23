@@ -21,7 +21,7 @@ export async function generateMetadata({
   return {
     title: `Revista VAMOS — Página ${page}`,
     description:
-      "Una revista con pasión por las misiones. Más de 110 ediciones publicadas en formato digital y gratis.",
+      "Una revista con pasión por las misiones. Más de 100 ediciones publicadas en formato digital y gratis.",
     alternates: { canonical: `/revistavamos/page/${page}/` },
   };
 }

@@ -36,6 +36,18 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "SIM Latinoamérica",
     locale: "es_ES",
+    images: [
+      {
+        url: "/home/banner-sim-home-2026-1200.webp",
+        width: 1200,
+        height: 675,
+        alt: "SIM Latinoamérica",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/home/banner-sim-home-2026-1200.webp"],
   },
 };
 

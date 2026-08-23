@@ -16,7 +16,7 @@ const RESOURCE_TABS: ResourceTab[] = [
   {
     title: "Revista VAMOS",
     tagline: "Revista digital gratuita con voces y testimonios de toda la iglesia latina",
-    body: "Tenemos más de 110 ediciones publicadas en formato digital y gratis. Queremos reflejar la voz de los obreros que se encuentran en el campo y la realidad de la Iglesia latina.",
+    body: "Tenemos más de 100 ediciones publicadas en formato digital y gratis. Queremos reflejar la voz de los obreros que se encuentran en el campo y la realidad de la Iglesia latina.",
     image: {
       src: "/pages/recursos-revista.webp",
       alt: "Dos jóvenes sonríen sosteniendo un ejemplar de la revista VAMOS",
