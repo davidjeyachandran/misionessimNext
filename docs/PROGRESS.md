@@ -785,3 +785,87 @@ diff is the three questions above.
 - Five posts take the issue cover as their hero (`coverHero`): they are
   sidebars set beside an article that owns the page's only photograph.
 - Titles are the magazine headlines verbatim, per the Nº 118 convention.
+
+## 2026-08-23 — Six more VAMOS editions imported as drafts
+
+The six editions before *Regresando a casa* (dic 2023) are now in
+Contentful, all unpublished, run oldest first through
+`scripts/vamos/*.mjs`:
+
+| Edition | Created | Already live | Revista total |
+|---|---|---|---|
+| Tu trabajo en el Reino · jun 2022 | 48 | 7 | 7 → 55 |
+| Idioma y cultura · sep 2022 | 37 | 7 | 7 → 44 |
+| Fondos misioneros · dic 2022 | 44 | 7 | 7 → 51 |
+| Termina bien · mar 2023 | 26 | 4 | 4 → 30 |
+| Equipos multiculturales · jun 2023 | 21 | 26 | 26 → 47 |
+| No Alcanzados · sep 2023 | 16 | 24 | 24 → 40 |
+
+192 drafts. Three slug collisions were skipped by design, all in Termina
+bien: `la-palabra-de-dios-nos-ayuda-en-la-transicion`,
+`nuestra-identidad-no-esta-en-nuestro-ministerio` and
+`no-fuera-de-circulacion-sino-bajar-las-revoluciones-un-poco` already
+exist under *Regresando a casa*.
+
+**Termina bien's `blogPosts` array was extended (4 → 30).** It is one of
+the two editions mi-movilicemos's «Regresando a casa» learning route reads;
+David signed off on extending the other one (dic 2023) in the previous
+batch and the same decision is applied here. Worth checking the course
+before any of these drafts is published.
+
+### Pipeline changes
+
+- **`heroOverride` now resolves against every image on the page**, not just
+  the ones that pass the candidate filters. An override is a human decision
+  and the filters were second-guessing it: two sep 2023 heroes are
+  full-measure banner photographs, wider than a candidate is allowed to be,
+  and looking them up in the filtered list found nothing.
+- **`score.mjs` warns when a pick won on a saturation above 1.** HSL
+  saturation is `(max-min)/(1-|2L-1|)`, which blows up as lightness
+  approaches 1, so clip art on stark white can report 80 or 300 and beat
+  every real photograph on the page. Dic 2022 illustrates half its pages
+  that way — piggy banks, coin stacks, a globe on banknotes — and six of
+  its heroes needed naming outright. The warning is advisory; it changes no
+  picks, so Nº 118 still plans the same 27 posts with the same 26 heroes.
+- **A frame-split opening clause is rejoined.** `paragraphs()` merged a
+  lowercase continuation only into a preceding paragraph of three words or
+  fewer; the same break happens a whole frame at a time («La Ventana 10/40
+  comprende una vasta» / «región de países en donde…»), which
+  `images.mjs` already exempts from the short-frame rule for the same
+  reason. Raised to eight words.
+- **A middle initial no longer ends a sentence** in `describe()`, which was
+  cutting descriptions to «Al misionero antropólogo Charles H.» and «Hace
+  algunos años R. C.».
+
+### Traps worth knowing
+
+- **Labelled lists lose their labels.** A list set as one heading frame plus
+  one body frame per item — «10 cosas que matan el ministerio», «Motivos
+  correctos» / «Motivos equivocados», the price table in dic 2022 — loses
+  every heading to the short-frame rule and reads as one undifferentiated
+  list. Numbered headings survive; worded ones do not. Six items across
+  these editions went to `dropArticles` for this rather than ship a list
+  that says the opposite of what it means.
+- **Articles linked to an edition that are not in its PDF.** «La traducción
+  bíblica y la multiculturalidad del cuerpo de Cristo» is not in *Idioma y
+  cultura*, and three of *Tu trabajo en el Reino*'s seven live posts are not
+  in that PDF. One of the three, «10 razones por las que necesitas saber
+  inglés», ran in print three months later in *Idioma y cultura*, so that
+  page is listed as `live` there to avoid a second copy. The earlier
+  «Aprendiendo a convivir» mystery is solved the same way: it is *No
+  Alcanzados* p31, filed in Contentful under *Soy influencer*.
+- **Two columns inside one frame** still defeat the extractor and are worse
+  than a missing article: dic 2022 p39, mar 2023 p28, jun 2022 p24 and p34
+  all read as one line alternating between the columns. Skip the page, or
+  anchor the frame and drop it.
+
+### For review before publishing
+
+- Nine posts take the issue cover as their hero: sidebars beside an article
+  that owns the page's only photograph, plus two pages (sep 2022 p7 and
+  p19) that carry no photograph at all.
+- *Idioma y cultura* sets much of its photography in black and white, which
+  scores as greyscale; five of its heroes are named in `heroOverride`.
+- Titles are the magazine headlines verbatim, per the Nº 118 convention.
+  Twelve were read off page renders because they are set as vector art and
+  are absent from both the text layer and the contents page.

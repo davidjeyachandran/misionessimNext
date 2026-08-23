@@ -27,9 +27,19 @@ const rows = JSON.parse(readFileSync(path.join(WORK, 'with-images.json'), 'utf8'
 const xml = readFileSync(`${HTML}/doc.xml`, 'utf8');
 
 const byPage = new Map();
+/**
+ * Every image on the page, before the candidate filters. An override is a
+ * human decision and must not be second-guessed by them: the two heroes
+ * «Pero yo no siento el llamado» and «¡Envíanos misioneros!» (sep 2023)
+ * are full-measure banner photographs, wider than the aspect a candidate
+ * is allowed, and looking them up in the filtered list finds nothing.
+ */
+const allByPage = new Map();
 xml.split('<page ').slice(1).forEach((p, i) => {
-  byPage.set(i + 1, [...p.matchAll(/<image top="(-?\d+)" left="(-?\d+)" width="(\d+)" height="(\d+)" src="([^"]+)"/g)]
-    .map(m => ({ top: +m[1], left: +m[2], w: +m[3], h: +m[4], src: m[5] }))
+  const imgs = [...p.matchAll(/<image top="(-?\d+)" left="(-?\d+)" width="(\d+)" height="(\d+)" src="([^"]+)"/g)]
+    .map(m => ({ top: +m[1], left: +m[2], w: +m[3], h: +m[4], src: m[5] }));
+  allByPage.set(i + 1, imgs);
+  byPage.set(i + 1, imgs
     .filter(im => im.w * im.h >= 20000)
     .filter(im => Math.max(im.w / im.h, im.h / im.w) <= 2.5)
     .filter(im => !(im.w > 850 && im.h > 1200)));
@@ -66,7 +76,7 @@ for (const r of rows) {
 
   const forced = OVERRIDE[r.title];
   if (forced) {
-    const f = (byPage.get(r.page) ?? []).find(im => im.src === forced);
+    const f = (allByPage.get(r.page) ?? []).find(im => im.src === forced);
     r.image = f ? { ...f, ...metrics(f.src), score: 99 } : cands[0] ?? null;
   } else {
     r.image = cands.filter(im => !isLogo(im, im))[0] ?? null;
@@ -84,3 +94,18 @@ for (const r of rows) {
 }
 const none = rows.filter(r => !r.image);
 console.log(`\n${rows.length} articles · ${rows.length - none.length} with a photo · ${none.length} WITHOUT`);
+
+/**
+ * HSL saturation is (max-min)/(1-|2L-1|), which blows up as lightness
+ * approaches 1 — so a cut-out or a piece of clip art on stark white can
+ * report a saturation of 80 or 300 and beat every real photograph on the
+ * page. The measurement is meaningless, not the ranking, so say so and let
+ * a human look rather than silently shipping the wrong hero: the fix is a
+ * `heroOverride` in the issue file.
+ */
+const blown = rows.filter(r => r.image && r.image.sat > 1);
+if (blown.length) {
+  console.log(`\n⚠️  ${blown.length} pick(s) won on a saturation reading above 1, which means a`);
+  console.log('    near-white frame — check these are photographs, not cut-outs or clip art:');
+  for (const r of blown) console.log(`     p${r.page} ${r.image.src}  ${r.title}`);
+}

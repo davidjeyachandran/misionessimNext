@@ -24,7 +24,10 @@ const slugify = t => t
  */
 function describe(body) {
   const first = paragraphs(body).find(l => l.length > 60) ?? body;
-  const sentences = first.replace(/\s+/g, ' ').trim().split(/(?<=[.!?])\s+/);
+  // A middle initial is not the end of a sentence — «Al misionero
+  // antropólogo Charles H. Kraft se le preguntó…» must not be cut to
+  // «Al misionero antropólogo Charles H.»
+  const sentences = first.replace(/\s+/g, ' ').trim().split(/(?<!\s[A-ZÁÉÍÓÚÑ]\.)(?<=[.!?])\s+/);
   let out = '';
   for (const s of sentences) {
     if ((out + ' ' + s).trim().length > 160) break;
@@ -36,14 +39,20 @@ function describe(body) {
 /**
  * A justified opening line can leave one or two words stranded on their own
  * line, which the indent reflow then reads as a paragraph («¡Qué» /
- * «emocionantes son las conferencias misioneras!»). A sentence carrying on
- * into the next paragraph cannot be a paragraph of its own.
+ * «emocionantes son las conferencias misioneras!»). The same break happens
+ * a frame at a time, where a definition's opening clause is set in its own
+ * frame («La Ventana 10/40 comprende una vasta» / «región de países en
+ * donde…») — images.mjs already exempts those openers from the short-frame
+ * rule for the same reason. A sentence carrying on into the next paragraph
+ * cannot be a paragraph of its own.
  */
+const RUN_ON_MAX_WORDS = 8;
+
 function paragraphs(body) {
   const out = [];
   for (const p of body.split('\n').map(t => t.trim()).filter(Boolean)) {
     const prev = out[out.length - 1];
-    if (prev && prev.split(/\s+/).length <= 3 && /^[a-záéíóúñü]/.test(p)) {
+    if (prev && prev.split(/\s+/).length <= RUN_ON_MAX_WORDS && /^[a-záéíóúñü]/.test(p)) {
       out[out.length - 1] = `${prev} ${p}`;
     } else out.push(p);
   }

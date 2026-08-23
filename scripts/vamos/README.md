@@ -19,6 +19,12 @@ August 2026 to run any issue. Run against `master` so far:
 | Conferencias misioneras · jun 2024 | `conferencias-misioneras` | 34, draft |
 | Soy influencer · mar 2024 | `soy-influencer` | 20, draft |
 | Regresando a casa · dic 2023 | `regresando-a-casa` | 22, draft |
+| No Alcanzados · sep 2023 | `no-alcanzados` | 16, draft |
+| Equipos multiculturales · jun 2023 | `equipos-multiculturales` | 21, draft |
+| Termina bien · mar 2023 | `termina-bien` | 26, draft |
+| Fondos misioneros · dic 2022 | `fondos-misioneros` | 44, draft |
+| Idioma y cultura · sep 2022 | `idioma-y-cultura` | 37, draft |
+| Tu trabajo en el Reino · jun 2022 | `tu-trabajo-en-el-reino` | 48, draft |
 
 ## Why this is not the sim-blog pipeline
 
@@ -116,6 +122,28 @@ ending in prose that belongs to its neighbour. Name such pages in
 `rowPages` and they are ordered by y instead. The two layouts cannot be
 told apart from geometry, so this is a per-page judgement like `skipPages`.
 
+### Labelled lists lose their labels
+
+A list whose items are set as a heading frame plus a body frame — «10 cosas
+que matan el ministerio», «Motivos correctos» / «Motivos equivocados» —
+loses every heading to the short-frame rule, and what is left reads as one
+undifferentiated list. Numbered headings survive (`LIST_ITEM` matches «1. »)
+but worded ones do not. Where the labels carry the meaning, name the item in
+`dropArticles` rather than ship a list that says the opposite of what it
+means; where each paragraph restates its own label, keep it.
+
+### When the hero is clip art
+
+`score.mjs` measures saturation in HSL, where S is `(max-min)/(1-|2L-1|)` and
+blows up as lightness approaches 1. A cut-out or a piece of clip art on stark
+white can therefore report a saturation of 80 or 300 and beat every real
+photograph on its page. `score.mjs` prints a warning naming any pick that won
+on a reading above 1 — check those, and name the photograph in
+`heroOverride` when the automatic pick is clip art. `heroOverride` is looked
+up against every image on the page, not just the candidates, so it can also
+name a banner too wide to be a candidate, or a black-and-white photograph
+that scores as greyscale.
+
 ### One trap worth knowing
 
 Cuidado Integral (mar 2025) devotes pages 25–45 to teaser excerpts from
@@ -144,6 +172,13 @@ appends to `revista.blogPosts` with de-duplication and changes no other
 field on the edition. Appending drafts is safe: `getRevistaBySlug` in
 `lib/contentful.ts` drops links that do not resolve, so a draft stays
 invisible on the site until someone publishes it.
+
+Some articles linked to an edition are simply not in its PDF — «Aprendiendo
+a convivir» under *Soy influencer*, «La traducción bíblica…» under *Idioma y
+cultura*, three of the seven under *Tu trabajo en el Reino*. Grep the text
+layer before assuming an anchor is missing; where the article exists live
+under another edition, list it in `live` so the import does not make a
+second copy of it.
 
 Cross-issue republishes surface as slug collisions and are skipped by
 design — VAMOS reruns material, both across editions (`¿Buscas dónde Dios
