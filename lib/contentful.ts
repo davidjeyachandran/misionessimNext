@@ -44,6 +44,9 @@ export interface BlogPostCard {
 }
 
 export interface BlogPost extends BlogPostCard {
+  /** CMS publish timestamp — the closest thing we have to a last-modified
+   *  date, since the WordPress import did not carry one. Used for JSON-LD. */
+  sys?: { publishedAt?: string | null } | null;
   body?: {
     json: RichTextDocument;
     links?: {
@@ -275,6 +278,7 @@ export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | 
     `query ($slug: String!) {
       blogPostCollection(where: { slug: $slug }, limit: 1) {
         items {
+          sys { publishedAt }
           slug
           title
           publishDate

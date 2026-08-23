@@ -45,3 +45,52 @@ test("footer does not link to a generic social-network homepage", async ({ page 
 
   await expect(page.locator('footer a[href="https://x.com/"]')).toHaveCount(0);
 });
+
+// Regression: `twitter:*` is never derived from `openGraph`, so before these
+// routes declared their own `twitter` block every article and every edition
+// advertised the homepage banner as its card image.
+const HOMEPAGE_BANNER = "https://misionessim.org/home/banner-sim-home-2026-1200.webp";
+
+const OWN_SOCIAL_IMAGE = [
+  { route: "/blog/2025-06/10-cualidades-de-un-discipulador/", label: "an article" },
+  { route: "/revistavamos/el-clamor-macedonio/", label: "a magazine edition" },
+];
+
+for (const { route, label } of OWN_SOCIAL_IMAGE) {
+  test(`${label} uses its own image on both card types`, async ({ page }) => {
+    await page.goto(`http://localhost:3000${route}`);
+
+    const og = await page.locator('meta[property="og:image"]').getAttribute("content");
+    const twitter = await page.locator('meta[name="twitter:image"]').getAttribute("content");
+
+    expect(og).toBeTruthy();
+    expect(twitter).toBe(og);
+    expect(twitter).not.toBe(HOMEPAGE_BANNER);
+  });
+}
+
+test("articles publish Article structured data", async ({ page }) => {
+  await page.goto("http://localhost:3000/blog/2025-06/10-cualidades-de-un-discipulador/");
+
+  const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();
+  const nodes = blocks.flatMap((block) => JSON.parse(block)["@graph"] as Array<{ "@type": string }>);
+  const types = nodes.map((node) => node["@type"]);
+
+  expect(types).toContain("Article");
+  expect(types).toContain("BreadcrumbList");
+  expect(types).toContain("Organization");
+  expect(types).toContain("WebSite");
+
+  const article = nodes.find((node) => node["@type"] === "Article") as Record<string, unknown>;
+  expect(article.headline).toBe("10 cualidades de un discipulador según el modelo de Jesús");
+  expect(article.datePublished).toBeTruthy();
+  expect(article.image).toBeTruthy();
+
+  // We have no author data in the CMS, so the publisher stands in. Claiming a
+  // Person here would be fabricated attribution.
+  expect(article.author).toEqual(article.publisher);
+
+  // No search endpoint exists, so no SearchAction may be advertised.
+  const website = nodes.find((node) => node["@type"] === "WebSite") as Record<string, unknown>;
+  expect(website.potentialAction).toBeUndefined();
+});

@@ -26,6 +26,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${revista.title} · Revista VAMOS`,
       images: revista.coverImage?.url ? [{ url: revista.coverImage.url }] : [],
     },
+    // Without this the card falls back to the root layout's homepage banner —
+    // `twitter:*` is never derived from `openGraph`.
+    ...(revista.coverImage?.url
+      ? {
+          twitter: {
+            card: "summary_large_image" as const,
+            title: `${revista.title} · Revista VAMOS`,
+            images: [revista.coverImage.url],
+          },
+        }
+      : {}),
   };
 }
 
@@ -48,15 +59,18 @@ export default async function RevistaPage({ params }: Props) {
         {revista.coverImage?.url && (
           // The cover keeps its own proportions: editions vary slightly around
           // 543x768, so a fixed ratio with object-cover would crop the artwork.
+          // The link carries its own name: the alt text describes the artwork,
+          // not what following the link does.
           <a
             href={revista.pdfUrl ?? undefined}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Descargar PDF: ${revista.title}`}
             className="block w-full shrink-0 sm:w-[460px]"
           >
             <Image
               src={revista.coverImage.url}
-              alt={revista.coverImage.description ?? `Portada: ${revista.title}`}
+              alt={revista.coverImage.description || `Portada: ${revista.title}`}
               width={revista.coverImage.width ?? 543}
               height={revista.coverImage.height ?? 768}
               className="h-auto w-full rounded-md shadow-md"

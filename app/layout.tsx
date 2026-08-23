@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "./_components/SiteHeader";
 import { SiteFooter } from "./_components/SiteFooter";
 import { SITE_URL } from "../lib/site";
+import { jsonLdProps, siteGraph } from "../lib/structured-data";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { ANALYTICS_ENABLED, GA_MEASUREMENT_ID } from "../lib/analytics";
 
@@ -59,6 +60,8 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${raleway.variable} ${workSans.variable}`}>
       <body className="min-h-screen">
+        {/* Organization + WebSite, referenced by @id from the per-page graphs. */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdProps(siteGraph())} />
         <SiteHeader />
         {children}
         <SiteFooter />

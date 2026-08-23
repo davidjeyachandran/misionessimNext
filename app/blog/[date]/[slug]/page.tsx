@@ -12,6 +12,11 @@ import {
   slugify,
 } from "../../../../lib/contentful";
 import { formatPostDate } from "../../../../lib/dates";
+import {
+  articleGraph,
+  breadcrumbGraph,
+  jsonLdProps,
+} from "../../../../lib/structured-data";
 
 export async function generateStaticParams() {
   const slugs = await getAllBlogPostSlugs();
@@ -33,6 +38,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalDate = post.publishDate
     ? publishDateToSegment(post.publishDate)
     : date;
+  // Twitter tags do NOT inherit from openGraph — Next only emits `twitter:*`
+  // from the `twitter` field, so without this block every article kept the
+  // root layout's homepage banner as its card image.
+  const socialImage = post.heroImage?.url ? [post.heroImage.url] : undefined;
   return {
     title: post.seoTitle ?? post.title,
     description: post.seoDescription ?? post.description ?? undefined,
@@ -43,6 +52,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.seoDescription ?? post.description ?? undefined,
       images: post.heroImage?.url ? [{ url: post.heroImage.url }] : [],
     },
+    ...(socialImage
+      ? {
+          twitter: {
+            card: "summary_large_image",
+            title: post.seoTitle ?? post.title,
+            description: post.seoDescription ?? post.description ?? undefined,
+            images: socialImage,
+          },
+        }
+      : {}),
   };
 }
 
@@ -177,8 +196,37 @@ export default async function BlogPostPage({ params }: Props) {
 
   const displayDate = formatPostDate(post.publishDate);
 
+  const canonicalPath = `/blog/${publishDateToSegment(post.publishDate)}/${post.slug}/`;
+  const structuredData = jsonLdProps([
+    articleGraph({
+      path: canonicalPath,
+      headline: post.title,
+      description: post.seoDescription ?? post.description,
+      image: post.heroImage,
+      datePublished: post.publishDate,
+      dateModified: post.sys?.publishedAt,
+      categories: post.categories,
+      tags: post.tags,
+    }),
+    // Mirrors the visible breadcrumb below, as Google expects.
+    breadcrumbGraph(canonicalPath, [
+      { name: "Inicio", path: "/" },
+      { name: "Blog", path: "/blog/" },
+      ...(post.revista
+        ? [
+            {
+              name: post.revista.title,
+              path: `/revistavamos/${normalizeRevistaSlug(post.revista.slug)}/`,
+            },
+          ]
+        : []),
+      { name: post.title },
+    ]),
+  ]);
+
   return (
     <main className="page-offset mx-auto max-w-3xl px-4 py-12">
+      <script type="application/ld+json" dangerouslySetInnerHTML={structuredData} />
       <nav className="mb-6 text-sm text-muted">
         <Link href="/" className="hover:text-ink transition-colors">Inicio</Link>
         {" / "}
@@ -220,7 +268,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="mb-8 overflow-hidden rounded-lg aspect-[16/9] relative">
           <Image
             src={post.heroImage.url}
-            alt={post.heroImage.description ?? post.title}
+            alt={post.heroImage.description || post.title}
             fill
             className="object-cover"
             priority
