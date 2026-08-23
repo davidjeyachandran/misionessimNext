@@ -17,6 +17,12 @@ function url(path: string): string {
   return `${SITE_URL}${clean}`;
 }
 
+// Absolute URL for a file path, left exactly as given — `trailingSlash: true`
+// does not apply to paths ending in a file extension (see revistaPdfPath).
+function fileUrl(path: string): string {
+  return `${SITE_URL}${path}`;
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [posts, categories, tags, revistas] = await Promise.all([
     getAllBlogPostSlugs(),
@@ -44,6 +50,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // The magazine PDFs themselves, at their first-party `/revistavamos/<slug>/
+  // <file>.pdf` paths (proxied to Contentful by the generated vercel.json
+  // rewrites). Editions whose entry has no PDF asset yield no entry.
+  const revistaPdfEntries: MetadataRoute.Sitemap = revistas
+    .filter((r): r is typeof r & { pdfUrl: string } => Boolean(r.pdfUrl))
+    .map((r) => ({
+      url: fileUrl(r.pdfUrl),
+      lastModified: r.fecha || undefined,
+      changeFrequency: "yearly",
+      priority: 0.6,
+    }));
+
   const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
     url: url(`/blog/${publishDateToSegment(p.publishDate)}/${p.slug}`),
     lastModified: p.publishDate || undefined,
@@ -66,6 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...staticEntries,
     ...revistaEntries,
+    ...revistaPdfEntries,
     ...postEntries,
     ...categoryEntries,
     ...tagEntries,
