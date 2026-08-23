@@ -1703,11 +1703,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/2020-01/siempre-sera-un-desafio",
-      "destination": "/blog/",
-      "permanent": true
-    },
-    {
       "source": "/blog/2020-01/lo-que-mi-corazon-esconde-tras-hacer-mucho-a-la-vez",
       "destination": "/blog/2020-01/lo-que-mi-corazon-esconde-tras-hacer-mucho-la-vez/",
       "permanent": true
@@ -1839,7 +1834,7 @@
     },
     {
       "source": "/blog/2020-01/siempre-sera-un-desafio-2",
-      "destination": "/blog/",
+      "destination": "/blog/2020-01/siempre-sera-un-desafio/",
       "permanent": true
     },
     {

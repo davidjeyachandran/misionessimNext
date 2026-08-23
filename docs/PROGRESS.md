@@ -869,3 +869,74 @@ before any of these drafts is published.
 - Titles are the magazine headlines verbatim, per the Nº 118 convention.
   Twelve were read off page renders because they are set as vector art and
   are absent from both the text layer and the contents page.
+
+## 2026-08-24 — SEO/a11y parity fixes and the two unreachable blog routes
+
+Four items from the pre-cutover open list, plus the CMA slug repair this log
+has carried as a TODO since 2026-07-12 (line 229).
+
+- **`Article` JSON-LD** (`lib/structured-data.ts`, new). Yoast emitted a
+  `@graph` on every WP post; we emitted none. Now `Organization` + `WebSite`
+  site-wide from the layout, `Article` + `BreadcrumbList` per post, joined by
+  `@id`. All 899 post pages carry it; validator.schema.org reports no errors.
+  Two deliberate departures from Yoast, documented in the file: `author`
+  resolves to the Organization, because **no blogPost in the space has an
+  `author` value** (`author_exists: true` → 0 of 901), and no
+  `WebSite.potentialAction`, because advertising a SearchAction we do not
+  serve would point Google at a 404. `dateModified` comes from `sys.publishedAt`,
+  now queried in `getBlogPostBySlug`.
+- **`twitter:image` was the homepage banner on every article and every
+  edition.** Next derives `twitter:*` only from the `twitter` metadata field —
+  never from `openGraph` — so both routes inherited the root layout's default.
+  Each now declares its own; `og:image` was always correct.
+- **Magazine cover link had no accessible name.** `coverImage.description ?? …`
+  let an empty string through as `alt=""`, and **50 of the 119 editions have
+  an empty cover description**, so this was 42% of edition pages, not an edge
+  case. The anchor now carries its own `aria-label` (the alt text describes
+  the artwork, not the action). Same `??` trap fixed on the blog hero image.
+  Covered by `tests/e2e/revista-accessibility.spec.ts`, pinned to an edition
+  that actually has the blank description.
+- **`vercel.json` gained a `headers` block** — immutable for `/_next/static`,
+  1h + 24h SWR for `/home|heroes|pages`, 24h + 7d SWR for PDFs and documents,
+  plus `nosniff`, `Referrer-Policy` and HSTS. Verified rather than assumed:
+  re-running `yarn build:revista-rewrites && yarn build:legacy-redirects`
+  leaves the file byte-identical, so the generators do not clobber it.
+
+### The two blog routes that exported as 404 shells
+
+`generateStaticParams` emitted them, `getBlogPostBySlug` could not resolve
+them. Cause: revista slugs pass through `normalizeRevistaSlug`, blogPost slugs
+are used verbatim, and two rows still held their source system's path.
+
+- `4spRb3TGlc28zVnrzu260S` `ent/requisitos-y-pasos-para-ser-misionero`
+  → `requisitos-y-pasos-para-ser-misionero-0`. The unsuffixed slug is held by
+  a **published** row (`1zx2zjWer9BL1kwMx2uahk`, "Cómo ir al campo misionero",
+  the SEO rewrite of the same topic imported from WP). The two are near
+  duplicates, but archiving this one would be the `REVIEW` tier in
+  `archive-duplicate-posts.ts` — it is the row with the revista link, so
+  archiving removes the article from *La capacitación misionera* in
+  mi-movilicemos. Renamed, not archived. **Open for David: archive instead?**
+- `2kK1o4Gv19sZNNmWYyznCL` ` 2020-01/Siempre-será-un-desafío `
+  → `siempre-sera-un-desafio`, the exact path the live WordPress site serves,
+  so the legacy URL keeps resolving after cutover. Free because the earlier
+  duplicate cleanup archived the two WP rows and kept this one — whose slug
+  was the broken one. Title trailing space trimmed at the same time.
+  The `/blog/2020-01/siempre-sera-un-desafio` → `/blog/` fallback redirect was
+  **removed** (Vercel evaluates redirects before static files, so it would
+  have shadowed the page it was standing in for), and `…-2` now points at the
+  article instead of at `/blog/`. Closes the TODO at line 229.
+
+`scripts/fix-malformed-blog-slugs.ts` does the repair generically — detect,
+drop the source-system path prefix, `slugify`, suffix on collision — dry run
+unless `--live`, and it ignores archived rows so they neither get repaired nor
+reserve a slug.
+
+### Caution: `.next/cache` served stale CMS data to the sitemap
+
+The first build after the CMA change generated the **new** post routes but a
+sitemap still listing the **old** slugs — different build workers, different
+fetch-cache state. `rm -rf .next out` before trusting any count taken from a
+build that follows a CMS write. It also revealed that the sitemap totals
+quoted in the rebuild scorecard were low: the current build emits **1,212**
+URLs (899 posts, 119 editions, 119 PDFs, 66 taxonomy, 9 index/pages), not
+1,185.
