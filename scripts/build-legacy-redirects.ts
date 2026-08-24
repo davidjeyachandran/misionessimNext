@@ -157,7 +157,11 @@ async function main() {
   for (const [from, to] of Object.entries(aliases.slugAliases)) {
     const destination = `/revistavamos/${to}/`;
     redirects.push({
-      source: `/la-revista/${from}`,
+      // Trailing slash is required: `trailingSlash: true` normalises the
+      // request path before redirects are matched, so a slashless source
+      // never fires — it 308s to the slashed form and then falls through
+      // to a 404.
+      source: `/la-revista/${from}/`,
       destination,
       permanent: true,
     });
@@ -166,7 +170,7 @@ async function main() {
     // the legacy slug happens to name a different edition.
     if (!collides.has(from)) {
       redirects.push({
-        source: `/revistavamos/${from}`,
+        source: `/revistavamos/${from}/`,
         destination,
         permanent: true,
       });

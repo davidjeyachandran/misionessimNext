@@ -75,4 +75,47 @@ describe("redirect table integrity", () => {
   it("stays inside Vercel's 2,048 redirect limit", () => {
     expect(config.redirects.length).toBeLessThanOrEqual(2048);
   });
+
+});
+
+// `trailingSlash: true` normalises the request path *before* redirects are
+// matched, and Vercel compiles sources with path-to-regexp's `strict` option,
+// under which a slashless pattern does not match a slashed path. A rule
+// written without the trailing slash therefore never fires: the request 308s
+// to the slashed form and then falls through to a 404. This silently killed
+// all 69 extension-less rules — the whole `/la-revista/*` space included —
+// while every rule ending in a file extension kept working, because
+// normalisation leaves those alone.
+describe("trailing slashes match the normalised request path", () => {
+  const EXTENSION = /\.[a-zA-Z0-9]{2,5}$/;
+  const extensionless = config.redirects.filter(
+    (r) => !EXTENSION.test(r.source.split("?")[0]) && !r.source.includes("("),
+  );
+
+  it("covers the extension-less rules", () => {
+    expect(extensionless.length).toBeGreaterThan(60);
+  });
+
+  it("every extension-less source ends in a slash", () => {
+    // `/la-revista` is the one deliberate exception: it is unreachable (the
+    // normaliser rewrites it to `/la-revista/`, which has its own rule) and
+    // adding the slash would duplicate that rule's source.
+    const slashless = extensionless
+      .map((r) => r.source)
+      .filter((s) => !s.endsWith("/") && s !== "/la-revista");
+    expect(slashless).toEqual([]);
+  });
+
+  it("matches the slashed path under Vercel's strict matching", () => {
+    const cases: Array<[string, string]> = [
+      ["/la-revista/:path*/", "/la-revista/el-llamado/"],
+      ["/portfolio-category/:path*/", "/portfolio-category/discapacidad/"],
+      ["/blog/author/:path*/", "/blog/author/juan/"],
+    ];
+    for (const [source, url] of cases) {
+      expect(
+        pathToRegexp(source, [], { strict: true } as never).test(url),
+      ).toBe(true);
+    }
+  });
 });
