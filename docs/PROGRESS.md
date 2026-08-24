@@ -1236,3 +1236,20 @@ Also flagged there: MX is `0 misionessim.org.`, which resolves to Vercel
 (`216.198.79.1`). Port 443 answers, port 25 does not. Inbound mail to
 `@misionessim.org` may have had nowhere to land since cutover — needs a live test
 to confirm, since consumer ISPs commonly block outbound 25.
+
+### 2026-08-24 — WordPress `.htaccess` recovered
+
+The Drupal-era redirect table from the live install, captured verbatim in
+`data/drupal-htaccess-redirects.json` and consumed by
+`scripts/build-legacy-redirects.ts`. It supersedes `data/drupal-file-map.json`
+where both describe a path: that file was built by probing, which could only
+guess Drupal filenames from their WordPress twins and so missed all five rules
+where the names differ (three lowercase-vs-CamelCase, two `_0` suffixes). Those
+five now resolve in one hop to the Contentful PDF, verified 200.
+
+Its three `/la-revista/` slug rules matched `slugAliases` exactly — independent
+confirmation of guesses that had been inferred. The generator now reports drift
+between the two rather than silently preferring one.
+
+Both this and `drupal-file-map.json` are **frozen captures**: unreproducible once
+the install is gone.

@@ -51,6 +51,11 @@ const REVISTA_ALIASES = path.join(
   "legacy-revista-aliases.json",
 );
 const DRUPAL_MAP = path.join(process.cwd(), "data", "drupal-file-map.json");
+const DRUPAL_HTACCESS = path.join(
+  process.cwd(),
+  "data",
+  "drupal-htaccess-redirects.json",
+);
 const MANUAL_DESTINATIONS = path.join(
   process.cwd(),
   "data",
@@ -208,6 +213,10 @@ async function main() {
   const drupal = JSON.parse(await readFile(DRUPAL_MAP, "utf8")) as {
     entries: DrupalHit[];
   };
+  const htaccess = JSON.parse(await readFile(DRUPAL_HTACCESS, "utf8")) as {
+    files: DrupalHit[];
+    pages: { path: string; destination: string }[];
+  };
   const manual = JSON.parse(await readFile(MANUAL_DESTINATIONS, "utf8")) as {
     destinations: Record<string, string>;
   };
@@ -304,7 +313,17 @@ async function main() {
   // property of this file worth keeping.
   const destinationByWpPath = new Map(redirects.map((r) => [r.source, r.destination]));
   const drupalOrphans: string[] = [];
-  for (const hit of drupal.entries) {
+  // The probe in data/drupal-file-map.json could only try Drupal filenames it
+  // could guess from the WordPress side, so it silently missed every rule where
+  // the two names differ — `_0` suffixes WordPress added on re-upload, and
+  // editions Drupal stored lowercase. data/drupal-htaccess-redirects.json is
+  // the rule table itself, so it supersedes the probe where both describe a
+  // path; the probe still contributes the paths the .htaccess handled by other
+  // means. Keyed by path, so a re-run cannot double-emit.
+  const drupalHits = new Map<string, DrupalHit>();
+  for (const hit of drupal.entries) drupalHits.set(hit.path, hit);
+  for (const hit of htaccess.files) drupalHits.set(hit.path, hit);
+  for (const hit of drupalHits.values()) {
     const destination = destinationByWpPath.get(hit.wpPath);
     if (!destination) {
       drupalOrphans.push(`${hit.path} -> ${hit.wpPath || "(served in place)"}`);
@@ -319,6 +338,22 @@ async function main() {
         + `/wp-content/ twin is unresolved):`,
     );
     for (const o of drupalOrphans) console.log(`  ${o}`);
+  }
+
+  // The .htaccess also carried three slug corrections under /la-revista/. Those
+  // are already expressed as aliases.slugAliases above, so nothing is emitted
+  // here — this only asserts the two sources still agree, which is the whole
+  // reason to keep the captured rules rather than trust the transcription.
+  const emittedSources = new Set(redirects.map((r) => r.source));
+  const pageDrift = htaccess.pages.filter(
+    (rule) => !emittedSources.has(rule.path.replace(/\/?$/, "/")),
+  );
+  if (pageDrift.length) {
+    console.log(
+      `\n${pageDrift.length} .htaccess page rules are not covered by `
+        + `slugAliases — add them to data/legacy-revista-aliases.json:`,
+    );
+    for (const r of pageDrift) console.log(`  ${r.path} -> ${r.destination}`);
   }
 
   // 5. The Drupal-era URL space Google still crawls. These never reached

@@ -1,0 +1,229 @@
+{
+  "capturedAt": "2026-08-24",
+  "source": "public_html/.htaccess on the live WordPress install",
+  "note": "Verbatim `Redirect 301` rules lifted from the WordPress .htaccess before the install is decommissioned. This is the authoritative version of what data/drupal-file-map.json measured by probing: that probe could only guess Drupal filenames by assuming they matched their WordPress twin, so it missed every rule where the two names differ in case or in an `_0` suffix. Frozen — re-deriving it requires a .htaccess that will not exist after shutdown.",
+  "files": [
+    {
+      "path": "/sites/default/files/magazinepdf/adaptacionvamosdic24.pdf",
+      "wpPath": "/wp-content/uploads/2025/04/AdaptacionVAMOSdic24.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/alianzasvamosjulio14_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/alianzasvamosjulio14_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/amorenmisionesvamosjunio19.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/amorenmisionesvamosjunio19.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/apolgeticavamosoct21.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/apolgeticavamosoct21.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/arteenmisionvamosoct19_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/arteenmisionvamosoct19_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/autocuidadovamosfeb22.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/autocuidadovamosfeb22.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/bamvamosoct15.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/bamvamosoct15.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/capactiacionvamosjunio16.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/capactiacionvamosjunio16.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/conferenciamisioneravamosjun24.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/conferenciamisioneravamosjun24.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/crisisvamosago20.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/crisisvamosago20.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/cuidadointegralmarzo25.pdf",
+      "wpPath": "/wp-content/uploads/2025/04/CuidadoIntegralMarzo25.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/cuidadoivamosdic15.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/cuidadoivamosdic15.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/equiposmisionerosmarzo14.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/equiposmisionerosmarzo14.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/equiposmulticulturalesvamosjun23.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/equiposmulticulturalesvamosjun23.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/evangelismovamosago16.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/evangelismovamosago16.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/familiamisioneravamosfeb20.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/familiamisioneravamosfeb20.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/fondosenmisionvamosdic22.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/fondosenmisionvamosdic22.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/fondosvamosfeb16.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/fondosvamosfeb16.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/gentequenovemosvamossept24.pdf",
+      "wpPath": "/wp-content/uploads/2025/04/GenteQueNoVemosVAMOSsept24.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/grandesnecesidadesvamosfeb18_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/grandesnecesidadesvamosfeb18_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/hinduismovamosjun21.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/hinduismovamosjun21.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/htcvamosjun20.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/htcvamosjun20.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/idiomaculturavamossep22_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/idiomaculturavamossep22_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/influencersvamosmar24.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/influencersvamosmar24.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/islamvamosfeb15_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/islamvamosfeb15_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/jovenesenmisionvamosoct18_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/jovenesenmisionvamosoct18_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/latinosal100.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/latinosal100.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/limitesvamosnov14.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/limitesvamosnov14.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/losquequedanvamosago19.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/losquequedanvamosago19.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/matrimoniosvamosoct20.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/matrimoniosvamosoct20.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/medioorientevamosabril18.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/medioorientevamosabril18.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/misionesmedicasvamosabril20.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/misionesmedicasvamosabril20.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/misionesurbanasvamosjunio17.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/misionesurbanasvamosjunio17_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/movilizacionesdiscipuladovamosjago21.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/movilizacionesdiscipuladovamosjago21.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/movilizacionvamosdic13_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/movilizacionvamosdic13_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/mujeresenmisionvamosdic19.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/mujeresenmisionvamosdic19_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/noalcanzadosvamossep23.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/noalcanzadosvamossep23.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/ocupacion_vamos_1.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/ocupacion_vamos_1.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/oracionvamosjunio14.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/oracionvamosjunio14.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/pastor_es_clave_vamos.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/pastor_es_clave_vamos.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/procesosvamosdic20_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/procesosvamosdic20_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/regresoacasavamosdic23.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/regresoacasavamosdic23.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/saludmentalvamosfeb21.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/saludmentalvamosfeb21.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/solteriavamosabr16_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/solteriavamosabr16_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/tecnologiavamosabr21.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/tecnologiavamosabr21.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/trabajoequipovamosabril19.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/trabajoequipovamosabril19.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/trabajoyfevamosjunio22.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/trabajoyfevamosjunio22.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/traduccionvamosoct17_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/traduccionvamosoct17_0.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/traficohumanovamos.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/traficohumanovamos.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/transicionesvamosmar23.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/transicionesvamosmar23.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/vamosabril2012.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/vamosabril2012.pdf"
+    },
+    {
+      "path": "/sites/default/files/magazinepdf/voluntariadovamosfeb19_0.pdf",
+      "wpPath": "/wp-content/uploads/2024/11/voluntariadovamosfeb19_0.pdf"
+    }
+  ],
+  "pages": [
+    {
+      "path": "/la-revista/adaptacion-en-misiones",
+      "destination": "/la-revista/latinos-en-adaptacion/"
+    },
+    {
+      "path": "/la-revista/equipos-multiculturales-0",
+      "destination": "/la-revista/equipos-multiculturales/"
+    },
+    {
+      "path": "/la-revista/regresando-casa",
+      "destination": "/la-revista/regresando-a-casa/"
+    }
+  ]
+}

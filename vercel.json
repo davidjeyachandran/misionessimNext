@@ -1973,6 +1973,31 @@
       "permanent": true
     },
     {
+      "source": "/sites/default/files/magazinepdf/adaptacionvamosdic24.pdf",
+      "destination": "/revistavamos/latinos-en-adaptacion/AdaptacionVAMOSdic24.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinepdf/cuidadointegralmarzo25.pdf",
+      "destination": "/revistavamos/cuidado-integral-biblico-y-solidario/CuidadoIntegralMarzo25.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinepdf/gentequenovemosvamossept24.pdf",
+      "destination": "/revistavamos/la-gente-que-no-vemos/GenteQueNoVemosVAMOSsept24.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinepdf/misionesurbanasvamosjunio17.pdf",
+      "destination": "/revistavamos/misiones-urbanas/2017-06-MisionesUrbanasVAMOS.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinepdf/mujeresenmisionvamosdic19.pdf",
+      "destination": "/revistavamos/mujeres-en-mision/2019-12-MujeresenMisionVAMOS.pdf",
+      "permanent": true
+    },
+    {
       "source": "/content/la-persecucion/",
       "destination": "/revistavamos/persecucion/",
       "permanent": true

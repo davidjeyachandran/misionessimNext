@@ -202,3 +202,54 @@ describe("Drupal-era rules", () => {
     }
   });
 });
+
+// The WordPress .htaccess carried the Drupal-era redirect table verbatim. It is
+// captured in data/drupal-htaccess-redirects.json because it dies with the
+// install, and because it is the authoritative version of what
+// data/drupal-file-map.json could only measure by probing — the probe guessed
+// Drupal filenames from their WordPress twins, so it missed every rule where
+// the two names differ.
+describe("captured WordPress .htaccess rules", () => {
+  const htaccess = JSON.parse(
+    readFileSync(
+      path.join(process.cwd(), "data", "drupal-htaccess-redirects.json"),
+      "utf8",
+    ),
+  ) as {
+    files: Array<{ path: string; wpPath: string }>;
+    pages: Array<{ path: string; destination: string }>;
+  };
+
+  const bySource = new Map(config.redirects.map((r) => [r.source, r]));
+  const rewriteSources = new Set(config.rewrites.map((r) => r.source));
+
+  it("honours every file rule", () => {
+    const missing = htaccess.files.filter((r) => !bySource.has(r.path));
+    expect(missing).toEqual([]);
+    expect(htaccess.files.length).toBeGreaterThan(50);
+  });
+
+  it("resolves each one in a single hop, not by chaining through WordPress", () => {
+    // WordPress answered these with a 301 into /wp-content/uploads/, which is
+    // itself a redirect. Re-emitting that pair would leave a chain whose second
+    // hop dies with the install, so each rule must land on its final home.
+    for (const rule of htaccess.files) {
+      const destination = bySource.get(rule.path)?.destination;
+      expect(destination, rule.path).toBeDefined();
+      expect(destination, rule.path).not.toMatch(/^\/wp-content\//);
+      expect(rewriteSources.has(destination!), `${rule.path} -> ${destination}`).toBe(true);
+    }
+  });
+
+  it("agrees with the revista slug aliases on every page rule", () => {
+    // These three are expressed as aliases in legacy-revista-aliases.json. The
+    // captured rules are kept as an independent check on that transcription.
+    for (const rule of htaccess.pages) {
+      const source = rule.path.replace(/\/?$/, "/");
+      const redirect = bySource.get(source);
+      expect(redirect, source).toBeDefined();
+      const slug = rule.destination.replace(/^\/la-revista\/|\/$/g, "");
+      expect(redirect!.destination, source).toBe(`/revistavamos/${slug}/`);
+    }
+  });
+});

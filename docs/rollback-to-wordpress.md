@@ -35,12 +35,23 @@ presents a Let's Encrypt cert covering `misionessim.org` and
 `autodiscover`, `autoconfig`, `cpcalendars`, `cpcontacts` — valid until
 **2026-11-04**. So a rollback today would land on a valid certificate.
 
-The risk is at **renewal**. AutoSSL proves control by fetching a challenge over
-HTTP at the domain it is issuing for, and `misionessim.org` resolves to Vercel,
-so that check now fails at the origin. Whether the November renewal succeeds
-depends on which validation method Banahosting uses. Point DNS back at the
-origin with a lapsed cert and every visitor gets a browser interstitial — a worse
-outage than the one you were fixing.
+**The November renewal will fail.** AutoSSL proves control by fetching a token
+over HTTP at the domain it is issuing for. Confirmed 2026-08-24:
+`http://misionessim.org/.well-known/acme-challenge/…` is answered by **Vercel**
+(`server: Vercel`, 404) — so Let's Encrypt can never retrieve a token placed on
+the Banahosting origin, and DCV for `misionessim.org` and `www.misionessim.org`
+cannot pass while the apex points at Vercel. Point DNS back at the origin with a
+lapsed cert and every visitor gets a browser interstitial — a worse outage than
+the one you were fixing.
+
+This has a second consequence worth knowing: those two failing names can make an
+AutoSSL run fail for the *whole account*, including certificates you do want. If
+you exclude them from AutoSSL to get other issuance working, **re-include them
+before any rollback** — and expect to have to run AutoSSL again once DNS points
+back, since only then can DCV succeed.
+
+The Cloudflare workaround below sidesteps the certificate problem entirely and is
+the faster path under time pressure.
 
 Two ways to deal with it:
 
@@ -108,18 +119,30 @@ Total time ≈ 20 minutes, most of it steps 4–6 on the WordPress side.
 ### 1. Undo the "archive mode" lockdown
 
 Everything done to keep the WordPress copy out of Google now has to come off, or
-you will roll back onto a site that search engines are forbidden to crawl.
+you will roll back onto a site that is telling search engines to drop it.
 
-- Delete `public_html/robots.txt` (the `Disallow: /` file), **or** replace its
-  contents with `User-agent: *` and `Allow: /`.
-- Remove any `X-Robots-Tag "noindex, nofollow"` line from `public_html/.htaccess`.
-- cPanel → *Directory Privacy* → remove the password protection from
-  `public_html`.
-- WordPress → *Settings → Reading* → ensure "Discourage search engines" is
-  **unchecked**.
+As configured on 2026-08-24, the archive serves `X-Robots-Tag: noindex, nofollow`
+on every response while `robots.txt` still allows crawling — the correct pairing,
+since a crawler has to be let in to be told no. That header is what must go:
+
+- WordPress → *Settings → Reading* → uncheck **"Discourage search engines from
+  indexing this site"**. That setting is what emits the header.
+- Confirm it is gone before announcing the rollback:
+
+  ```bash
+  curl -sI https://misionessim.org/ | grep -i x-robots-tag
+  ```
+
+- Also remove any `X-Robots-Tag` line from `public_html/.htaccess`, and any
+  *Directory Privacy* password on `public_html`, if either was added later.
 
 A missed `noindex` here is the most expensive mistake in this runbook: the site
 comes back up looking fine and silently deindexes over the following weeks.
+
+The archive subdomain is proxied through Cloudflare and covered by Universal SSL
+(`misionessim.org` + `*.misionessim.org`, Google Trust Services, auto-renewing) —
+which is the proof that the Cloudflare workaround in the box above works for this
+zone, should the apex need it.
 
 ### 2. Point WordPress back at the apex
 

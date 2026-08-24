@@ -56,18 +56,54 @@ twin, since that is what Googlebot actually sends.
 
 ### Deliberately left to 404
 
+## Addendum 2026-08-24 — the WordPress `.htaccess`
+
+The `.htaccess` from the live install turned up after this triage was written,
+carrying 52 `Redirect 301` rules for `/sites/default/files/magazinepdf/` plus 3
+slug corrections under `/la-revista/`. Captured verbatim in
+[`data/drupal-htaccess-redirects.json`](../data/drupal-htaccess-redirects.json).
+
+It is the authoritative version of what
+[`data/drupal-file-map.json`](../data/drupal-file-map.json) had to measure by
+probing, and it closed that probe's one structural blind spot. The probe could
+only try Drupal filenames it could guess from the WordPress side, so it found
+every rule where the two names matched and none where they differed:
+
+| Missed | Why |
+| --- | --- |
+| `cuidadointegralmarzo25.pdf`, `adaptacionvamosdic24.pdf`, `gentequenovemosvamossept24.pdf` | Drupal stored them lowercase; WordPress re-uploaded them CamelCase, so the probed name 404ed |
+| `misionesurbanasvamosjunio17.pdf`, `mujeresenmisionvamosdic19.pdf` | WordPress appended `_0` on re-upload |
+
+All five now redirect to the Contentful-served PDF in a single hop, verified 200.
+The 3 page rules needed no change — they matched `slugAliases` exactly, which is
+independent confirmation that those slug guesses were right. The generator now
+warns if the two ever disagree.
+
+Worth noting what this did **not** change: no rule here touches the 99 orphaned
+course documents below. The `.htaccess` only ever covered the magazine PDF space.
+
 **99 documents** from the old VAMOS course library — `/images/<tema>_adjuntos/`
-and `/phocadownload/`. No Contentful asset carries the file, and the WordPress
-probe on 2026-08-23 found nothing at `/sites/default/files/magazinefiles/`
-either. The bytes are gone unless someone has a backup or they can be pulled
-from the Wayback Machine. Listed by `yarn build:legacy-redirects`.
+and `/phocadownload/`. No Contentful asset carries the file. **Confirmed against
+live WordPress 2026-08-24** (`wordpress.misionessim.org`, once it was stood up):
+these paths 404 there too. The bytes are gone from the hosting account; the only
+remaining route is a backup or the Wayback Machine. Listed by
+`yarn build:legacy-redirects`.
 
 **46 blog posts**, clustered in months the migration has no posts for at all —
-2024-08, 2024-09, 2025-01, 2025-02, plus two 2024-05 slugs. They are absent from
-`export/posts/` (335 posts, matching WordPress's own `x-wp-total`), from
-`export/import-plan.json`, and from sim-blog. By subject they look like
-VAMOS-issue articles: a singleness cluster in 2024-09, an Africa and digital
-cluster in 2025-01, a pre-departure cluster in 2025-02.
+2024-08, 2024-09, 2025-01, 2025-02, plus two 2024-05 slugs. Absent from
+`export/posts/`, from `export/import-plan.json`, and from sim-blog.
+
+**Resolved 2026-08-24 — the export was complete and nothing was lost in
+migration.** Querying the live WordPress REST API once the site was stood up at
+`wordpress.misionessim.org` returns `x-wp-total: 335`, exactly matching the 335
+files in `export/posts/`, and every one of these slugs returns an empty result.
+WordPress never held them. They are Drupal-era posts that WordPress itself
+dropped years ago, which is why they were 404ing long before the rebuild. Only
+the Wayback Machine could recover them, and only if it happened to archive them.
+
+By subject they look like VAMOS-issue articles — a singleness cluster in 2024-09,
+an Africa and digital cluster in 2025-01, a pre-departure cluster in 2025-02 —
+so the underlying magazine content most likely survives as revista editions.
 
 **9 junk paths** — `sim.preguntas@sim.org` and `www.jewishvoice.org` appended to
 post URLs by broken hrefs in old content, `/wp-content/plugins/*`,
