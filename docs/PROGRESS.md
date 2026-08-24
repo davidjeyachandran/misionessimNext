@@ -1253,3 +1253,20 @@ between the two rather than silently preferring one.
 
 Both this and `drupal-file-map.json` are **frozen captures**: unreproducible once
 the install is gone.
+
+### 2026-08-24 — WordPress `/feed/` URLs redirected, two lost posts recovered
+
+Search Console's 15 indexed `/feed/` URLs. The `/la-revista/*` half was 308ing
+into a 404 — the `/la-revista/:path*` wildcard passed `feed` through as if it
+were a slug. Section 6 of `scripts/build-legacy-redirects.ts` now strips the
+segment: 96 rules, exact twins derived from the redirect table so drifted slugs
+resolve in **one** hop, plus ordered passthrough wildcards. 25 tests in
+`tests/unit/vercel-redirects.test.ts`, including the 15 indexed URLs verbatim.
+Detail in `docs/legacy-404-triage.md`.
+
+Two of the 15 had no article behind them. Neither is rebuild fallout: all 335
+posts on `wordpress.misionessim.org` resolve on the live site (30 via slug-drift
+redirects), so the Contentful migration lost nothing — these two were gone
+before it ran. Text recovered from the Wayback Machine into
+`data/recovered-posts/`; `camino-de-generosidad` has a single snapshot, so that
+capture is the last copy. **Open: whether to re-import them to Contentful.**

@@ -128,6 +128,11 @@ const DRUPAL_PREFIXES = [
 /** Redirects this script owns. Anything else in vercel.json is left alone. */
 function ownsRedirect(source: string): boolean {
   const decoded = decodeURIComponent(source);
+  // Every rule with a `feed` segment comes from section 6, whatever prefix it
+  // sits under — including the `:path*` wildcards, which the `/la-revista/`
+  // branch below would otherwise disown and leave behind as duplicates on a
+  // re-run, and the `/feed/:type/` forms that do not end in `feed/` at all.
+  if (decoded.split("/").includes("feed")) return true;
   for (const prefix of DRUPAL_PREFIXES) {
     if (decoded === prefix || decoded.startsWith(prefix)) return true;
   }
@@ -494,6 +499,55 @@ async function main() {
   const keptRewrites = (config.rewrites ?? []).filter(
     (r) => !ownsRewrite(r.source),
   );
+
+  // 6. WordPress feed URLs. WordPress published a comment feed beside every
+  // post, edition and term, advertised it in <link rel="alternate">, and Google
+  // indexed the lot. Nobody subscribes to a per-post comment feed, but they are
+  // not harmless: `/la-revista/<slug>/feed/` falls into the hand-written
+  // `/la-revista/:path*` wildcard and 308s to `/revistavamos/<slug>/feed/`,
+  // which is a 404 — a permanent redirect into a dead end, which Search Console
+  // reports as an error and Google keeps re-crawling. Stripping `feed/` lands
+  // the visitor on the article the feed belonged to, the only real equivalent.
+  //
+  // Exact twins come first, derived from the redirect table itself rather than
+  // hand-listed, so a slug alias added later gets its feed twin for free — and
+  // so the twin points at the SAME final destination as its parent instead of
+  // chaining through it. The `/feed/:type/` forms (`/feed/atom/`, `/feed/rss2/`)
+  // have no exact spelling and go through the wildcards; for a drifted slug
+  // that costs a second hop, which is acceptable for a URL Google never had.
+  const FEED_PARENTS = ["/blog/", "/la-revista/", "/revistavamos/"];
+  const feedSources = new Set<string>();
+  const pushFeed = (source: string, destination: string) => {
+    if (feedSources.has(source)) return;
+    feedSources.add(source);
+    redirects.push({ source, destination, permanent: true });
+  };
+
+  for (const rule of [...redirects, ...keptRedirects]) {
+    if (rule.source.includes(":") || !rule.source.endsWith("/")) continue;
+    if (!FEED_PARENTS.some((prefix) => rule.source.startsWith(prefix))) continue;
+    pushFeed(`${rule.source}feed/`, rule.destination);
+  }
+
+  // Section fronts, which no wildcard below can express: `:path*` matching zero
+  // segments would build `/blog//`.
+  pushFeed("/blog/feed/", "/blog/");
+  pushFeed("/comments/feed/", "/blog/");
+  pushFeed("/feed/", "/blog/");
+
+  // Wildcards last, as everywhere else here: Vercel takes the first match and
+  // every exact rule above is a correction to what the wildcard would do.
+  for (const [prefix, destination] of [
+    // Author archives redirect to the blog index, so their feeds must too —
+    // passing the slug through would chain via `/blog/author/:path*/`.
+    ["/blog/author/", "/blog/"],
+    ["/blog/", "/blog/:path*/"],
+    ["/la-revista/", "/revistavamos/:path*/"],
+    ["/revistavamos/", "/revistavamos/:path*/"],
+  ] as const) {
+    pushFeed(`${prefix}:path*/feed/`, destination);
+    pushFeed(`${prefix}:path*/feed/:type/`, destination);
+  }
 
   config.redirects = [...redirects, ...keptRedirects];
   config.rewrites = [...keptRewrites, ...rewrites];

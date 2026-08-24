@@ -253,3 +253,111 @@ describe("captured WordPress .htaccess rules", () => {
     }
   });
 });
+
+// WordPress published a comment feed beside every post, edition and term, and
+// Google indexed the lot. They are not merely useless: before these rules,
+// `/la-revista/<slug>/feed/` fell into the `/la-revista/:path*` wildcard and
+// 308ed to `/revistavamos/<slug>/feed/`, a 404 — a permanent redirect into a
+// dead end, which Search Console reports as an error and Google re-crawls for
+// years. Stripping `feed/` lands the visitor on the article the feed belonged
+// to, the only real equivalent a static site has.
+describe("WordPress feed URLs", () => {
+  const sourceIndex = new Map(config.redirects.map((r, i) => [r.source, i]));
+
+  /** Vercel takes the first matching rule and substitutes its params. */
+  const resolve = (url: string): string | undefined => {
+    for (const rule of config.redirects) {
+      const keys: Array<{ name: string | number }> = [];
+      const match = pathToRegexp(rule.source, keys as never, {
+        strict: true,
+      } as never).exec(url);
+      if (!match) continue;
+      let destination = rule.destination;
+      keys.forEach((key, i) => {
+        destination = destination.replace(`:${key.name}*`, match[i + 1] ?? "");
+        destination = destination.replace(`:${key.name}`, match[i + 1] ?? "");
+      });
+      return destination;
+    }
+    return undefined;
+  };
+
+  // The 15 feed URLs Search Console listed on 2026-08-24, verbatim.
+  const INDEXED = [
+    "/la-revista/traduccion-biblica/feed/",
+    "/la-revista/mentoria/feed/",
+    "/la-revista/latinos-en-adaptacion/feed/",
+    "/la-revista/obstaculos-y-perseverancia/feed/",
+    "/la-revista/africa/feed/",
+    "/la-revista/biocupacionales/feed/",
+    "/la-revista/movilizacion/feed/",
+    "/blog/2024-07/no-eres-un-empleado-de-dios/feed/",
+    "/blog/2021-06/cocinando-para-su-gloria/feed/",
+    "/blog/2020-11/los-traductores-tienen-muchos-roles/feed/",
+    "/blog/2020-10/voluntario-con-paga/feed/",
+    "/blog/2020-10/voluntatest/feed/",
+    "/blog/2024-06/todo-cristiano-forma-parte/feed/",
+    "/blog/2023-03/salir-del-campo-y-en-busca-de-un-nuevo-hogar/feed/",
+    "/blog/2024-05/camino-de-generosidad/feed/",
+  ];
+
+  it("strips the feed segment off every indexed URL", () => {
+    for (const url of INDEXED) {
+      const destination = resolve(url);
+      expect(destination, url).toBeDefined();
+      expect(destination, url).not.toMatch(/\/feed\//);
+    }
+  });
+
+  it("resolves each one in a single hop", () => {
+    // The whole point of the change: a 308 whose destination is itself a
+    // redirect is barely better than the 404 it replaced. The exact twins are
+    // generated from the redirect table so they inherit its FINAL destination
+    // rather than chaining through the parent's own rule.
+    for (const url of INDEXED) {
+      const destination = resolve(url)!;
+      expect(resolve(destination), `${url} -> ${destination}`).toBeUndefined();
+    }
+  });
+
+  it("keeps drifted slugs off the passthrough wildcard", () => {
+    // `/la-revista/movilizacion/` is a slug that drifted in the CMS. Its feed
+    // must follow it to `mobilizacion`, not pass the stale slug through.
+    expect(resolve("/la-revista/movilizacion/feed/")).toBe(
+      resolve("/la-revista/movilizacion/"),
+    );
+    expect(resolve("/la-revista/traduccion-biblica/feed/")).toBe(
+      resolve("/la-revista/traduccion-biblica/"),
+    );
+  });
+
+  it("orders every feed wildcard before the rule it corrects", () => {
+    // `/la-revista/:path*/` would swallow `/la-revista/x/feed/` and send it to
+    // `/revistavamos/x/feed/`, and `/blog/author/:path*/` would leave an author
+    // feed chaining through its own archive rule. Vercel takes the first match,
+    // so both feed wildcards have to come first.
+    const pairs: Array<[string, string]> = [
+      ["/la-revista/:path*/feed/", "/la-revista/:path*/"],
+      ["/blog/author/:path*/feed/", "/blog/author/:path*/"],
+      ["/blog/author/:path*/feed/", "/blog/:path*/feed/"],
+    ];
+    for (const [feed, general] of pairs) {
+      expect(sourceIndex.get(feed), feed).toBeDefined();
+      expect(sourceIndex.get(general), general).toBeDefined();
+      expect(sourceIndex.get(feed)!).toBeLessThan(sourceIndex.get(general)!);
+    }
+  });
+
+  it("covers the section fronts and the /feed/<type> variants", () => {
+    // `:path*` matching zero segments would build `/blog//`, so the fronts need
+    // exact rules. WordPress also served `/feed/atom/` and `/feed/rss2/`.
+    expect(resolve("/feed/")).toBe("/blog/");
+    expect(resolve("/comments/feed/")).toBe("/blog/");
+    expect(resolve("/blog/feed/")).toBe("/blog/");
+    expect(resolve("/blog/2021-06/cocinando-para-su-gloria/feed/atom/")).toBe(
+      "/blog/2021-06/cocinando-para-su-gloria/",
+    );
+    expect(resolve("/blog/category/iglesia/feed/")).toBe("/blog/category/iglesia/");
+    expect(resolve("/blog/author/juan/feed/")).toBe("/blog/");
+  });
+});

@@ -136,3 +136,69 @@ One post carries an uppercase slug: `/blog/2021-08/Discipulando-con-el-manual-va
 is live, the lowercase form 404s. It is the only mixed-case slug among 899. The
 redirect added for the legacy `/blog/2021-09/` form points at the live uppercase
 URL and will need updating if the Contentful slug is fixed.
+
+## Addendum 2026-08-24 — the WordPress `/feed/` space
+
+Search Console listed 15 indexed `/feed/` URLs (last crawled 11 Apr 2025).
+WordPress published a comment feed beside every post, edition and term and
+advertised it in `<link rel="alternate">`, so Google indexed the lot.
+
+The `/blog/*/feed/` half was only noise — a plain 404. The `/la-revista/*/feed/`
+half was a **redirect into a dead end**: the hand-written `/la-revista/:path*`
+wildcard swallowed the feed segment and 308ed to `/revistavamos/<slug>/feed/`,
+which 404s. Search Console files that as a redirect error, and Google re-crawls
+both hops for years rather than dropping the URL.
+
+Section 6 of the generator now strips the `feed` segment and lands the visitor
+on the article the feed belonged to — the only equivalent a static site has.
+96 rules:
+
+- **Exact twins for every page redirect** under `/blog/`, `/la-revista/` and
+  `/revistavamos/`, derived from the redirect table itself rather than
+  hand-listed. Two consequences worth the indirection: a slug alias added later
+  gets its feed twin for free, and the twin inherits its parent's **final**
+  destination instead of chaining through the parent's own rule.
+  `/la-revista/movilizacion/feed/` reaches `/revistavamos/mobilizacion/` in one
+  hop, not two.
+- **Passthrough wildcards** for everything live, ordered ahead of the rules they
+  correct — `/blog/author/:path*/feed/` before `/blog/:path*/feed/` (an author
+  feed must reach the index, not chain via the archive rule), and both
+  `/la-revista/` feed wildcards before `/la-revista/:path*/`.
+- **Section fronts** `/feed/`, `/blog/feed/` and `/comments/feed/` → `/blog/`,
+  which no wildcard can express: `:path*` matching zero segments builds
+  `/blog//`.
+- **`/feed/<type>/`** (`atom`, `rss2`, `rdf`) via a `:type` twin of each
+  wildcard. These have no exact spelling, so a drifted slug costs a second hop
+  there — acceptable for a URL Google never indexed.
+
+Serving a real RSS feed instead was considered and rejected: nobody subscribes
+to a per-post comment feed. A site-wide feed is a separate decision, and `/feed/`
+itself was not in the export.
+
+`/content/:path*/` has the same swallowing behaviour in principle, but Drupal
+never served `/content/<slug>/feed/` — its feeds were `/rss.xml` — so no feed
+rule is emitted for that prefix.
+
+## Addendum 2026-08-24 — two posts lost before the rebuild
+
+Two of the 15 feed URLs had no article behind them on the new site:
+
+| Path | Status |
+| --- | --- |
+| `/blog/2024-07/no-eres-un-empleado-de-dios/` | Drupal-era; gone before WordPress |
+| `/blog/2024-05/camino-de-generosidad/` | on WordPress in Apr 2025, deleted since |
+
+Neither is in `data/legacy-404s.json` — the feed export is the only record that
+they existed. Both are **not rebuild fallout**: the WordPress REST API
+(`wordpress.misionessim.org`, 335 published posts) has no post at either slug,
+and a full diff of those 335 against the live sitemap found **every one of them
+reachable**, 30 through slug-drift redirects and the rest directly. Nothing was
+lost in the Contentful migration; these two were already gone when it ran.
+
+Recovered from the Wayback Machine into
+[`data/recovered-posts/`](../data/recovered-posts/) — complete text, no images,
+awaiting a decision on re-import to Contentful. The Drupal snapshot carries a
+byline the WordPress one lost (*"Enviado por Efrain el Mar, 07/23/2024"*), and
+`camino-de-generosidad` has exactly one snapshot, so this capture is the last
+copy. Until they are re-imported both paths 404, and their feed twins now
+redirect to that 404 — harmless, and self-correcting the moment the posts exist.
