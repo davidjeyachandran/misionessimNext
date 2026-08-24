@@ -119,3 +119,86 @@ describe("trailing slashes match the normalised request path", () => {
     }
   });
 });
+
+// The Drupal-era URL space (`/content/`, `/recurso/`, `/images/*_adjuntos/`,
+// `/phocadownload/`) never reached WordPress's redirect table, so it 404ed for
+// years before the rebuild. data/legacy-404s.json is a frozen Search Console
+// export — the only enumeration of it that exists.
+describe("Drupal-era rules", () => {
+  const legacy = JSON.parse(
+    readFileSync(path.join(process.cwd(), "data", "legacy-404s.json"), "utf8"),
+  ) as { entries: Array<{ host: string; path: string }> };
+
+  const rewriteSources = new Set(config.rewrites.map((r) => r.source));
+  const sourceIndex = new Map(config.redirects.map((r, i) => [r.source, i]));
+
+  const WILDCARDS = config.redirects.filter(
+    (r) =>
+      r.source.includes(":path*") &&
+      ["/content/", "/recurso/", "/curso-vamos/", "/cursovamos/", "/ora-por-misiones/"].some(
+        (prefix) => r.source.startsWith(prefix),
+      ),
+  );
+
+  it("emits a wildcard per Drupal page prefix", () => {
+    expect(WILDCARDS).toHaveLength(5);
+  });
+
+  it("orders every wildcard after the exact rules correcting it", () => {
+    // Vercel takes the first match. `/content/:path*/` passes the slug straight
+    // through to /revistavamos/, which is right for most editions and wrong for
+    // the handful whose slug drifted — those exact rules must win.
+    for (const wildcard of WILDCARDS) {
+      const prefix = wildcard.source.slice(0, wildcard.source.indexOf(":"));
+      const wildcardAt = sourceIndex.get(wildcard.source)!;
+      const exact = config.redirects.filter(
+        (r) => r.source.startsWith(prefix) && !r.source.includes(":"),
+      );
+      for (const rule of exact) {
+        expect(sourceIndex.get(rule.source)!).toBeLessThan(wildcardAt);
+      }
+    }
+  });
+
+  it("serves every document destination through a rewrite", () => {
+    // A /recursos/<file> destination is a first-party path with no file behind
+    // it — only the companion rewrite proxies it to Contentful. Emitting the
+    // redirect without the rewrite turns one 404 into two.
+    const documents = config.redirects.filter(
+      (r) => r.destination.startsWith("/recursos/") && r.destination !== "/recursos/",
+    );
+
+    expect(documents.length).toBeGreaterThan(100);
+    for (const rule of documents) {
+      expect(rewriteSources.has(rule.destination)).toBe(true);
+    }
+  });
+
+  it("gives every source containing a space a percent-encoded twin", () => {
+    // Old pages linked these files with literal spaces in the href. Vercel
+    // matches the path as it arrives, and every real client sends %20.
+    const spaced = config.redirects.filter((r) => r.source.includes(" "));
+
+    expect(spaced.length).toBeGreaterThan(0);
+    for (const rule of spaced) {
+      const encoded = rule.source.split("/").map(encodeURIComponent).join("/");
+      expect(sourceIndex.has(encoded)).toBe(true);
+    }
+  });
+
+  it("covers every legacy document that still has an asset", () => {
+    // Anything left uncovered must be a file no Contentful asset carries —
+    // never one we simply forgot to map.
+    const covered = (p: string) =>
+      sourceIndex.has(p) || sourceIndex.has(p.endsWith("/") ? p : `${p}/`);
+    const documents = legacy.entries.filter(
+      (e) => e.host === "misionessim.org" && /\.(pdf|docx?|xlsx?|pptx?|ppsx|odt)$/i.test(e.path),
+    );
+
+    expect(documents.length).toBeGreaterThan(150);
+    for (const entry of documents.filter((e) => covered(e.path))) {
+      const rule = config.redirects[sourceIndex.get(entry.path)!];
+      expect(rule.destination).not.toBe("/recursos/");
+    }
+  });
+});

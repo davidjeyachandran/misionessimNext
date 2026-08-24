@@ -1973,6 +1973,586 @@
       "permanent": true
     },
     {
+      "source": "/content/la-persecucion/",
+      "destination": "/revistavamos/persecucion/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/la-persecucion/",
+      "destination": "/revistavamos/persecucion/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/la-persecucion/",
+      "destination": "/revistavamos/persecucion/",
+      "permanent": true
+    },
+    {
+      "source": "/content/la-oracion-55/",
+      "destination": "/revistavamos/la-oracion/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/la-oracion-55/",
+      "destination": "/revistavamos/la-oracion/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/la-oracion-55/",
+      "destination": "/revistavamos/la-oracion/",
+      "permanent": true
+    },
+    {
+      "source": "/content/regresando-casa/",
+      "destination": "/revistavamos/regresando-a-casa/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/regresando-casa/",
+      "destination": "/revistavamos/regresando-a-casa/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/regresando-casa/",
+      "destination": "/revistavamos/regresando-a-casa/",
+      "permanent": true
+    },
+    {
+      "source": "/content/fondos-misioneros-1/",
+      "destination": "/revistavamos/fondos-misioneros/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/fondos-misioneros-1/",
+      "destination": "/revistavamos/fondos-misioneros/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/fondos-misioneros-1/",
+      "destination": "/revistavamos/fondos-misioneros/",
+      "permanent": true
+    },
+    {
+      "source": "/content/equipos-multiculturales-0/",
+      "destination": "/revistavamos/equipos-multiculturales/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/equipos-multiculturales-0/",
+      "destination": "/revistavamos/equipos-multiculturales/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/equipos-multiculturales-0/",
+      "destination": "/revistavamos/equipos-multiculturales/",
+      "permanent": true
+    },
+    {
+      "source": "/content/trabajo-en-equipo1/",
+      "destination": "/revistavamos/trabajo-en-equipo/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/trabajo-en-equipo1/",
+      "destination": "/revistavamos/trabajo-en-equipo/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/trabajo-en-equipo1/",
+      "destination": "/revistavamos/trabajo-en-equipo/",
+      "permanent": true
+    },
+    {
+      "source": "/content/adaptacion-en-misiones/",
+      "destination": "/revistavamos/latinos-en-adaptacion/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/adaptacion-en-misiones/",
+      "destination": "/revistavamos/latinos-en-adaptacion/",
+      "permanent": true
+    },
+    {
+      "source": "/revistavamos/adaptacion-en-misiones/",
+      "destination": "/revistavamos/latinos-en-adaptacion/",
+      "permanent": true
+    },
+    {
+      "source": "/quienessomos/",
+      "destination": "/nosotros/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/",
+      "destination": "/sirve-con-sim/",
+      "permanent": true
+    },
+    {
+      "source": "/ora-con-nosotros/",
+      "destination": "/ora/",
+      "permanent": true
+    },
+    {
+      "source": "/ora-por-misiones/",
+      "destination": "/ora/",
+      "permanent": true
+    },
+    {
+      "source": "/da-la-obra/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/recursos-movilicemos/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
+      "source": "/content/",
+      "destination": "/revistavamos/",
+      "permanent": true
+    },
+    {
+      "source": "/recurso/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
+      "source": "/curso-vamos/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
+      "source": "/curso-vamos-0/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
+      "source": "/cursovamos/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/ resolucion-de-conflictos/",
+      "destination": "/revistavamos/resolucion-de-conflictos/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/%20resolucion-de-conflictos/",
+      "destination": "/revistavamos/resolucion-de-conflictos/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/ trabajo-en-equipo/",
+      "destination": "/revistavamos/trabajo-en-equipo/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/%20trabajo-en-equipo/",
+      "destination": "/revistavamos/trabajo-en-equipo/",
+      "permanent": true
+    },
+    {
+      "source": "/content/ resolucion-de-conflictos/",
+      "destination": "/revistavamos/resolucion-de-conflictos/",
+      "permanent": true
+    },
+    {
+      "source": "/content/%20resolucion-de-conflictos/",
+      "destination": "/revistavamos/resolucion-de-conflictos/",
+      "permanent": true
+    },
+    {
+      "source": "/content/ trabajo-en-equipo/",
+      "destination": "/revistavamos/trabajo-en-equipo/",
+      "permanent": true
+    },
+    {
+      "source": "/content/%20trabajo-en-equipo/",
+      "destination": "/revistavamos/trabajo-en-equipo/",
+      "permanent": true
+    },
+    {
+      "source": "/content/consejos-para-tu-primer-ano-misionero/",
+      "destination": "/revistavamos/",
+      "permanent": true
+    },
+    {
+      "source": "/content/alcanzando-los-aprendices-de-orales./",
+      "destination": "/revistavamos/alcanzando-los-aprendices-de-orales/",
+      "permanent": true
+    },
+    {
+      "source": "/images/Acceso_limit_adjuntos/El_budismo.pdf",
+      "destination": "/recursos/el_budismo.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Antes_de_ir_adjuntos/ENVIO_MISIONERO_RESPONSABLE.pdf",
+      "destination": "/recursos/envio_misionero_responsable.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Discipulado_adjuntos/El_Discipulo_en_Crecimiento.pdf",
+      "destination": "/recursos/el_discipulo_en_crecimiento.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Discipulado_adjuntos/El_Mensaje_de_Jesus.pdf",
+      "destination": "/recursos/el_mensaje_de_jesus.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Discipulado_adjuntos/Gran_historia.pdf",
+      "destination": "/recursos/gran_historia.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Equipo_adjuntos/ENCONTRANDO_TUS_DONES.pdf",
+      "destination": "/recursos/encontrando_tus_dones.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Equipo_adjuntos/Test_Dones_Espirituales.pdf",
+      "destination": "/recursos/test_dones_espirituales.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Involucrar_iglesia_adjuntos/tripticooracion.pdf",
+      "destination": "/recursos/tripticooracion.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Mejor en la cancha.pdf",
+      "destination": "/recursos/mejor_en_la_cancha.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Mejor%20en%20la%20cancha.pdf",
+      "destination": "/recursos/mejor_en_la_cancha.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Vamosjunio2011.pdf",
+      "destination": "/revistavamos/guerra-espiritual/2011-06-GuerraEspiritualVAMOS.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/Vamosmayo2011.pdf",
+      "destination": "/revistavamos/negocio-como-mision/2011-05-Negociocomomisio_nVAMOS.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/levantando_adjuntos/30_formas_de_expresar_gratitud.pdf",
+      "destination": "/recursos/30_formas_de_expresar_gratitud.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/images/levantando_adjuntos/Presupuesto_misionero.xls",
+      "destination": "/recursos/presupuesto_misionero.xls",
+      "permanent": true
+    },
+    {
+      "source": "/images/mision_integral_adjuntos/Integridad_y_cooperacion_en_la_mision.pdf",
+      "destination": "/recursos/integridad_y_cooperacion_en_la_mision.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/recurso/test-dones-espirituales/",
+      "destination": "/recursos/test_dones_espirituales.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/13LeccionesSobreMisiones.pdf",
+      "destination": "/recursos/13leccionessobremisiones.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/Los Bebes en Cristo.docx",
+      "destination": "/recursos/los_bebes_en_cristo.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/Los%20Bebes%20en%20Cristo.docx",
+      "destination": "/recursos/los_bebes_en_cristo.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/images/Equipo_adjuntos/Test_Dones_Espirituales.pdf",
+      "destination": "/recursos/test_dones_espirituales.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/100dxven.pdf",
+      "destination": "/recursos/100dxven.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/30_formas_de_expresar_gratitud.pdf",
+      "destination": "/recursos/30_formas_de_expresar_gratitud.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/aspectos_fundamentales_del_modelo_de_discipulado_de_jesucristo.doc",
+      "destination": "/recursos/aspectos_fundamentales_del_modelo_de_discipulado_de_jesucristo.doc",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/comibam_articulo_para_enciclopedia.docx",
+      "destination": "/recursos/comibam_articulo_para_enciclopedia.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/como_discipular_a_un_creyente_0.docx",
+      "destination": "/recursos/como_discipular_a_un_creyente_0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/conociendo_los_dones_y_talentos.docx",
+      "destination": "/recursos/conociendo_los_dones_y_talentos.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/cuestionario_de_parejas_-_cuan_bien_conoces_a_tu_pareja.pdf",
+      "destination": "/recursos/cuestionario_de_parejas_-_cuan_bien_conoces_a_tu_pareja.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/cuestionario_de_parejas_-_que_tan_saludable_es_tu_matrimonio_.pdf",
+      "destination": "/recursos/cuestionario_de_parejas_-_que_tan_saludable_es_tu_matrimonio_.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/desarrollar_una_visionbam.docx",
+      "destination": "/recursos/desarrollar_una_visionbam.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/desde_la_iglesia_como_facilitamos_el_levantamiento_de_nuevos_misioneros_iglesia_local_y_la_mision_mundial_0.docx",
+      "destination": "/recursos/desde_la_iglesia_como_facilitamos_el_levantamiento_de_nuevos_misioneros_iglesia_local_y_la_mision_mundial_0.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/devo_raim_kids_orando_por_los_hijos_de_los_misioneros.pdf",
+      "destination": "/recursos/devo_raim_kids_orando_por_los_hijos_de_los_misioneros.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/discerniendo_la_voluntad_de_dios.docx",
+      "destination": "/recursos/discerniendo_la_voluntad_de_dios.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/el_discipulo_en_crecimiento.pdf",
+      "destination": "/recursos/el_discipulo_en_crecimiento.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/el_legado_tesalonico.docx",
+      "destination": "/recursos/el_legado_tesalonico.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/el_mensaje_de_jesus.pdf",
+      "destination": "/recursos/el_mensaje_de_jesus.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/el_pastoreado_del_rebano_de_dios.docx",
+      "destination": "/recursos/el_pastoreado_del_rebano_de_dios.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/el_perfil_del_misionero_transcultural_ideal.doc",
+      "destination": "/recursos/el_perfil_del_misionero_transcultural_ideal.doc",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/envio_misionero_responsable.pdf",
+      "destination": "/recursos/envio_misionero_responsable.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/experiencia_familiar_de_corto_plazo_1.docx",
+      "destination": "/recursos/experiencia_familiar_de_corto_plazo_1.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/finanzas_misioneras_omar.docx",
+      "destination": "/recursos/finanzas_misioneras_omar.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/finanzas_para_las_misiones_mundiales.pdf",
+      "destination": "/recursos/finanzas_para_las_misiones_mundiales.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/gran_historia.pdf",
+      "destination": "/recursos/gran_historia.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/honor_y_verguenza_en_las_relaciones_transculturales.pdf",
+      "destination": "/recursos/honor_y_verguenza_en_las_relaciones_transculturales.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/integridad_y_cooperacion_en_la_mision.pdf",
+      "destination": "/recursos/integridad_y_cooperacion_en_la_mision.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/la_voluntad_de_dios_nunca_te_llevara_poesia.docx",
+      "destination": "/recursos/la_voluntad_de_dios_nunca_te_llevara_poesia.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/lagranomision.pdf",
+      "destination": "/recursos/lagranomision.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/las_asociaciones_en_las_misiones.docx",
+      "destination": "/recursos/las_asociaciones_en_las_misiones.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/los_inicios_de_un_movimiento.pdf",
+      "destination": "/recursos/los_inicios_de_un_movimiento.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/luchando_contra_una_fragmentada.docx",
+      "destination": "/recursos/luchando_contra_una_fragmentada.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/metodos_misioneros_0.doc",
+      "destination": "/recursos/metodos_misioneros_0.doc",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/nancy_guthrie_-_aferrandose_a_la_esperanza.pdf",
+      "destination": "/recursos/nancy_guthrie_-_aferrandose_a_la_esperanza.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/nuevo_obrero_v8_.pdf",
+      "destination": "/recursos/nuevo_obrero_v8_.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/pablo_y_timoteo.docx",
+      "destination": "/recursos/pablo_y_timoteo.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/partnership_y_el_dinero.doc",
+      "destination": "/recursos/partnership_y_el_dinero.doc",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/predica_4.docx",
+      "destination": "/recursos/predica_4.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/preguntas_frecuentes_material_vamos.docx",
+      "destination": "/recursos/preguntas_frecuentes_material_vamos.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/preparandose_para_contar_la_historia.docx",
+      "destination": "/recursos/preparandose_para_contar_la_historia.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/seis_llaves_para_abrir_la_puerta_a_las_misiones.docx",
+      "destination": "/recursos/seis_llaves_para_abrir_la_puerta_a_las_misiones.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/sufrimiento_el_costo_del_discipulado.docx",
+      "destination": "/recursos/sufrimiento_el_costo_del_discipulado.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/tomando_buenas_decisiones.docx",
+      "destination": "/recursos/tomando_buenas_decisiones.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/tripticocomo_me_preparo.pdf",
+      "destination": "/recursos/tripticocomo_me_preparo.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/tripticocomo_me_preparo_0.pdf",
+      "destination": "/recursos/tripticocomo_me_preparo_0.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/un_ano_de_misiones.pdf",
+      "destination": "/recursos/un_ano_de_misiones.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinefiles/verdaderas_asociaciones_eclesiales_transculturales.docx",
+      "destination": "/recursos/verdaderas_asociaciones_eclesiales_transculturales.docx",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinepdf/vamosagosto2011.pdf",
+      "destination": "/revistavamos/mobilizacion/2011-08-Movilizacio_nVAMOS.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinepdf/vamosfeb2012.pdf",
+      "destination": "/revistavamos/conferencia-misionera/2012-02-ConferenciaMisioneraVAMOS.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinepdf/vamosoct13.pdf",
+      "destination": "/revistavamos/caballeros-de-dios/2013-10-CaballerosVAMOS.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/magazinepdf/vamossept13_0.pdf",
+      "destination": "/revistavamos/alcanzando-los-aprendices-de-orales/2013-09-AprendicesOralesVAMOS.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/sites/default/files/test_dones_espirituales.pdf",
+      "destination": "/recursos/test_dones_espirituales.pdf",
+      "permanent": true
+    },
+    {
+      "source": "/content/:path*/",
+      "destination": "/revistavamos/:path*/",
+      "permanent": true
+    },
+    {
+      "source": "/recurso/:path*/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
+      "source": "/curso-vamos/:path*/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
+      "source": "/cursovamos/:path*/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
+      "source": "/ora-por-misiones/:path*/",
+      "destination": "/ora/",
+      "permanent": true
+    },
+    {
       "source": "/portfolio-category/:path*/",
       "destination": "/sirve-con-sim/",
       "permanent": true
@@ -2000,6 +2580,21 @@
     {
       "source": "/la-revista/:path*/",
       "destination": "/revistavamos/:path*/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2024-05/como-nos-afectan-las-diferencias/",
+      "destination": "/blog/2023-06/como-nos-afectan-las-diferencias/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2021-09/discipulando-con-el-manual-vamos/",
+      "destination": "/blog/2021-08/Discipulando-con-el-manual-vamos/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/la-mentoria-una-aliada-en-el-ministerio-2/",
+      "destination": "/blog/2020-01/la-mentoria-una-aliada-en-el-ministerio-0/",
       "permanent": true
     },
     {

@@ -21,6 +21,13 @@
  *      would 301 these straight into a 404 (or, for the three slugs in
  *      `liveOnNewSite`, into the WRONG edition).
  *
+ *   4. Drupal-era paths Google still requests (`data/legacy-404s.json`, a
+ *      frozen Search Console export). WordPress never redirected these either,
+ *      so they have been 404ing for years — the new site is simply the first
+ *      place the log became visible. Documents resolve by filename against the
+ *      `/recursos/` assets emitted above; pages resolve through the
+ *      hand-decided `data/legacy-page-map.json`.
+ *
  * Images are deliberately NOT emitted: WordPress serves generated size
  * variants (`-300x200.jpg`) that appear in no API, so the URL space cannot be
  * enumerated 1:1 — see docs/media-redirect-review.md.
@@ -49,6 +56,8 @@ const MANUAL_DESTINATIONS = path.join(
   "data",
   "media-manual-destinations.json",
 );
+const LEGACY_404S = path.join(process.cwd(), "data", "legacy-404s.json");
+const LEGACY_PAGE_MAP = path.join(process.cwd(), "data", "legacy-page-map.json");
 
 interface Redirect {
   source: string;
@@ -72,14 +81,51 @@ interface DrupalHit {
   wpPath: string;
 }
 
+interface Legacy404 {
+  host: string;
+  path: string;
+  lastCrawled: string;
+}
+
+interface LegacyPageMap {
+  revistaSlugAliases: Record<string, string>;
+  exact: Record<string, string>;
+  wildcards: { source: string; destination: string }[];
+}
+
 interface RevistaAliases {
   slugAliases: Record<string, string>;
   liveOnNewSite: string[];
   pdfToSlug: Record<string, string>;
 }
 
+/**
+ * The Drupal-era prefixes section 4 owns outright — wildcards included, since
+ * nothing under them is hand-written. Listed in full rather than matched by a
+ * shorter stem so `/recursos-movilicemos/` can't be mistaken for `/recurso/`.
+ */
+const DRUPAL_PREFIXES = [
+  "/images/",
+  "/phocadownload/",
+  "/content/",
+  "/recurso/",
+  "/curso-vamos/",
+  "/curso-vamos-0/",
+  "/cursovamos/",
+  "/quienessomos/",
+  "/contact/",
+  "/ora-con-nosotros/",
+  "/ora-por-misiones/",
+  "/da-la-obra/",
+  "/recursos-movilicemos/",
+];
+
 /** Redirects this script owns. Anything else in vercel.json is left alone. */
 function ownsRedirect(source: string): boolean {
+  const decoded = decodeURIComponent(source);
+  for (const prefix of DRUPAL_PREFIXES) {
+    if (decoded === prefix || decoded.startsWith(prefix)) return true;
+  }
   // Exact media paths only. The `:path`-style image catch-all under the same
   // prefix is hand-written and must survive a re-run — and must stay LAST in
   // the array, since Vercel takes the first match and it would otherwise
@@ -100,6 +146,41 @@ function ownsRedirect(source: string): boolean {
  * build-revista-pdf-rewrites.ts and must survive a re-run here. */
 function ownsRewrite(source: string): boolean {
   return source.startsWith("/recursos/");
+}
+
+/**
+ * Accent- and case-insensitive key for a filename or slug. The Drupal file
+ * space spelled the same document a dozen ways — `Test_Dones_Espirituales.pdf`,
+ * `test_dones_espirituales.pdf`, `Pablo_Bajo_Estrés.pdf` — while Vercel matches
+ * sources byte-for-byte, so the only way to reunite them with the one asset in
+ * Contentful is to compare normalised keys and emit an exact rule per spelling.
+ */
+function assetKey(name: string): string {
+  return name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9.]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/** `assetKey` with any trailing file extension dropped. */
+function stemKey(name: string): string {
+  return assetKey(name.replace(/\.[a-z0-9]+$/i, ""));
+}
+
+/**
+ * Vercel matches `source` against the request path as it arrives on the wire,
+ * so a legacy path containing a space or an accent needs both spellings: the
+ * literal one for the odd client that sends it raw, the percent-encoded one for
+ * every browser and for Googlebot.
+ */
+function sourceVariants(legacyPath: string): string[] {
+  const encoded = legacyPath
+    .split("/")
+    .map((segment) => encodeURIComponent(segment))
+    .join("/");
+  return encoded === legacyPath ? [legacyPath] : [legacyPath, encoded];
 }
 
 /**
@@ -238,6 +319,138 @@ async function main() {
         + `/wp-content/ twin is unresolved):`,
     );
     for (const o of drupalOrphans) console.log(`  ${o}`);
+  }
+
+  // 5. The Drupal-era URL space Google still crawls. These never reached
+  // WordPress's redirect table, so they have 404ed for years; the Search
+  // Console export in data/legacy-404s.json is the only enumeration we have of
+  // them, and it cannot be regenerated once Google stops asking.
+  const emitted = new Set(redirects.map((r) => r.source));
+  const pushLegacy = (legacyPath: string, destination: string): boolean => {
+    let added = false;
+    for (const source of sourceVariants(legacyPath)) {
+      if (emitted.has(source)) continue;
+      redirects.push({ source, destination, permanent: true });
+      emitted.add(source);
+      added = true;
+    }
+    return added;
+  };
+
+  // Everything reachable under /recursos/, keyed both ways: `assetKey` for a
+  // filename that survived intact, `stemKey` for the ones whose extension
+  // changed (`*.docx.pdf`) or that only survive as a Drupal page slug.
+  const assetByName = new Map<string, string>();
+  const assetByStem = new Map<string, string>();
+  for (const { source } of rewrites) {
+    const fileName = source.slice("/recursos/".length);
+    assetByName.set(assetKey(fileName), source);
+    if (!assetByStem.has(stemKey(fileName))) {
+      assetByStem.set(stemKey(fileName), source);
+    }
+  }
+  const revistaPdfByName = new Map<string, string>();
+  for (const { source } of config.rewrites ?? []) {
+    const match = /^\/revistavamos\/[^/]+\/([^/]+\.pdf)$/i.exec(source);
+    if (match) revistaPdfByName.set(assetKey(match[1]), source);
+  }
+  // Drupal filed the magazine under its own names (`vamosoct13.pdf`), which
+  // Contentful no longer uses. `pdfToSlug` is keyed by the WordPress upload
+  // path, but the basename inside it is still the Drupal one — enough to reach
+  // the edition, and from there its current PDF.
+  const editionByPdfName = new Map<string, string>();
+  for (const [wpPath, slug] of Object.entries(aliases.pdfToSlug)) {
+    editionByPdfName.set(assetKey(path.posix.basename(wpPath)), slug);
+  }
+
+  const pageMap = JSON.parse(
+    await readFile(LEGACY_PAGE_MAP, "utf8"),
+  ) as LegacyPageMap;
+
+  // Drupal-era edition slugs, under every prefix that ever served them.
+  for (const [from, to] of Object.entries(pageMap.revistaSlugAliases)) {
+    if (from.startsWith("_")) continue;
+    const destination = `/revistavamos/${to}/`;
+    for (const prefix of ["/content/", "/la-revista/", "/revistavamos/"]) {
+      if (prefix === "/revistavamos/" && collides.has(from)) continue;
+      pushLegacy(`${prefix}${from}/`, destination);
+    }
+  }
+
+  for (const [source, destination] of Object.entries(pageMap.exact)) {
+    if (source.startsWith("_")) continue;
+    pushLegacy(source, destination);
+  }
+
+  const legacy = JSON.parse(await readFile(LEGACY_404S, "utf8")) as {
+    entries: Legacy404[];
+  };
+  const DOCUMENT = /\.(pdf|docx?|xlsx?|pptx?|ppsx|odt)$/i;
+  const unmatchedDocs: string[] = [];
+  const unmatchedPages: string[] = [];
+
+  for (const entry of legacy.entries) {
+    // A different host answers these; a path rule can't reach them.
+    if (entry.host !== "misionessim.org") continue;
+    const legacyPath = entry.path;
+    // `trailingSlash: true` normalises the request before redirects match, so
+    // every extension-less rule is stored slashed while the export is not.
+    const slashed = legacyPath.endsWith("/") ? legacyPath : `${legacyPath}/`;
+    if (emitted.has(legacyPath) || emitted.has(slashed)) continue;
+
+    if (DOCUMENT.test(legacyPath)) {
+      const fileName = path.posix.basename(legacyPath);
+      const edition = editionByPdfName.get(assetKey(fileName));
+      const destination =
+        assetByName.get(assetKey(fileName)) ??
+        revistaPdfByName.get(assetKey(fileName)) ??
+        (edition ? editionTarget(edition, legacyPath) : undefined) ??
+        assetByStem.get(stemKey(fileName));
+      if (destination) pushLegacy(legacyPath, destination);
+      else unmatchedDocs.push(legacyPath);
+      continue;
+    }
+
+    // A Drupal resource page names one document. Point at the document itself
+    // where it survived — the wildcard below only reaches the index.
+    const resource = /^\/recurso\/(.+?)\/?$/.exec(legacyPath);
+    if (resource) {
+      const destination = assetByStem.get(stemKey(resource[1]));
+      if (destination) pushLegacy(`/recurso/${resource[1]}/`, destination);
+      continue;
+    }
+
+    const covered =
+      DRUPAL_PREFIXES.some((prefix) => legacyPath.startsWith(prefix)) ||
+      legacyPath.startsWith("/la-revista/") ||
+      legacyPath.startsWith("/blog/") ||
+      legacyPath.startsWith("/sites/") ||
+      legacyPath.startsWith("/wp-");
+    if (!covered) unmatchedPages.push(legacyPath);
+  }
+
+  // Wildcards last: Vercel takes the first match, and every exact rule above
+  // is a correction to what the wildcard would otherwise do.
+  for (const { source, destination } of pageMap.wildcards) {
+    if (!emitted.has(source)) {
+      redirects.push({ source, destination, permanent: true });
+      emitted.add(source);
+    }
+  }
+
+  if (unmatchedDocs.length) {
+    console.log(
+      `\n${unmatchedDocs.length} legacy documents have no surviving asset and ` +
+        `will keep 404ing (nothing in Contentful carries the file):`,
+    );
+    for (const p of unmatchedDocs) console.log(`  ${p}`);
+  }
+  if (unmatchedPages.length) {
+    console.log(
+      `\n${unmatchedPages.length} legacy pages have no rule ` +
+        `(add them to data/legacy-page-map.json if they deserve one):`,
+    );
+    for (const p of unmatchedPages) console.log(`  ${p}`);
   }
 
   const keptRedirects = (config.redirects ?? []).filter(

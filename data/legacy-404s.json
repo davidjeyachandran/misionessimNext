@@ -1,0 +1,1535 @@
+{
+  "generatedAt": "2026-08-24",
+  "source": "Google Search Console — \"Not found (404)\" export for misionessim.org",
+  "note": "Frozen list of legacy URLs Google still requests. Deduped by (host, path); query strings dropped except where recorded, since Vercel matches on path. Mostly Drupal-era URLs that WordPress never redirected either — they have been 404ing for years and only surfaced once the new site made the log visible. Feeds build-legacy-redirects.ts.",
+  "urls": 320,
+  "uniquePaths": 300,
+  "entries": [
+    {
+      "host": "mail.misionessim.org",
+      "path": "/blog",
+      "lastCrawled": "2026-05-02",
+      "query": "page=8"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/blog/2020-01/sim.preguntas@sim.org",
+      "lastCrawled": "2026-03-26",
+      "query": "page=69"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/blog/2020-01/url",
+      "lastCrawled": "2026-05-02",
+      "query": "page=8"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/blog/2020-01/www.jewishvoice.org",
+      "lastCrawled": "2026-04-30"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/blog/2020-10/quien-fue-buda",
+      "lastCrawled": "2026-06-27"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/blog/2020-10/sim.preguntas@sim.org",
+      "lastCrawled": "2026-03-26",
+      "query": "page=69"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/blog/2021-07/12-puntos-tomar-en-cuenta-para-ministrar-comunidades",
+      "lastCrawled": "2026-08-22"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/blog/2021-11/alaba-dios-tambien-con-tu-mente",
+      "lastCrawled": "2026-06-25",
+      "query": "page=89"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/blog/sim.preguntas@sim.org",
+      "lastCrawled": "2026-05-15",
+      "query": "page=5"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/curso-vamos-0",
+      "lastCrawled": "2026-07-27"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/revistavamos",
+      "lastCrawled": "2026-03-10",
+      "query": "page=1"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/sites/default/files/magazinefiles/test_dones_espirituales.pdf",
+      "lastCrawled": "2026-08-05"
+    },
+    {
+      "host": "mail.misionessim.org",
+      "path": "/sites/default/files/magazinepdf/vamosmayo2011.pdf",
+      "lastCrawled": "2026-02-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/",
+      "lastCrawled": "2026-06-24",
+      "query": "post_type=keydesign-portfolio&p=33772"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2017-07/la-biblia-en-una-mano-y-el-periodico-en-la-otra",
+      "lastCrawled": "2026-04-24"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/el-alivio-de-moises-un-equipo",
+      "lastCrawled": "2026-06-16"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/el-trabajo-en-equipo-en-la-biblia-un-modelo-efectivo",
+      "lastCrawled": "2026-06-16"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/el-trabajo-en-equipo-en-la-biblia-un-modelo-efectivo/",
+      "lastCrawled": "2026-08-04"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/emocion-o-conviccion",
+      "lastCrawled": "2026-04-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/emocion-o-conviccion/",
+      "lastCrawled": "2026-05-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/glorificamos-dios-traves-del-arte",
+      "lastCrawled": "2026-03-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/jerusalen-corazon-de-una-nacion/www.jewishvoice.org",
+      "lastCrawled": "2026-07-14"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/la-feminidad-raiz-de-la-biblia-y-la-historia",
+      "lastCrawled": "2026-08-02",
+      "query": "page=12"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/la-mentoria-una-aliada-en-el-ministerio-2/",
+      "lastCrawled": "2026-03-01"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/representando-a-cristo-en-vivo/www.roysotoblog.com",
+      "lastCrawled": "2026-07-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/sim.preguntas@sim.org",
+      "lastCrawled": "2026-06-08",
+      "query": "page=60"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/tipos-de-judaismo",
+      "lastCrawled": "2026-04-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/tipos-de-judaismo/",
+      "lastCrawled": "2026-04-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/un-equipo-unido-enviando-misioneros/sim.preguntas@sim.org",
+      "lastCrawled": "2026-06-24"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/url",
+      "lastCrawled": "2026-03-26",
+      "query": "page=6"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-01/www.jewishvoice.org",
+      "lastCrawled": "2026-06-08",
+      "query": "page=5"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-02/10-elementos-que-aprendemos-de-la-plantacion-de-iglesias",
+      "lastCrawled": "2026-06-08",
+      "query": "page=12"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-09/de-donde-eres",
+      "lastCrawled": "2026-04-06",
+      "query": "page=5"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-10/diferencias-entre-el-budismo-y-el-cristianismo/",
+      "lastCrawled": "2026-07-20"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2020-10/voluntario-con-paga/",
+      "lastCrawled": "2026-03-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-01/algunos-riesgos-que-los-misioneros-suelen-vivir",
+      "lastCrawled": "2026-03-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-02/quienes-somos-en-cristo",
+      "lastCrawled": "2026-03-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-02/quienes-somos-en-cristo/",
+      "lastCrawled": "2026-03-13"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-02/si-muere-un-familiar-mientras-estoy-en-el-campo-misionero/",
+      "lastCrawled": "2026-03-14"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-06/india-y-su-influencia-global",
+      "lastCrawled": "2026-06-16"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-06/los-10-paises-con-mayor-poblacion-hindu/",
+      "lastCrawled": "2026-03-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-06/los-vedas-la-",
+      "lastCrawled": "2026-06-11",
+      "query": "page=10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-06/los-vedas-la-biblia-hindu",
+      "lastCrawled": "2026-04-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-06/sim.preguntas@sim.org",
+      "lastCrawled": "2026-06-10",
+      "query": "page=98"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-09/discipulando-con-el-manual-vamos",
+      "lastCrawled": "2026-07-07",
+      "query": "page=92"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-09/sim.preguntas@sim.org",
+      "lastCrawled": "2026-08-06",
+      "query": "page=98"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-10/deja-que-la-biblia-argumente-por-ti",
+      "lastCrawled": "2026-04-23",
+      "query": "page=30"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-10/sim.preguntas@sim.org",
+      "lastCrawled": "2026-03-22",
+      "query": "page=69"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2021-11/sim.preguntas@sim.org",
+      "lastCrawled": "2026-05-15",
+      "query": "page=1"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2022-04/las-similitudes-de-cristo-y-krishna",
+      "lastCrawled": "2026-07-02"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2022-04/las-similitudes-de-cristo-y-krishna/",
+      "lastCrawled": "2026-02-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2023-08/video-post/",
+      "lastCrawled": "2026-06-19"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-05/como-nace-mission-language",
+      "lastCrawled": "2026-07-13"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-05/como-nos-afectan-las-diferencias",
+      "lastCrawled": "2026-08-01"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-05/de-campo-misionero-fuerza-misionera",
+      "lastCrawled": "2026-07-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-05/sim.preguntas@sim.org",
+      "lastCrawled": "2026-05-30",
+      "query": "page=7"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-08/cristo-cambia-vidas",
+      "lastCrawled": "2026-08-02"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-08/dios-es-quien-salva-y-agrega",
+      "lastCrawled": "2026-07-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-08/el-ruego-de-los-ashaninka",
+      "lastCrawled": "2026-06-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-08/la-ventana-verde",
+      "lastCrawled": "2026-06-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-08/no-te-vayas-dios-te-ha-enviado",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-09/la-solteria-alrededor-del-mundo",
+      "lastCrawled": "2026-06-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-09/mejor-solteros-o-casados",
+      "lastCrawled": "2026-06-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-09/soltero-en-el-campo",
+      "lastCrawled": "2026-06-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2024-09/vendido-por-sus-hermanos",
+      "lastCrawled": "2026-03-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/atados-vudu",
+      "lastCrawled": "2026-03-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/cambio-mi-forma-de-pensar",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/dios-obrando-en-el-continente-que-ya-no-es-oscuro",
+      "lastCrawled": "2026-07-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/el-gran-exito-de-la-era-digital",
+      "lastCrawled": "2026-06-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/facebook-es-un-exito-en-latinoamerica",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/la-clave-del-exito-en-social-media-esta-en-la-interaccion",
+      "lastCrawled": "2026-06-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/los-africanos-aman-la-comunidad",
+      "lastCrawled": "2026-06-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/nuestra-responsabilidad-frente-esta-generacion",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/sim-nombra-africano-como-director-internacional",
+      "lastCrawled": "2026-08-07",
+      "query": "page=85"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/sim.preguntas@sim.org",
+      "lastCrawled": "2026-05-15",
+      "query": "page=1"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-01/vidas-transformadas",
+      "lastCrawled": "2026-06-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-02/considera-durante-el-vuelo",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-02/el-apoyo-de-la-iglesia-en-tu-proceso-de-salida",
+      "lastCrawled": "2026-06-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-02/jesus-dijo-que-siempre-vamos-tener-los-pobres-entre-nosotros-no",
+      "lastCrawled": "2026-03-12"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-02/seguridad-para-la-computadora",
+      "lastCrawled": "2026-08-01"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-02/toma-accion-contra-el-generocidio",
+      "lastCrawled": "2026-06-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/2025-02/viaje-seguro",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/blog/nadie-puede-imitar-quien-no-conoce",
+      "lastCrawled": "2026-06-08",
+      "query": "page=5"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/contact",
+      "lastCrawled": "2026-08-02"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/content/",
+      "lastCrawled": "2026-08-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/content/alcanzando-los-aprendices-de-orales",
+      "lastCrawled": "2026-04-13"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/content/alcanzando-los-aprendices-de-orales.",
+      "lastCrawled": "2026-07-02"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/content/consejos-para-tu-primer-ano-misionero",
+      "lastCrawled": "2026-08-04"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/content/involucrar-tu-iglesia",
+      "lastCrawled": "2026-04-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/content/la-oracion-55",
+      "lastCrawled": "2026-05-13"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/content/la-persecucion",
+      "lastCrawled": "2026-08-03"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/content/mobilizacion",
+      "lastCrawled": "2026-07-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/content/movilizando-la-juventud",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/curso-vamos-0",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/curso-vamos/aprender-el-idioma",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/curso-vamos/levantando-apoyo",
+      "lastCrawled": "2026-07-21"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/curso-vamos/organizar-y-planear",
+      "lastCrawled": "2026-07-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/curso-vamos/relaciones-misioneras",
+      "lastCrawled": "2026-04-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/curso-vamos/trabajo-en-paises-de-acceso-limito",
+      "lastCrawled": "2026-04-19"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/cursovamos",
+      "lastCrawled": "2026-03-22"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/cursovamos/levantando-apoyo",
+      "lastCrawled": "2026-08-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/da-la-obra",
+      "lastCrawled": "2026-03-15"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Acceso_limit_adjuntos/Dawa_mision_islamica.pdf",
+      "lastCrawled": "2026-07-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Acceso_limit_adjuntos/El_budismo.pdf",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Acceso_limit_adjuntos/Espiritualidad_oriental.pdf",
+      "lastCrawled": "2026-05-18"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Acceso_limit_adjuntos/Un_Análisis_Diferente_del_Hinduismo.pdf",
+      "lastCrawled": "2026-06-15"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Antes_de_ir_adjuntos/ENVIO_MISIONERO_RESPONSABLE.pdf",
+      "lastCrawled": "2026-06-14"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Antes_de_ir_adjuntos/Lista_de_Equipaje_Misionero.xlsx",
+      "lastCrawled": "2026-07-29"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Antes_de_ir_adjuntos/Test_de_Inteligencia_Emocional.pdf",
+      "lastCrawled": "2026-07-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Aprender_idioma_Adjuntos/IALO.pdf",
+      "lastCrawled": "2026-06-12"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Aprender_idioma_Adjuntos/Notas_sobre_el_aprendizaje_de_un_idioma.pdf",
+      "lastCrawled": "2026-06-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Aprender_idioma_Adjuntos/Planificacion_y_evaluacion_continua_del_progreso.pdf",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Aprender_idioma_Adjuntos/Prueba_de_Barsch_de_Estilos_de_Aprendizaje.docx.pdf",
+      "lastCrawled": "2026-06-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Conociendo_SIM_adjuntos/2010_SIM_Manual_SP.pdf",
+      "lastCrawled": "2026-07-13"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Conociendo_SIM_adjuntos/VALORES_CENTRALES_DE_SIM.docx.pdf",
+      "lastCrawled": "2026-04-21"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Cuidado_intergral_adjuntos/Cuidado_Pastoral_VAMOS.pdf",
+      "lastCrawled": "2026-06-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Cuidado_intergral_adjuntos/Cuidado_Pastoral_del_Misionero-_Carlos_Scott.pdf",
+      "lastCrawled": "2026-04-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Cuidado_intergral_adjuntos/El_Cuidado_Integral_del_Misionero-Mario_Loss.pdf",
+      "lastCrawled": "2026-06-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Cuidado_intergral_adjuntos/Temas_personales_que_puede_hablar_con_el_misionero-_Diane_Williams.pdf",
+      "lastCrawled": "2026-07-24"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Cuidado_intergral_adjuntos/Un_equipo_alrededor_de_tu_misionero.pdf",
+      "lastCrawled": "2026-07-29"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Discipulado_adjuntos/El_Discipulo_en_Crecimiento.pdf",
+      "lastCrawled": "2026-06-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Discipulado_adjuntos/El_Mensaje_de_Jesus.pdf",
+      "lastCrawled": "2026-08-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Discipulado_adjuntos/Evaluando_tu_ensenanza.pdf",
+      "lastCrawled": "2026-06-20"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Discipulado_adjuntos/Gran_historia.pdf",
+      "lastCrawled": "2026-07-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Discipulado_adjuntos/Lecciones de  Discipulado.pdf",
+      "lastCrawled": "2026-07-12"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Discipulado_adjuntos/LiderazgoEspiritual.ppsx",
+      "lastCrawled": "2026-06-25"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Discipulado_adjuntos/Manual_de_Predicacion.pdf",
+      "lastCrawled": "2026-06-24"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Discipulado_adjuntos/manualLiderazgoEficaz.pdf",
+      "lastCrawled": "2026-06-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Equipo_adjuntos/Casos_de_Estudio_Conviviendo_con_otras_Culturas.pdf",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Equipo_adjuntos/Definiendo_Equipos.pdf",
+      "lastCrawled": "2026-06-24"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Equipo_adjuntos/Diferenciando_Valores_y_Practicas.pdf",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Equipo_adjuntos/ENCONTRANDO_TUS_DONES.pdf",
+      "lastCrawled": "2026-06-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Equipo_adjuntos/Suposiciones_y_Valores_personales.pdf",
+      "lastCrawled": "2026-07-19"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Equipo_adjuntos/Test_Dones_Espirituales.pdf",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Guerra_espiritual_adjuntos/9_Pasos_para_Ministrar_Liberacion.pdf",
+      "lastCrawled": "2026-06-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Guerra_espiritual_adjuntos/Caso_Guerra_Espiritual.pdf",
+      "lastCrawled": "2026-06-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Guerra_espiritual_adjuntos/Test_de_Opresion_Espiritual.docx.pdf",
+      "lastCrawled": "2026-08-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Involucrar_iglesia_adjuntos/Frases_interesantes.doc",
+      "lastCrawled": "2026-07-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Involucrar_iglesia_adjuntos/VAMOS_Iglesia_y_misiones.pdf",
+      "lastCrawled": "2026-06-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Involucrar_iglesia_adjuntos/VAMOS_Pastor_a_Pastor.pdf",
+      "lastCrawled": "2026-07-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Involucrar_iglesia_adjuntos/Vamosconferenciamis.pdf",
+      "lastCrawled": "2026-07-22"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Involucrar_iglesia_adjuntos/etnias_no_alcanzadas.ppt",
+      "lastCrawled": "2026-07-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Involucrar_iglesia_adjuntos/tripticooracion.pdf",
+      "lastCrawled": "2026-07-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Mejor en la cancha.pdf",
+      "lastCrawled": "2026-08-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Mentoreo_adjuntos/Tipos_de_mentores.pdf",
+      "lastCrawled": "2026-05-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Mentoreo_adjuntos/Una_Charla_Interesante.pdf",
+      "lastCrawled": "2026-06-21"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Org_y_plan_adjuntos/ADMINISTRACIONdelTIEMPO.pdf",
+      "lastCrawled": "2026-06-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Org_y_plan_adjuntos/Guias_para_una_buena-presentacion.pdf",
+      "lastCrawled": "2026-06-14"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Org_y_plan_adjuntos/PLANIFICACIÓN_DEL_TIEMPO.pdf",
+      "lastCrawled": "2026-06-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Org_y_plan_adjuntos/Plan_Ministerial.pdf",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Org_y_plan_adjuntos/PresupuestoPersonal.xls",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Org_y_plan_adjuntos/UNA_INTRODUCCIÓN_A_LA_ADMINISTRACION.pdf",
+      "lastCrawled": "2026-06-29"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Relaciones_Adjuntos/Cualidades_Para_Buenas_Relaciones.pdf",
+      "lastCrawled": "2026-06-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Relaciones_Adjuntos/El_Conflicto.ppt",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Relaciones_Adjuntos/Est._Bib._La_Imp._de_las_Relaciones.pdf",
+      "lastCrawled": "2026-06-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Relaciones_Adjuntos/Pautas_para_resolver_conflictos.pdf",
+      "lastCrawled": "2026-06-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Relaciones_Adjuntos/ResolucionConflictosVAMOS.pdf",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Salud_emocional_adjuntos/Depresion.pdf",
+      "lastCrawled": "2026-06-18"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Salud_emocional_adjuntos/Inventario_de_los_Sintomas_de_Estrés.pdf",
+      "lastCrawled": "2026-06-29"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Salud_emocional_adjuntos/La_Autoestima.pdf",
+      "lastCrawled": "2026-06-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Salud_emocional_adjuntos/Pablo_Bajo_Estrés.pdf",
+      "lastCrawled": "2026-08-03"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Salud_fisica_Adjuntos/Buena_alimentacion.pdf",
+      "lastCrawled": "2026-04-18"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Salud_fisica_Adjuntos/Cuide_su_Salud.pdf",
+      "lastCrawled": "2026-06-18"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Salud_fisica_Adjuntos/exam medico SIM.doc",
+      "lastCrawled": "2026-06-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Solteria_adjuntos/EstudioBib_para_Solteros.pdf",
+      "lastCrawled": "2026-07-29"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Vamosjunio2011.pdf",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/Vamosmayo2011.pdf",
+      "lastCrawled": "2026-07-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/caracter_adjuntos/Dar_y_Recibir_Criticas.pdf",
+      "lastCrawled": "2026-08-04"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/caracter_adjuntos/Preparacion_y_caracter_VAMOS.pdf",
+      "lastCrawled": "2026-06-29"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/caracter_adjuntos/Test_del_CarácterFinal.pdf",
+      "lastCrawled": "2026-07-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/communicacion  adjuntos/Ejemplos_y_Comentarios_de_Diseno.pdf",
+      "lastCrawled": "2026-08-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/communicacion  adjuntos/Fotografia_y_composicion.pdf",
+      "lastCrawled": "2026-07-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/communicacion  adjuntos/La_fotografia_para_el_misionero.ppsx",
+      "lastCrawled": "2026-07-19"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/communicacion  adjuntos/Powerpoint_lo_basico.pdf",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/communicacion adjuntos/Como_hacer_video.pdf",
+      "lastCrawled": "2026-06-29"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/familia_adjuntos/Educacion_de_Hijos_de_Misioneros_-_Dorothy_Haile.ppt",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/familia_adjuntos/Hijos_de_Quijotes,_Guillermo_Taylor.pdf",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/familia_adjuntos/La_Adaptacion_de_los_Hijos.pdf",
+      "lastCrawled": "2026-07-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/levantando_adjuntos/30_formas_de_expresar_gratitud.pdf",
+      "lastCrawled": "2026-06-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/levantando_adjuntos/ALTERNATIVAS_FINANCIERAS_PARA_MISIONES.pdf",
+      "lastCrawled": "2026-04-29"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/levantando_adjuntos/Asuntos_de_Actitud.pdf",
+      "lastCrawled": "2026-07-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/levantando_adjuntos/Biocupacionales_VAMOS.pdf",
+      "lastCrawled": "2026-04-12"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/levantando_adjuntos/Lista_de_Contactos.pdf",
+      "lastCrawled": "2026-02-25"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/levantando_adjuntos/Presupuesto_misionero.xls",
+      "lastCrawled": "2026-07-17"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/levantando_adjuntos/tripticofondos.pdf",
+      "lastCrawled": "2026-07-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/mision_integral_adjuntos/DUALISMO_CRISTIANO.pdf",
+      "lastCrawled": "2026-08-01"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/mision_integral_adjuntos/Integridad_y_cooperacion_en_la_mision.pdf",
+      "lastCrawled": "2026-08-01"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/images/tripticofondos.pdf",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/ resolucion-de-conflictos",
+      "lastCrawled": "2026-07-31"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/ trabajo-en-equipo",
+      "lastCrawled": "2026-06-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/adaptacion-en-misiones",
+      "lastCrawled": "2026-06-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/alcanzando-los-aprendices-de-orales",
+      "lastCrawled": "2026-07-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/equipos-multiculturales-0",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/fondos-misioneros-1",
+      "lastCrawled": "2026-06-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/la-oracion-55",
+      "lastCrawled": "2026-04-01"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/la-persecucion",
+      "lastCrawled": "2026-06-15"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/movilizando-la-juventud",
+      "lastCrawled": "2026-06-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/recibiendo-las-naciones-0",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/regresando-casa",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/la-revista/trabajo-en-equipo1",
+      "lastCrawled": "2026-03-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/ora-con-nosotros",
+      "lastCrawled": "2026-07-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/ora-por-misiones/ideas-para-orar-por-misiones",
+      "lastCrawled": "2026-08-03"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/page/57/",
+      "lastCrawled": "2026-03-21",
+      "query": "option=com_content&task=view&id=320&Itemid=37"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/phocadownload/Adaptandose_adjuntos/Contextualizacion_del_evangelio.pdf",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/phocadownload/Adaptandose_adjuntos/Desordenes_de_estres_y_ajuste.ppsx",
+      "lastCrawled": "2026-07-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/phocadownload/Adaptandose_adjuntos/Diario_de_Crecimiento_1er_Ano.ppt",
+      "lastCrawled": "2026-07-25"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/phocadownload/Adaptandose_adjuntos/LA_COSMOVISION.pdf",
+      "lastCrawled": "2026-07-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/quienessomos",
+      "lastCrawled": "2026-07-12"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/recurso/dar-y-recibir-criticas",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/recurso/estandares-para-el-cuidado-de-los-miembros",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/recurso/pastoreando-los-candidatos-y-los-misioneros",
+      "lastCrawled": "2026-07-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/recurso/preguntas-para-rendir-cuentas",
+      "lastCrawled": "2026-03-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/recurso/pureza-moral",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/recurso/test-dones-espirituales",
+      "lastCrawled": "2026-07-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/recurso/un-equipo-alrededor-de-tu-misionero",
+      "lastCrawled": "2026-06-24"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/recursos-movilicemos",
+      "lastCrawled": "2026-07-02"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/",
+      "lastCrawled": "2026-05-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/1-Ejercicio sobre Declaracion  de Proposito de la Iglesia.doc",
+      "lastCrawled": "2026-02-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/13LeccionesSobreMisiones.pdf",
+      "lastCrawled": "2026-07-17"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Como Involucrar la Iglesia.pdf",
+      "lastCrawled": "2026-02-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Cuadro Linea Tiempo A.T.pdf",
+      "lastCrawled": "2026-02-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Cuidado Pastoral del misionero-  Tito Laptom.pdf",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Dar_y_Recibir_Criticas.pdf",
+      "lastCrawled": "2026-06-17"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Discipulado y Liderazgo.pdf",
+      "lastCrawled": "2026-03-30"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/El_Privilegio_de_las_Misiones_Transculturales.pdf",
+      "lastCrawled": "2026-02-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Evaluandome_a_mi_mismo.pdf",
+      "lastCrawled": "2026-02-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Los Bebes en Cristo.docx",
+      "lastCrawled": "2026-07-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Pablo_Bajo_Estres.pdf",
+      "lastCrawled": "2026-07-13"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Test_de_Inteligencia_Emocional.pdf",
+      "lastCrawled": "2026-03-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/Walpola Rahula Lo Que El Buda  Enseno.pdf",
+      "lastCrawled": "2026-04-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/fundamentos del Budismo.pdf",
+      "lastCrawled": "2026-03-13"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/images/Aprender_idioma_Adjuntos/Aprendiendo_un_Idioma_y_Cultura.pdf",
+      "lastCrawled": "2026-04-18"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/images/Aprender_idioma_Adjuntos/El_Privilegio_de_las_Misiones_Transculturales.pdf",
+      "lastCrawled": "2026-02-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/images/Equipo_adjuntos/Test_Dones_Espirituales.pdf",
+      "lastCrawled": "2026-08-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/images/Org_y_plan_adjuntos/ADMINISTRACIO",
+      "lastCrawled": "2026-02-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/images/Solteria_adjuntos/EstudioBib_para_Solteros.pdf",
+      "lastCrawled": "2026-07-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/images/caracter_adjuntos/Caracter  misionero.pdf",
+      "lastCrawled": "2026-02-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/100dxven.pdf",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/30_formas_de_expresar_gratitud.pdf",
+      "lastCrawled": "2026-07-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/aspectos_fundamentales_del_modelo_de_discipulado_de_jesucristo.doc",
+      "lastCrawled": "2026-07-21"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/comibam_articulo_para_enciclopedia.docx",
+      "lastCrawled": "2026-07-17"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/como_discipular_a_un_creyente_0.docx",
+      "lastCrawled": "2026-02-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/conociendo_los_dones_y_talentos.docx",
+      "lastCrawled": "2026-07-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/cuestionario_de_parejas_-_cuan_bien_conoces_a_tu_pareja.pdf",
+      "lastCrawled": "2026-07-25"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/cuestionario_de_parejas_-_que_tan_saludable_es_tu_matrimonio_.pdf",
+      "lastCrawled": "2026-04-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/desarrollar_una_visionbam.docx",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/desde_la_iglesia_como_facilitamos_el_levantamiento_de_nuevos_misioneros_iglesia_local_y_la_mision_mundial_0.docx",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/devo_raim_kids_orando_por_los_hijos_de_los_misioneros.pdf",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/discerniendo_la_voluntad_de_dios.docx",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/el_discipulo_en_crecimiento.pdf",
+      "lastCrawled": "2026-03-14"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/el_legado_tesalonico.docx",
+      "lastCrawled": "2026-08-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/el_mensaje_de_jesus.pdf",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/el_pastoreado_del_rebano_de_dios.docx",
+      "lastCrawled": "2026-07-24"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/el_perfil_del_misionero_transcultural_ideal.doc",
+      "lastCrawled": "2026-07-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/envio_misionero_responsable.pdf",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/experiencia_familiar_de_corto_plazo_1.docx",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/finanzas_misioneras_omar.docx",
+      "lastCrawled": "2026-08-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/finanzas_para_las_misiones_mundiales.pdf",
+      "lastCrawled": "2026-06-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/gran_historia.pdf",
+      "lastCrawled": "2026-03-21"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/historia_de_la_persecucion_antecedentes.pdf",
+      "lastCrawled": "2026-04-19"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/honor_y_verguenza_en_las_relaciones_transculturales.pdf",
+      "lastCrawled": "2026-05-09"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/integridad_y_cooperacion_en_la_mision.pdf",
+      "lastCrawled": "2026-07-25"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/la_voluntad_de_dios_nunca_te_llevara_poesia.docx",
+      "lastCrawled": "2026-06-23"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/lagranomision.pdf",
+      "lastCrawled": "2026-03-31"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/las_asociaciones_en_las_misiones.docx",
+      "lastCrawled": "2026-07-17"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/lecciones_de_discipulado.pdf",
+      "lastCrawled": "2026-06-19"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/lecturas_biblicas_sobre_persecucion.docx",
+      "lastCrawled": "2026-05-06"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/los_inicios_de_un_movimiento.pdf",
+      "lastCrawled": "2026-07-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/luchando_contra_una_fragmentada.docx",
+      "lastCrawled": "2026-07-16"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/metodos_misioneros_0.doc",
+      "lastCrawled": "2026-06-20"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/nancy_guthrie_-_aferrandose_a_la_esperanza.pdf",
+      "lastCrawled": "2026-04-17"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/nuevo_obrero_v8_.pdf",
+      "lastCrawled": "2026-02-26"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/pablo_y_timoteo.docx",
+      "lastCrawled": "2026-07-21"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/partnership_y_el_dinero.doc",
+      "lastCrawled": "2026-05-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/predica_4.docx",
+      "lastCrawled": "2026-07-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/preguntas_frecuentes_material_vamos.docx",
+      "lastCrawled": "2026-06-28"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/preparandose_para_contar_la_historia.docx",
+      "lastCrawled": "2026-08-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/seis_llaves_para_abrir_la_puerta_a_las_misiones.docx",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/sufrimiento_el_costo_del_discipulado.docx",
+      "lastCrawled": "2026-05-15"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/tomando_buenas_decisiones.docx",
+      "lastCrawled": "2026-07-08"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/tripticocomo_me_preparo.pdf",
+      "lastCrawled": "2026-07-11"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/tripticocomo_me_preparo_0.pdf",
+      "lastCrawled": "2026-07-22"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/un_ano_de_misiones.pdf",
+      "lastCrawled": "2026-07-25"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinefiles/verdaderas_asociaciones_eclesiales_transculturales.docx",
+      "lastCrawled": "2026-07-07"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinepdf/vamosagosto2011.pdf",
+      "lastCrawled": "2026-07-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinepdf/vamosfeb2012.pdf",
+      "lastCrawled": "2026-07-19"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinepdf/vamosoct13.pdf",
+      "lastCrawled": "2026-03-12"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/magazinepdf/vamossept13_0.pdf",
+      "lastCrawled": "2026-07-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/mision integral.ppt",
+      "lastCrawled": "2026-04-22"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/plantacion de iglesias.pdf",
+      "lastCrawled": "2026-07-19"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/sites/default/files/test_dones_espirituales.pdf",
+      "lastCrawled": "2026-08-01"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/wp-",
+      "lastCrawled": "2026-07-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/wp-content/AppData/Local/Adobe/InDesign  (Beta)/Version 20.0/en_US/Caches/InDesign ClipboardScrap1.pdf",
+      "lastCrawled": "2026-06-10"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/wp-content/AppData/Local/Adobe/InDesign  (Beta)/Version 21.0/en_US/Caches/InDesign ClipboardScrap1.pdf",
+      "lastCrawled": "2026-08-04"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/wp-content/plugins/*",
+      "lastCrawled": "2026-07-20"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/wp-content/themes/amity/*",
+      "lastCrawled": "2026-06-27"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/wp-includes/js/mediaelement/",
+      "lastCrawled": "2026-04-05"
+    },
+    {
+      "host": "misionessim.org",
+      "path": "/wp-json/elementskit/v1/",
+      "lastCrawled": "2026-07-06"
+    },
+    {
+      "host": "www.misionessim.org",
+      "path": "/recurso/evaluandome-mi-mismo",
+      "lastCrawled": "2026-06-17"
+    },
+    {
+      "host": "www.misionessim.org",
+      "path": "/sites/default/files/magazinefiles/test_dones_espirituales.pdf",
+      "lastCrawled": "2026-08-02"
+    }
+  ]
+}

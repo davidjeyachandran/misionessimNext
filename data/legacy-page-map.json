@@ -1,0 +1,60 @@
+{
+  "_comment": "Hand-decided destinations for the Drupal-era URL space, which WordPress never redirected either — see data/legacy-404s.json for the Google Search Console evidence. Kept separate from legacy-revista-aliases.json, which is a frozen crawl of the WordPress /la-revista/ space and must stay verbatim. Consumed by scripts/build-legacy-redirects.ts.",
+  "capturedAt": "2026-08-24",
+  "revistaSlugAliases": {
+    "_comment": "Drupal-era edition slugs that drifted before WordPress, so they are absent from the WordPress crawl. Applied under /content/, /la-revista/ and /revistavamos/.",
+    "la-persecucion": "persecucion",
+    "la-oracion-55": "la-oracion",
+    "regresando-casa": "regresando-a-casa",
+    "fondos-misioneros-1": "fondos-misioneros",
+    "equipos-multiculturales-0": "equipos-multiculturales",
+    "trabajo-en-equipo1": "trabajo-en-equipo",
+    "adaptacion-en-misiones": "latinos-en-adaptacion"
+  },
+  "exact": {
+    "_comment": "Drupal page paths with a single obvious counterpart on the new site.",
+    "/quienessomos/": "/nosotros/",
+    "/contact/": "/sirve-con-sim/",
+    "/ora-con-nosotros/": "/ora/",
+    "/ora-por-misiones/": "/ora/",
+    "/da-la-obra/": "/",
+    "/recursos-movilicemos/": "/recursos/",
+    "/content/": "/revistavamos/",
+    "/recurso/": "/recursos/",
+    "/curso-vamos/": "/recursos/",
+    "/curso-vamos-0/": "/recursos/",
+    "/cursovamos/": "/recursos/",
+    "_comment2": "Corrections to what the /content/ and /la-revista/ wildcards below would otherwise do. The leading spaces are real: old pages linked the edition with a stray space, which arrives as %20 and survives the wildcard's passthrough into a 404. consejos-para-tu-primer-ano-misionero was never an edition on the new site.",
+    "/la-revista/ resolucion-de-conflictos/": "/revistavamos/resolucion-de-conflictos/",
+    "/la-revista/ trabajo-en-equipo/": "/revistavamos/trabajo-en-equipo/",
+    "/content/ resolucion-de-conflictos/": "/revistavamos/resolucion-de-conflictos/",
+    "/content/ trabajo-en-equipo/": "/revistavamos/trabajo-en-equipo/",
+    "/content/consejos-para-tu-primer-ano-misionero/": "/revistavamos/",
+    "/content/alcanzando-los-aprendices-de-orales./": "/revistavamos/alcanzando-los-aprendices-de-orales/"
+  },
+  "wildcards": [
+    {
+      "_comment": "/content/<slug> was Drupal's alias for a magazine edition — the same slug space /la-revista/ later used, so it gets the same passthrough rule. Emitted after the exact rules above so the aliases win.",
+      "source": "/content/:path*/",
+      "destination": "/revistavamos/:path*/"
+    },
+    {
+      "_comment": "Drupal resource detail pages. Per-slug rules pointing at the actual document are emitted first where the asset survived; this catches the rest.",
+      "source": "/recurso/:path*/",
+      "destination": "/recursos/"
+    },
+    {
+      "_comment": "The VAMOS course sections have no per-section counterpart; the material they linked now lives on /recursos/.",
+      "source": "/curso-vamos/:path*/",
+      "destination": "/recursos/"
+    },
+    {
+      "source": "/cursovamos/:path*/",
+      "destination": "/recursos/"
+    },
+    {
+      "source": "/ora-por-misiones/:path*/",
+      "destination": "/ora/"
+    }
+  ]
+}

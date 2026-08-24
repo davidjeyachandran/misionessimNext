@@ -1168,3 +1168,52 @@ explicit `{" "}`. The output is now checked for `</strong>`/`</code>`/`</em>`
 boundaries glued to adjacent words — 0 in either direction.
 
 Unit 76/76, e2e 71/71 (8 new).
+
+---
+
+## 2026-08-24 — Google Search Console 404 triage
+
+Full write-up: [legacy-404-triage.md](legacy-404-triage.md).
+
+Search Console's "Not found (404)" export (320 rows → 300 unique paths) turned
+out to be almost entirely **Drupal-era** URLs — `/content/`, `/recurso/`,
+`/curso-vamos/`, `/images/<tema>_adjuntos/`, `/phocadownload/`,
+`/sites/default/files/`. WordPress never redirected that space either, so these
+have 404ed for years; the rebuild only made the report worth reading. `Last
+crawled` is when Google last *tried*, not when the URL last worked.
+
+Measured against production rather than reasoned about: 24 of the 300 already
+resolve (the export is stale).
+
+### Done
+- **`data/legacy-404s.json`** — the export, frozen. Search Console prunes URLs
+  once it stops asking; this cannot be regenerated later.
+- **`data/legacy-page-map.json`** — hand-decided destinations for the Drupal page
+  space, plus seven edition slugs that drifted *before* WordPress and so are
+  absent from `legacy-revista-aliases.json` (a frozen crawl that must stay
+  verbatim).
+- **`scripts/build-legacy-redirects.ts` section 4** — resolves documents by an
+  accent- and case-insensitive filename key against the `/recursos/` assets, the
+  `/revistavamos/**.pdf` rewrites, and `pdfToSlug`; resolves pages through the
+  page map. Emits a percent-encoded twin for any source containing a space, and
+  orders the `:path*` wildcards after every exact rule correcting them.
+- **107 paths now redirect** (61 documents, 26 magazine URLs, the rest pages).
+  Every destination was probed: all 79 return 200. Redirects 539 total, well
+  inside Vercel's 2,048.
+- **5 new unit tests** covering wildcard ordering, rewrite backing for every
+  document destination, and space/percent-encoding pairs. Unit 84/84.
+
+### Left to 404 on purpose
+99 documents whose file did not survive Drupal, 46 blog posts absent from the
+WordPress export itself, 9 junk paths. A 301 onto an unrelated index reads to
+Google as a soft 404 — same signal, minus the honesty, plus a permanent rule.
+
+### Open
+- **99 orphaned course documents** — recoverable only from a backup or the
+  Wayback Machine. Decide: recover, or let them go.
+- **46 missing blog posts** (2024-08 → 2025-02, plus two 2024-05 slugs) — never
+  in `export/posts/`. Same decision.
+- **`mail.misionessim.org`** returns 525 over HTTPS, which Google retries
+  forever. Needs a Cloudflare redirect rule or the DNS record removed — not
+  fixable in `vercel.json`.
+- One uppercase Contentful slug: `Discipulando-con-el-manual-vamos`.
