@@ -1269,4 +1269,12 @@ posts on `wordpress.misionessim.org` resolve on the live site (30 via slug-drift
 redirects), so the Contentful migration lost nothing — these two were gone
 before it ran. Text recovered from the Wayback Machine into
 `data/recovered-posts/`; `camino-de-generosidad` has a single snapshot, so that
-capture is the last copy. **Open: whether to re-import them to Contentful.**
+capture is the last copy.
+
+Both re-imported and published to Contentful via `yarn import:recovered --live`
+(entries `31imquHttWUaWBuLXG1tNA`, `1T7a1NZpNjDkoPbDt6inAd`). The script creates
+only and skips any slug already present, so a re-run is a no-op — the shared
+space already carries 34 duplicate articles and does not need more. A clean
+`yarn build` prerenders both at their legacy URLs and the sitemap grew to 902
+posts, matching the prerendered page count exactly. **They reach the public site
+on the next deploy.**

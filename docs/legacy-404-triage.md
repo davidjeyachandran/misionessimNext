@@ -196,9 +196,21 @@ reachable**, 30 through slug-drift redirects and the rest directly. Nothing was
 lost in the Contentful migration; these two were already gone when it ran.
 
 Recovered from the Wayback Machine into
-[`data/recovered-posts/`](../data/recovered-posts/) — complete text, no images,
-awaiting a decision on re-import to Contentful. The Drupal snapshot carries a
-byline the WordPress one lost (*"Enviado por Efrain el Mar, 07/23/2024"*), and
-`camino-de-generosidad` has exactly one snapshot, so this capture is the last
-copy. Until they are re-imported both paths 404, and their feed twins now
-redirect to that 404 — harmless, and self-correcting the moment the posts exist.
+[`data/recovered-posts/`](../data/recovered-posts/) — complete text, no images —
+and re-imported to Contentful by `yarn import:recovered --live`. The Drupal
+snapshot carries a byline the WordPress one lost (*"Enviado por Efrain el Mar,
+07/23/2024"*), and `camino-de-generosidad` has exactly one snapshot, so that
+capture is the last copy in existence.
+
+Two extraction artifacts were repaired before import, both defects of the
+archived HTML rather than of the writing: a stray `}` closing the opening
+sentence of `camino-de-generosidad`, and a `<br>` in the Drupal body that split
+*"Era el Santo Espíritu el que agregaba a la iglesia / a los que se convertían"*
+across two paragraphs mid-sentence. Nothing else was edited.
+
+`publishDate` for `no-eres-un-empleado-de-dios` is exact — the Drupal byline
+gives 2024-07-23 12:39. For `camino-de-generosidad` it is **not**: the WordPress
+theme printed no date and the page carried no article metadata, so only the
+month survives in the legacy URL. It is pinned to 2024-05-01 to hold the
+`/blog/2024-05/` segment; the day is a placeholder, and correcting it in
+Contentful would not move the URL.

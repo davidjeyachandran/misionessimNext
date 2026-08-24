@@ -21,7 +21,8 @@
     "import:revistas": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-missing-revistas.ts",
     "connect:revistas": "node --env-file=.env.local node_modules/.bin/tsx scripts/connect-posts-to-revistas.ts",
     "migrate:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/run-migration.ts",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run",
+    "import:recovered": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-recovered-posts.ts"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.2.1",
