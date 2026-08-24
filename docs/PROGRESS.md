@@ -1109,3 +1109,39 @@ and WP size variants — which appear in no map at all — are caught.
 302, the image destination and the "never claims a document" property, plus
 no-duplicates / no-chains / under-budget for the table as a whole. Unit 76/76.
 Budget: 420 redirects + 265 rewrites.
+
+## 2026-08-24 — Unlisted review page: /rebuild-vs-wordpress/
+
+The rebuild-vs-live comparison, previously only an external artifact, now lives
+on the site itself at `/rebuild-vs-wordpress/` — reachable by direct link,
+absent from search and from navigation. The "Closed since the first draft"
+section was left out at David's request; the page carries only the current
+state.
+
+Three independent things keep it unlisted, and each is asserted in
+`tests/e2e/unlisted-pages.spec.ts` because each can be undone by accident:
+
+1. `robots: { index: false, follow: false }` in the route's metadata.
+2. Absence from `app/sitemap.ts`, whose static list is hand-written — a new
+   route is excluded by default, which is the safe direction.
+3. Nothing on the site links to it (asserted from five public routes).
+
+**Deliberately NOT disallowed in robots.txt.** Blocking the crawl would stop
+crawlers reading the noindex tag, which is the opposite of the goal.
+
+Built with the site's own tokens rather than the artifact's CSS, so it looks
+like the site — and the two designs already share Raleway/Work Sans and the
+brand palette. Bars are computed from the measured values (`value / max`)
+instead of hard-coded widths, so the chart cannot drift from the numbers beside
+it. Content is English inside an `es` document, so `<main>` carries `lang="en"`.
+
+Note for whoever finds this page later: the figures are a snapshot dated in the
+page itself, not a live readout. Re-measure before quoting them.
+
+**JSX whitespace bug caught in the built HTML**, worth remembering: one
+`</strong> while` in the source rendered as `</strong>while`, while three
+identical constructs in the same file rendered correctly. Fixed with an
+explicit `{" "}`. The output is now checked for `</strong>`/`</code>`/`</em>`
+boundaries glued to adjacent words — 0 in either direction.
+
+Unit 76/76, e2e 71/71 (8 new).
