@@ -1217,3 +1217,22 @@ Google as a soft 404 — same signal, minus the honesty, plus a permanent rule.
   forever. Needs a Cloudflare redirect rule or the DNS record removed — not
   fixable in `vercel.json`.
 - One uppercase Contentful slug: `Discipulando-con-el-manual-vamos`.
+
+### Rollback runbook
+[rollback-to-wordpress.md](rollback-to-wordpress.md) — how to put WordPress back
+on the apex if the rebuild has to be abandoned. Two things in it are worth
+knowing before an incident rather than during one:
+
+- **Most incidents want Vercel's "Promote to Production" on a known-good
+  deployment, not a DNS change.** Two minutes, no propagation.
+- **The origin's TLS cert for `misionessim.org` is probably expiring unnoticed.**
+  AutoSSL validates over HTTP at the domain it issues for, and the apex has
+  pointed at Vercel since cutover, so that check fails at Banahosting. Rolling
+  back onto a lapsed cert means a browser interstitial for every visitor.
+  Monthly check, or use Cloudflare proxy + SSL mode **Full** (not strict) as the
+  emergency workaround.
+
+Also flagged there: MX is `0 misionessim.org.`, which resolves to Vercel
+(`216.198.79.1`). Port 443 answers, port 25 does not. Inbound mail to
+`@misionessim.org` may have had nowhere to land since cutover — needs a live test
+to confirm, since consumer ISPs commonly block outbound 25.
