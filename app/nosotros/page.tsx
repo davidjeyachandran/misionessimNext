@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "../_components/PageHero";
+import { CONTACT_EMAIL } from "../sirve-con-sim/contact";
 import { AreasSlider } from "./AreasSlider";
 import { HistoryTimeline } from "./HistoryTimeline";
 
@@ -316,8 +317,8 @@ export default function NosotrosPage() {
                 <strong className="text-ink">Ve:</strong> Existen tantas
                 oportunidades de servicio de corto y largo plazo. Para saber más,
                 escríbenos a{" "}
-                <a href="mailto:info@misionessim.org" className="text-brand underline">
-                  info@misionessim.org
+                <a href={`mailto:${CONTACT_EMAIL}`} className="text-brand underline">
+                  {CONTACT_EMAIL}
                 </a>
               </p>
             </Faq>

@@ -1118,6 +1118,29 @@ absent from search and from navigation. The "Closed since the first draft"
 section was left out at David's request; the page carries only the current
 state.
 
+**Rewritten in Spanish for a non-technical reader** (second pass, same day).
+The route kept its English slug so the link already circulated stays valid —
+rename it if that ever matters. What changed beyond translation:
+
+- Metrics are named for what a visitor experiences, not by their metric names:
+  "cuánto tarda en verse la imagen principal" rather than largest contentful
+  paint, "cuánto tiempo la página no responde al tacto" rather than total
+  blocking time. Blocking times moved from milliseconds to seconds and page
+  weight from KiB to MB, because those are the units a reader already owns.
+- Terms that could not be dropped are explained in place: what the Lighthouse
+  score is, what "accesibilidad" means, what a sitemap is and why layout shift
+  is measured 0–1.
+- `admin-ajax.php`, CDN, PHP, canonical tags and Open Graph are gone as terms;
+  what they *do* is still there in plain language.
+- `<main lang="en">` removed — the page now inherits the document's `es`.
+
+**Two overstated figures caught while checking the arithmetic**, both mine and
+both introduced in the rewrite: the headline said "5 veces más rápido" when
+15,2 / 3,5 is 4,3, and "120 ediciones que hoy Google no puede ver" conflated
+the new site's 120 editions with the 118 that exist on the live site today.
+Corrected to 4 and 118. Every headline ratio is now rounded **down**: 7,3 → 7,
+2,18 → 2.
+
 Three independent things keep it unlisted, and each is asserted in
 `tests/e2e/unlisted-pages.spec.ts` because each can be undone by accident:
 
