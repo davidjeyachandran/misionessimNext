@@ -80,8 +80,12 @@ interface RevistaAliases {
 
 /** Redirects this script owns. Anything else in vercel.json is left alone. */
 function ownsRedirect(source: string): boolean {
-  if (source.startsWith("/wp-content/uploads/")) return true;
-  if (source.startsWith("/sites/default/files/")) return true;
+  // Exact media paths only. The `:path`-style image catch-all under the same
+  // prefix is hand-written and must survive a re-run — and must stay LAST in
+  // the array, since Vercel takes the first match and it would otherwise
+  // swallow every document rule above it.
+  if (source.startsWith("/wp-content/uploads/")) return !source.includes(":");
+  if (source.startsWith("/sites/default/files/")) return !source.includes(":");
   // Exact-path legacy revista aliases only — never the `:path*` wildcards or
   // the bare `/la-revista` rules, which are hand-written.
   for (const prefix of ["/la-revista/", "/revistavamos/"]) {

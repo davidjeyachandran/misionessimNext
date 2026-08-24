@@ -2151,6 +2151,11 @@
       "source": "/blog/2023-01/puedo-tener-novioa-en-un-viaje-de-corto-plazo",
       "destination": "/blog/2023-01/puedo-tener-novio-a-en-un-viaje-de-corto-plazo/",
       "permanent": true
+    },
+    {
+      "source": "/wp-content/uploads/:file(.*\\.(?:jpe?g|png|gif|webp|svg|avif|bmp|tiff?|JPE?G|PNG|GIF|WEBP))",
+      "destination": "/home/banner-sim-home-2026-1200.webp",
+      "permanent": false
     }
   ],
   "rewrites": [

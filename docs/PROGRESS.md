@@ -1062,3 +1062,50 @@ e2e 63/63.
 **October 2014 is also absent**, and unlike May it is not fixable here: no
 `oct14` VAMOS PDF exists anywhere in the media map, so there is nothing to
 import. 2013 is complete; 2015 onward is bimonthly by design, not by gap.
+
+## 2026-08-24 — Legacy image URLs: one pattern rule
+
+The last unenumerable piece of the WordPress URL space. WordPress generates
+size variants (`-300x200.jpg`, `-scaled.jpg`) that are live URLs but appear in
+no API, so the image space cannot be listed and 1:1 rules were never possible —
+`docs/media-redirect-review.md` has said "pattern rule (cannot enumerate)"
+since Phase 7b.
+
+**Scope check first:** grepped every entry of all six content types, including
+drafts and archived rows, for a `/wp-content/uploads/` image reference. **Zero.**
+Nothing this site renders depends on a legacy image URL, so the rule exists
+purely for inbound links and third-party embeds.
+
+The rule:
+
+```
+/wp-content/uploads/:file(.*\.(?:jpe?g|png|gif|webp|svg|avif|bmp|tiff?|JPE?G|PNG|GIF|WEBP))
+  -> /home/banner-sim-home-2026-1200.webp   (302)
+```
+
+Three decisions worth keeping:
+
+- **It points at an image, not at a page.** A hotlinked `<img>` on someone
+  else's site keeps rendering a real SIM image instead of a broken icon, and
+  we avoid the soft-404 pattern of dumping every asset URL on the homepage.
+  The destination is the banner already used as the default `og:image`.
+- **302, not 301.** A permanent redirect would be cached by browsers forever
+  and would invite crawlers to consolidate 531 image URLs onto one banner.
+  Neither is wanted for a mapping that means "unknown image → generic image".
+- **Extension-scoped, and last in the array.** Vercel takes the first match,
+  so a catch-all placed anywhere but last would swallow all 303 document
+  rules above it. `ownsRedirect()` in the generator now claims only exact
+  media paths (`return !source.includes(":")`, mirroring what the
+  `/la-revista/` block already did), so this hand-written rule survives a
+  re-run — verified byte-identical after
+  `build:revista-rewrites && build:legacy-redirects`.
+
+**Verified by simulating the whole redirect table in order** against the real
+media map, using the same path-to-regexp build Vercel routes with: 531/531
+known images hit the catch-all, 303/303 documents still hit their own rule,
+and WP size variants — which appear in no map at all — are caught.
+
+`tests/unit/vercel-redirects.test.ts` (new, 9 tests) locks the ordering, the
+302, the image destination and the "never claims a document" property, plus
+no-duplicates / no-chains / under-budget for the table as a whole. Unit 76/76.
+Budget: 420 redirects + 265 rewrites.
