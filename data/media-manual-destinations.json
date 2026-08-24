@@ -1,0 +1,6 @@
+{
+  "note": "Legacy /wp-content/uploads/ paths whose destination is a first-party file this repo already serves, so the document is never copied into Contentful just to have a URL. Consulted by build-legacy-redirects.ts before the bucket rules.",
+  "destinations": {
+    "/wp-content/uploads/2026/07/CampanaORA1002-SIMLatinoamerica-2026.pdf": "/ora/ora-1002.pdf"
+  }
+}

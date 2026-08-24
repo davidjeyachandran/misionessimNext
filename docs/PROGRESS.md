@@ -940,3 +940,125 @@ build that follows a CMS write. It also revealed that the sitemap totals
 quoted in the rebuild scorecard were low: the current build emits **1,212**
 URLs (899 posts, 119 editions, 119 PDFs, 66 taxonomy, 9 index/pages), not
 1,185.
+
+## 2026-08-24 — Everything that dies with WordPress: 187/187
+
+Two gaps closed while the old site is still answering. Both depend on it being
+up, so neither could have waited for cutover.
+
+### The Drupal file space nobody had inventoried
+
+`build-media-redirect-map.ts` crawls the WordPress media API, which knows only
+`/wp-content/uploads/`. But WordPress also answers for the **Drupal** tree that
+preceded it, with per-file 301s
+(`/sites/default/files/magazinepdf/<file>` → `/wp-content/uploads/2024/11/<file>`),
+and **8 published blog bodies link into that space**. Those rules live in the
+WordPress install; at shutdown our own articles would have carried broken links
+to their own magazine PDFs.
+
+- The space has no index and a nonexistent name 404s rather than listing
+  siblings, so it cannot be enumerated — `scripts/probe-drupal-files.ts`
+  probes it instead, using the filenames already known from the media map
+  (every Drupal file that survived into WordPress kept its name).
+- 606 probes → **47 live paths**, all under `magazinepdf/`; `magazinefiles/`
+  is empty, which is why `nuevo_obrero_v8_.pd` (truncated extension, linked
+  from *El nuevo obrero iberoamericano*) is dead on the live site today.
+- `data/drupal-file-map.json` is a **frozen crawl** — same status as
+  `legacy-revista-aliases.json`. Re-running after shutdown yields an empty
+  map. Don't.
+- `build-legacy-redirects.ts` emits these as **direct** rules to the
+  first-party PDF, not as chains through `/wp-content/`: a chain survives the
+  shutdown only as far as its first hop.
+
+### The 15 orphaned documents
+
+`scripts/upload-orphan-documents.ts` — downloads from the live site, uploads
+under the original filename (all the filename join needs), dry run by default.
+Two were deliberately not uploaded, both detected by content hash rather than
+by name:
+
+- `cuando_simplemente_dicen_no-1.pdf` is byte-identical to
+  `cuando_simplemente_dicen_no.pdf`. One asset answers both URLs, since
+  `normalizeFileName` strips the suffix. The **unsuffixed** name wins, because
+  the asset filename becomes the public `/recursos/<file>` URL.
+- `CampanaORA1002-SIMLatinoamerica-2026.pdf` is byte-identical to
+  `public/ora/ora-1002.pdf`, which this repo already serves. Copying it into
+  Contentful would put the same 3.2 MB on two URLs. New
+  `data/media-manual-destinations.json` records the mapping to our own copy;
+  the generator consults it before the bucket rules.
+
+Asset titles were read off each document's own first page rather than
+generated from the filename — `engnewsmar14.pdf` is "English in Lima — marzo
+2014", not "Engnewsmar14". `persecucionvamosmayo14.pdf` has no text layer
+(scanned) and is titled from the edition it is.
+
+**`persecucionvamosmayo14.pdf` is still only a document, not an edition.** The
+2014-05 VAMOS issue remains absent from Contentful. Uploading the PDF
+discharges the deadline — the file no longer depends on WordPress — but
+importing it as a proper edition (cover, articles, `import:revistas`) is
+separate work and was not bundled in silently.
+
+### Result
+
+- `unresolved-doc` 26 → 12, and **every one of the 303 known documents now has
+  a redirect**; the generator's "no destination" list is empty for the first
+  time.
+- **`docs/routes.txt`: 187/187** trafficked URLs resolve, up from 185/187
+  (108 static, 47 exact redirect, 32 wildcard). The two that were 404ing were
+  both trafficked.
+- Budget: 419 redirects (limit 2,048) + 265 rewrites. No duplicate sources,
+  no chains, `headers` block intact across regeneration.
+- All 13 new Contentful assets HEAD-check 200 through their `/recursos/`
+  rewrites. Unit 67/67, e2e 63/63.
+
+### Also settled
+
+- **The 23 `resource` entries hardcoding `misionessim.org/wp-content/...` are
+  not a shutdown risk.** After cutover that hostname *is* this site, so those
+  links land on our own redirect map; all 7 distinct paths they reference are
+  already covered. No action needed.
+- **The 528 (now 531) images are lower priority than they looked**: zero of
+  the 901 published blog bodies reference a `wp-content` image, so this
+  affects inbound links only, never anything we render.
+
+## 2026-08-24 — VAMOS mayo 2014 imported: the archive is whole for its era
+
+The last item from the pre-cutover list that was ours to fix. The May 2014
+edition existed only as a PDF, so the archive showed 119 editions where it
+should have shown 120.
+
+- **`scripts/import-revista-from-pdf.ts`** (new). `import-missing-revistas.ts`
+  pulls a PDF *and* a cover JPEG from recorded WordPress URLs; that could not
+  work here, because WordPress never had an edition page for this issue and
+  therefore has no cover image anywhere (`persecucionvamosmayo14.jpg` 404s in
+  every form). The PDF is also a **scan with no text layer**, so nothing
+  downstream could derive one either. The first page *is* the cover, so the
+  script renders it with poppler at 768px — matching the larger of the two
+  cover-width conventions in the space (543px on 51 editions, 763–768px on 33).
+- **Title and date came off the cover itself**, not the filename: «Persecución»,
+  Mayo 2014, strapline "Donde la Fe Cuesta al Máximo". Slug `persecucion`,
+  which was free.
+- The rendered cover was given a **real `description`**. An empty one is
+  precisely what left 50 edition pages with a nameless PDF link earlier today;
+  the script hard-codes a description rather than leaving it to the operator,
+  and rejects a non-URL-safe slug for the same reason.
+- **Zero linked articles, and that is correct** — no blogPost in the space
+  carries a 2014-05 publish date, and the scan has no text for the extractor.
+  47 of the other 119 editions also have none, so this is an established shape,
+  not a broken one.
+
+After `build:revista-rewrites && build:media-map && build:legacy-redirects` the
+PDF re-buckets from `contentful-asset` to `vamos-pdf`, so the legacy WordPress
+URL now lands on `/revistavamos/persecucion/persecucionvamosmayo14.pdf` — the
+edition's own first-party path — instead of the generic `/recursos/` proxy,
+and that stale `/recursos/` rewrite is gone.
+
+Verified: 120 editions, sitemap 1,212 → **1,214**, the edition sorts between
+*La Oración* (2014-06) and *Movilizando a la Juventud* (2014-04) on archive
+page 5, the cover link announces "Descargar PDF: Persecución", the PDF serves
+200 through the rewrite, index pagination grew to 8 pages. Unit 67/67,
+e2e 63/63.
+
+**October 2014 is also absent**, and unlike May it is not fixable here: no
+`oct14` VAMOS PDF exists anywhere in the media map, so there is nothing to
+import. 2013 is complete; 2015 onward is bimonthly by design, not by gap.

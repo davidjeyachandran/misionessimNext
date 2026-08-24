@@ -43,6 +43,12 @@ const REVISTA_ALIASES = path.join(
   "data",
   "legacy-revista-aliases.json",
 );
+const DRUPAL_MAP = path.join(process.cwd(), "data", "drupal-file-map.json");
+const MANUAL_DESTINATIONS = path.join(
+  process.cwd(),
+  "data",
+  "media-manual-destinations.json",
+);
 
 interface Redirect {
   source: string;
@@ -61,6 +67,11 @@ interface MediaEntry {
   destination?: string;
 }
 
+interface DrupalHit {
+  path: string;
+  wpPath: string;
+}
+
 interface RevistaAliases {
   slugAliases: Record<string, string>;
   liveOnNewSite: string[];
@@ -70,6 +81,7 @@ interface RevistaAliases {
 /** Redirects this script owns. Anything else in vercel.json is left alone. */
 function ownsRedirect(source: string): boolean {
   if (source.startsWith("/wp-content/uploads/")) return true;
+  if (source.startsWith("/sites/default/files/")) return true;
   // Exact-path legacy revista aliases only — never the `:path*` wildcards or
   // the bare `/la-revista` rules, which are hand-written.
   for (const prefix of ["/la-revista/", "/revistavamos/"]) {
@@ -108,6 +120,12 @@ async function main() {
   const aliases = JSON.parse(
     await readFile(REVISTA_ALIASES, "utf8"),
   ) as RevistaAliases;
+  const drupal = JSON.parse(await readFile(DRUPAL_MAP, "utf8")) as {
+    entries: DrupalHit[];
+  };
+  const manual = JSON.parse(await readFile(MANUAL_DESTINATIONS, "utf8")) as {
+    destinations: Record<string, string>;
+  };
 
   const raw = await readFile(VERCEL_JSON, "utf8");
   const config = JSON.parse(raw) as {
@@ -155,6 +173,14 @@ async function main() {
   for (const entry of media.entries) {
     if (entry.bucket === "image" || entry.bucket === "junk") continue;
 
+    // A document the repo already serves itself: point at our copy rather
+    // than uploading the same bytes to Contentful for a second URL.
+    const manualDestination = manual.destinations[entry.path];
+    if (manualDestination) {
+      redirects.push({ source: entry.path, destination: manualDestination, permanent: true });
+      continue;
+    }
+
     const editionSlug = aliases.pdfToSlug[entry.path];
     if (editionSlug) {
       redirects.push({
@@ -180,6 +206,30 @@ async function main() {
       continue;
     }
     unresolved.push(entry.path);
+  }
+
+  // 4. Drupal-era paths. WordPress answers these with a 301 into
+  // /wp-content/uploads/, so they resolve today through two hops. We emit the
+  // final destination directly: a chain would survive the shutdown only as
+  // far as its first hop, and PROGRESS records "no redirect chains" as a
+  // property of this file worth keeping.
+  const destinationByWpPath = new Map(redirects.map((r) => [r.source, r.destination]));
+  const drupalOrphans: string[] = [];
+  for (const hit of drupal.entries) {
+    const destination = destinationByWpPath.get(hit.wpPath);
+    if (!destination) {
+      drupalOrphans.push(`${hit.path} -> ${hit.wpPath || "(served in place)"}`);
+      continue;
+    }
+    redirects.push({ source: hit.path, destination, permanent: true });
+  }
+
+  if (drupalOrphans.length) {
+    console.log(
+      `\n${drupalOrphans.length} Drupal paths have no destination (their `
+        + `/wp-content/ twin is unresolved):`,
+    );
+    for (const o of drupalOrphans) console.log(`  ${o}`);
   }
 
   const keptRedirects = (config.redirects ?? []).filter(

@@ -1,15 +1,15 @@
 # Media redirect review — /wp-content/uploads/
 
-Generated 2026-08-10 by `yarn build:media-map`.
+Generated 2026-08-23 by `yarn build:media-map`.
 
 WordPress is being decommissioned, so every URL below 404s at cutover unless it is redirected. Review the **unresolved** section — those are the ones needing a decision.
 
 | Bucket | Count | Handling |
 |---|---:|---|
-| VAMOS issue PDFs | 139 | 1:1 → `/revistavamos/<slug>/` |
-| Matched to Contentful asset | 138 | 1:1 → asset URL |
-| **Unresolved docs** | 26 | **needs a decision** |
-| Images | 528 | pattern rule (cannot enumerate) |
+| VAMOS issue PDFs | 140 | 1:1 → `/revistavamos/<slug>/` |
+| Matched to Contentful asset | 151 | 1:1 → asset URL |
+| **Unresolved docs** | 12 | **needs a decision** |
+| Images | 531 | pattern rule (cannot enumerate) |
 | Junk | 5 | let 404 |
 
 ## Unresolved — decide these
@@ -18,31 +18,17 @@ No VAMOS date and no Contentful asset with a matching filename. Each needs eithe
 
 | URL | Type |
 |---|---|
-| `/wp-content/uploads/2024/11/13leccionessobremisiones.pdf` | pdf |
 | `/wp-content/uploads/2024/11/aniversariosimvamosnov18.pdf` | pdf |
 | `/wp-content/uploads/2024/11/asiajunio2013.pdf` | pdf |
 | `/wp-content/uploads/2024/11/desarollocomunitariofebrero14.pdf` | pdf |
 | `/wp-content/uploads/2024/11/discipuladoenero14_0.pdf` | pdf |
-| `/wp-content/uploads/2024/11/engnewsmar14.pdf` | pdf |
 | `/wp-content/uploads/2024/11/idiomayculturadiciembre2012.pdf` | pdf |
 | `/wp-content/uploads/2024/11/llamadovamosset14.pdf` | pdf |
 | `/wp-content/uploads/2024/11/ocupacion_vamos_0.pdf` | pdf |
 | `/wp-content/uploads/2024/11/ocupacion_vamos_1.pdf` | pdf |
 | `/wp-content/uploads/2024/11/ocupacion_vamos.pdf` | pdf |
 | `/wp-content/uploads/2024/11/pastor_es_clave_vamos.pdf` | pdf |
-| `/wp-content/uploads/2024/11/persecucionvamosmayo14.pdf` | pdf |
 | `/wp-content/uploads/2024/11/traficohumanovamos.pdf` | pdf |
-| `/wp-content/uploads/2025/04/aprender_vs_estudiar.pdf` | pdf |
-| `/wp-content/uploads/2025/04/christian_words.pdf` | pdf |
-| `/wp-content/uploads/2025/04/cuando_simplemente_dicen_no-1.pdf` | pdf |
-| `/wp-content/uploads/2025/04/cuando_simplemente_dicen_no.pdf` | pdf |
-| `/wp-content/uploads/2025/04/fortalezas_y_debilidades_de_las_misiones_iberoamericanas.pdf` | pdf |
-| `/wp-content/uploads/2025/04/hacer_tiendas_y_el_llamado_apostolico.docx` | vnd.openxmlformats-officedocument.wordprocessingml.document |
-| `/wp-content/uploads/2025/04/mi_profesion_para_la_honra_de_dios.doc` | msword |
-| `/wp-content/uploads/2025/04/my_weekly_language_schedule.pdf` | pdf |
-| `/wp-content/uploads/2025/04/separacion_entre_lo_sagrado_y_lo_secular.docx` | vnd.openxmlformats-officedocument.wordprocessingml.document |
-| `/wp-content/uploads/2025/04/trabajando_tu_llamado_a_las_naciones_-_completo.pdf` | pdf |
-| `/wp-content/uploads/2025/08/GuiadeOracion-ORA1002-SIM_compressed-1.pdf` | pdf |
 | `/wp-content/uploads/2026/07/CampanaORA1002-SIMLatinoamerica-2026.pdf` | pdf |
 
 ## VAMOS issue PDFs → edition pages
@@ -97,6 +83,7 @@ No VAMOS date and no Contentful asset with a matching filename. Each needs eithe
 | `/wp-content/uploads/2024/11/mujeresenmisionvamosdic19_0.pdf` | `/revistavamos/mujeres-en-mision/` | month 2019-12 -> "Mujeres en misión" |
 | `/wp-content/uploads/2024/11/noalcanzadosvamossep23.pdf` | `/revistavamos/no-alcanzados/` | month 2023-09 -> "No Alcanzados " |
 | `/wp-content/uploads/2024/11/oracionvamosjunio14.pdf` | `/revistavamos/la-oracion/` | month 2014-06 -> "La Oración" |
+| `/wp-content/uploads/2024/11/persecucionvamosmayo14.pdf` | `/revistavamos/persecucion/` | month 2014-05 -> "Persecución" |
 | `/wp-content/uploads/2024/11/plantacionvamosjunio18.pdf` | `/revistavamos/plantacion-de-iglesias/` | month 2018-06 -> "Plantación de Iglesias" |
 | `/wp-content/uploads/2024/11/procesosvamosdic20_0.pdf` | `/revistavamos/envio-responsable/` | month 2020-12 -> "Envío responsable " |
 | `/wp-content/uploads/2024/11/regresoacasavamosdic23.pdf` | `/revistavamos/regresando-a-casa/` | month 2023-12 -> "Regresando a casa" |
@@ -193,12 +180,15 @@ No VAMOS date and no Contentful asset with a matching filename. Each needs eithe
 
 | URL | → |
 |---|---|
+| `/wp-content/uploads/2024/11/13leccionessobremisiones.pdf` | `https://assets.ctfassets.net/i46buyptg48q/1bJwuRlxq0M33dLzDTEVLp/72ffd6eeb7aa01069dccb7374539660c/13leccionessobremisiones.pdf` |
 | `/wp-content/uploads/2024/11/autocuidadovamosfeb22.pdf` | `https://assets.ctfassets.net/i46buyptg48q/1OcpDP22RkDunrzbHUZhMW/f5c510d69f0b32a7644455ff24122dd2/autocuidadovamosfeb22.pdf` |
+| `/wp-content/uploads/2024/11/engnewsmar14.pdf` | `https://assets.ctfassets.net/i46buyptg48q/3pTQSdg9jiwp3lzK77V3OI/9abca25e52e6e208d7ae7480398407cd/engnewsmar14.pdf` |
 | `/wp-content/uploads/2024/11/equiposmisionerosmarzo14.pdf` | `https://images.ctfassets.net/i46buyptg48q/68lnmpwCjPh1qcQtqDlrQF/a074454b294b73cd892247c8d6a769c3/equiposmisionerosmarzo14.jpg` |
 | `/wp-content/uploads/2024/11/latinosal100.pdf` | `https://assets.ctfassets.net/i46buyptg48q/5LYRU5ThSw53ZaiJzU6LCC/f557a63e99b899632ae5dff35a969ea0/Latinosal100.pdf` |
 | `/wp-content/uploads/2025/04/100dxven.pdf` | `https://assets.ctfassets.net/i46buyptg48q/1eABw2yi89Ft9KdRsxp5NB/2a6280cfc5b621b7242d00626bf17246/100dxven.pdf` |
 | `/wp-content/uploads/2025/04/3_jovenes_un_mismo_pastor.docx` | `https://assets.ctfassets.net/i46buyptg48q/41nrQSfn0Z4a0GF1ow6u5x/49868ff4afa43ba8abf51b4a62d01002/3_jovenes_un_mismo_pastor.docx` |
 | `/wp-content/uploads/2025/04/30_formas_de_expresar_gratitud.pdf` | `https://assets.ctfassets.net/i46buyptg48q/Hh6xcVQfUR5Fow5aO2yyZ/27fd8a6e6e1ed06152aeeec5482bd749/30_formas_de_expresar_gratitud.pdf` |
+| `/wp-content/uploads/2025/04/aprender_vs_estudiar.pdf` | `https://assets.ctfassets.net/i46buyptg48q/5zYSCODoTpCycSmxZbmt2c/26b162ae590832f81b8ddddba75035df/aprender_vs_estudiar.pdf` |
 | `/wp-content/uploads/2025/04/aspectos_fundamentales_del_modelo_de_discipulado_de_jesucristo.doc` | `https://assets.ctfassets.net/i46buyptg48q/g7MYHUuMRl5tpICuCtjAv/70796a4b70d91fb8182776761fbffae3/aspectos_fundamentales_del_modelo_de_discipulado_de_jesucristo.doc` |
 | `/wp-content/uploads/2025/04/ayudando_al_que_es_diferente_0.docx` | `https://assets.ctfassets.net/i46buyptg48q/3iWGjjQepXB7a05GEQhC15/b70dfa347b99c7499cd2e9d1e77e5e2a/ayudando_al_que_es_diferente_0.docx` |
 | `/wp-content/uploads/2025/04/budismo_en_asia.docx` | `https://assets.ctfassets.net/i46buyptg48q/3Et4MAIIxnZQR1WPQ9C9QS/f7f3961f3f7e860d406c1aacb7edda57/budismo_en_asia.docx` |
@@ -207,6 +197,7 @@ No VAMOS date and no Contentful asset with a matching filename. Each needs eithe
 | `/wp-content/uploads/2025/04/campana_de_oracion-_7_dias_por_siria_0.docx` | `https://assets.ctfassets.net/i46buyptg48q/3Nq0vaZgHfHG50jmROpAYV/36ae1245252dd07bbddc962dd6e9ded5/campana_de_oracion-_7_dias_por_siria_0.docx` |
 | `/wp-content/uploads/2025/04/campana_fondos_1.docx` | `https://assets.ctfassets.net/i46buyptg48q/5EGjK8DOAK8a1RZZG8BMxL/1441a99629fc933d2f65dbb0b5d148b0/campana_fondos_1.docx` |
 | `/wp-content/uploads/2025/04/chatarra_0.pptx` | `https://assets.ctfassets.net/i46buyptg48q/1UNcOynSrDac5cm4ZZkLgB/0648b49be27ef02f11c3bf2a6fd416b1/chatarra_0.pptx` |
+| `/wp-content/uploads/2025/04/christian_words.pdf` | `https://assets.ctfassets.net/i46buyptg48q/4zPuRxMv9M2AbNLuJSW8G0/26234fd2231a2680a421dcf2965a7209/christian_words.pdf` |
 | `/wp-content/uploads/2025/04/comibam_articulo_para_enciclopedia.docx` | `https://assets.ctfassets.net/i46buyptg48q/2PRtbZb4TZ3azCSgSlXrSc/60d23b15c55c80fb16b15cb605ca285b/comibam_articulo_para_enciclopedia.docx` |
 | `/wp-content/uploads/2025/04/como_discipular_a_un_creyente_0.docx` | `https://assets.ctfassets.net/i46buyptg48q/7nrFG4kcpg1grJfwnKXpCq/da8de62901a1fd6636dcd0482aa65ced/como_discipular_a_un_creyente_0.docx` |
 | `/wp-content/uploads/2025/04/como_hacer_el_discipulado.docx` | `https://assets.ctfassets.net/i46buyptg48q/6Tzrz9SgDQYQ6EVYbFaokO/c757fea64d630a912662636328b05939/como_hacer_el_discipulado.docx` |
@@ -215,6 +206,8 @@ No VAMOS date and no Contentful asset with a matching filename. Each needs eithe
 | `/wp-content/uploads/2025/04/conociendo_los_dones_y_talentos.docx` | `https://assets.ctfassets.net/i46buyptg48q/2HEsEBZ1iBVg9Iu4y6TJxi/4b5d6092970af90609dda51638dd1e6a/conociendo_los_dones_y_talentos.docx` |
 | `/wp-content/uploads/2025/04/consejos_para_jovenes_predicadores.docx` | `https://assets.ctfassets.net/i46buyptg48q/3rP3ATxBliHMOCwuCLB5Ef/1b9a41aa4cb00b05b5a95a7537773f56/consejos_para_jovenes_predicadores.docx` |
 | `/wp-content/uploads/2025/04/cronologia_de_proyecto_misionero_0.docx` | `https://assets.ctfassets.net/i46buyptg48q/4dBANx4aOgEBWH5LywEhTu/581ec19948f08e2409d2dd5642594da0/cronologia_de_proyecto_misionero_0.docx` |
+| `/wp-content/uploads/2025/04/cuando_simplemente_dicen_no-1.pdf` | `https://assets.ctfassets.net/i46buyptg48q/4eRGuDoN9rsHs5wuHgDlwY/ec0640ceda9915f55d86a6f615013504/cuando_simplemente_dicen_no.pdf` |
+| `/wp-content/uploads/2025/04/cuando_simplemente_dicen_no.pdf` | `https://assets.ctfassets.net/i46buyptg48q/4eRGuDoN9rsHs5wuHgDlwY/ec0640ceda9915f55d86a6f615013504/cuando_simplemente_dicen_no.pdf` |
 | `/wp-content/uploads/2025/04/cuestionario_de_parejas_-_cuan_bien_conoces_a_tu_pareja.pdf` | `https://assets.ctfassets.net/i46buyptg48q/5DmuTaRZpfSMoKCijVCdyZ/69f559271351d5aa2174bae9a0d3186b/cuestionario_de_parejas_-_cuan_bien_conoces_a_tu_pareja.pdf` |
 | `/wp-content/uploads/2025/04/cuestionario_de_parejas_-_que_tan_saludable_es_tu_matrimonio_.pdf` | `https://assets.ctfassets.net/i46buyptg48q/1hFUvH1KGezcbzcacnhhrF/fe2eb947b30cc750625427d9bd82fcf3/cuestionario_de_parejas_-_que_tan_saludable_es_tu_matrimonio_.pdf` |
 | `/wp-content/uploads/2025/04/CuidadoIntegralMarzo25.pdf` | `https://assets.ctfassets.net/i46buyptg48q/7zMQmx6YaP5EqhI1oKwiRu/fb2ad5dfc1fb878218bfbe355c43e8fb/CuidadoIntegralMarzo25.pdf` |
@@ -252,11 +245,13 @@ No VAMOS date and no Contentful asset with a matching filename. Each needs eithe
 | `/wp-content/uploads/2025/04/finanzas_para_las_misiones_mundiales.pdf` | `https://assets.ctfassets.net/i46buyptg48q/6WKxJ3bCb1PT6mkqcqTBjC/95e4a60740b3542486cdc4e40791f4b5/finanzas_para_las_misiones_mundiales.pdf` |
 | `/wp-content/uploads/2025/04/folleto_promesa_de_fe.doc` | `https://assets.ctfassets.net/i46buyptg48q/11RJ0twxzZl7IwCDJErsfF/55abe8523a8095531ed99f03662bad65/folleto_promesa_de_fe.doc` |
 | `/wp-content/uploads/2025/04/folletosamm.pdf` | `https://assets.ctfassets.net/i46buyptg48q/rMkspyQanuZJowt3c8C4E/5c28e70b00aa6504d3c4c772f78f089e/folletosamm.pdf` |
+| `/wp-content/uploads/2025/04/fortalezas_y_debilidades_de_las_misiones_iberoamericanas.pdf` | `https://assets.ctfassets.net/i46buyptg48q/5dKanMGxdm9ieobt0J8Sxr/ef793e1d7d5b6e0a0248c95b7a57bd20/fortalezas_y_debilidades_de_las_misiones_iberoamericanas.pdf` |
 | `/wp-content/uploads/2025/04/fundamentos_de_la_capacitacion_misionera_transcultural.doc` | `https://assets.ctfassets.net/i46buyptg48q/6VqWQ9sPXQQLnnY5LKlGWN/3e3b9e33beb5519f079093f96a939200/fundamentos_de_la_capacitacion_misionera_transcultural.doc` |
 | `/wp-content/uploads/2025/04/gran_historia.doc` | `https://assets.ctfassets.net/i46buyptg48q/7tyAgbeVdxCMYevQxG4lWp/9a7a7d719a998a5ed57f2d003cf27def/gran_historia.doc` |
 | `/wp-content/uploads/2025/04/gran_historia.pdf` | `https://assets.ctfassets.net/i46buyptg48q/7tyAgbeVdxCMYevQxG4lWp/9a7a7d719a998a5ed57f2d003cf27def/gran_historia.doc` |
 | `/wp-content/uploads/2025/04/grupos_budistas_no_alcanzados.pdf` | `https://assets.ctfassets.net/i46buyptg48q/53EsLgvqIv6hPh1jruWPji/bf407c782fb9889a9eb197da6598b8eb/grupos_budistas_no_alcanzados.pdf` |
 | `/wp-content/uploads/2025/04/guia_para_lideres_-_trabajo_con_personas_con_discapacidad._fundacion_sendas.ppt` | `https://assets.ctfassets.net/i46buyptg48q/3N8Bm0bmjXCPDSe7ENbiSE/be2c21b8a9494c048b5aca4262eb1d9c/guia_para_lideres_-_trabajo_con_personas_con_discapacidad._fundacion_sendas.ppt` |
+| `/wp-content/uploads/2025/04/hacer_tiendas_y_el_llamado_apostolico.docx` | `https://assets.ctfassets.net/i46buyptg48q/2V1e1OmrbvefdcajRX70Mu/bb69bd2f9ee54d3bdbfd8da693717c83/hacer_tiendas_y_el_llamado_apostolico.docx` |
 | `/wp-content/uploads/2025/04/honor_y_verguenza_en_las_relaciones_transculturales.pdf` | `https://assets.ctfassets.net/i46buyptg48q/7nJCbyIVJ4m1kLx27zNZwn/7a8e2d6bf9771ed9c45eb7e720508d14/honor_y_verguenza_en_las_relaciones_transculturales.pdf` |
 | `/wp-content/uploads/2025/04/hora_misionera_de_ninos.doc` | `https://assets.ctfassets.net/i46buyptg48q/2IihGPvFiiR21L58XrZhQI/ff0f8a799c3d1e3f2aa9d41a66b643e4/hora_misionera_de_ninos.doc` |
 | `/wp-content/uploads/2025/04/incluyendo_a_las_personas_con_discapacidad_en_la_iglesia_-_ministerio_amistad.docx` | `https://assets.ctfassets.net/i46buyptg48q/3PMY6tevN5XfuUgHDPlH1h/d1cc54e595f88455e119eafd2553bd40/incluyendo_a_las_personas_con_discapacidad_en_la_iglesia_-_ministerio_amistad.docx` |
@@ -283,9 +278,11 @@ No VAMOS date and no Contentful asset with a matching filename. Each needs eithe
 | `/wp-content/uploads/2025/04/mefi-boset_-_ministerio_confines_paraguay.docx` | `https://assets.ctfassets.net/i46buyptg48q/2nxv8ac0cfY81C06zK0tXR/8c4c582216abc2dd76ce987151e2fbe3/mefi-boset_-_ministerio_confines_paraguay.docx` |
 | `/wp-content/uploads/2025/04/mejor_en_la_cancha.pdf` | `https://assets.ctfassets.net/i46buyptg48q/6LyUikoTyjSxudbEauraPT/18a8f66640ef33414fe1c88e047971e9/mejor_en_la_cancha.pdf` |
 | `/wp-content/uploads/2025/04/metodos_misioneros_0.doc` | `https://assets.ctfassets.net/i46buyptg48q/58o9p77eeft9guMdPZof68/3191938d59f04fba1216b54d349023ae/metodos_misioneros_0.doc` |
+| `/wp-content/uploads/2025/04/mi_profesion_para_la_honra_de_dios.doc` | `https://assets.ctfassets.net/i46buyptg48q/3QMSKXqPiYSSljWD9WFIsw/f14780b5bfe7db96126aaa43814e049f/mi_profesion_para_la_honra_de_dios.doc` |
 | `/wp-content/uploads/2025/04/misionero_ante_las_culturas-reichel_dolmatoff.pdf` | `https://assets.ctfassets.net/i46buyptg48q/13IYF2QnnGKk8rqyhbgMbQ/c992717a481dde4228e1eb881f588fbc/misionero_ante_las_culturas-reichel_dolmatoff.pdf` |
 | `/wp-content/uploads/2025/04/misiones_latinas_siglo_xxi.pdf` | `https://assets.ctfassets.net/i46buyptg48q/6nvvBhEme7SGdvAAlCSbo9/79582c6a30e15614b7a0666c7345d584/misiones_latinas_siglo_xxi.pdf` |
 | `/wp-content/uploads/2025/04/moduloesp.doc` | `https://assets.ctfassets.net/i46buyptg48q/6CL34TrPpYMd2AzLPaXsTD/b6cd9d45d2e3eb4056aa1c4fd098ab2c/moduloesp.doc` |
+| `/wp-content/uploads/2025/04/my_weekly_language_schedule.pdf` | `https://assets.ctfassets.net/i46buyptg48q/wvbfvj89WAbkASWDN6U3z/aba7660c1858975e16b843a5e220c019/my_weekly_language_schedule.pdf` |
 | `/wp-content/uploads/2025/04/nancy_guthrie_-_aferrandose_a_la_esperanza.pdf` | `https://assets.ctfassets.net/i46buyptg48q/5ePYmfGwtYox9TCxygGQcB/2e30bf3d4fca54a4e7b1945bcf3cd40a/nancy_guthrie_-_aferrandose_a_la_esperanza.pdf` |
 | `/wp-content/uploads/2025/04/narracion_por_que.docx` | `https://assets.ctfassets.net/i46buyptg48q/2BkZGdNoVuf6MFYxLvoY36/aa1eef555fbffe02502a9acf14b24fa2/narracion_por_que.docx` |
 | `/wp-content/uploads/2025/04/nuevo_obrero_v8_.pdf` | `https://downloads.ctfassets.net/i46buyptg48q/5DjyQr5k0eQE4odwY4aTom/1d436a87c089d321b6359a3750697b07/nuevo_obrero_v8_.pdf` |
@@ -314,12 +311,14 @@ No VAMOS date and no Contentful asset with a matching filename. Each needs eithe
 | `/wp-content/uploads/2025/04/repensando_nuestra_capacitacion_misionera.pdf` | `https://assets.ctfassets.net/i46buyptg48q/5yPK03VTrE0FVebGMWzWTe/d036ffd69dfb3a066dd34f5c20bea2a0/repensando_nuestra_capacitacion_misionera.pdf` |
 | `/wp-content/uploads/2025/04/seis_llaves_para_abrir_la_puerta_a_las_misiones.docx` | `https://assets.ctfassets.net/i46buyptg48q/1R8YkJtlCS4xbcUf9zLB0c/11ea4e74e6c5e79855f18b6a0244314f/seis_llaves_para_abrir_la_puerta_a_las_misiones.docx` |
 | `/wp-content/uploads/2025/04/seminario_de_mov_misio_de_la_igl_local.doc` | `https://assets.ctfassets.net/i46buyptg48q/2afHYXj0KklHBo3sDYzeMA/1d86c70ce35bc89696c08866001175ea/seminario_de_mov_misio_de_la_igl_local.doc` |
+| `/wp-content/uploads/2025/04/separacion_entre_lo_sagrado_y_lo_secular.docx` | `https://assets.ctfassets.net/i46buyptg48q/3CatbneMeej5kVmlkmxme6/3389ac5ec7295ddcf0bc30d340ce38ec/separacion_entre_lo_sagrado_y_lo_secular.docx` |
 | `/wp-content/uploads/2025/04/sufrimiento_el_costo_del_discipulado.docx` | `https://assets.ctfassets.net/i46buyptg48q/2vzZtP9uEjNzEdFLHXOLNZ/ca91215dd76d3b1be1f1c310bfb09991/sufrimiento_el_costo_del_discipulado.docx` |
 | `/wp-content/uploads/2025/04/tallerdemanoschiquitas.doc` | `https://assets.ctfassets.net/i46buyptg48q/2kSTL5vkHuvh47R2ARXSvz/11ff92bcacb10fee7a12e95a8a7c1dda/tallerdemanoschiquitas.doc` |
 | `/wp-content/uploads/2025/04/tengo_dones_para_servir_en_1.doc` | `https://assets.ctfassets.net/i46buyptg48q/3PH4BbtBkzQ0VVfyWN4QgI/a7f2f592726fe2e234af74e620463151/tengo_dones_para_servir_en_1.doc` |
 | `/wp-content/uploads/2025/04/test_dones_espirituales.pdf` | `https://assets.ctfassets.net/i46buyptg48q/57pEf6pPOvVJF3eAedAEy6/6cebb12953914f5e24d3fd78e0508ca3/test_dones_espirituales.pdf` |
 | `/wp-content/uploads/2025/04/testimonios_ministerio_amistad_compatibility_mode.pdf` | `https://assets.ctfassets.net/i46buyptg48q/6bZsUvL7zd9v8Pt08ed72y/c03f27e1b515939b6672d923c0a304dc/testimonios_ministerio_amistad_compatibility_mode.pdf` |
 | `/wp-content/uploads/2025/04/tomando_buenas_decisiones.docx` | `https://assets.ctfassets.net/i46buyptg48q/7cqPl6xkyPpldFKNzYRlML/4fb0c962d7fc2f2f121a97eaff8ee304/tomando_buenas_decisiones.docx` |
+| `/wp-content/uploads/2025/04/trabajando_tu_llamado_a_las_naciones_-_completo.pdf` | `https://assets.ctfassets.net/i46buyptg48q/66PdYEXSGHuFTBaLSpmPxw/07dcebfc8a5c5b1b54590d3e265eccb1/trabajando_tu_llamado_a_las_naciones_-_completo.pdf` |
 | `/wp-content/uploads/2025/04/tripticocomo_me_preparo_0.pdf` | `https://assets.ctfassets.net/i46buyptg48q/3sgCIT51TYl6dO54cBAVe0/694f82bc8280cd81a36ea94898b94d5a/tripticocomo_me_preparo.pdf` |
 | `/wp-content/uploads/2025/04/tripticocomo_me_preparo.pdf` | `https://assets.ctfassets.net/i46buyptg48q/3sgCIT51TYl6dO54cBAVe0/694f82bc8280cd81a36ea94898b94d5a/tripticocomo_me_preparo.pdf` |
 | `/wp-content/uploads/2025/04/tripticofondos_0.pdf` | `https://assets.ctfassets.net/i46buyptg48q/4fcGxvGkeC3wzw6GeiRb5v/6d17c27aa6010e722c0ce784baef2072/tripticofondos_0.pdf` |
@@ -329,8 +328,9 @@ No VAMOS date and no Contentful asset with a matching filename. Each needs eithe
 | `/wp-content/uploads/2025/04/un_motivo_para_orar.docx` | `https://assets.ctfassets.net/i46buyptg48q/4Ti0f0ytLnX651s5f8XQHK/48e9c4fce9153255665c426f60615106/un_motivo_para_orar.docx` |
 | `/wp-content/uploads/2025/04/una_leccion_en_milagros.docx` | `https://assets.ctfassets.net/i46buyptg48q/49z8pMNba1yaB1q5s4OJgN/e42aac33a8efb7649592ed147f21d76b/una_leccion_en_milagros.docx` |
 | `/wp-content/uploads/2025/04/verdaderas_asociaciones_eclesiales_transculturales.docx` | `https://assets.ctfassets.net/i46buyptg48q/2rQjrgVfqlgdrvtCiXTPMF/4ce6300995d6c49de652dcf54526e6c7/verdaderas_asociaciones_eclesiales_transculturales.docx` |
+| `/wp-content/uploads/2025/08/GuiadeOracion-ORA1002-SIM_compressed-1.pdf` | `https://assets.ctfassets.net/i46buyptg48q/7rkavmV7Xrc0W9NrMgpFKE/f1ec0007009e8b46d73c715983609e64/GuiadeOracion-ORA1002-SIM_compressed-1.pdf` |
 | `/wp-content/uploads/2025/11/SIMLaEnvio25.pdf` | `https://assets.ctfassets.net/i46buyptg48q/2J91cKYz3BstWy2uqxyAPB/2446d2a9a27e3896a3e1e32ebeb377b2/SIMLaEnvio25.pdf` |
-| `/wp-content/uploads/2026/05/LlamadoMacedonioJun26.pdf` | `https://assets.ctfassets.net/i46buyptg48q/3s7CIFjws1neEw0EOIN0bI/dd60ea572f81d602f13fc1f62cd05647/LlamadoMacedonioJun26.pdf` |
+| `/wp-content/uploads/2026/05/LlamadoMacedonioJun26.pdf` | `https://assets.ctfassets.net/i46buyptg48q/5sKOm1A4z03ITdsMwTjeQQ/bbc5c010f8066c6f4098a9e1a5c427ee/LlamadoMacedonioJun26.pdf` |
 
 ## Junk — no redirect
 
