@@ -12,6 +12,7 @@ import {
   slugify,
 } from "../../../../lib/contentful";
 import { formatPostDate } from "../../../../lib/dates";
+import { socialImage } from "../../../../lib/social-image";
 import {
   articleGraph,
   breadcrumbGraph,
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // Twitter tags do NOT inherit from openGraph — Next only emits `twitter:*`
   // from the `twitter` field, so without this block every article kept the
   // root layout's homepage banner as its card image.
-  const socialImage = post.heroImage?.url ? [post.heroImage.url] : undefined;
+  const card = socialImage(post.heroImage);
   return {
     title: post.seoTitle ?? post.title,
     description: post.seoDescription ?? post.description ?? undefined,
@@ -50,15 +51,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       title: post.seoTitle ?? post.title,
       description: post.seoDescription ?? post.description ?? undefined,
-      images: post.heroImage?.url ? [{ url: post.heroImage.url }] : [],
+      images: card ? [card] : [],
     },
-    ...(socialImage
+    ...(card
       ? {
           twitter: {
             card: "summary_large_image",
             title: post.seoTitle ?? post.title,
             description: post.seoDescription ?? post.description ?? undefined,
-            images: socialImage,
+            images: [card.url],
           },
         }
       : {}),

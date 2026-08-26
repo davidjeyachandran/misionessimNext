@@ -15,6 +15,7 @@
 // in the route). Consumers merge every JSON-LD block on a page before
 // resolving `@id`, so the cross-references below still join up.
 import { SITE_URL } from "./site";
+import { socialImage } from "./social-image";
 
 const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 const WEBSITE_ID = `${SITE_URL}/#website`;
@@ -117,6 +118,9 @@ export interface ArticleInput {
 
 export function articleGraph(article: ArticleInput): JsonLdObject {
   const url = abs(article.path);
+  // Same capped, crawler-friendly rendition the social cards advertise, rather
+  // than the raw Contentful original.
+  const image = socialImage(article.image);
   return {
     "@type": "Article",
     "@id": `${url}#article`,
@@ -125,16 +129,16 @@ export function articleGraph(article: ArticleInput): JsonLdObject {
     url,
     headline: article.headline,
     ...(article.description ? { description: article.description } : {}),
-    ...(article.image?.url
+    ...(image
       ? {
           image: {
             "@type": "ImageObject",
-            url: article.image.url,
-            contentUrl: article.image.url,
-            ...(article.image.width ? { width: article.image.width } : {}),
-            ...(article.image.height ? { height: article.image.height } : {}),
+            url: image.url,
+            contentUrl: image.url,
+            ...(image.width ? { width: image.width } : {}),
+            ...(image.height ? { height: image.height } : {}),
           },
-          thumbnailUrl: article.image.url,
+          thumbnailUrl: image.url,
         }
       : {}),
     ...(article.datePublished ? { datePublished: article.datePublished } : {}),

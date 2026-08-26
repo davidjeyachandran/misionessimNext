@@ -169,10 +169,14 @@ memo for `getAllEntries`, `getCanonicalEntries` and `getAllRevistas`.
 pages — measured, not estimated — of which 1,022 are irreducible per-entity
 queries. ~90 builds a month now fit inside the free tier.
 
-**Phase 2 — quality fixes, no urgency.** Commit and deploy the `deviceSizes`
-cap; fix the OG/Twitter/JSON-LD leak (§3a); add long-lived `Cache-Control` for
-the PDF paths in `vercel.json`.
-*Exit:* no page advertises an uncapped original in its meta tags.
+**Phase 2 — quality fixes, no urgency. Done, 2026-08-27.** The `deviceSizes`
+cap shipped in `409ae7e`. The OG/Twitter/JSON-LD leak (§3a) is fixed via
+[`lib/social-image.ts`](../lib/social-image.ts). The PDF `Cache-Control` item
+needed no work — `vercel.json` already carries
+`max-age=86400, stale-while-revalidate=604800` on both PDF prefixes.
+*Exit met:* a site-wide scan of `out/` finds no `og:image`, `twitter:image` or
+JSON-LD `thumbnailUrl` pointing at an uncapped Contentful original. Measured on
+one real hero: **2,473 KB → 126 KB**, a 95% cut on every link unfurl.
 
 **Phase 3 — remove the manual publish step (§4).** Fold rewrite generation into
 a prebuild script so a redeploy is all anyone has to do. Blocked on Q2.

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { getAllRevistas, getRevistaBySlug } from "../../../lib/contentful";
+import { socialImage } from "../../../lib/social-image";
 import { fechaToEdicion } from "../../../lib/dates";
 import { PostCard } from "../../blog/_components/PostCard";
 
@@ -18,22 +19,23 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const revista = await getRevistaBySlug(slug);
   if (!revista) return {};
+  const card = socialImage(revista.coverImage);
   return {
     title: `${revista.title} · Revista VAMOS`,
     description: `Edición ${fechaToEdicion(revista.fecha)} de la Revista VAMOS: ${revista.title}. Lectura digital gratuita.`,
     alternates: { canonical: `/revistavamos/${slug}/` },
     openGraph: {
       title: `${revista.title} · Revista VAMOS`,
-      images: revista.coverImage?.url ? [{ url: revista.coverImage.url }] : [],
+      images: card ? [card] : [],
     },
     // Without this the card falls back to the root layout's homepage banner —
     // `twitter:*` is never derived from `openGraph`.
-    ...(revista.coverImage?.url
+    ...(card
       ? {
           twitter: {
             card: "summary_large_image" as const,
             title: `${revista.title} · Revista VAMOS`,
-            images: [revista.coverImage.url],
+            images: [card.url],
           },
         }
       : {}),
