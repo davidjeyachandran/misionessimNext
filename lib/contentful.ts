@@ -1,5 +1,6 @@
 import type { Document as RichTextDocument } from "@contentful/rich-text-types";
 import { cache } from "react";
+import { buildMemo } from "./build-memo";
 import { buildBlogCatalogue } from "./content/blog-catalogue";
 import {
   buildRevistaCatalogue,
@@ -108,8 +109,10 @@ const CATALOGUE_FIELDS = `
   revista { slug title }
 `;
 
-// Fetch every blogPost once (paged), cached per request. ~10 GraphQL calls.
-const getAllEntries = cache(async (): Promise<RawEntry[]> => {
+// Fetch every blogPost once (paged) — ~10 GraphQL calls, memoized for the
+// whole build. This was `cache()`, which reset on every page render; see
+// `buildMemo` for why that cost ~3,000 calls a build.
+const getAllEntries = buildMemo(async (): Promise<RawEntry[]> => {
   const all: RawEntry[] = [];
   let skip = 0;
   while (true) {
@@ -149,7 +152,7 @@ function toCard(e: RawEntry): BlogPostCard {
 // The de-duplicated, date-sorted catalogue used by every listing. Entries
 // without a publishDate are dropped from listings (they can't form a valid
 // /blog/[date]/[slug] URL); they remain reachable by direct slug.
-const getCanonicalEntries = cache(async (): Promise<RawEntry[]> => {
+const getCanonicalEntries = buildMemo(async (): Promise<RawEntry[]> => {
   const all = await getAllEntries();
   return buildBlogCatalogue(all);
 });
@@ -392,7 +395,7 @@ function toRevistaCard(r: RawRevista, urlSlug: string): RevistaCard {
 }
 
 // All editions, newest first, with unique URL slugs assigned.
-export const getAllRevistas = cache(async (): Promise<RevistaCard[]> => {
+export const getAllRevistas = buildMemo(async (): Promise<RevistaCard[]> => {
   const all: RawRevista[] = [];
   let skip = 0;
   while (true) {

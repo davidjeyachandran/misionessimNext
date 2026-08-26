@@ -59,22 +59,53 @@ let cataloguePromise: Promise<RawEntry[]> | null = null;
 const getAllEntries = () => (cataloguePromise ??= fetchAllEntries());
 ```
 
-Applied to `getAllEntries` (the ~1,940-call offender) and to `getAllRevistas`,
-this takes a build from **~3,000 GraphQL calls to ~12**: the catalogue is paged
-once and reused for all 1,235 pages.
+Applied to `getAllEntries`, `getCanonicalEntries` and `getAllRevistas`, the
+catalogue is paged once per worker and reused for all 1,235 pages. Shipped as
+[`lib/build-memo.ts`](../lib/build-memo.ts), which carries the reasoning and the
+`output: "export"` precondition next to the code.
 
-The per-post `getBlogPostBySlug` calls (902 of them) are genuinely distinct
-queries — each fetches a body the catalogue doesn't carry — and can stay as they
-are. Even leaving those, a build lands around **~950 calls**, and ~100 builds a
-month fits inside the free tier's 100K with room to spare.
+### Measured, 2026-08-27
 
-**Caveat to verify, not assume:** Next may fan static generation across worker
-processes, in which case the singleton is per worker and the true figure is
-~12 × workers. Still a 100×+ reduction. Measure it with the dashboard delta
-across one deploy rather than trusting the arithmetic.
+A full build was instrumented to log every outbound HTTP request to the GraphQL
+endpoint (retries included, since the meter counts those too), tagged by process
+id. One build, 1,235 pages:
 
-**Effort:** roughly an hour plus a verification build. It also makes builds
-substantially faster, which is its own reward.
+| | calls |
+|---|---|
+| `getBlogPostBySlug` — 902 posts, one distinct body query each | 902 |
+| `getRevistaBySlug` — 120 editions, one linked-posts query each | 120 |
+| Catalogue paging — ~12 pages × 7 worker processes | 83 |
+| **Total** | **1,105** |
+
+The 1,940 catalogue calls that the 194 listing pages used to force are gone: the
+83 remaining catalogue calls are 12 per worker, which is exactly one full paging
+pass each. **That is the proof the memo is doing its job** — under `cache()` the
+194 listing pages alone could not have come in under 1,940.
+
+**Worker fan-out is real but cheap.** Next forked static generation across 7
+processes (`experimental.staticGenerationMinPagesPerWorker`, documented in
+`node_modules/next/dist/docs/.../staticGeneration.md`), so the memo is per
+worker as suspected. It costs 83 calls instead of 12 — irrelevant next to the
+1,022 per-entity queries that now dominate.
+
+**Headroom: 100K ÷ 1,105 ≈ 90 builds a month**, inside the free tier. Before the
+fix that was ~33.
+
+One honest limit: **1,105 is measured, ~3,000 is still arithmetic.** No
+instrumented build was run against the old code, because doing so would spend
+~3% of the monthly quota to confirm a number the composition above already
+implies. If that proof is ever wanted, it costs one build.
+
+**Effort:** about an hour including the verification build. Builds also got
+faster — the measured build completed in 53s.
+
+### What was deliberately left alone
+
+The 1,022 per-entity queries are genuinely distinct: each post body and each
+edition's linked-post list carries data the catalogue doesn't. Collapsing them
+would mean fetching all 902 bodies in paged bulk — a much larger change, a much
+larger peak memory footprint, and unnecessary at 90 builds a month. Revisit only
+if the build count needs to go higher.
 
 ## 3. What this means for the media plan — mostly, don't do it
 
@@ -132,11 +163,11 @@ reserved but unused. See Q2.
 
 ## 5. Phases
 
-**Phase 1 — kill the build amplification (§2).** The whole fix. Module-level
-singleton for `getAllEntries` and `getAllRevistas`; verify with a dashboard
-delta across one deploy.
-*Exit:* one full build consumes double-digit-to-low-hundreds GraphQL calls,
-measured, not estimated.
+**Phase 1 — kill the build amplification (§2). Done, 2026-08-27.** Module-level
+memo for `getAllEntries`, `getCanonicalEntries` and `getAllRevistas`.
+*Exit met:* an instrumented build consumed **1,105 GraphQL calls** for 1,235
+pages — measured, not estimated — of which 1,022 are irreducible per-entity
+queries. ~90 builds a month now fit inside the free tier.
 
 **Phase 2 — quality fixes, no urgency.** Commit and deploy the `deviceSizes`
 cap; fix the OG/Twitter/JSON-LD leak (§3a); add long-lived `Cache-Control` for
@@ -217,6 +248,13 @@ recording because they show how the diagnosis moved.
 - **This draft** — the free-tier limit (100K) and real bandwidth (3.88 GB)
   confirm the API meter alone caused the block. The media migration is shelved;
   the build fix is the plan.
+
+- **2026-08-27, after implementing** — the fix was measured rather than
+  projected, and the projection was wrong in both directions: the memo saves
+  less than the headline "~12 calls" suggested (per-entity queries dominate at
+  1,022 of 1,105), and worker fan-out, flagged as the risk, turned out to cost
+  83 calls rather than multiplying anything that mattered. The ~950 estimate in
+  the second draft was the accurate one.
 
 The lesson worth keeping: the first two drafts inferred usage from the built
 output instead of reading the usage dashboard. Measuring the artefact is not the
