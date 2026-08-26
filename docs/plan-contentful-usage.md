@@ -178,10 +178,35 @@ needed no work — `vercel.json` already carries
 JSON-LD `thumbnailUrl` pointing at an uncapped Contentful original. Measured on
 one real hero: **2,473 KB → 126 KB**, a 95% cut on every link unfurl.
 
-**Phase 3 — remove the manual publish step (§4).** Fold rewrite generation into
-a prebuild script so a redeploy is all anyone has to do. Blocked on Q2.
-*Exit:* adding an edition in Contentful and hitting redeploy publishes it, with
-nobody remembering a script.
+**Phase 3 — remove the silent failure (§4). Done, 2026-08-27.** Not as
+originally planned. Generating `vercel.json` during the build does not work:
+Vercel reads it as *static deployment configuration*, so a build that rewrites
+the file on disk has no reliable effect on routing — it would look like it
+worked and change nothing.
+
+Vercel's `vercel.ts` (programmatic config, executes at build time) and
+`bulkRedirectsPath` (generated at build time) both exist and were considered.
+Neither fits: `bulkRedirectsPath` covers **redirects only**, and these 265 PDF
+rules are **rewrites** — a proxy that keeps the PDF on misionessim.org. Moving
+them to redirects would expose the raw Contentful CDN URL in the address bar,
+which is the exact thing the rewrites were built to avoid. `vercel.ts` could
+work, but its `config` export is synchronous and no documented mechanism makes
+an async CMS fetch available to it; migrating would also mean deleting
+`vercel.json` and putting all 640 redirects plus 265 rewrites through an
+unproven path in one step.
+
+So the shipped fix converts a **silent** failure into a **loud** one:
+`scripts/check-revista-rewrites.ts` runs as `prebuild`, recomputes the expected
+rewrites from Contentful, and fails the build if `vercel.json` disagrees. Both
+the generator and the check call one `computeRevistaRewrites()`, so they cannot
+drift.
+*Exit met:* publishing an edition without regenerating now produces a failed
+deploy naming the exact missing rule and the command to fix it, instead of a
+PDF that 404s with nobody watching. Verified against a simulated new edition
+and a simulated PDF re-upload.
+
+*Still open:* the deploy is not yet automatic — someone must still redeploy
+after publishing. That part remains blocked on Q2.
 
 ## 6. Risks
 
