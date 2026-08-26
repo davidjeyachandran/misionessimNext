@@ -14,6 +14,14 @@ const nextConfig: NextConfig = {
     // srcsets. Local /public srcs pass through unchanged.
     loader: "custom",
     loaderFile: "./lib/contentful-image-loader.ts",
+    // Trimmed from the Next default [640, 750, 828, 1080, 1200, 1920, 2048,
+    // 3840]. Every srcset offered a 3840px variant on 1221 of 1236 pages, but
+    // only two images on the site render full-bleed (sizes="100vw") — the rest
+    // top out around 768px CSS. The 3840/2048 tiers were being fetched by
+    // retina desktops for no visible gain, and asset bandwidth is the meter
+    // that blocked the Contentful space on 2026-08-25. 750 is dropped as
+    // redundant with 640/828.
+    deviceSizes: [640, 828, 1080, 1200, 1920],
   },
   // NOTE: redirects()/rewrites()/headers() are NOT supported by `output:
   // 'export'` (they need a server). All legacy redirects live in
