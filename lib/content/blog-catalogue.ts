@@ -41,10 +41,10 @@ function richness(entry: BlogCatalogueEntry): number {
  * listing. Title-equivalent records are collapsed to the richest entry, while
  * records without a publish date remain available to callers outside listings.
  */
-export function buildBlogCatalogue(
-  entries: readonly BlogCatalogueEntry[],
-): BlogCatalogueEntry[] {
-  const groups = new Map<string, BlogCatalogueEntry[]>();
+export function buildBlogCatalogue<T extends BlogCatalogueEntry>(
+  entries: readonly T[],
+): T[] {
+  const groups = new Map<string, T[]>();
   for (const entry of entries) {
     const key = normalizeTitle(entry.title) || entry.slug;
     const group = groups.get(key);
@@ -54,6 +54,6 @@ export function buildBlogCatalogue(
 
   return [...groups.values()]
     .map((group) => [...group].sort((a, b) => richness(b) - richness(a))[0])
-    .filter((entry): entry is BlogCatalogueEntry & { publishDate: string } => Boolean(entry.publishDate))
+    .filter((entry): entry is T & { publishDate: string } => Boolean(entry.publishDate))
     .sort((a, b) => b.publishDate.localeCompare(a.publishDate));
 }

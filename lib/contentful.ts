@@ -3,6 +3,10 @@ import { cache } from "react";
 import { buildMemo } from "./build-memo";
 import { buildBlogCatalogue } from "./content/blog-catalogue";
 import {
+  buildEditionIndex,
+  pickFurtherReading,
+} from "./content/edition-navigation";
+import {
   buildRevistaCatalogue,
   normalizeRevistaSlug as normalizeStoredRevistaSlug,
 } from "./content/revista-catalogue";
@@ -94,7 +98,7 @@ interface RawEntry {
   tags?: string[] | null;
   author?: string | null;
   heroImage?: ContentfulImage | null;
-  revista?: { slug: string; title: string } | null;
+  revista?: { sys: { id: string }; slug: string; title: string } | null;
 }
 
 const CATALOGUE_FIELDS = `
@@ -106,7 +110,7 @@ const CATALOGUE_FIELDS = `
   tags
   author
   heroImage { url description width height }
-  revista { slug title }
+  revista { sys { id } slug title }
 `;
 
 // Fetch every blogPost once (paged) — ~10 GraphQL calls, memoized for the
@@ -422,52 +426,80 @@ export const getAllRevistas = buildMemo(async (): Promise<RevistaCard[]> => {
   );
 });
 
+// ---------------------------------------------------------------------------
+// Onward navigation
+//
+// One reading sequence per edition, derived once per build from the same
+// catalogue every listing already uses. The revista link travels with each
+// row, so this costs no extra API calls — and because the article page and the
+// edition page read the identical sequence, "artículo 4 de 24" can never
+// disagree with the list it points at.
+
+const getEditionIndex = buildMemo(async () =>
+  buildEditionIndex(await getCanonicalEntries()),
+);
+
+export interface PostNavigation {
+  /** The edition this article belongs to, and where it sits inside it. */
+  edition: (RevistaCard & { position: number; total: number }) | null;
+  /** The article before this one — earlier in the edition, or older on the blog. */
+  previous: BlogPostCard | null;
+  next: BlogPostCard | null;
+  /** Further reading from the same edition; empty when there is no edition. */
+  more: BlogPostCard[];
+}
+
+const NO_NAVIGATION: PostNavigation = {
+  edition: null,
+  previous: null,
+  next: null,
+  more: [],
+};
+
+export const getPostNavigation = cache(
+  async (slug: string, moreCount = 3): Promise<PostNavigation> => {
+    const { sequences, placements } = await getEditionIndex();
+    const placement = placements.get(slug);
+    const edition = placement
+      ? (await getAllRevistas()).find((r) => r.id === placement.revistaId)
+      : undefined;
+
+    if (placement && edition) {
+      const sequence = sequences.get(placement.revistaId) ?? [];
+      const { index } = placement;
+      return {
+        edition: { ...edition, position: index + 1, total: sequence.length },
+        previous: index > 0 ? toCard(sequence[index - 1]) : null,
+        next: index < sequence.length - 1 ? toCard(sequence[index + 1]) : null,
+        more: pickFurtherReading(sequence, index, moreCount).map(toCard),
+      };
+    }
+
+    // No edition (or an edition that is no longer published): the blog itself
+    // is the sequence. It runs newest first, so the previous article is the
+    // older neighbour.
+    const entries = await getCanonicalEntries();
+    const at = entries.findIndex((e) => e.slug === slug);
+    if (at === -1) return NO_NAVIGATION;
+    return {
+      edition: null,
+      previous: at < entries.length - 1 ? toCard(entries[at + 1]) : null,
+      next: at > 0 ? toCard(entries[at - 1]) : null,
+      more: [],
+    };
+  },
+);
+
 export const getRevistaBySlug = cache(async (slug: string): Promise<Revista | null> => {
   // Resolve the URL slug through the (cached) catalogue — stored slugs are
   // neither URL-safe nor unique, so the entry id is the real lookup key.
   const card = (await getAllRevistas()).find((r) => r.slug === slug);
   if (!card) return null;
 
-  const data = await gql<{
-    revista: {
-      blogPostsCollection?: {
-        items: ({
-          slug: string;
-          title: string;
-          publishDate: string | null;
-          description?: string | null;
-          heroImage?: ContentfulImage | null;
-        } | null)[];
-      } | null;
-    } | null;
-  }>(
-    `query ($id: String!) {
-      revista(id: $id) {
-        blogPostsCollection(limit: 50) {
-          items {
-            slug
-            title
-            publishDate
-            description
-            heroImage { url description width height }
-          }
-        }
-      }
-    }`,
-    { id: card.id },
-  );
-  return {
-    ...card,
-    // Keep the collection's editorial order (the magazine's own sequence);
-    // drop unresolvable links (e.g. a linked post that is archived/draft).
-    posts: (data.revista?.blogPostsCollection?.items ?? [])
-      .filter((p): p is NonNullable<typeof p> => p !== null && !!p.publishDate)
-      .map((p) => ({
-        slug: p.slug,
-        title: p.title,
-        publishDate: p.publishDate!,
-        description: p.description,
-        heroImage: p.heroImage,
-      })),
-  };
+  // The articles come from the shared reading sequence rather than the
+  // edition's own `blogPostsCollection`. That link order carried no editorial
+  // meaning (it is the order the VAMOS import created the links in), it capped
+  // at 50 articles, and reading it cost one GraphQL call per edition.
+  const { sequences } = await getEditionIndex();
+  return { ...card, posts: (sequences.get(card.id) ?? []).map(toCard) };
 });

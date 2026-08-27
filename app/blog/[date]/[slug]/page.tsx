@@ -7,10 +7,12 @@ import { notFound } from "next/navigation";
 import {
   getAllBlogPostSlugs,
   getBlogPostBySlug,
+  getPostNavigation,
   normalizeRevistaSlug,
   publishDateToSegment,
   slugify,
 } from "../../../../lib/contentful";
+import { PostOnwardNav } from "../../_components/PostOnwardNav";
 import { formatPostDate } from "../../../../lib/dates";
 import { socialImage } from "../../../../lib/social-image";
 import {
@@ -189,6 +191,8 @@ export default async function BlogPostPage({ params }: Props) {
   const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
+  const nav = await getPostNavigation(slug);
+
   const assetMap = new Map<string, { url: string; title?: string | null }>();
   for (const asset of post.body?.links?.assets?.block ?? []) {
     if (asset) assetMap.set(asset.sys.id, asset);
@@ -285,7 +289,7 @@ export default async function BlogPostPage({ params }: Props) {
       )}
 
       {post.tags && post.tags.length > 0 && (
-        <footer className="mt-10 pt-6 border-t border-hairline">
+        <div className="mt-10 pt-6 border-t border-hairline">
           <div className="flex flex-wrap gap-2">
             {post.tags.map((tag) => (
               <Link
@@ -297,8 +301,10 @@ export default async function BlogPostPage({ params }: Props) {
               </Link>
             ))}
           </div>
-        </footer>
+        </div>
       )}
+
+      <PostOnwardNav nav={nav} />
     </main>
   );
 }
