@@ -205,8 +205,42 @@ deploy naming the exact missing rule and the command to fix it, instead of a
 PDF that 404s with nobody watching. Verified against a simulated new edition
 and a simulated PDF re-upload.
 
-*Still open:* the deploy is not yet automatic — someone must still redeploy
-after publishing. That part remains blocked on Q2.
+**Phase 4 — publish triggers the deploy (Q2 answered, 2026-08-27).** David
+confirmed push-to-main is the deploy trigger and asked for a Contentful publish
+webhook. `scripts/setup-contentful-deploy-webhook.ts` creates it
+(`yarn setup:deploy-webhook`), idempotently, matching by name so rotating the
+hook URL is a re-run.
+
+*Needs one manual step first:* the Vercel Deploy Hook must be created in the
+dashboard (Settings → Git → Deploy Hooks, branch `main`) and its URL put in
+`.env.local` as `VERCEL_DEPLOY_HOOK_URL`. That URL is a credential — anyone
+holding it can deploy the project — so it stays out of git (`.env*` is ignored)
+and the script never prints it unredacted.
+
+Design notes:
+- **Topics are explicit, not `Entry.*`.** `Entry.*` includes `auto_save`, which
+  fires while an editor types. Only publish/unpublish/delete for entries and
+  assets are subscribed.
+- **Filtered to the `master`/`main` environments**, so work in `development`
+  cannot deploy production.
+- **Not filtered by content type.** The space is shared with `mi-movilicemos`,
+  which reads the same `blogPost` and `revista` types
+  ([`lib/contentful.ts:77`](../lib/contentful.ts)), so content type does not
+  separate the two sites. Since `mi-movilicemos` has not launched, everything
+  published here is currently for this site. When it launches it wants its own
+  deploy hook on the same events, not a filter on this one.
+- **Bulk imports are the risk to watch.** The import scripts publish dozens of
+  entries at a time, and each publish is a build (~1,105 GraphQL calls). Two
+  things contain it: Vercel cancels superseded deployments from the same deploy
+  hook, so a burst largely collapses into one build; and deploy hooks are capped
+  at **60 triggers/hour/project**. Triggers past the cap are dropped, so after a
+  large import confirm the final state actually deployed.
+
+**Interaction worth knowing:** re-uploading a revista PDF changes its content
+hash, so the webhook will now fire a build that *fails* on the Phase 3 check
+until `yarn build:revista-rewrites` is re-run and committed. That is the
+intended behaviour — a red deploy instead of a silent 404 — but it means a
+content action can produce a failed build that only David can clear.
 
 ## 6. Risks
 

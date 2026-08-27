@@ -24,7 +24,8 @@
     "migrate:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/run-migration.ts",
     "test:unit": "vitest run",
     "import:recovered": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-recovered-posts.ts",
-    "check:revista-rewrites": "tsx scripts/check-revista-rewrites.ts"
+    "check:revista-rewrites": "tsx scripts/check-revista-rewrites.ts",
+    "setup:deploy-webhook": "tsx scripts/setup-contentful-deploy-webhook.ts"
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^16.2.1",
