@@ -33,7 +33,10 @@ function describe(body) {
     if ((out + ' ' + s).trim().length > 160) break;
     out = (out + ' ' + s).trim();
   }
-  return out || sentences[0].slice(0, 160);
+  // A numbered list splits into sentences at every enumerator, so the
+  // budget can end on a bare «2.» — «…ora por quienes aún no conocen a
+  // Cristo. 2.» Drop a trailing one rather than ship it in the meta.
+  return (out || sentences[0].slice(0, 160)).replace(/\s+\d{1,2}\.$/, '');
 }
 
 /**
@@ -48,11 +51,25 @@ function describe(body) {
  */
 const RUN_ON_MAX_WORDS = 8;
 
+/**
+ * The word count catches a stranded opener, but not the commoner break:
+ * prose set to wrap around a picture changes indent at the wrap, and the
+ * reflow reads that as a new paragraph mid-sentence («…agradecen la
+ * presencia de» / «profesionales que se presentan como cristianos»). Sep
+ * 2026 alone had 28 of them. So a paragraph that ends without terminal
+ * punctuation is a run-on too, whatever its length: a real paragraph ends
+ * on . ! ? : ; … or a closing quote, and the one after it starts capitalised.
+ */
+const ENDS_A_PARAGRAPH = /[.!?:;…»”"')\]]$/;
+
 function paragraphs(body) {
   const out = [];
   for (const p of body.split('\n').map(t => t.trim()).filter(Boolean)) {
     const prev = out[out.length - 1];
-    if (prev && prev.split(/\s+/).length <= RUN_ON_MAX_WORDS && /^[a-záéíóúñü]/.test(p)) {
+    const runsOn = prev
+      && /^[a-záéíóúñü]/.test(p)
+      && (prev.split(/\s+/).length <= RUN_ON_MAX_WORDS || !ENDS_A_PARAGRAPH.test(prev));
+    if (runsOn) {
       out[out.length - 1] = `${prev} ${p}`;
     } else out.push(p);
   }
