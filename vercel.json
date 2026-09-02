@@ -2133,6 +2133,11 @@
       "permanent": true
     },
     {
+      "source": "/recursos-misioneros/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
       "source": "/content/",
       "destination": "/revistavamos/",
       "permanent": true
@@ -2608,6 +2613,11 @@
       "permanent": true
     },
     {
+      "source": "/recursos-misioneros/:path*/",
+      "destination": "/recursos/",
+      "permanent": true
+    },
+    {
       "source": "/la-revista/al-100-el-latino-en-misiones/feed/",
       "destination": "/revistavamos/latinos-al-100/",
       "permanent": true
@@ -3068,6 +3078,26 @@
       "permanent": true
     },
     {
+      "source": "/blog/2021-09/simply-mobilizing/feed/",
+      "destination": "/blog/2021-08/simply-mobilizing/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2021-11/uniendo-la-evangelizacion-y-apologetica/feed/",
+      "destination": "/blog/2021-10/uniendo-la-evangelizacion-y-apologetica/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/nadie-puede-imitar-quien-no-conoce/feed/",
+      "destination": "/blog/2019-10/nadie-puede-imitar-quien-no-conoce/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-02/superando-los-desafios-2/feed/",
+      "destination": "/blog/2020-02/superando-los-desafios/",
+      "permanent": true
+    },
+    {
       "source": "/blog/feed/",
       "destination": "/blog/",
       "permanent": true
@@ -3335,6 +3365,26 @@
     {
       "source": "/blog/2024-06/como-movilizar-para-llegar-a-los-no-alcanzados/",
       "destination": "/blog/2024-06/movilizar-alcanzar-no-alcanzados/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2021-09/simply-mobilizing/",
+      "destination": "/blog/2021-08/simply-mobilizing/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2021-11/uniendo-la-evangelizacion-y-apologetica/",
+      "destination": "/blog/2021-10/uniendo-la-evangelizacion-y-apologetica/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/nadie-puede-imitar-quien-no-conoce/",
+      "destination": "/blog/2019-10/nadie-puede-imitar-quien-no-conoce/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-02/superando-los-desafios-2/",
+      "destination": "/blog/2020-02/superando-los-desafios/",
       "permanent": true
     },
     {

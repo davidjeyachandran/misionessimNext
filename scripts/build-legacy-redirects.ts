@@ -124,6 +124,7 @@ const DRUPAL_PREFIXES = [
   "/ora-por-misiones/",
   "/da-la-obra/",
   "/recursos-movilicemos/",
+  "/recursos-misioneros/",
 ];
 
 /** Redirects this script owns. Anything else in vercel.json is left alone. */
