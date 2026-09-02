@@ -2208,6 +2208,31 @@
       "permanent": true
     },
     {
+      "source": "/la-revista/familias-/",
+      "destination": "/revistavamos/familias-misioneras/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/familias-misioneras/4/",
+      "destination": "/revistavamos/familias-misioneras/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/la-/",
+      "destination": "/revistavamos/la-solteria/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/la-solteria/5/",
+      "destination": "/revistavamos/la-solteria/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/aniversario-de-/",
+      "destination": "/revistavamos/aniversario-de-sim/",
+      "permanent": true
+    },
+    {
       "source": "/images/Acceso_limit_adjuntos/El_budismo.pdf",
       "destination": "/recursos/el_budismo.pdf",
       "permanent": true
@@ -2578,6 +2603,11 @@
       "permanent": true
     },
     {
+      "source": "/larevista/:path*/",
+      "destination": "/revistavamos/:path*/",
+      "permanent": true
+    },
+    {
       "source": "/la-revista/al-100-el-latino-en-misiones/feed/",
       "destination": "/revistavamos/latinos-al-100/",
       "permanent": true
@@ -2833,6 +2863,31 @@
       "permanent": true
     },
     {
+      "source": "/la-revista/familias-/feed/",
+      "destination": "/revistavamos/familias-misioneras/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/familias-misioneras/4/feed/",
+      "destination": "/revistavamos/familias-misioneras/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/la-/feed/",
+      "destination": "/revistavamos/la-solteria/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/la-solteria/5/feed/",
+      "destination": "/revistavamos/la-solteria/",
+      "permanent": true
+    },
+    {
+      "source": "/la-revista/aniversario-de-/feed/",
+      "destination": "/revistavamos/aniversario-de-sim/",
+      "permanent": true
+    },
+    {
       "source": "/la-revista/feed/",
       "destination": "/revistavamos/",
       "permanent": true
@@ -2923,6 +2978,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/2020-09/sin-discipulado-no-hay-mision/feed/",
+      "destination": "/blog/2019-10/sin-discipulado-no-hay-mision/",
+      "permanent": true
+    },
+    {
       "source": "/blog/2020-04/sim-ofrece-ayuda-del-covid-19-a-hospitales-alrededor-del-mundo/feed/",
       "destination": "/blog/2020-04/sim-ofrece-ayuda-del-covid-19-hospitales-alrededor-del-mundo/",
       "permanent": true
@@ -3003,6 +3063,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/2024-06/como-movilizar-para-llegar-a-los-no-alcanzados/feed/",
+      "destination": "/blog/2024-06/movilizar-alcanzar-no-alcanzados/",
+      "permanent": true
+    },
+    {
       "source": "/blog/feed/",
       "destination": "/blog/",
       "permanent": true
@@ -3055,6 +3120,16 @@
     {
       "source": "/revistavamos/:path*/feed/:type/",
       "destination": "/revistavamos/:path*/",
+      "permanent": true
+    },
+    {
+      "source": "/index.php",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/resource-category/:path*/",
+      "destination": "/recursos/",
       "permanent": true
     },
     {
@@ -3173,6 +3248,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/2020-09/sin-discipulado-no-hay-mision/",
+      "destination": "/blog/2019-10/sin-discipulado-no-hay-mision/",
+      "permanent": true
+    },
+    {
       "source": "/blog/2020-04/sim-ofrece-ayuda-del-covid-19-a-hospitales-alrededor-del-mundo/",
       "destination": "/blog/2020-04/sim-ofrece-ayuda-del-covid-19-hospitales-alrededor-del-mundo/",
       "permanent": true
@@ -3253,12 +3333,501 @@
       "permanent": true
     },
     {
+      "source": "/blog/2024-06/como-movilizar-para-llegar-a-los-no-alcanzados/",
+      "destination": "/blog/2024-06/movilizar-alcanzar-no-alcanzados/",
+      "permanent": true
+    },
+    {
       "source": "/wp-content/uploads/:file(.*\\.(?:jpe?g|png|gif|webp|svg|avif|bmp|tiff?|JPE?G|PNG|GIF|WEBP))",
       "destination": "/home/banner-sim-home-2026-1200.webp",
       "permanent": false
     }
   ],
   "rewrites": [
+    {
+      "source": "/revistavamos/africa/2013-07-A_fricaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/217U0a6n6JGAstCy6VCAHl/d3d743f258609bd60a5af54eaa136aa6/2013-07-A_fricaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/agencias-misioneras/2010-11-AgenciasMisionerasVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/28YAerRMDUem1vzETnaoKN/d928a0b3290d342b6f58d0595584e463/2010-11-AgenciasMisionerasVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/agotamiento/2012-07-tamientoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1ZVTEZo4IiALRVd59kB7VC/0a841c6f599795072fdb027a3b784b2d/2012-07-tamientoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/alcanzando-los-aprendices-de-orales/2013-09-AprendicesOralesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3eHwYpUtCSKIEudjicVrhM/2dc8b59ed0678c806c8fdfecef215546/2013-09-AprendicesOralesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/alianzas-estrategicas/2014-07-AlianzasVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3F6sD41J9buyjbyw1PRVfP/a4d4509078271d161edffc7a6754fcf7/2014-07-AlianzasVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/amor-en-misiones/2019-06-AmorenMisionesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1aixyMZG2AoPW1n5X4lsgz/c8666af8cdfef17e0e33c03fb71db3cd/2019-06-AmorenMisionesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/aniversario-de-sim/2018-12-AniversarioSIM125VAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/HHGxly8pFdcP4pIzkzujw/50b25cb72202a84bff43e4f7893ed8bb/2018-12-AniversarioSIM125VAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/antes-de-ir/2013-01-AntesdeIrVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/KZZQFSrLRk8Y7oHoUKkWm/38c84d27f5bb85e52f0c66d094f02be4/2013-01-AntesdeIrVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/apologetica/ApolgeticaVAMOSoct21.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/112zcgdWC6POF1aXIVVFS4/400710750af7d73cd343b6ac34ae6905/ApolgeticaVAMOSoct21.pdf"
+    },
+    {
+      "source": "/revistavamos/arte-en-misiones/2019-10-ArteEnMisionVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2Dh1tiMwVv9I39GU9jYvsl/3b8b5409f6acb354d3405b7501bbab61/2019-10-ArteEnMisionVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/autocuidado/autocuidadovamosfeb22.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1OcpDP22RkDunrzbHUZhMW/f5c510d69f0b32a7644455ff24122dd2/autocuidadovamosfeb22.pdf"
+    },
+    {
+      "source": "/revistavamos/biocupacionales/2010-08-BiocupacionalesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3lBp3JoGmIdbr99IZlWrgq/87dc9b143a1cd6ffdb9b757bf017fa64/2010-08-BiocupacionalesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/caballeros-de-dios/2013-10-CaballerosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4cmOPrIYX6DOLij5PUAcSh/4a697b68e526117836d3dffb28e4cd8f/2013-10-CaballerosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/caracter-misionero/CaracterVAMOSseptiembre25.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/680uhhKeVgXVfOHoL5vHFO/fb0c40184a5aa856cfe3c3f8b3ed9328/CaracterVAMOSseptiembre25.pdf"
+    },
+    {
+      "source": "/revistavamos/comunicacion-integral/2011-12-Comunicacio_nIntegralVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7y8L3whCiyBHsBi5XUPQ4L/110e366590abca6df59db3d81efad4a8/2011-12-Comunicacio_nIntegralVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/conectando-con-la-comunidad/ConectandoComunidadSep26.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3dYiv86QNskc0jcejFMqpE/981629d5a01989880f5e00502716e2c8/ConectandoComunidadSep26.pdf"
+    },
+    {
+      "source": "/revistavamos/conferencia-misionera/2012-02-ConferenciaMisioneraVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/29t5rk8VdXjPwNxuUUFeV0/b37466edb7fa394e4b52f11346c181ba/2012-02-ConferenciaMisioneraVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/conferencias-misioneras/conferenciamisioneravamosjun24.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7zDlcPrutYYH5bM4j0bBQa/f8a00e054da12f7471ec6cc8107c3624/conferenciamisioneravamosjun24.pdf"
+    },
+    {
+      "source": "/revistavamos/conociendo-el-mundo-musulman/2015-02-IslamrevistaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6hKdYq41sIgw9AJPvZWIW3/e2e0b2077030a618aa9eef8a0bfe9b9a/2015-02-IslamrevistaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/cuidado-integral-biblico-y-solidario/CuidadoIntegralMarzo25.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7zMQmx6YaP5EqhI1oKwiRu/fb2ad5dfc1fb878218bfbe355c43e8fb/CuidadoIntegralMarzo25.pdf"
+    },
+    {
+      "source": "/revistavamos/cuidado-integral-del-misionero/2015-12-CuidadoIntegralVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5gWRaRJ5IFzc7bQfM5Uysb/14df351f7c668765bf8b67fdaa7037bd/2015-12-CuidadoIntegralVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/cuidado-pastoral/2011-03-CuidadoPastoralVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/67qwZMy9OfVI0UlfZV8Ztl/ba5973b0a8c6c0a7c8244a069e39b80c/2011-03-CuidadoPastoralVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/cuidando-de-los-que-se-quedan/2019-08-LosQueQuedanVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/25wrT77ksMrccBgOQeuL80/99e8556434c2cae282594ada0043c3b4/2019-08-LosQueQuedanVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/de-pastor-pastor/2012-03-DePastoraPastorVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/MNyOA2xm4KFHD4K12DY0J/f06268ff0e39f470bf7562833040ea06/2012-03-DePastoraPastorVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/desarrollo-comunitario/2014-02-DesarollocomunitarioVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6q814GuL59BGfScZaJLlrb/96d1fe34d761fafc926dff0dc4c05a13/2014-02-DesarollocomunitarioVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/discipulos-que-hacen-discipulos/DiscipuladoVAMOSjunio25.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7Fuf7bCZTueUbEt5pA6gk8/998cf608bb5bfec4508f163d1a15832d/DiscipuladoVAMOSjunio25.pdf"
+    },
+    {
+      "source": "/revistavamos/donde-cristo-ya-no-es-conocido/2011-09-EuropaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/59kvQokF6P9XWp8gEtdh6N/551bf27a728a38ec441a062a8fa12fdf/2011-09-EuropaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/el-budismo/2017-12-BudismoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1GwOPZm7fl0M2mNGyhxF99/66e0f6613cfad113e03301d7fde73f84/2017-12-BudismoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/el-clamor-macedonio/LlamadoMacedonioJun26.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3s7CIFjws1neEw0EOIN0bI/dd60ea572f81d602f13fc1f62cd05647/LlamadoMacedonioJun26.pdf"
+    },
+    {
+      "source": "/revistavamos/el-discipulado/2014-01-DiscipuladoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5Y3IiuMQwa5hp1qDevccji/6c971ea32a7e8d9e64cef32a326880ca/2014-01-DiscipuladoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/el-llamado/2010-05-ElLlamadoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4qWMx6tm0ciPxLGVV3JReT/0c9ac7d7981003b57f7a1dac7c01dc54/2010-05-ElLlamadoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/el-pastor-es-clave/2015-06-PastoresclaveVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1lMBNe28luPoOjGI51lQ2W/2047d30ee2be2fa7169415a18fd25f96/2015-06-PastoresclaveVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/emocionalmente-libres/2012-10-SaludEmocionalVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/19lecxSzTUN2UkG9axrTCn/7e8e6a46e6f954798d1284787c0bbecc/2012-10-SaludEmocionalVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/envio-responsable-2/SIMLaEnvio25.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2J91cKYz3BstWy2uqxyAPB/2446d2a9a27e3896a3e1e32ebeb377b2/SIMLaEnvio25.pdf"
+    },
+    {
+      "source": "/revistavamos/envio-responsable/2020-12-procesosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5WmIP6ZKCGEmU9hnOP0W0X/451325fced893a5bf6433928464d277f/2020-12-procesosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/equipos-de-corto-plazo/2014-03-EquiposdeCortoplazoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1ebK0H3QR1saJEEtmfx6dz/0eb16a5412d2f9d54849fb86b25f39f6/2014-03-EquiposdeCortoplazoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/equipos-multiculturales-2024/equiposmulticulturalesvamosjun23.pdf",
+      "destination": "https://downloads.ctfassets.net/i46buyptg48q/3qpMYFRgo0QzhYzgLnl355/b6c65118ad663438fc7467929c95021f/equiposmulticulturalesvamosjun23.pdf"
+    },
+    {
+      "source": "/revistavamos/equipos-multiculturales/2011-07-EquiposMulticulturalesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3WBecOnZwB5adqOQOxQxCy/c039762f9003629b5f001bceccbf19d0/2011-07-EquiposMulticulturalesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/esperanza-para-las-mujeres-valiosas/2013-03-RescatandoPrincesasVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6ZalREtE4Rx4MDLjKBmC2y/1e652da8b6d93e8de9b4b7a7f7d39437/2013-03-RescatandoPrincesasVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/evangelismo-creativo/2014-08-CreatividadVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2J5erDC3aMjne9D3VeJcFP/8357764fc5513a9f370fd6ae26f1b585/2014-08-CreatividadVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/evangelismo-eficaz/2016-08-EvangelismoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7bVFmKP1qN1jVDtxJOk5la/1c9fc34bffd38646f3a4157946092ee5/2016-08-EvangelismoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/familia-en-misiones/2010-03-FamiliaenMisionesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/74juaDBGcNBFwGn7LkQsiv/50552cc58c770baccd12992ceb5d0754/2010-03-FamiliaenMisionesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/familias-misioneras/FamiliamisioneraVAMOSfeb20.pdf",
+      "destination": "https://downloads.ctfassets.net/i46buyptg48q/7g3FDF3FsNsAEFHp7igUOS/e9d51e29dcc9da4e074dbfa2519393d4/FamiliamisioneraVAMOSfeb20.pdf"
+    },
+    {
+      "source": "/revistavamos/fondos-misioneros-2022/FondosenMisionVAMOSdic22.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/xLhSSTAj4FlgPGYPaQQTP/1d8ff632c8951f2cea43a51153d65471/FondosenMisionVAMOSdic22.pdf"
+    },
+    {
+      "source": "/revistavamos/fondos-misioneros/2016-02-FondosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3a7An7PpANozVRnm5ELIKp/8234c9d73e330f04e7c0454b4e16e792/2016-02-FondosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/fondos-y-misiones-orig/2010-10-FondosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1qo8fnZFz7aLp8kTYzjA75/9c3ea2956fdebc27ccae69b6600e3669/2010-10-FondosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/fondos-y-misiones/2010-09-MisionIntegralVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3I6Rf32ZShtOlcq5KU8zuk/22b55f7f91fedb497728be8e4a926ee1/2010-09-MisionIntegralVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/grandes-necesidades/2018-02-GrandesNecesidadesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3JkaaNibsBMed4NoXkc9YQ/45b591139d82d8dff534f21d73559f2d/2018-02-GrandesNecesidadesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/guerra-espiritual/2011-06-GuerraEspiritualVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6DvHIUIpsoPaZSWMdvTDgl/657f92218d6a9226c9717bb5b8d58e87/2011-06-GuerraEspiritualVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/hijos-de-la-tercera-cultura/2020-06-htcVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7DMWHi4eOLFR9nGwkMAWPp/086ba56d31fae34d75b2ece809d8a1dd/2020-06-htcVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/hijos-de-misioneros/2013-04-HijosdemisionerosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/35rIdBSL8hfUxdNQzUzRWN/b3bcae1f73966ffad99605f76cb38def/2013-04-HijosdemisionerosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/hinduismo/HinduismoVAMOSjun21.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7ztdhKvu8zYQo1QtFwVXYm/df5d089f3ad16c57ba6c0e4a7b969d6d/HinduismoVAMOSjun21.pdf"
+    },
+    {
+      "source": "/revistavamos/idioma-y-cultura-2022/idiomaculturavamossep22_0.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6Awtg91ftQZTZ8ElE8sL4M/7840bc8b34a333928da9c46db4f5e5ac/idiomaculturavamossep22_0.pdf"
+    },
+    {
+      "source": "/revistavamos/idioma-y-cultura/2012-12-IdiomayCulturaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4DvuxeEe3f6VYzvmEFU5H8/61243573ceb90e839f944c1302007900/2012-12-IdiomayCulturaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/iglesia-y-misiones/2009-12-IglesiamisioneraVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5E01Z3I2LDZjxlWCyDFiIX/ab5016fafbb769bcc2e1faeac4415cb3/2009-12-IglesiamisioneraVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/invirtiendo-en-la-eternidad/2016-02-FondosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3a7An7PpANozVRnm5ELIKp/8234c9d73e330f04e7c0454b4e16e792/2016-02-FondosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/involucrar-tu-iglesia/2012-11-HaciaLasNacionesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3vinr8JEtn4IWUA7hzzSKi/b9942b3400bcc8e96d19a9dfc6e61052/2012-11-HaciaLasNacionesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/jovenes-en-mision/2018-10-JovenesEnMisionVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6eOYpASmbTs6wrvGCqkLPV/06d6b66577c4395d7f82cc7bf96800fa/2018-10-JovenesEnMisionVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/judaismo/2018-08-JudaismoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3Fyn5LMwtOozSrMhPTitrT/e52a5972e5222c3e39d909019200112e/2018-08-JudaismoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/la-capacitacion-misionera/2016-06-CapactiacionVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2EvLN74PH4pTFzPJqYm691/bb37a9ae882e1ce22474ed49dc4cf509/2016-06-CapactiacionVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/la-contextualizacion/2016-10-ContextualizacionVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2smJCWCprKkAAGr7YVvKXZ/00678d19454650e68ece7ea75cfd90e0/2016-10-ContextualizacionVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/la-gente-que-no-vemos/GenteQueNoVemosVAMOSsept24.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6BjzX5e2zly2d6Mf8OSQPv/434ffeb68e698987ce27c747a613ba6f/GenteQueNoVemosVAMOSsept24.pdf"
+    },
+    {
+      "source": "/revistavamos/la-movilizacion-es-discipulado/MovilizacionESdiscipuladoVAMOSjago21.pdf",
+      "destination": "https://downloads.ctfassets.net/i46buyptg48q/2InqHjCresgaTfers7crqT/c00a5a1e805a98e4dfa08e4c832dd057/MovilizacionESdiscipuladoVAMOSjago21.pdf"
+    },
+    {
+      "source": "/revistavamos/la-movilizacion-misionera/2013-12-MovilizacionVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6elFMXMSO2598EHjFMRv6g/59e36cba0e60377823549fbc32c0d163/2013-12-MovilizacionVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/la-oracion-2010/2010-06-LaOracio_nVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/23Bld3aazvfzvtG9rcsz9k/300452c58d3822b76b131fad1e1bbcab/2010-06-LaOracio_nVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/la-oracion/2014-06-OracionVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5MBNqefj4Dr0HHaMeSarYU/c5b6e2e80a5aafc7f72c7896c3d46709/2014-06-OracionVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/la-solteria-un-regalo/2016-04-SolteriaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6Cf84bxN5TxbsFWus6tYtl/ba5eff3f68691e3cd21e5664cea10fc2/2016-04-SolteriaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/la-solteria/2010-01-LaSolteri_aVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/mXBvZinv5kqWg2qtysvuP/c12965375d57712e729ff5ac94f3676b/2010-01-LaSolteri_aVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/latinos-al-100/Latinosal100.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5LYRU5ThSw53ZaiJzU6LCC/f557a63e99b899632ae5dff35a969ea0/Latinosal100.pdf"
+    },
+    {
+      "source": "/revistavamos/latinos-en-adaptacion/AdaptacionVAMOSdic24.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5your1LPsj9pYtg6v45tVg/bd7dd7fbc7da92b5349243f6b96f57b3/AdaptacionVAMOSdic24.pdf"
+    },
+    {
+      "source": "/revistavamos/liderazgo-y-capacitacion-de-lideres/2013-11-LiderazgoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6kzjCChwb8tyvQJVp12lxs/363d6b30591c7f1ebcb0d3520ecdd488/2013-11-LiderazgoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/limitaciones-que-no-limitan/2014-11-HabilidadesEspecialesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/Rdqh1DG3vG7kLSLEuOulC/69d86ccdf30768edda956a261d232081/2014-11-HabilidadesEspecialesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/llamado-y-voluntad-de-dios/2014-09-LlamadoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/41BcPkWCHiKVH3yuteEMK3/38a16e3541cc0dcfc44c7977a44fe7b2/2014-09-LlamadoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/los-medios-en-mision/2017-08-MediosenMisionVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1RhOoyIfQOb4u3Mcwv5ysD/ce39623884f96ce63de8c4838950d093/2017-08-MediosenMisionVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/lucha-espiritual/LuchaEspiritualVamosMarzo26-4.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6LAzPs1ybLJANhQykHm3DR/f32cff10a5e76b8c072e6d3071e7c4f7/LuchaEspiritualVamosMarzo26-4.pdf"
+    },
+    {
+      "source": "/revistavamos/luz-para-el-medio-oriente/2018-04-MedioOrienteVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5vJOm5ahPVge7zpQBwn5Rk/3bb649ff5784512f9f892671c2192924/2018-04-MedioOrienteVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/matrimonio-misionero/2020-10-matrimoniosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5GeL5gfTEoKaaLraRGkga0/214a3e246ea76523edd812c032b6cab1/2020-10-matrimoniosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/mentoria/2012-05-Mentori_aVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6hxvXir8ht8bDaZBmVAGtP/f811263f65943a0af79224923449f1d2/2012-05-Mentori_aVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/mi-vida-espiritual/2016-12-VidaEspiritualVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/Fd7mdTRl1xdm8KaVzXOAe/b9ea794db446b130bc5c822eb9d3b585/2016-12-VidaEspiritualVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/mision-local-y-global/2014-12-GlocalVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/68oujuYdy4Z4uwmHYfenvy/9b1a01239a97e476046e5ac4ecf4c7b9/2014-12-GlocalVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/misiones-de-corto-plazo/2011-02-MisionesdecortoplazoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3SDA3tjE7p3ZWAkd2K616I/cc292f06f26071ff12fbec89208a8401/2011-02-MisionesdecortoplazoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/misiones-en-tiempos-de-crisis/2020-08-crisisVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5TVPvTba8GAEyfqol2rmTr/a8badac3938ea3d84ab720850d46218a/2020-08-crisisVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/misiones-en-zonas-de-conflicto/2010-04-ZonasdeconflictoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1gmoo54KCzLXA40RZU5dEi/bde1d29ed6e0ef7ef81be52f6ee27c65/2010-04-ZonasdeconflictoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/misiones-medicas/2020-04-misionesMedicasVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7k5MN0ihSZYsaSH2XuVWuA/68f23dd63d4c9dd1cd04bfe50548ac35/2020-04-misionesMedicasVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/misiones-urbanas/2017-06-MisionesUrbanasVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2h0MKEegzUe228erQgcLRA/808204de9908626046ae5403d393e466/2017-06-MisionesUrbanasVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/misiones-y-jovenes/2011-04-MisionesConJo_venesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3k30ZpvKG3nDTVsAAu9Nuz/5c84029fcb06fd7219eaca57356cf41b/2011-04-MisionesConJo_venesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/mobilizacion/2011-08-Movilizacio_nVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2JtChA9AdAJ64BY7JOyB0g/1c9d03fcabc9f9ae70f8d8175e75138a/2011-08-Movilizacio_nVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/movilizando-la-juventud/2014-04-MovilJuventudVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6p4z0TE8h7wVx8iDjGPpys/a461ac64240e48cdfe933cc695a112dc/2014-04-MovilJuventudVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/mujeres-en-mision/2019-12-MujeresenMisionVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/59rHy1NcmdEu2iqerYkUvV/44cbc78d8ca70d24324ac3efca90d9ea/2019-12-MujeresenMisionVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/negocio-como-mision/2011-05-Negociocomomisio_nVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1tnY9TYucgANlQ5sj1ap6q/363f68df0ea30c1502db683583898e0f/2011-05-Negociocomomisio_nVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/negocios-como-mision/2015-10-BAMVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1ijYZQgQRhAF9X7TFVjSe8/e6011407429cf93d0bc6c178855d4ed5/2015-10-BAMVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/no-alcanzados/noalcanzadosvamossep23.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7tEWZgonkH7CTOXLzOXy0C/b142f660c81e8b7e82fa88802159b5e8/noalcanzadosvamossep23.pdf"
+    },
+    {
+      "source": "/revistavamos/obstaculos-y-perseverancia/2012-09-Obsta_culosyPerseveranciaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6tFokWzzApS0I3wQ12HgNC/89478b8e375d9351a367a658dc1614f5/2012-09-Obsta_culosyPerseveranciaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/oscuridad-en-los-colores-vibrantes-asia/2013-06-AsiaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2dsKQozjWe0BzJ5BFALKv6/78f28bf3e2c04317f7a1275eabfc2529/2013-06-AsiaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/persecucion/persecucionvamosmayo14.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/sYKER47lQNseyeSk4US9u/8cbca8011ce84b6de81aaa1a3affc58f/persecucionvamosmayo14.pdf"
+    },
+    {
+      "source": "/revistavamos/plantacion-de-iglesias-0/2011-10-Plantacio_ndeiglesiasVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/54qTe9sd5pFIrnpPAkyeEp/3aaf4ca9d2982b1a72aa67224b811ecf/2011-10-Plantacio_ndeiglesiasVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/plantacion-de-iglesias/2018-06-PlantacionIglesiaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3FYezoxHEgV8nTDGNDMsR5/991ba885fbe3889ddf336439dd364acf/2018-06-PlantacionIglesiaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/preparacion-misionera/2010-07-Preparacio_nmisioneraVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7KtEO5Na9xfnOcAGCVmaMc/792a9d04c5df8ab59ba3d19cdf7a6ac6/2010-07-Preparacio_nmisioneraVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/recibiendo-las-naciones-0/2017-02-MigracionyRefugiadosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6R4AKZA5rcJjV7pquufw14/15e77ba2b0c1a8ec828a8de339707960/2017-02-MigracionyRefugiadosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/redes-sociales/2013-08-RedesSocialesVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/66PeDbeOUlehzcnEh00XLD/1133bce6b4ed6ac515c9867ab42e6e4d/2013-08-RedesSocialesVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/regresando-a-casa/regresoacasavamosdic23.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6F3aACXxkwbLJMBeE7zgP8/0810d7818273a4f27feaabcd2e1b7104/regresoacasavamosdic23.pdf"
+    },
+    {
+      "source": "/revistavamos/resolucion-de-conflictos/2012-01-Resolucio_ndeConflictosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2fEgCMUv0qN359j04QofgC/0fd440abb6af19373c22a2b212c5eec3/2012-01-Resolucio_ndeConflictosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/salud-fisica/2012-06-SaludFi_sicaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/4WTj94wZTNPEzP6bpHuYpJ/c8895a5dbdbc6662f871306c9c08b057/2012-06-SaludFi_sicaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/salud-mental/2021-02-saludmentalVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/1ynL52pt3JDkst8h5xLCN7/0b2b49575da50f41caa6580a175e6a3c/2021-02-saludmentalVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/seguridad-en-el-campo/2013-02-SeguridadenelcampoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7slT2DUQPvoHobcKoTctKM/ecea58a7c6a50d2951237c1be41ec516/2013-02-SeguridadenelcampoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/sida/2010-12-SIDAVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2YKJPZT38B3Pj1CB21h2SP/c6a6b678dc1bb0abe240b7e4759d20bb/2010-12-SIDAVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/soy-influencer/influencersvamosmar24.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3sok7ABC7KEoSeURK7bgg1/f72d270778d6edbc2f0300377f4a450d/influencersvamosmar24.pdf"
+    },
+    {
+      "source": "/revistavamos/tecnologia-en-misiones/TecnologiaVAMOSabr21.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/RNjPtfQR0HBaZ3IIOBJi2/cc78dd6f8a28e417cebc2649ee712958/TecnologiaVAMOSabr21.pdf"
+    },
+    {
+      "source": "/revistavamos/termina-bien/transicionesvamosmar23.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/5x3SleswV05qCISR9XgpUk/a79f2ae4935b050579753a12855536d6/transicionesvamosmar23.pdf"
+    },
+    {
+      "source": "/revistavamos/trabajando-con-ninos/2012-04-TrabajandoconNin_osVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2IgTrJdgOVKoSAh3zaaexm/ad4edcee2d0bf999654d43eb1092387a/2012-04-TrabajandoconNin_osVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/trabajo-en-equipo/2019-04-TrabajoEquipoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3GHeI3nZGhT4hKokBxFDPE/a9a06139fd7d960d4cf3a9b5b8c2fda2/2019-04-TrabajoEquipoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/trabajo-en-la-selva/2017-04-SelvaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7HdnVQIpCdHxgvIbeVFnIX/f74b9e836e35c3100b3305d785c03e66/2017-04-SelvaVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/trabajo-en-paises-restringidos/2012-08-Pai_sesRestringidosVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6ZqqlACDTxqFdYF5ezpdjR/3d06c526ef0af2758a6ac9f9b1d7a1c1/2012-08-Pai_sesRestringidosVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/traduccion-bibilica/2017-10-TraduccionVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2OfRq8tQjQkBC1zT6kxowI/52207359e4601de7ac556603aaf486fd/2017-10-TraduccionVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/traduccion-de-la-biblia/2011-11-Traduccio_nVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3PxraZ0zF8NvckUF2oWT6i/7a55ff6c3e67f6287997ffe3c665c75b/2011-11-Traduccio_nVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/trafico-humano/2015-08-TraficohumanoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3sknp0l0GsMfrYyIK8HiJi/13a5d958dd74c50e7716331cebe3af7e/2015-08-TraficohumanoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/tu-trabajo-en-el-reino/trabajoyfevamos-junio-2022.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2W9LqLroAEzjjWCQAxA7lW/a75a40d9ce9d030b4df0e76d85736a2a/trabajoyfevamos-junio-2022.pdf"
+    },
+    {
+      "source": "/revistavamos/usando-tu-ocupacion-para-el-reino/2015-04-UsandoTuTrabajoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/ubTZK5O95IAdSDHBHhwh2/7d950feadffea9a7746e2366527e89d5/2015-04-UsandoTuTrabajoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/vida-espiritual/2013-05-VidaEspiritualVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/6govJrAvTa6oxrozCY3eQu/87610f766ce44e77563825b2052f6667/2013-05-VidaEspiritualVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/voluntariado/2019-02-VoluntariadoVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3Uwf5TUnW7ON72yjsaG0UB/cdb595483d568f106c27e4e3ef742e01/2019-02-VoluntariadoVAMOS.pdf"
+    },
+    {
+      "source": "/revistavamos/volviendo-casa/2011-01-VolviendoacasaVAMOS.pdf",
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3Uld3cyHmfB17q6baWlrke/ac7fb592276f1a1b35b078a06ec27083/2011-01-VolviendoacasaVAMOS.pdf"
+    },
     {
       "source": "/recursos/13leccionessobremisiones.pdf",
       "destination": "https://assets.ctfassets.net/i46buyptg48q/1bJwuRlxq0M33dLzDTEVLp/72ffd6eeb7aa01069dccb7374539660c/13leccionessobremisiones.pdf"
@@ -3838,490 +4407,6 @@
     {
       "source": "/recursos/GuiadeOracion-ORA1002-SIM_compressed-1.pdf",
       "destination": "https://assets.ctfassets.net/i46buyptg48q/7rkavmV7Xrc0W9NrMgpFKE/f1ec0007009e8b46d73c715983609e64/GuiadeOracion-ORA1002-SIM_compressed-1.pdf"
-    },
-    {
-      "source": "/revistavamos/africa/2013-07-A_fricaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/217U0a6n6JGAstCy6VCAHl/d3d743f258609bd60a5af54eaa136aa6/2013-07-A_fricaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/agencias-misioneras/2010-11-AgenciasMisionerasVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/28YAerRMDUem1vzETnaoKN/d928a0b3290d342b6f58d0595584e463/2010-11-AgenciasMisionerasVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/agotamiento/2012-07-tamientoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1ZVTEZo4IiALRVd59kB7VC/0a841c6f599795072fdb027a3b784b2d/2012-07-tamientoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/alcanzando-los-aprendices-de-orales/2013-09-AprendicesOralesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3eHwYpUtCSKIEudjicVrhM/2dc8b59ed0678c806c8fdfecef215546/2013-09-AprendicesOralesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/alianzas-estrategicas/2014-07-AlianzasVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3F6sD41J9buyjbyw1PRVfP/a4d4509078271d161edffc7a6754fcf7/2014-07-AlianzasVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/amor-en-misiones/2019-06-AmorenMisionesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1aixyMZG2AoPW1n5X4lsgz/c8666af8cdfef17e0e33c03fb71db3cd/2019-06-AmorenMisionesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/aniversario-de-sim/2018-12-AniversarioSIM125VAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/HHGxly8pFdcP4pIzkzujw/50b25cb72202a84bff43e4f7893ed8bb/2018-12-AniversarioSIM125VAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/antes-de-ir/2013-01-AntesdeIrVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/KZZQFSrLRk8Y7oHoUKkWm/38c84d27f5bb85e52f0c66d094f02be4/2013-01-AntesdeIrVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/apologetica/ApolgeticaVAMOSoct21.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/112zcgdWC6POF1aXIVVFS4/400710750af7d73cd343b6ac34ae6905/ApolgeticaVAMOSoct21.pdf"
-    },
-    {
-      "source": "/revistavamos/arte-en-misiones/2019-10-ArteEnMisionVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2Dh1tiMwVv9I39GU9jYvsl/3b8b5409f6acb354d3405b7501bbab61/2019-10-ArteEnMisionVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/autocuidado/autocuidadovamosfeb22.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1OcpDP22RkDunrzbHUZhMW/f5c510d69f0b32a7644455ff24122dd2/autocuidadovamosfeb22.pdf"
-    },
-    {
-      "source": "/revistavamos/biocupacionales/2010-08-BiocupacionalesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3lBp3JoGmIdbr99IZlWrgq/87dc9b143a1cd6ffdb9b757bf017fa64/2010-08-BiocupacionalesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/caballeros-de-dios/2013-10-CaballerosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/4cmOPrIYX6DOLij5PUAcSh/4a697b68e526117836d3dffb28e4cd8f/2013-10-CaballerosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/caracter-misionero/CaracterVAMOSseptiembre25.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/680uhhKeVgXVfOHoL5vHFO/fb0c40184a5aa856cfe3c3f8b3ed9328/CaracterVAMOSseptiembre25.pdf"
-    },
-    {
-      "source": "/revistavamos/comunicacion-integral/2011-12-Comunicacio_nIntegralVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7y8L3whCiyBHsBi5XUPQ4L/110e366590abca6df59db3d81efad4a8/2011-12-Comunicacio_nIntegralVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/conectando-con-la-comunidad/ConectandoComunidadSep26.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3dYiv86QNskc0jcejFMqpE/981629d5a01989880f5e00502716e2c8/ConectandoComunidadSep26.pdf"
-    },
-    {
-      "source": "/revistavamos/conferencia-misionera/2012-02-ConferenciaMisioneraVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/29t5rk8VdXjPwNxuUUFeV0/b37466edb7fa394e4b52f11346c181ba/2012-02-ConferenciaMisioneraVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/conferencias-misioneras/conferenciamisioneravamosjun24.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7zDlcPrutYYH5bM4j0bBQa/f8a00e054da12f7471ec6cc8107c3624/conferenciamisioneravamosjun24.pdf"
-    },
-    {
-      "source": "/revistavamos/conociendo-el-mundo-musulman/2015-02-IslamrevistaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6hKdYq41sIgw9AJPvZWIW3/e2e0b2077030a618aa9eef8a0bfe9b9a/2015-02-IslamrevistaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/cuidado-integral-biblico-y-solidario/CuidadoIntegralMarzo25.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7zMQmx6YaP5EqhI1oKwiRu/fb2ad5dfc1fb878218bfbe355c43e8fb/CuidadoIntegralMarzo25.pdf"
-    },
-    {
-      "source": "/revistavamos/cuidado-integral-del-misionero/2015-12-CuidadoIntegralVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5gWRaRJ5IFzc7bQfM5Uysb/14df351f7c668765bf8b67fdaa7037bd/2015-12-CuidadoIntegralVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/cuidado-pastoral/2011-03-CuidadoPastoralVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/67qwZMy9OfVI0UlfZV8Ztl/ba5973b0a8c6c0a7c8244a069e39b80c/2011-03-CuidadoPastoralVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/cuidando-de-los-que-se-quedan/2019-08-LosQueQuedanVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/25wrT77ksMrccBgOQeuL80/99e8556434c2cae282594ada0043c3b4/2019-08-LosQueQuedanVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/de-pastor-pastor/2012-03-DePastoraPastorVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/MNyOA2xm4KFHD4K12DY0J/f06268ff0e39f470bf7562833040ea06/2012-03-DePastoraPastorVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/desarrollo-comunitario/2014-02-DesarollocomunitarioVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6q814GuL59BGfScZaJLlrb/96d1fe34d761fafc926dff0dc4c05a13/2014-02-DesarollocomunitarioVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/discipulos-que-hacen-discipulos/DiscipuladoVAMOSjunio25.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7Fuf7bCZTueUbEt5pA6gk8/998cf608bb5bfec4508f163d1a15832d/DiscipuladoVAMOSjunio25.pdf"
-    },
-    {
-      "source": "/revistavamos/donde-cristo-ya-no-es-conocido/2011-09-EuropaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/59kvQokF6P9XWp8gEtdh6N/551bf27a728a38ec441a062a8fa12fdf/2011-09-EuropaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/el-budismo/2017-12-BudismoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1GwOPZm7fl0M2mNGyhxF99/66e0f6613cfad113e03301d7fde73f84/2017-12-BudismoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/el-clamor-macedonio/LlamadoMacedonioJun26.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3s7CIFjws1neEw0EOIN0bI/dd60ea572f81d602f13fc1f62cd05647/LlamadoMacedonioJun26.pdf"
-    },
-    {
-      "source": "/revistavamos/el-discipulado/2014-01-DiscipuladoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5Y3IiuMQwa5hp1qDevccji/6c971ea32a7e8d9e64cef32a326880ca/2014-01-DiscipuladoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/el-llamado/2010-05-ElLlamadoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/4qWMx6tm0ciPxLGVV3JReT/0c9ac7d7981003b57f7a1dac7c01dc54/2010-05-ElLlamadoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/el-pastor-es-clave/2015-06-PastoresclaveVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1lMBNe28luPoOjGI51lQ2W/2047d30ee2be2fa7169415a18fd25f96/2015-06-PastoresclaveVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/emocionalmente-libres/2012-10-SaludEmocionalVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/19lecxSzTUN2UkG9axrTCn/7e8e6a46e6f954798d1284787c0bbecc/2012-10-SaludEmocionalVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/envio-responsable-2/SIMLaEnvio25.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2J91cKYz3BstWy2uqxyAPB/2446d2a9a27e3896a3e1e32ebeb377b2/SIMLaEnvio25.pdf"
-    },
-    {
-      "source": "/revistavamos/envio-responsable/2020-12-procesosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5WmIP6ZKCGEmU9hnOP0W0X/451325fced893a5bf6433928464d277f/2020-12-procesosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/equipos-de-corto-plazo/2014-03-EquiposdeCortoplazoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1ebK0H3QR1saJEEtmfx6dz/0eb16a5412d2f9d54849fb86b25f39f6/2014-03-EquiposdeCortoplazoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/equipos-multiculturales-2024/equiposmulticulturalesvamosjun23.pdf",
-      "destination": "https://downloads.ctfassets.net/i46buyptg48q/3qpMYFRgo0QzhYzgLnl355/b6c65118ad663438fc7467929c95021f/equiposmulticulturalesvamosjun23.pdf"
-    },
-    {
-      "source": "/revistavamos/equipos-multiculturales/2011-07-EquiposMulticulturalesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3WBecOnZwB5adqOQOxQxCy/c039762f9003629b5f001bceccbf19d0/2011-07-EquiposMulticulturalesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/esperanza-para-las-mujeres-valiosas/2013-03-RescatandoPrincesasVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6ZalREtE4Rx4MDLjKBmC2y/1e652da8b6d93e8de9b4b7a7f7d39437/2013-03-RescatandoPrincesasVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/evangelismo-creativo/2014-08-CreatividadVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2J5erDC3aMjne9D3VeJcFP/8357764fc5513a9f370fd6ae26f1b585/2014-08-CreatividadVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/evangelismo-eficaz/2016-08-EvangelismoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7bVFmKP1qN1jVDtxJOk5la/1c9fc34bffd38646f3a4157946092ee5/2016-08-EvangelismoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/familia-en-misiones/2010-03-FamiliaenMisionesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/74juaDBGcNBFwGn7LkQsiv/50552cc58c770baccd12992ceb5d0754/2010-03-FamiliaenMisionesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/familias-misioneras/FamiliamisioneraVAMOSfeb20.pdf",
-      "destination": "https://downloads.ctfassets.net/i46buyptg48q/7g3FDF3FsNsAEFHp7igUOS/e9d51e29dcc9da4e074dbfa2519393d4/FamiliamisioneraVAMOSfeb20.pdf"
-    },
-    {
-      "source": "/revistavamos/fondos-misioneros-2022/FondosenMisionVAMOSdic22.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/xLhSSTAj4FlgPGYPaQQTP/1d8ff632c8951f2cea43a51153d65471/FondosenMisionVAMOSdic22.pdf"
-    },
-    {
-      "source": "/revistavamos/fondos-misioneros/2016-02-FondosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3a7An7PpANozVRnm5ELIKp/8234c9d73e330f04e7c0454b4e16e792/2016-02-FondosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/fondos-y-misiones-orig/2010-10-FondosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1qo8fnZFz7aLp8kTYzjA75/9c3ea2956fdebc27ccae69b6600e3669/2010-10-FondosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/fondos-y-misiones/2010-09-MisionIntegralVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3I6Rf32ZShtOlcq5KU8zuk/22b55f7f91fedb497728be8e4a926ee1/2010-09-MisionIntegralVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/grandes-necesidades/2018-02-GrandesNecesidadesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3JkaaNibsBMed4NoXkc9YQ/45b591139d82d8dff534f21d73559f2d/2018-02-GrandesNecesidadesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/guerra-espiritual/2011-06-GuerraEspiritualVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6DvHIUIpsoPaZSWMdvTDgl/657f92218d6a9226c9717bb5b8d58e87/2011-06-GuerraEspiritualVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/hijos-de-la-tercera-cultura/2020-06-htcVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7DMWHi4eOLFR9nGwkMAWPp/086ba56d31fae34d75b2ece809d8a1dd/2020-06-htcVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/hijos-de-misioneros/2013-04-HijosdemisionerosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/35rIdBSL8hfUxdNQzUzRWN/b3bcae1f73966ffad99605f76cb38def/2013-04-HijosdemisionerosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/hinduismo/HinduismoVAMOSjun21.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7ztdhKvu8zYQo1QtFwVXYm/df5d089f3ad16c57ba6c0e4a7b969d6d/HinduismoVAMOSjun21.pdf"
-    },
-    {
-      "source": "/revistavamos/idioma-y-cultura-2022/idiomaculturavamossep22_0.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6Awtg91ftQZTZ8ElE8sL4M/7840bc8b34a333928da9c46db4f5e5ac/idiomaculturavamossep22_0.pdf"
-    },
-    {
-      "source": "/revistavamos/idioma-y-cultura/2012-12-IdiomayCulturaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/4DvuxeEe3f6VYzvmEFU5H8/61243573ceb90e839f944c1302007900/2012-12-IdiomayCulturaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/iglesia-y-misiones/2009-12-IglesiamisioneraVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5E01Z3I2LDZjxlWCyDFiIX/ab5016fafbb769bcc2e1faeac4415cb3/2009-12-IglesiamisioneraVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/invirtiendo-en-la-eternidad/2016-02-FondosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3a7An7PpANozVRnm5ELIKp/8234c9d73e330f04e7c0454b4e16e792/2016-02-FondosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/involucrar-tu-iglesia/2012-11-HaciaLasNacionesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3vinr8JEtn4IWUA7hzzSKi/b9942b3400bcc8e96d19a9dfc6e61052/2012-11-HaciaLasNacionesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/jovenes-en-mision/2018-10-JovenesEnMisionVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6eOYpASmbTs6wrvGCqkLPV/06d6b66577c4395d7f82cc7bf96800fa/2018-10-JovenesEnMisionVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/judaismo/2018-08-JudaismoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3Fyn5LMwtOozSrMhPTitrT/e52a5972e5222c3e39d909019200112e/2018-08-JudaismoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/la-capacitacion-misionera/2016-06-CapactiacionVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2EvLN74PH4pTFzPJqYm691/bb37a9ae882e1ce22474ed49dc4cf509/2016-06-CapactiacionVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/la-contextualizacion/2016-10-ContextualizacionVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2smJCWCprKkAAGr7YVvKXZ/00678d19454650e68ece7ea75cfd90e0/2016-10-ContextualizacionVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/la-gente-que-no-vemos/GenteQueNoVemosVAMOSsept24.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6BjzX5e2zly2d6Mf8OSQPv/434ffeb68e698987ce27c747a613ba6f/GenteQueNoVemosVAMOSsept24.pdf"
-    },
-    {
-      "source": "/revistavamos/la-movilizacion-es-discipulado/MovilizacionESdiscipuladoVAMOSjago21.pdf",
-      "destination": "https://downloads.ctfassets.net/i46buyptg48q/2InqHjCresgaTfers7crqT/c00a5a1e805a98e4dfa08e4c832dd057/MovilizacionESdiscipuladoVAMOSjago21.pdf"
-    },
-    {
-      "source": "/revistavamos/la-movilizacion-misionera/2013-12-MovilizacionVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6elFMXMSO2598EHjFMRv6g/59e36cba0e60377823549fbc32c0d163/2013-12-MovilizacionVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/la-oracion-2010/2010-06-LaOracio_nVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/23Bld3aazvfzvtG9rcsz9k/300452c58d3822b76b131fad1e1bbcab/2010-06-LaOracio_nVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/la-oracion/2014-06-OracionVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5MBNqefj4Dr0HHaMeSarYU/c5b6e2e80a5aafc7f72c7896c3d46709/2014-06-OracionVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/la-solteria-un-regalo/2016-04-SolteriaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6Cf84bxN5TxbsFWus6tYtl/ba5eff3f68691e3cd21e5664cea10fc2/2016-04-SolteriaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/la-solteria/2010-01-LaSolteri_aVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/mXBvZinv5kqWg2qtysvuP/c12965375d57712e729ff5ac94f3676b/2010-01-LaSolteri_aVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/latinos-al-100/Latinosal100.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5LYRU5ThSw53ZaiJzU6LCC/f557a63e99b899632ae5dff35a969ea0/Latinosal100.pdf"
-    },
-    {
-      "source": "/revistavamos/latinos-en-adaptacion/AdaptacionVAMOSdic24.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5your1LPsj9pYtg6v45tVg/bd7dd7fbc7da92b5349243f6b96f57b3/AdaptacionVAMOSdic24.pdf"
-    },
-    {
-      "source": "/revistavamos/liderazgo-y-capacitacion-de-lideres/2013-11-LiderazgoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6kzjCChwb8tyvQJVp12lxs/363d6b30591c7f1ebcb0d3520ecdd488/2013-11-LiderazgoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/limitaciones-que-no-limitan/2014-11-HabilidadesEspecialesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/Rdqh1DG3vG7kLSLEuOulC/69d86ccdf30768edda956a261d232081/2014-11-HabilidadesEspecialesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/llamado-y-voluntad-de-dios/2014-09-LlamadoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/41BcPkWCHiKVH3yuteEMK3/38a16e3541cc0dcfc44c7977a44fe7b2/2014-09-LlamadoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/los-medios-en-mision/2017-08-MediosenMisionVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1RhOoyIfQOb4u3Mcwv5ysD/ce39623884f96ce63de8c4838950d093/2017-08-MediosenMisionVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/lucha-espiritual/LuchaEspiritualVamosMarzo26-4.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6LAzPs1ybLJANhQykHm3DR/f32cff10a5e76b8c072e6d3071e7c4f7/LuchaEspiritualVamosMarzo26-4.pdf"
-    },
-    {
-      "source": "/revistavamos/luz-para-el-medio-oriente/2018-04-MedioOrienteVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5vJOm5ahPVge7zpQBwn5Rk/3bb649ff5784512f9f892671c2192924/2018-04-MedioOrienteVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/matrimonio-misionero/2020-10-matrimoniosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5GeL5gfTEoKaaLraRGkga0/214a3e246ea76523edd812c032b6cab1/2020-10-matrimoniosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/mentoria/2012-05-Mentori_aVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6hxvXir8ht8bDaZBmVAGtP/f811263f65943a0af79224923449f1d2/2012-05-Mentori_aVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/mi-vida-espiritual/2016-12-VidaEspiritualVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/Fd7mdTRl1xdm8KaVzXOAe/b9ea794db446b130bc5c822eb9d3b585/2016-12-VidaEspiritualVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/mision-local-y-global/2014-12-GlocalVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/68oujuYdy4Z4uwmHYfenvy/9b1a01239a97e476046e5ac4ecf4c7b9/2014-12-GlocalVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/misiones-de-corto-plazo/2011-02-MisionesdecortoplazoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3SDA3tjE7p3ZWAkd2K616I/cc292f06f26071ff12fbec89208a8401/2011-02-MisionesdecortoplazoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/misiones-en-tiempos-de-crisis/2020-08-crisisVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5TVPvTba8GAEyfqol2rmTr/a8badac3938ea3d84ab720850d46218a/2020-08-crisisVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/misiones-en-zonas-de-conflicto/2010-04-ZonasdeconflictoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1gmoo54KCzLXA40RZU5dEi/bde1d29ed6e0ef7ef81be52f6ee27c65/2010-04-ZonasdeconflictoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/misiones-medicas/2020-04-misionesMedicasVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7k5MN0ihSZYsaSH2XuVWuA/68f23dd63d4c9dd1cd04bfe50548ac35/2020-04-misionesMedicasVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/misiones-urbanas/2017-06-MisionesUrbanasVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2h0MKEegzUe228erQgcLRA/808204de9908626046ae5403d393e466/2017-06-MisionesUrbanasVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/misiones-y-jovenes/2011-04-MisionesConJo_venesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3k30ZpvKG3nDTVsAAu9Nuz/5c84029fcb06fd7219eaca57356cf41b/2011-04-MisionesConJo_venesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/mobilizacion/2011-08-Movilizacio_nVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2JtChA9AdAJ64BY7JOyB0g/1c9d03fcabc9f9ae70f8d8175e75138a/2011-08-Movilizacio_nVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/movilizando-la-juventud/2014-04-MovilJuventudVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6p4z0TE8h7wVx8iDjGPpys/a461ac64240e48cdfe933cc695a112dc/2014-04-MovilJuventudVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/mujeres-en-mision/2019-12-MujeresenMisionVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/59rHy1NcmdEu2iqerYkUvV/44cbc78d8ca70d24324ac3efca90d9ea/2019-12-MujeresenMisionVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/negocio-como-mision/2011-05-Negociocomomisio_nVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1tnY9TYucgANlQ5sj1ap6q/363f68df0ea30c1502db683583898e0f/2011-05-Negociocomomisio_nVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/negocios-como-mision/2015-10-BAMVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1ijYZQgQRhAF9X7TFVjSe8/e6011407429cf93d0bc6c178855d4ed5/2015-10-BAMVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/no-alcanzados/noalcanzadosvamossep23.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7tEWZgonkH7CTOXLzOXy0C/b142f660c81e8b7e82fa88802159b5e8/noalcanzadosvamossep23.pdf"
-    },
-    {
-      "source": "/revistavamos/obstaculos-y-perseverancia/2012-09-Obsta_culosyPerseveranciaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6tFokWzzApS0I3wQ12HgNC/89478b8e375d9351a367a658dc1614f5/2012-09-Obsta_culosyPerseveranciaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/oscuridad-en-los-colores-vibrantes-asia/2013-06-AsiaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2dsKQozjWe0BzJ5BFALKv6/78f28bf3e2c04317f7a1275eabfc2529/2013-06-AsiaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/persecucion/persecucionvamosmayo14.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/sYKER47lQNseyeSk4US9u/8cbca8011ce84b6de81aaa1a3affc58f/persecucionvamosmayo14.pdf"
-    },
-    {
-      "source": "/revistavamos/plantacion-de-iglesias-0/2011-10-Plantacio_ndeiglesiasVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/54qTe9sd5pFIrnpPAkyeEp/3aaf4ca9d2982b1a72aa67224b811ecf/2011-10-Plantacio_ndeiglesiasVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/plantacion-de-iglesias/2018-06-PlantacionIglesiaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3FYezoxHEgV8nTDGNDMsR5/991ba885fbe3889ddf336439dd364acf/2018-06-PlantacionIglesiaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/preparacion-misionera/2010-07-Preparacio_nmisioneraVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7KtEO5Na9xfnOcAGCVmaMc/792a9d04c5df8ab59ba3d19cdf7a6ac6/2010-07-Preparacio_nmisioneraVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/recibiendo-las-naciones-0/2017-02-MigracionyRefugiadosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6R4AKZA5rcJjV7pquufw14/15e77ba2b0c1a8ec828a8de339707960/2017-02-MigracionyRefugiadosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/redes-sociales/2013-08-RedesSocialesVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/66PeDbeOUlehzcnEh00XLD/1133bce6b4ed6ac515c9867ab42e6e4d/2013-08-RedesSocialesVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/regresando-a-casa/regresoacasavamosdic23.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6F3aACXxkwbLJMBeE7zgP8/0810d7818273a4f27feaabcd2e1b7104/regresoacasavamosdic23.pdf"
-    },
-    {
-      "source": "/revistavamos/resolucion-de-conflictos/2012-01-Resolucio_ndeConflictosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2fEgCMUv0qN359j04QofgC/0fd440abb6af19373c22a2b212c5eec3/2012-01-Resolucio_ndeConflictosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/salud-fisica/2012-06-SaludFi_sicaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/4WTj94wZTNPEzP6bpHuYpJ/c8895a5dbdbc6662f871306c9c08b057/2012-06-SaludFi_sicaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/salud-mental/2021-02-saludmentalVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/1ynL52pt3JDkst8h5xLCN7/0b2b49575da50f41caa6580a175e6a3c/2021-02-saludmentalVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/seguridad-en-el-campo/2013-02-SeguridadenelcampoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7slT2DUQPvoHobcKoTctKM/ecea58a7c6a50d2951237c1be41ec516/2013-02-SeguridadenelcampoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/sida/2010-12-SIDAVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2YKJPZT38B3Pj1CB21h2SP/c6a6b678dc1bb0abe240b7e4759d20bb/2010-12-SIDAVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/soy-influencer/influencersvamosmar24.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3sok7ABC7KEoSeURK7bgg1/f72d270778d6edbc2f0300377f4a450d/influencersvamosmar24.pdf"
-    },
-    {
-      "source": "/revistavamos/tecnologia-en-misiones/TecnologiaVAMOSabr21.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/RNjPtfQR0HBaZ3IIOBJi2/cc78dd6f8a28e417cebc2649ee712958/TecnologiaVAMOSabr21.pdf"
-    },
-    {
-      "source": "/revistavamos/termina-bien/transicionesvamosmar23.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/5x3SleswV05qCISR9XgpUk/a79f2ae4935b050579753a12855536d6/transicionesvamosmar23.pdf"
-    },
-    {
-      "source": "/revistavamos/trabajando-con-ninos/2012-04-TrabajandoconNin_osVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2IgTrJdgOVKoSAh3zaaexm/ad4edcee2d0bf999654d43eb1092387a/2012-04-TrabajandoconNin_osVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/trabajo-en-equipo/2019-04-TrabajoEquipoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3GHeI3nZGhT4hKokBxFDPE/a9a06139fd7d960d4cf3a9b5b8c2fda2/2019-04-TrabajoEquipoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/trabajo-en-la-selva/2017-04-SelvaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/7HdnVQIpCdHxgvIbeVFnIX/f74b9e836e35c3100b3305d785c03e66/2017-04-SelvaVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/trabajo-en-paises-restringidos/2012-08-Pai_sesRestringidosVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6ZqqlACDTxqFdYF5ezpdjR/3d06c526ef0af2758a6ac9f9b1d7a1c1/2012-08-Pai_sesRestringidosVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/traduccion-bibilica/2017-10-TraduccionVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2OfRq8tQjQkBC1zT6kxowI/52207359e4601de7ac556603aaf486fd/2017-10-TraduccionVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/traduccion-de-la-biblia/2011-11-Traduccio_nVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3PxraZ0zF8NvckUF2oWT6i/7a55ff6c3e67f6287997ffe3c665c75b/2011-11-Traduccio_nVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/trafico-humano/2015-08-TraficohumanoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3sknp0l0GsMfrYyIK8HiJi/13a5d958dd74c50e7716331cebe3af7e/2015-08-TraficohumanoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/tu-trabajo-en-el-reino/trabajoyfevamos-junio-2022.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/2W9LqLroAEzjjWCQAxA7lW/a75a40d9ce9d030b4df0e76d85736a2a/trabajoyfevamos-junio-2022.pdf"
-    },
-    {
-      "source": "/revistavamos/usando-tu-ocupacion-para-el-reino/2015-04-UsandoTuTrabajoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/ubTZK5O95IAdSDHBHhwh2/7d950feadffea9a7746e2366527e89d5/2015-04-UsandoTuTrabajoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/vida-espiritual/2013-05-VidaEspiritualVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/6govJrAvTa6oxrozCY3eQu/87610f766ce44e77563825b2052f6667/2013-05-VidaEspiritualVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/voluntariado/2019-02-VoluntariadoVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3Uwf5TUnW7ON72yjsaG0UB/cdb595483d568f106c27e4e3ef742e01/2019-02-VoluntariadoVAMOS.pdf"
-    },
-    {
-      "source": "/revistavamos/volviendo-casa/2011-01-VolviendoacasaVAMOS.pdf",
-      "destination": "https://assets.ctfassets.net/i46buyptg48q/3Uld3cyHmfB17q6baWlrke/ac7fb592276f1a1b35b078a06ec27083/2011-01-VolviendoacasaVAMOS.pdf"
     }
   ]
 }

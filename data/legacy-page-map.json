@@ -30,7 +30,13 @@
     "/content/ resolucion-de-conflictos/": "/revistavamos/resolucion-de-conflictos/",
     "/content/ trabajo-en-equipo/": "/revistavamos/trabajo-en-equipo/",
     "/content/consejos-para-tu-primer-ano-misionero/": "/revistavamos/",
-    "/content/alcanzando-los-aprendices-de-orales./": "/revistavamos/alcanzando-los-aprendices-de-orales/"
+    "/content/alcanzando-los-aprendices-de-orales./": "/revistavamos/alcanzando-los-aprendices-de-orales/",
+    "_comment3": "Drupal pager artefacts, from the 2026-08-29 Search Console \"Page with redirect\" export. The pager both cut the edition slug at a hyphen (`/la-revista/la-?page=5`) and served the page number as a path segment (`/la-revista/la-solteria/5/`); each truncated slug pairs with its numbered twin crawled the same day, which is how the intended edition is known. Without these the hand-written /la-revista/:path* wildcard 301s all five into a 404.",
+    "/la-revista/familias-/": "/revistavamos/familias-misioneras/",
+    "/la-revista/familias-misioneras/4/": "/revistavamos/familias-misioneras/",
+    "/la-revista/la-/": "/revistavamos/la-solteria/",
+    "/la-revista/la-solteria/5/": "/revistavamos/la-solteria/",
+    "/la-revista/aniversario-de-/": "/revistavamos/aniversario-de-sim/"
   },
   "wildcards": [
     {
@@ -55,6 +61,11 @@
     {
       "source": "/ora-por-misiones/:path*/",
       "destination": "/ora/"
+    },
+    {
+      "_comment": "`/larevista/` without the hyphen — a Drupal-era spelling Google still crawls, in the same relationship to /la-revista/ as /cursovamos/ is to /curso-vamos/. The hyphenated wildcard does not match it, so it 404s.",
+      "source": "/larevista/:path*/",
+      "destination": "/revistavamos/:path*/"
     }
   ]
 }

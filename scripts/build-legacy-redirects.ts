@@ -117,6 +117,7 @@ const DRUPAL_PREFIXES = [
   "/curso-vamos/",
   "/curso-vamos-0/",
   "/cursovamos/",
+  "/larevista/",
   "/quienessomos/",
   "/contact/",
   "/ora-con-nosotros/",
