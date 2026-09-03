@@ -6,14 +6,14 @@ cheaper before publication than after. Sixteen editions were imported that way
 in August 2026 and are complete but invisible. This is the worklist for taking
 them live one edition at a time.
 
-The list below is a snapshot (2026-09-03). **The live list is the script** —
+The list below is a snapshot (2026-09-03, after *Tu trabajo en el Reino*). **The live list is the script** —
 the counts move as editions are published:
 
 ```bash
 yarn drafts:list
 ```
 
-## Queue — 466 unpublished posts across 16 editions
+## Queue — 419 unpublished posts across 15 editions
 
 Newest first. `live` is how many of that edition's posts are already public
 (hand-published over the years, or by the Nº 118 import).
@@ -35,13 +35,13 @@ Newest first. `live` is how many of that edition's posts are already public
 | Termina Bien · mar 2023 ⚠️ | `termina-bien` | 26 | 9 |
 | Fondos Misioneros · dic 2022 | `/fondos-misioneros-2022` | 44 | 7 |
 | Idioma y cultura · sep 2022 | `/idioma-y-cultura-2022` | 37 | 7 |
-| Tu trabajo en el Reino · jun 2022 | `tu-trabajo-en-el-reino` | 48 | 7 |
 
 Two editions carry legacy slugs with a leading `/`. Both scripts accept the
 slug with or without it.
 
 Nº 118 · *El clamor macedonio* · jun 2026 is absent because its 26 posts were
-imported published.
+imported published. *Tu trabajo en el Reino* · jun 2022 left the queue on
+2026-09-03: all 48 published, 55 live on the edition.
 
 ## Publishing an edition
 
@@ -64,7 +64,7 @@ Only `sys.publishedAt` on the blogPost entries. Nothing else needs doing:
 - **The edition page already lists them.** The importer appended every draft to
   `revista.blogPosts`, and `getRevistaBySlug` drops links that do not resolve —
   a draft is simply invisible until published (verified 2026-09-03: 0 of 466
-  drafts are missing from their edition's array).
+  drafts were missing from their edition's array).
 - **Hero assets are already published.** Contentful refuses to publish an entry
   linked to a draft asset; the importer publishes each hero as it uploads it
   (verified: 0 of 461 hero assets unpublished). The publish script still

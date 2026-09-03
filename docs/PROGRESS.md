@@ -1321,3 +1321,9 @@ should be archived rather than published.
   editions adds 48 stops to a live course.
 - Vercel deploy hooks are capped at 60 triggers/hour. One 44-post edition fits;
   two editions in one hour do not.
+
+### 2026-09-03 — First edition published: *Tu trabajo en el Reino*
+
+`yarn drafts:publish --revista=tu-trabajo-en-el-reino --live` — 48/48, no
+failures. The edition now resolves 55 posts on the Content Delivery API (0
+still draft), and the queue is down to 419 across 15 editions.
