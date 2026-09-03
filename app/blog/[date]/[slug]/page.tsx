@@ -12,6 +12,7 @@ import {
   publishDateToSegment,
   slugify,
 } from "../../../../lib/contentful";
+import { hintedSrc } from "../../../../lib/contentful-image-loader";
 import { PostOnwardNav } from "../../_components/PostOnwardNav";
 import { formatPostDate } from "../../../../lib/dates";
 import { socialImage } from "../../../../lib/social-image";
@@ -67,6 +68,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       : {}),
   };
 }
+
+// The hero slot. `HERO_ASPECT` must stay in step with the `aspect-[16/9]`
+// class on the wrapper below — Tailwind only sees literal class names, so the
+// ratio can't be interpolated from here. It drives the CDN-side crop: without
+// it `object-cover` frames the image by downloading every row and discarding
+// the ones outside the box.
+const HERO_ASPECT = [16, 9] as const;
+
+// The slot is `max-w-3xl` (768px) inside `px-4`, so it tops out at 736px —
+// the old "768px" over-asked by a tier on retina desktops. Kept as a bare
+// `100vw` below that breakpoint rather than the exact `calc(100vw - 32px)`:
+// Next only prunes the srcset down to the device tiers when it can parse a
+// plain `vw` out of `sizes`, and a `calc()` silently widened it from 5 URLs
+// to 12.
+const HERO_SIZES = "(min-width: 768px) 736px, 100vw";
 
 interface HyperlinkNode {
   data: { uri: string };
@@ -270,14 +286,20 @@ export default async function BlogPostPage({ params }: Props) {
       </header>
 
       {post.heroImage?.url && (
-        <div className="mb-8 overflow-hidden rounded-lg aspect-[16/9] relative">
+        <div className="mb-8 overflow-hidden rounded-lg relative aspect-[16/9]">
           <Image
-            src={post.heroImage.url}
+            src={hintedSrc(post.heroImage.url, HERO_ASPECT, post.heroImage)}
             alt={post.heroImage.description || post.title}
             fill
             className="object-cover"
-            priority
-            sizes="(max-width: 768px) 100vw, 768px"
+            // `priority` is deprecated in Next 16 and now only emits the
+            // <link rel=preload> — it no longer carries a priority hint, which
+            // is why Lighthouse's LCP-discovery audit was failing on this
+            // image. `fetchPriority` propagates to both the preload and the
+            // <img>, so the two props together restore the old behaviour.
+            preload
+            fetchPriority="high"
+            sizes={HERO_SIZES}
           />
         </div>
       )}
