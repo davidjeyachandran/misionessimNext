@@ -1278,3 +1278,46 @@ space already carries 34 duplicate articles and does not need more. A clean
 `yarn build` prerenders both at their legacy URLs and the sitemap grew to 902
 posts, matching the prerendered page count exactly. **They reach the public site
 on the next deploy.**
+
+## 2026-09-03 — Progressive publication of the imported VAMOS editions
+
+The August PDF import left 16 editions in Contentful as drafts, by design. They
+are now publishable one edition at a time, on whatever cadence suits:
+
+```bash
+yarn drafts:list                                # the worklist
+yarn drafts:list --revista=<slug>               # the titles of one edition
+yarn drafts:publish --revista=<slug> [--live]   # dry run by default
+```
+
+The standing queue and its cautions live in
+[revista-publication-queue.md](revista-publication-queue.md). Scripts:
+[list-revista-drafts.mjs](../scripts/list-revista-drafts.mjs),
+[publish-revista-posts.mjs](../scripts/publish-revista-posts.mjs), sharing
+[lib/revista-drafts.mjs](../scripts/lib/revista-drafts.mjs).
+
+### The state the audit found
+
+466 draft posts across 16 editions, and publishing them is a pure state flip —
+nothing else is missing:
+
+- **0 of 466** drafts are absent from their edition's `revista.blogPosts` array.
+  The importer appended them all; `getRevistaBySlug` drops unresolvable links,
+  which is exactly what keeps a draft invisible.
+- **0 of 461** hero assets are unpublished. Contentful would refuse the entry
+  otherwise, so the importer publishes each hero as it uploads it.
+
+Two entries are deliberately outside the queue: the 38 archived duplicates from
+`archive-duplicate-posts.ts` (archived entries have no `publishedAt` either, so
+every query filters `sys.archivedAt`), and one bodyless 2022 stub,
+`la-feminidad-raiz-de-la-biblia-y-la-historia`, which has no revista link and
+should be archived rather than published.
+
+### Two things to check before pressing publish
+
+- `regresando-a-casa` and `termina-bien` back the live "Regresando a casa"
+  learning route in mi-movilicemos. Their arrays grew 17→39 and 4→30 in the
+  August import; if that route renders the whole array, publishing those two
+  editions adds 48 stops to a live course.
+- Vercel deploy hooks are capped at 60 triggers/hour. One 44-post edition fits;
+  two editions in one hour do not.

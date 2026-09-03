@@ -21,6 +21,8 @@
     "import:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-cms.ts",
     "import:revistas": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-missing-revistas.ts",
     "connect:revistas": "node --env-file=.env.local node_modules/.bin/tsx scripts/connect-posts-to-revistas.ts",
+    "drafts:list": "node --env-file=.env.local scripts/list-revista-drafts.mjs",
+    "drafts:publish": "node --env-file=.env.local scripts/publish-revista-posts.mjs",
     "migrate:cms": "node --env-file=.env.local node_modules/.bin/tsx scripts/run-migration.ts",
     "test:unit": "vitest run",
     "import:recovered": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-recovered-posts.ts",
