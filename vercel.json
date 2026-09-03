@@ -3098,6 +3098,21 @@
       "permanent": true
     },
     {
+      "source": "/blog/2024-05/autocuidado/feed/",
+      "destination": "/blog/2024-05/autocuidado-antes-de-ir-al-campo-misionero/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2024-07/te-gustaria-dejar-de-comer/feed/",
+      "destination": "/blog/2024-07/formas-en-que-la-iglesia-puede-fortalecer-a-los-obreros/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tag/agenda/feed/",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
       "source": "/blog/feed/",
       "destination": "/blog/",
       "permanent": true
@@ -3385,6 +3400,21 @@
     {
       "source": "/blog/2020-02/superando-los-desafios-2/",
       "destination": "/blog/2020-02/superando-los-desafios/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2024-05/autocuidado/",
+      "destination": "/blog/2024-05/autocuidado-antes-de-ir-al-campo-misionero/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2024-07/te-gustaria-dejar-de-comer/",
+      "destination": "/blog/2024-07/formas-en-que-la-iglesia-puede-fortalecer-a-los-obreros/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/tag/agenda/",
+      "destination": "/blog/",
       "permanent": true
     },
     {
