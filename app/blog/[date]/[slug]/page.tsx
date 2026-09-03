@@ -69,6 +69,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// Breadcrumb and taxonomy chips opt out of prefetching for the same reason the
+// site chrome does — see SiteHeader. PostOnwardNav deliberately keeps its
+// prefetch: it sits below the fold, so it costs nothing at load, and it is the
+// genuine next-navigation candidate on an article page.
+const PREFETCH = false;
+
 // The hero slot. `HERO_ASPECT` must stay in step with the `aspect-[16/9]`
 // class on the wrapper below — Tailwind only sees literal class names, so the
 // ratio can't be interpolated from here. It drives the CDN-side crop: without
@@ -249,15 +255,16 @@ export default async function BlogPostPage({ params }: Props) {
     <main className="page-offset mx-auto max-w-3xl px-4 py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={structuredData} />
       <nav className="mb-6 text-sm text-muted">
-        <Link href="/" className="hover:text-ink transition-colors">Inicio</Link>
+        <Link href="/" className="hover:text-ink transition-colors" prefetch={PREFETCH}>Inicio</Link>
         {" / "}
-        <Link href="/blog/" className="hover:text-ink transition-colors">Blog</Link>
+        <Link href="/blog/" className="hover:text-ink transition-colors" prefetch={PREFETCH}>Blog</Link>
         {post.revista && (
           <>
             {" / "}
             <Link
               href={`/revistavamos/${normalizeRevistaSlug(post.revista.slug)}/`}
               className="hover:text-ink transition-colors"
+              prefetch={PREFETCH}
             >
               {post.revista.title}
             </Link>
@@ -273,6 +280,7 @@ export default async function BlogPostPage({ params }: Props) {
                 key={cat}
                 href={`/blog/category/${slugify(cat)}/`}
                 className="text-xs font-semibold uppercase tracking-wide text-brand hover:text-brand-dark"
+                prefetch={PREFETCH}
               >
                 {cat}
               </Link>
@@ -318,6 +326,7 @@ export default async function BlogPostPage({ params }: Props) {
                 key={tag}
                 href={`/blog/tag/${slugify(tag)}/`}
                 className="rounded-full border border-hairline px-3 py-1 text-xs text-muted hover:border-brand hover:text-brand transition-colors"
+                prefetch={PREFETCH}
               >
                 #{tag}
               </Link>

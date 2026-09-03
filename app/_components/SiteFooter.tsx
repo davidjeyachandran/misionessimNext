@@ -1,6 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
+// Site chrome opts out of prefetching. Next's default (`prefetch="auto"`)
+// prefetches the *full* route for static routes, and on a static export that
+// is every link here — the whole nav, on every page. Lighthouse caught it
+// pulling 11 routes at load: 45 requests and 101KB competing with the LCP
+// image.
+//
+// This is the App Router's `false`, which disables hover prefetching too (the
+// Pages Router's "still prefetches on hover" behaviour does not apply here).
+// A nav click therefore costs one round trip for a few KB of RSC payload —
+// the deliberate trade for not spending 101KB on every page load. Navigation
+// stays client-side; only the fetch moves from load time to click time.
+const PREFETCH = false;
+
 const MENU_LINKS = [
   { label: "Nosotros", href: "/nosotros/", external: false },
   { label: "Recursos", href: "/recursos/", external: false },
@@ -48,7 +61,7 @@ function FooterLink({
   return link.external ? (
     <a href={link.href}>{link.label}</a>
   ) : (
-    <Link href={link.href}>{link.label}</Link>
+    <Link href={link.href} prefetch={PREFETCH}>{link.label}</Link>
   );
 }
 
@@ -111,7 +124,7 @@ export function SiteFooter() {
           <p>
             Copyright © {new Date().getFullYear()} SIM Latinoamérica INC. Todos
             los derechos reservados ·{" "}
-            <Link href="/privacidad/">Política de privacidad</Link>
+            <Link href="/privacidad/" prefetch={PREFETCH}>Política de privacidad</Link>
           </p>
           <p>Sirve · Ora · Da</p>
         </div>
