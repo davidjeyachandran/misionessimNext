@@ -1327,3 +1327,27 @@ should be archived rather than published.
 `yarn drafts:publish --revista=tu-trabajo-en-el-reino --live` — 48/48, no
 failures. The edition now resolves 55 posts on the Content Delivery API (0
 still draft), and the queue is down to 419 across 15 editions.
+
+### 2026-09-06 — *Idioma y cultura* published; deploys are manual on purpose
+
+`yarn drafts:publish --revista=/idioma-y-cultura-2022 --live` — 37/37, no
+failures; the edition resolves 44 posts on the CDA. Queue down to 382 across 14
+editions.
+
+**Publishing does not deploy, deliberately** (David, 2026-09-06). The space holds
+exactly two webhooks, both Algolia's; the
+"Vercel — deploy misionessim.org on publish" hook that
+`scripts/setup-contentful-deploy-webhook.ts` can create is intentionally not
+installed while this bulk publication run is under way — a per-entry hook would
+spend hundreds of Vercel builds on content that is changing in batches. David
+deploys by hand instead. So the live site lags Contentful between deploys: as of
+this entry the latest production build is 2026-09-04, and neither this edition
+nor *Tu trabajo en el Reino* is on it yet.
+
+That also retires the 60-triggers/hour caution the scripts print after each run:
+with no webhook, nothing is being triggered, and several editions can be
+published in one sitting before a single deploy.
+
+Unrelated, but visible in the same check: both Algolia webhooks are failing —
+0 of the last 86 calls healthy, all HTTP 500 on `Entry.publish`. That index is
+mi-movilicemos's, not this site's, but it has been broken for a while.

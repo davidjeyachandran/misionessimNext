@@ -6,14 +6,14 @@ cheaper before publication than after. Sixteen editions were imported that way
 in August 2026 and are complete but invisible. This is the worklist for taking
 them live one edition at a time.
 
-The list below is a snapshot (2026-09-03, after *Tu trabajo en el Reino*). **The live list is the script** —
+The list below is a snapshot (2026-09-06, after *Idioma y cultura*). **The live list is the script** —
 the counts move as editions are published:
 
 ```bash
 yarn drafts:list
 ```
 
-## Queue — 419 unpublished posts across 15 editions
+## Queue — 382 unpublished posts across 14 editions
 
 Newest first. `live` is how many of that edition's posts are already public
 (hand-published over the years, or by the Nº 118 import).
@@ -34,14 +34,14 @@ Newest first. `live` is how many of that edition's posts are already public
 | Equipos multiculturales · jun 2023 | `equipos-multiculturales-2024` | 21 | 26 |
 | Termina Bien · mar 2023 ⚠️ | `termina-bien` | 26 | 9 |
 | Fondos Misioneros · dic 2022 | `/fondos-misioneros-2022` | 44 | 7 |
-| Idioma y cultura · sep 2022 | `/idioma-y-cultura-2022` | 37 | 7 |
 
-Two editions carry legacy slugs with a leading `/`. Both scripts accept the
-slug with or without it.
+*Fondos Misioneros* carries a legacy slug with a leading `/`. Both scripts
+accept the slug with or without it.
 
 Nº 118 · *El clamor macedonio* · jun 2026 is absent because its 26 posts were
 imported published. *Tu trabajo en el Reino* · jun 2022 left the queue on
-2026-09-03: all 48 published, 55 live on the edition.
+2026-09-03 (48 published, 55 live) and *Idioma y cultura* · sep 2022 on
+2026-09-06 (37 published, 44 live).
 
 ## Publishing an edition
 
@@ -69,8 +69,13 @@ Only `sys.publishedAt` on the blogPost entries. Nothing else needs doing:
   linked to a draft asset; the importer publishes each hero as it uploads it
   (verified: 0 of 461 hero assets unpublished). The publish script still
   publishes a stray draft asset if it meets one.
-- **Deploy is automatic.** The Contentful webhook fires the Vercel deploy hook
-  on `Entry.publish`.
+- **Deploy is manual, by design.** The publish-on-deploy webhook that
+  `scripts/setup-contentful-deploy-webhook.ts` can create is deliberately **not
+  installed** while this bulk publication run is in progress (David, 2026-09-06):
+  a per-entry hook would spend hundreds of Vercel builds on content that is
+  changing in batches anyway. So a published edition stays off the live site
+  until someone starts a production deploy. Publish the editions you want, then
+  deploy once.
 
 ## Cautions
 
@@ -79,10 +84,10 @@ Only `sys.publishedAt` on the blogPost entries. Nothing else needs doing:
   revistas, and their arrays grew 17→39 and 4→30 in the August import. If that
   route renders the whole array, publishing these two editions adds 48 stops to
   a live course. Check the course before publishing them, not after.
-- **Deploy-hook rate limit.** Vercel caps deploy hooks at 60 triggers/hour and
-  drops the rest. One edition of 44 publishes fits; two editions in the same
-  hour do not. One edition per session, then confirm the build landed — which
-  is what the day-at-a-time cadence is for.
+- **Batch freely; the hourly hook cap does not apply.** The 60 triggers/hour
+  deploy-hook limit only bites once the webhook is installed. With manual
+  deploys there is no reason to hold to one edition per hour — the day-at-a-time
+  cadence is about review effort, not Vercel.
 - **`check-revista-rewrites.ts` runs on prebuild** and fails the build if the
   generated PDF rewrites are stale. Publishing posts does not touch revista
   PDFs, so this should stay quiet; if it fires, run `yarn

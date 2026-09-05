@@ -3,6 +3,23 @@ import Link from "next/link";
 import type { BlogPostCard } from "../../../lib/contentful";
 import { publishDateToSegment, slugify } from "../../../lib/contentful";
 import { formatPostDate } from "../../../lib/dates";
+import { hintedSrc } from "../../../lib/contentful-image-loader";
+
+// Must stay in step with the `aspect-[16/9]` class on the wrapper below —
+// Tailwind only sees literal class names. Drives the CDN-side crop, so a
+// portrait or letterboxed hero is cut to the card's shape by the Images API
+// rather than downloaded whole and trimmed by `object-cover`.
+//
+// Only cards get this. The revista covers are `object-contain` by design:
+// they letterbox rather than crop, and a `fit=fill` there would slice the
+// cover art.
+const CARD_ASPECT = [16, 9] as const;
+
+// Card and chip links opt out of prefetching — see SiteHeader for the full
+// reasoning. A grid of these prefetches one full route per card as it enters
+// the viewport, which on a listing page is the whole grid, competing with the
+// card images for the LCP.
+const PREFETCH = false;
 
 export function PostCard({ post }: { post: BlogPostCard }) {
   const dateSegment = publishDateToSegment(post.publishDate);
@@ -12,9 +29,13 @@ export function PostCard({ post }: { post: BlogPostCard }) {
   return (
     <article className="group flex flex-col gap-3">
       {post.heroImage?.url && (
-        <Link href={href} className="block overflow-hidden rounded-md aspect-[16/9] relative">
+        <Link
+          href={href}
+          prefetch={PREFETCH}
+          className="block overflow-hidden rounded-md aspect-[16/9] relative"
+        >
           <Image
-            src={post.heroImage.url}
+            src={hintedSrc(post.heroImage.url, CARD_ASPECT, post.heroImage)}
             alt={post.heroImage.description ?? post.title}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -28,6 +49,7 @@ export function PostCard({ post }: { post: BlogPostCard }) {
             {post.categories.map((cat) => (
               <Link
                 key={cat}
+                prefetch={PREFETCH}
                 href={`/blog/category/${slugify(cat)}/`}
                 className="text-xs font-semibold uppercase tracking-wide text-brand hover:text-brand-dark"
               >
@@ -37,7 +59,7 @@ export function PostCard({ post }: { post: BlogPostCard }) {
           </div>
         )}
         <h2 className="font-heading text-xl font-bold leading-snug text-ink">
-          <Link href={href} className="hover:text-brand transition-colors">
+          <Link href={href} prefetch={PREFETCH} className="hover:text-brand transition-colors">
             {post.title}
           </Link>
         </h2>

@@ -56,6 +56,19 @@ const AUDIOREVISTA_EPISODES: SpotifyEpisode[] = [
  * Total number of paginated revista pages (>= 1). The newest issue is shown in
  * its own featured block on page 1, so it doesn't count toward the grid.
  */
+// Revista links opt out of prefetching — see SiteHeader for the full
+// reasoning. The cover grid is 12 editions per page, each prefetching a full
+// route as it scrolls into view.
+const PREFETCH = false;
+
+// Cover thumbnails render at ~187 CSS px in the grid and a third of the row
+// for the newest issue, so they carry far more detail than the slot shows. At
+// q=60 the mean per-channel deviation from the q=70 default is ~4/255 (~2%,
+// measured across three covers) for 20% fewer bytes — 514KB -> 411KB across a
+// page of 14. The edition page's own cover is deliberately left at the
+// default: it is that page's LCP element and renders at 460px.
+const COVER_QUALITY = 60;
+
 export async function revistaTotalPages(): Promise<number> {
   const revistas = await getAllRevistas();
   return Math.max(1, Math.ceil(Math.max(0, revistas.length - 1) / PER_PAGE));
@@ -91,6 +104,7 @@ export async function RevistaIndexView({ page }: { page: number }) {
                   PDF stays one click away on the button below. */}
               <Link
                 href={`/revistavamos/${newest.slug}/`}
+                prefetch={PREFETCH}
                 className="relative aspect-[543/768] w-full shrink-0 overflow-hidden rounded-md shadow-md sm:w-1/3"
               >
                 {newest.coverImage?.url && (
@@ -99,7 +113,14 @@ export async function RevistaIndexView({ page }: { page: number }) {
                     alt={newest.coverImage.description ?? `Portada: ${newest.title}`}
                     fill
                     className="object-contain"
-                    priority
+                    quality={COVER_QUALITY}
+                    // `priority` is deprecated in Next 16; `preload` is its
+                    // replacement and emits the same head link. Deliberately
+                    // no fetchPriority: measured against the full-viewport
+                    // PageHero above it, this is not the LCP element, and
+                    // hinting it High would only take bandwidth from the one
+                    // that is.
+                    preload
                     sizes="(max-width: 640px) 100vw, 33vw"
                   />
                 )}
@@ -136,6 +157,7 @@ export async function RevistaIndexView({ page }: { page: number }) {
             <article key={revista.slug} className="group flex flex-col gap-2">
               <Link
                 href={`/revistavamos/${revista.slug}/`}
+                prefetch={PREFETCH}
                 className="relative block aspect-[543/768] overflow-hidden rounded-md bg-cream shadow-sm"
               >
                 {revista.coverImage?.url && (
@@ -144,6 +166,7 @@ export async function RevistaIndexView({ page }: { page: number }) {
                     alt={revista.coverImage.description ?? `Portada: ${revista.title}`}
                     fill
                     className="object-contain transition-transform duration-300 group-hover:scale-105"
+                    quality={COVER_QUALITY}
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   />
                 )}
@@ -151,6 +174,7 @@ export async function RevistaIndexView({ page }: { page: number }) {
               <h2 className="font-heading text-base font-bold leading-snug text-ink">
                 <Link
                   href={`/revistavamos/${revista.slug}/`}
+                  prefetch={PREFETCH}
                   className="transition-colors hover:text-brand"
                 >
                   {revista.title}

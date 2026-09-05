@@ -42,6 +42,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// Breadcrumb links opt out of prefetching — see SiteHeader.
+const PREFETCH = false;
+
 export default async function RevistaPage({ params }: Props) {
   const { slug } = await params;
   const revista = await getRevistaBySlug(slug);
@@ -50,9 +53,9 @@ export default async function RevistaPage({ params }: Props) {
   return (
     <main className="page-offset mx-auto max-w-6xl px-4 py-12">
       <nav className="mb-6 text-sm text-muted">
-        <Link href="/" className="transition-colors hover:text-ink">Inicio</Link>
+        <Link href="/" prefetch={PREFETCH} className="transition-colors hover:text-ink">Inicio</Link>
         {" / "}
-        <Link href="/revistavamos/" className="transition-colors hover:text-ink">
+        <Link href="/revistavamos/" prefetch={PREFETCH} className="transition-colors hover:text-ink">
           Revista VAMOS
         </Link>
       </nav>
@@ -76,7 +79,14 @@ export default async function RevistaPage({ params }: Props) {
               width={revista.coverImage.width ?? 543}
               height={revista.coverImage.height ?? 768}
               className="h-auto w-full rounded-md shadow-md"
-              priority
+              // Measured as the LCP element on edition pages. `priority` is
+              // deprecated in Next 16 and now only emits the preload — it no
+              // longer carries a priority hint, which is why Lighthouse's
+              // LCP-discovery audit failed here. Chrome's own heuristic was
+              // already ranking it High; this makes that explicit rather than
+              // dependent on the heuristic holding.
+              preload
+              fetchPriority="high"
               sizes="(max-width: 640px) 100vw, 460px"
             />
           </a>

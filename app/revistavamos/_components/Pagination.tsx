@@ -30,6 +30,10 @@ function pageWindow(page: number, totalPages: number): (number | null)[] {
  * strings can't be resolved by a static host): page 1 lives at the base path,
  * pages 2+ at `${basePath}/page/N/`.
  */
+// Pagination links opt out of prefetching — see SiteHeader. The page-number
+// strip would otherwise prefetch every listed page at load.
+const PREFETCH = false;
+
 export function Pagination({ page, totalPages, basePath }: PaginationProps) {
   if (totalPages <= 1) return null;
 
@@ -40,6 +44,7 @@ export function Pagination({ page, totalPages, basePath }: PaginationProps) {
       {page > 1 && (
         <Link
           href={href(page - 1)}
+          prefetch={PREFETCH}
           rel="prev"
           className="rounded-btn border border-hairline px-4 py-2 text-sm text-ink transition-colors hover:bg-cream"
         >
@@ -64,6 +69,7 @@ export function Pagination({ page, totalPages, basePath }: PaginationProps) {
           <Link
             key={n}
             href={href(n)}
+            prefetch={PREFETCH}
             aria-label={`Página ${n}`}
             className="rounded-btn border border-hairline px-4 py-2 text-sm text-ink transition-colors hover:bg-cream"
           >
@@ -75,6 +81,7 @@ export function Pagination({ page, totalPages, basePath }: PaginationProps) {
       {page < totalPages && (
         <Link
           href={href(page + 1)}
+          prefetch={PREFETCH}
           rel="next"
           className="rounded-btn border border-hairline px-4 py-2 text-sm text-ink transition-colors hover:bg-cream"
         >

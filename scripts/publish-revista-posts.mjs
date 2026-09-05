@@ -22,10 +22,11 @@
  *  - re-order or re-date anything. What publishes is exactly what was
  *    imported and reviewed.
  *
- * Deploys: the Contentful webhook fires a Vercel deploy hook per publish, and
- * those hooks are capped at 60 triggers/hour. Vercel collapses superseded
- * builds, so one edition is fine, but after publishing check that the final
- * state actually deployed before starting a second edition in the same hour.
+ * Deploys are manual and deliberately so: the publish-on-deploy webhook is not
+ * installed while this bulk run is under way, since a per-entry hook would
+ * spend hundreds of Vercel builds on content that changes in batches. Nothing
+ * here reaches the live site until someone starts a production deploy, so
+ * publish the editions you want and deploy once at the end.
  */
 import {
   CT,
@@ -126,6 +127,6 @@ if (failures.length) {
   console.log(`${failures.length} failed — re-run the same command to retry just those.`);
 }
 console.log(
-  `\nCheck the edition: https://misionessim.org/revistavamos/${slugOf(edition).replace(/^\//, "")}/` +
-    "\nConfirm the Vercel deploy finished before publishing another edition this hour.\n",
+  `\nLive once deployed: https://misionessim.org/revistavamos/${slugOf(edition).replace(/^\//, "")}/` +
+    "\nDeploys are manual — nothing is on the live site until you start a production build.\n",
 );
