@@ -12,6 +12,12 @@
       "runtimeExecutable": "zsh",
       "runtimeArgs": ["-c", "export PATH=$HOME/.nvm/versions/node/v20.19.3/bin:$PATH && yarn dev"],
       "port": 3000
+    },
+    {
+      "name": "static-export",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8139", "--directory", "out"],
+      "port": 8139
     }
   ]
 }
