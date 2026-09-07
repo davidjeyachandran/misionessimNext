@@ -218,6 +218,8 @@ export interface TaxonomyTerm {
   name: string;
   slug: string;
   count: number;
+  /** Publish date of the term's newest post — the archive's `<lastmod>`. */
+  latest: string;
 }
 
 type TaxonomyKind = "categories" | "tags";
@@ -231,8 +233,10 @@ async function aggregateTerms(kind: TaxonomyKind): Promise<TaxonomyTerm[]> {
       const slug = slugify(value);
       if (!slug) continue;
       const existing = bySlug.get(slug);
+      // The catalogue is date-descending, so the first entry to claim a term
+      // is its newest post and fixes the term's `latest`.
       if (existing) existing.count++;
-      else bySlug.set(slug, { name: value, slug, count: 1 });
+      else bySlug.set(slug, { name: value, slug, count: 1, latest: e.publishDate ?? "" });
     }
   }
   return [...bySlug.values()].sort(
