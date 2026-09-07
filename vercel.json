@@ -39,6 +39,19 @@
       ]
     },
     {
+      "source": "/cdn/img/(.*)",
+      "headers": [
+        {
+          "key": "x-vercel-enable-rewrite-caching",
+          "value": "1"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
@@ -52,10 +65,6 @@
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
-        },
-        {
-          "key": "Link",
-          "value": "<https://images.ctfassets.net>; rel=preconnect"
         }
       ]
     }
@@ -3428,6 +3437,10 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/cdn/img/:path*",
+      "destination": "https://images.ctfassets.net/:path*"
+    },
     {
       "source": "/revistavamos/africa/2013-07-A_fricaVAMOS.pdf",
       "destination": "https://assets.ctfassets.net/i46buyptg48q/217U0a6n6JGAstCy6VCAHl/d3d743f258609bd60a5af54eaa136aa6/2013-07-A_fricaVAMOS.pdf"

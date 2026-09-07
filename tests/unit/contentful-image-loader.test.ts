@@ -4,6 +4,9 @@ import loader, { hintedSrc } from "../../lib/contentful-image-loader";
 const CTF =
   "https://images.ctfassets.net/i46buyptg48q/4IECx2If8hYjlYAwyNizM4/05db3535/hero.jpg";
 const SIXTEEN_NINE = [16, 9] as const;
+// The loader's output is first-party; vercel.json rewrites it back to
+// images.ctfassets.net. See PROXY_PREFIX in the loader.
+const PROXIED = "/cdn/img/i46buyptg48q/4IECx2If8hYjlYAwyNizM4/05db3535/hero.jpg";
 
 const params = (url: string) => new URLSearchParams(url.split("?")[1]);
 
@@ -56,7 +59,23 @@ describe("contentfulImageLoader", () => {
     const src = hintedSrc(CTF, SIXTEEN_NINE, { width: 1280, height: 853 });
     const out = loader({ src, width: 1080 });
     expect(out).not.toMatch(/[?&](mw|ar)=/);
-    expect(out.startsWith(`${CTF}?`)).toBe(true);
+    expect(out.startsWith(`${PROXIED}?`)).toBe(true);
+  });
+
+  it("routes through the first-party proxy, preserving the Contentful path", () => {
+    // The path after the prefix has to survive verbatim: vercel.json splices
+    // it straight onto images.ctfassets.net, so a dropped or re-encoded
+    // segment is a 404 at the origin.
+    const out = loader({ src: CTF, width: 828 });
+    expect(out.startsWith(PROXIED)).toBe(true);
+    expect(out).not.toContain("images.ctfassets.net");
+  });
+
+  it("leaves non-Contentful sources on their own path", () => {
+    // Local /public assets have no proxy and no resizing service.
+    expect(loader({ src: "/home/SIM-Logotipo.png", width: 195 })).toBe(
+      "/home/SIM-Logotipo.png",
+    );
   });
 
   it("honours an explicit quality", () => {

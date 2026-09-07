@@ -6,6 +6,25 @@
 
 const CONTENTFUL_IMAGES = "https://images.ctfassets.net/";
 
+/**
+ * First-party prefix that `vercel.json` rewrites straight back to
+ * `images.ctfassets.net`.
+ *
+ * Serving images from a second origin cost the LCP hero a full DNS + TCP +
+ * TLS handshake before its first byte — 259ms on a measured cable profile,
+ * against 202ms to actually download the file. A preconnect can only start
+ * that handshake once the document's response headers arrive, and this site's
+ * HTML is a long TTFB followed by a fast body, so there was barely 15ms of
+ * overlap to hide it in. Proxying removes the second connection instead of
+ * trying to hide it: the image rides the HTTP/2 connection the browser
+ * already has open to misionessim.org.
+ *
+ * Only the on-page `<img>` srcsets move. `og:image`, `twitter:image` and
+ * JSON-LD keep absolute ctfassets URLs — see lib/social-image.ts — because
+ * crawlers need absolute URLs and gain nothing from the warm connection.
+ */
+const PROXY_PREFIX = "/cdn/img/";
+
 // Hints that `hintedSrc` smuggles through `src`, because next/image hands a
 // loader only `src`, `width` and `quality` — there is no channel for an
 // asset's intrinsic size. Stripped before the URL reaches Contentful.
@@ -90,5 +109,17 @@ export default function contentfulImageLoader({
     params.set("fit", "fill");
   }
 
-  return `${base}?${params}`;
+  // `/cdn/img/**` only resolves where vercel.json is applied, so `next dev`
+  // would 404 every image. Point dev straight at Contentful — the handshake
+  // this proxy exists to avoid is not something worth optimising locally.
+  // `output: "export"` builds as production, so this never affects a deploy.
+  const origin =
+    process.env.NODE_ENV === "development" ? CONTENTFUL_IMAGES : PROXY_PREFIX;
+
+  // The query string is what carries the resize; Vercel forwards it to the
+  // rewrite destination untouched. If that ever stopped being true the images
+  // would still render — Contentful would just serve the full-size original —
+  // so the failure is silent on the page and loud on the bandwidth bill.
+  // `yarn check:image-proxy` asserts against a deployment that it holds.
+  return `${base.replace(CONTENTFUL_IMAGES, origin)}?${params}`;
 }
