@@ -1351,3 +1351,18 @@ published in one sitting before a single deploy.
 Unrelated, but visible in the same check: both Algolia webhooks are failing —
 0 of the last 86 calls healthy, all HTTP 500 on `Entry.publish`. That index is
 mi-movilicemos's, not this site's, but it has been broken for a while.
+
+### 2026-09-09 — Three editions published in one batch
+
+`yarn drafts:publish --live` for `equipos-multiculturales-2024` (21/21),
+`soy-influencer` (20/20) and `latinos-en-adaptacion` (34/34) — 75 posts, no
+failures. The editions now resolve 47, 44 and 34 posts on the CDA with none
+still draft. Queue down to 307 across 11 editions.
+
+First batch since deploys were confirmed manual, and batching is the point:
+one production build will now carry five editions' worth of new pages —
+these three plus *Tu trabajo en el Reino* and *Idioma y cultura*, which are
+still waiting on a deploy.
+
+The two editions that need a look at the mi-movilicemos "Regresando a casa"
+course first — `regresando-a-casa` and `termina-bien` — remain unpublished.

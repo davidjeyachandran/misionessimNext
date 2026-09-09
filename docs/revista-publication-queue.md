@@ -6,14 +6,14 @@ cheaper before publication than after. Sixteen editions were imported that way
 in August 2026 and are complete but invisible. This is the worklist for taking
 them live one edition at a time.
 
-The list below is a snapshot (2026-09-06, after *Idioma y cultura*). **The live list is the script** —
+The list below is a snapshot (2026-09-09). **The live list is the script** —
 the counts move as editions are published:
 
 ```bash
 yarn drafts:list
 ```
 
-## Queue — 382 unpublished posts across 14 editions
+## Queue — 307 unpublished posts across 11 editions
 
 Newest first. `live` is how many of that edition's posts are already public
 (hand-published over the years, or by the Nº 118 import).
@@ -25,13 +25,10 @@ Newest first. `live` is how many of that edition's posts are already public
 | Carácter misionero · sep 2025 | `caracter-misionero` | 24 | 2 |
 | Discípulos que hacen discípulos · jun 2025 | `discipulos-que-hacen-discipulos` | 29 | 3 |
 | Cuidado Integral bíblico y solidario · mar 2025 | `cuidado-integral-biblico-y-solidario` | 25 | 2 |
-| Latinos en adaptación · dic 2024 | `latinos-en-adaptacion` | 34 | 0 |
 | La gente que no vemos · sep 2024 | `la-gente-que-no-vemos` | 35 | 0 |
 | Conferencias misioneras · jun 2024 | `conferencias-misioneras` | 34 | 5 |
-| Soy influencer · mar 2024 | `soy-influencer` | 20 | 24 |
 | Regresando a casa · dic 2023 ⚠️ | `regresando-a-casa` | 22 | 21 |
 | No Alcanzados · sep 2023 | `no-alcanzados` | 15 | 25 |
-| Equipos multiculturales · jun 2023 | `equipos-multiculturales-2024` | 21 | 26 |
 | Termina Bien · mar 2023 ⚠️ | `termina-bien` | 26 | 9 |
 | Fondos Misioneros · dic 2022 | `/fondos-misioneros-2022` | 44 | 7 |
 
@@ -39,9 +36,16 @@ Newest first. `live` is how many of that edition's posts are already public
 accept the slug with or without it.
 
 Nº 118 · *El clamor macedonio* · jun 2026 is absent because its 26 posts were
-imported published. *Tu trabajo en el Reino* · jun 2022 left the queue on
-2026-09-03 (48 published, 55 live) and *Idioma y cultura* · sep 2022 on
-2026-09-06 (37 published, 44 live).
+imported published. Editions that have left the queue, with what they published
+and how many posts the edition now carries:
+
+| Edición | Published | Live on the edition | Date |
+|---|---:|---:|---|
+| Tu trabajo en el Reino · jun 2022 | 48 | 55 | 2026-09-03 |
+| Idioma y cultura · sep 2022 | 37 | 44 | 2026-09-06 |
+| Equipos multiculturales · jun 2023 | 21 | 47 | 2026-09-09 |
+| Soy influencer · mar 2024 | 20 | 44 | 2026-09-09 |
+| Latinos en adaptación · dic 2024 | 34 | 34 | 2026-09-09 |
 
 ## Publishing an edition
 
