@@ -1366,3 +1366,20 @@ still waiting on a deploy.
 
 The two editions that need a look at the mi-movilicemos "Regresando a casa"
 course first — `regresando-a-casa` and `termina-bien` — remain unpublished.
+
+### 2026-09-13 — Fondos Misioneros, No Alcanzados and Termina Bien published
+
+`yarn drafts:publish --live` for `/fondos-misioneros-2022` (44/44),
+`no-alcanzados` (15/15) and `termina-bien` (26/26) — 85 posts, no failures.
+The editions resolve 51, 40 and 30 posts on the CDA with none still draft.
+Queue down to 221 across 8 editions.
+
+**The mi-movilicemos caution is retired.** `termina-bien` and
+`regresando-a-casa` had been held back because they back that app's "Regresando
+a casa" learning route. mi-movilicemos has not launched (David), so there is no
+live course to disturb, and `regresando-a-casa` is now as ready as any other
+edition.
+
+Still waiting on a manual deploy: these three only. The latest production build
+(2026-09-09 12:10 UTC) started after the 2026-09-09 batch finished publishing
+(11:15 UTC), so the five earlier editions are already on it.

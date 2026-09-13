@@ -6,14 +6,14 @@ cheaper before publication than after. Sixteen editions were imported that way
 in August 2026 and are complete but invisible. This is the worklist for taking
 them live one edition at a time.
 
-The list below is a snapshot (2026-09-09). **The live list is the script** —
+The list below is a snapshot (2026-09-13). **The live list is the script** —
 the counts move as editions are published:
 
 ```bash
 yarn drafts:list
 ```
 
-## Queue — 307 unpublished posts across 11 editions
+## Queue — 221 unpublished posts across 8 editions
 
 Newest first. `live` is how many of that edition's posts are already public
 (hand-published over the years, or by the Nº 118 import).
@@ -27,13 +27,7 @@ Newest first. `live` is how many of that edition's posts are already public
 | Cuidado Integral bíblico y solidario · mar 2025 | `cuidado-integral-biblico-y-solidario` | 25 | 2 |
 | La gente que no vemos · sep 2024 | `la-gente-que-no-vemos` | 35 | 0 |
 | Conferencias misioneras · jun 2024 | `conferencias-misioneras` | 34 | 5 |
-| Regresando a casa · dic 2023 ⚠️ | `regresando-a-casa` | 22 | 21 |
-| No Alcanzados · sep 2023 | `no-alcanzados` | 15 | 25 |
-| Termina Bien · mar 2023 ⚠️ | `termina-bien` | 26 | 9 |
-| Fondos Misioneros · dic 2022 | `/fondos-misioneros-2022` | 44 | 7 |
-
-*Fondos Misioneros* carries a legacy slug with a leading `/`. Both scripts
-accept the slug with or without it.
+| Regresando a casa · dic 2023 | `regresando-a-casa` | 22 | 21 |
 
 Nº 118 · *El clamor macedonio* · jun 2026 is absent because its 26 posts were
 imported published. Editions that have left the queue, with what they published
@@ -46,6 +40,9 @@ and how many posts the edition now carries:
 | Equipos multiculturales · jun 2023 | 21 | 47 | 2026-09-09 |
 | Soy influencer · mar 2024 | 20 | 44 | 2026-09-09 |
 | Latinos en adaptación · dic 2024 | 34 | 34 | 2026-09-09 |
+| Fondos Misioneros · dic 2022 | 44 | 51 | 2026-09-13 |
+| No Alcanzados · sep 2023 | 15 | 40 | 2026-09-13 |
+| Termina Bien · mar 2023 | 26 | 30 | 2026-09-13 |
 
 ## Publishing an edition
 
@@ -83,11 +80,10 @@ Only `sys.publishedAt` on the blogPost entries. Nothing else needs doing:
 
 ## Cautions
 
-- ⚠️ **`regresando-a-casa` and `termina-bien` back a live mi-movilicemos
-  course.** The "Regresando a casa" learning route is built on those two
-  revistas, and their arrays grew 17→39 and 4→30 in the August import. If that
-  route renders the whole array, publishing these two editions adds 48 stops to
-  a live course. Check the course before publishing them, not after.
+- **mi-movilicemos is not a constraint.** Its "Regresando a casa" learning
+  route is built on the `regresando-a-casa` and `termina-bien` revistas, which
+  once made those two editions look risky to publish. mi-movilicemos has not
+  launched (David, 2026-09-13), so there is no live course to disturb.
 - **Batch freely; the hourly hook cap does not apply.** The 60 triggers/hour
   deploy-hook limit only bites once the webhook is installed. With manual
   deploys there is no reason to hold to one edition per hour — the day-at-a-time
