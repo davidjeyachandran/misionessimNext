@@ -1383,3 +1383,47 @@ edition.
 Still waiting on a manual deploy: these three only. The latest production build
 (2026-09-09 12:10 UTC) started after the 2026-09-09 batch finished publishing
 (11:15 UTC), so the five earlier editions are already on it.
+
+## 2026-09-14 — Blog ↔ historias.misionessim.org cross-link opportunity (analysis only)
+
+David asked what opportunities exist to link blog posts to stories on the
+sister site `historias.misionessim.org` (sim-blog, Next.js `output: export`,
+GitHub Pages), for reader relevance and SEO. **Zero blog posts currently link
+there** — the only existing link is "Historias" in `SiteFooter.tsx`.
+
+Matched all 1,188 canonical blog posts against all 1,398 historias stories by
+TF-IDF cosine over full article text (historias' own `/search/meta.json` +
+`/graph/graph.json` feeds give title/excerpt/country/ministry per story
+without scraping; full story bodies were scraped for the match itself).
+Findings, and a tiered CSV of 183 candidate links across 147 posts, were sent
+to David directly (not committed — this was an exploratory analysis, not a
+build). Key results:
+
+- Score **≥0.25 is a reliable match**, 0.15–0.25 mostly good, below 0.15 is
+  roughly half noise (shared names/verses, not shared subject).
+- Strongest clusters: the budismo series (12 posts → one story), arte-en-misiones
+  posts, SIM founders history, Ébola/Liberia posts, the new 2026-09
+  sports-ministry posts → Sports Friends Perú stories, and Perú/Ecuador/Bolivia
+  field posts generally.
+- **5 blog posts are near-duplicate content of a historias story** (cos ≥0.45,
+  same event in both languages already Spanish-to-Spanish): the three 2025-10
+  fulani posts, "Tratamiento de Mariama", and "Voluntarios desarrollan un
+  sistema en línea…". Worth a canonical/de-dup decision before cross-linking
+  either side.
+- Coverage is inherently partial: the blog is mostly Latin-America-sending
+  content, historias is mostly Africa/Asia field stories — ~1,040 posts have
+  no good match, which is expected, not a gap in the method.
+
+**TODO (not started, needs David's direction on which route):**
+1. A data-driven "Historias relacionadas" block on `app/blog/[date]/[slug]/page.tsx`
+   — today `PostOnwardNav` only surfaces related reading for edition posts
+   (`more` in `getPostNavigation`, `lib/contentful.ts:463`); non-edition posts
+   (the majority) dead-end after prev/next. This is the scalable option and
+   needs no Contentful writes.
+2. Hand-placed hyperlinks inside the ~26 high-tier post bodies (Contentful
+   RichText edits), for the pairs judged near-certain.
+3. Resolve the 5 duplicate-content pairs first, independent of 1/2.
+
+Full method + findings recorded in memory
+(`project-historias-crosslinks.md`) since this was analysis, not code — no
+files in this repo changed.
