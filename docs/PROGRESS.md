@@ -1427,3 +1427,15 @@ build). Key results:
 Full method + findings recorded in memory
 (`project-historias-crosslinks.md`) since this was analysis, not code — no
 files in this repo changed.
+
+### 2026-09-17 — Lucha espiritual and Envío responsable published
+
+`yarn drafts:publish --live` for `lucha-espiritual` (29/29) and
+`envio-responsable-2` (23/23) — 52 posts, no failures. The editions resolve 30
+and 24 posts on the CDA with none still draft. Queue down to 170 across 6
+editions.
+
+A production deploy landed today at 09:42 UTC, just 3 minutes before these two
+finished publishing — it carries the eight editions published 2026-09-03
+through 2026-09-13, but not these two. Still waiting on a deploy: just
+`lucha-espiritual` and `envio-responsable-2`.

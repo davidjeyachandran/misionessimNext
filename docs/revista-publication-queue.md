@@ -6,22 +6,20 @@ cheaper before publication than after. Sixteen editions were imported that way
 in August 2026 and are complete but invisible. This is the worklist for taking
 them live one edition at a time.
 
-The list below is a snapshot (2026-09-13). **The live list is the script** —
+The list below is a snapshot (2026-09-17). **The live list is the script** —
 the counts move as editions are published:
 
 ```bash
 yarn drafts:list
 ```
 
-## Queue — 221 unpublished posts across 8 editions
+## Queue — 170 unpublished posts across 6 editions
 
 Newest first. `live` is how many of that edition's posts are already public
 (hand-published over the years, or by the Nº 118 import).
 
 | Edición | `--revista=` | Unpublished | Live |
 |---|---|---:|---:|
-| Lucha espiritual · mar 2026 | `lucha-espiritual` | 29 | 1 |
-| Envío responsable · dic 2025 | `envio-responsable-2` | 23 | 1 |
 | Carácter misionero · sep 2025 | `caracter-misionero` | 24 | 2 |
 | Discípulos que hacen discípulos · jun 2025 | `discipulos-que-hacen-discipulos` | 29 | 3 |
 | Cuidado Integral bíblico y solidario · mar 2025 | `cuidado-integral-biblico-y-solidario` | 25 | 2 |
@@ -43,6 +41,8 @@ and how many posts the edition now carries:
 | Fondos Misioneros · dic 2022 | 44 | 51 | 2026-09-13 |
 | No Alcanzados · sep 2023 | 15 | 40 | 2026-09-13 |
 | Termina Bien · mar 2023 | 26 | 30 | 2026-09-13 |
+| Lucha espiritual · mar 2026 | 29 | 30 | 2026-09-17 |
+| Envío responsable · dic 2025 | 23 | 24 | 2026-09-17 |
 
 ## Publishing an edition
 
