@@ -22,6 +22,7 @@ const NAV_LINKS = [
   { label: "Recursos", href: "/recursos/", external: false },
   { label: "Revista VAMOS", href: "/revistavamos/", external: false },
   { label: "Blog", href: "/blog/", external: false },
+  { label: "Historias", href: "https://historias.misionessim.org/", external: true },
   { label: "Ora", href: "/ora/", external: false },
 ];
 
@@ -46,8 +47,16 @@ export function SiteHeader() {
             {NAV_LINKS.map((link) => (
               <li key={link.label}>
                 {link.external ? (
-                  <a href={link.href} onClick={() => setOpen(false)}>
+                  // Same tab, so Back returns here; the arrow flags that
+                  // the destination is a separate site with its own menu.
+                  <a
+                    href={link.href}
+                    className="nav-external"
+                    onClick={() => setOpen(false)}
+                  >
                     {link.label}
+                    <span aria-hidden="true">↗</span>
+                    <span className="sr-only"> (sitio externo)</span>
                   </a>
                 ) : (
                   <Link href={link.href} onClick={() => setOpen(false)} prefetch={PREFETCH}>
