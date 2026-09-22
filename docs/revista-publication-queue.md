@@ -6,14 +6,14 @@ cheaper before publication than after. Sixteen editions were imported that way
 in August 2026 and are complete but invisible. This is the worklist for taking
 them live one edition at a time.
 
-The list below is a snapshot (2026-09-17). **The live list is the script** —
+The list below is a snapshot (2026-09-22). **The live list is the script** —
 the counts move as editions are published:
 
 ```bash
 yarn drafts:list
 ```
 
-## Queue — 170 unpublished posts across 6 editions
+## Queue — 113 unpublished posts across 4 editions
 
 Newest first. `live` is how many of that edition's posts are already public
 (hand-published over the years, or by the Nº 118 import).
@@ -24,8 +24,6 @@ Newest first. `live` is how many of that edition's posts are already public
 | Discípulos que hacen discípulos · jun 2025 | `discipulos-que-hacen-discipulos` | 29 | 3 |
 | Cuidado Integral bíblico y solidario · mar 2025 | `cuidado-integral-biblico-y-solidario` | 25 | 2 |
 | La gente que no vemos · sep 2024 | `la-gente-que-no-vemos` | 35 | 0 |
-| Conferencias misioneras · jun 2024 | `conferencias-misioneras` | 34 | 5 |
-| Regresando a casa · dic 2023 | `regresando-a-casa` | 22 | 21 |
 
 Nº 118 · *El clamor macedonio* · jun 2026 is absent because its 26 posts were
 imported published. Editions that have left the queue, with what they published
@@ -43,6 +41,8 @@ and how many posts the edition now carries:
 | Termina Bien · mar 2023 | 26 | 30 | 2026-09-13 |
 | Lucha espiritual · mar 2026 | 29 | 30 | 2026-09-17 |
 | Envío responsable · dic 2025 | 23 | 24 | 2026-09-17 |
+| Regresando a casa · dic 2023 | 22 | 39 | 2026-09-22 |
+| Conferencias misioneras · jun 2024 | 34 | 39 | 2026-09-22 |
 
 ## Publishing an edition
 

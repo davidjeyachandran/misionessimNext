@@ -1439,3 +1439,14 @@ A production deploy landed today at 09:42 UTC, just 3 minutes before these two
 finished publishing — it carries the eight editions published 2026-09-03
 through 2026-09-13, but not these two. Still waiting on a deploy: just
 `lucha-espiritual` and `envio-responsable-2`.
+
+### 2026-09-22 — Regresando a casa and Conferencias misioneras published
+
+`yarn drafts:publish --live` for `regresando-a-casa` (22/22) and
+`conferencias-misioneras` (34/34) — 56 posts, no failures. The editions
+resolve 39 and 39 posts on the CDA with none still draft. Queue down to 113
+across 4 editions.
+
+No deploy has landed since 2026-09-17 09:42 UTC, so four editions are now
+waiting on a build: `lucha-espiritual`, `envio-responsable-2`,
+`regresando-a-casa`, `conferencias-misioneras`.
