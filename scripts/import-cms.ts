@@ -67,8 +67,6 @@ interface PostPlan {
     categories: string[];
     tags: string[];
     author: string | null;
-    seoTitle: string | null;
-    seoDescription: string | null;
     publishDate: string;
   };
   image: ImagePlan;
@@ -231,8 +229,6 @@ async function buildPlan(environmentId?: string): Promise<PostPlan[]> {
         categories: (data.categories as string[]) ?? [],
         tags: (data.tags as string[]) ?? [],
         author: (data.author as string | null) ?? null,
-        seoTitle: (data.seoTitle as string | null) ?? null,
-        seoDescription: (data.seoDescription as string | null) ?? null,
         publishDate: data.date as string,
       },
       image,
@@ -392,8 +388,6 @@ async function runLive(plans: PostPlan[], environmentId: string) {
       description: { "en-US": cleanExcerpt(plan.fields.excerpt) || plan.fields.title },
       categories: { "en-US": plan.fields.categories },
       tags: { "en-US": plan.fields.tags },
-      seoTitle: { "en-US": plan.fields.seoTitle },
-      seoDescription: { "en-US": plan.fields.seoDescription },
     };
     if (heroImageLink) fields.heroImage = { "en-US": heroImageLink };
     // revista field is deliberately omitted from `fields` on update — the

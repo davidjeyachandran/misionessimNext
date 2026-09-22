@@ -47,21 +47,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // root layout's homepage banner as its card image.
   const card = socialImage(post.heroImage);
   return {
-    title: post.seoTitle ?? post.title,
-    description: post.seoDescription ?? post.description ?? undefined,
+    title: post.title,
+    description: post.description ?? undefined,
     alternates: { canonical: `/blog/${canonicalDate}/${slug}/` },
     openGraph: {
       type: "article",
-      title: post.seoTitle ?? post.title,
-      description: post.seoDescription ?? post.description ?? undefined,
+      title: post.title,
+      description: post.description ?? undefined,
       images: card ? [card] : [],
     },
     ...(card
       ? {
           twitter: {
             card: "summary_large_image",
-            title: post.seoTitle ?? post.title,
-            description: post.seoDescription ?? post.description ?? undefined,
+            title: post.title,
+            description: post.description ?? undefined,
             images: [card.url],
           },
         }
@@ -228,7 +228,7 @@ export default async function BlogPostPage({ params }: Props) {
     articleGraph({
       path: canonicalPath,
       headline: post.title,
-      description: post.seoDescription ?? post.description,
+      description: post.description,
       image: post.heroImage,
       datePublished: post.publishDate,
       dateModified: post.sys?.publishedAt,

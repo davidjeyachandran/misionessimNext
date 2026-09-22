@@ -48,8 +48,6 @@ interface RecoveredFrontmatter {
   recoveredFrom: string;
   categories?: string[];
   tags?: string[];
-  seoTitle?: string | null;
-  seoDescription?: string | null;
 }
 
 async function loadRecovered() {
@@ -117,8 +115,6 @@ async function main() {
       description: { "en-US": fm.description },
       categories: { "en-US": fm.categories ?? [] },
       tags: { "en-US": fm.tags ?? [] },
-      seoTitle: { "en-US": fm.seoTitle ?? fm.title },
-      seoDescription: { "en-US": fm.seoDescription ?? fm.description },
     };
     const missing = required.filter((id) => !(id in fields));
     if (missing.length) {

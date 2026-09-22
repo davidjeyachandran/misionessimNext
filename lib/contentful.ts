@@ -67,8 +67,6 @@ export interface BlogPost extends BlogPostCard {
       };
     };
   } | null;
-  seoTitle?: string | null;
-  seoDescription?: string | null;
   revista?: {
     slug: string;
     title: string;
@@ -297,8 +295,6 @@ export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | 
           categories
           tags
           heroImage { url description width height }
-          seoTitle
-          seoDescription
           body {
             json
             links {
