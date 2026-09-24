@@ -5,6 +5,9 @@ import {
   revistaTotalPages,
 } from "@/app/revistavamos/_components/RevistaIndexView";
 
+// Unknown params 404 without calling Contentful (docs/adr/0001).
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const totalPages = await revistaTotalPages();
   const params: { page: string }[] = [];

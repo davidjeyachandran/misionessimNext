@@ -1,6 +1,12 @@
 # Plan: Draft preview and Edit link
 
-Status: **planned, not built** (2026-09-23). Branch: `feat/draft-preview`.
+Status: **built on `feat/draft-preview`, not deployed** (2026-09-23). Rollout steps 2–4 and the manual setup below are still to do. The full Preview-button → draft page loop is untested until the Preview API token exists.
+
+Verified locally with `next start` on the production build:
+- published pages are served prebuilt
+- 8 unknown URLs across every dynamic route return 404 with zero Contentful fetches (counted with a fetch logger)
+- `/api/draft/` returns 401 for a bad or missing secret and 503 with a clear message when the preview token isn't set
+- `?edit` persists and follows client-side navigation (`tests/e2e/edit-link.spec.ts`)
 Decisions: [ADR 0001](adr/0001-mostly-static-site-with-draft-mode.md), [ADR 0002](adr/0002-edit-link-without-site-login.md). Terms: [CONTEXT.md](../CONTEXT.md).
 
 ## Goal
@@ -69,9 +75,10 @@ Decisions: [ADR 0001](adr/0001-mostly-static-site-with-draft-mode.md), [ADR 0002
   - `blog/page/[page]`
   - `blog/category/[category]` and its `page/[page]`
   - `blog/tag/[tag]`
-- `blog/[date]/[slug]` must still render never-published slugs in Draft preview. **Spike first:** check in Next 16.2.10 whether Draft Mode renders params outside `generateStaticParams` when `dynamicParams = false`.
-  - If it does, use `false` here too.
-  - If it doesn't, keep `dynamicParams` on and call `notFound()` before any fetch when the request isn't in Draft Mode and isn't part of the build.
+- `blog/[date]/[slug]` also uses `dynamicParams = false`. **Spike result (Next 16.2.10):**
+  - an unknown param returns 404 without running page code
+  - with the Draft Mode cookie, the same unknown param renders (200)
+  - so never-published posts are previewable with no build-phase workaround
 - Acceptance check: a visitor requesting `/blog/2026-01/does-not-exist/` gets a 404 with zero Contentful calls.
 
 ## Code changes

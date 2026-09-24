@@ -3,10 +3,14 @@ import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
+import { DraftBar } from "../../../_components/DraftBar";
+import { draftPostPath } from "../../../../lib/draft-preview";
 import {
   getAllBlogPostSlugs,
   getBlogPostBySlug,
+  getDraftBlogPostBySlug,
   getPostNavigation,
   normalizeRevistaSlug,
   publishDateToSegment,
@@ -23,6 +27,17 @@ import {
   jsonLdProps,
 } from "../../../../lib/structured-data";
 
+// Unknown URLs 404 without calling Contentful; Draft Mode still renders them,
+// which is how never-published posts are previewed (docs/adr/0001).
+export const dynamicParams = false;
+
+// Metadata and page share one fetch per request via React cache().
+async function loadPost(slug: string) {
+  const { isEnabled: isDraft } = await draftMode();
+  const post = isDraft ? await getDraftBlogPostBySlug(slug) : await getBlogPostBySlug(slug);
+  return { post, isDraft };
+}
+
 export async function generateStaticParams() {
   const slugs = await getAllBlogPostSlugs();
   return slugs.map(({ slug, publishDate }) => ({
@@ -35,7 +50,7 @@ type Props = { params: Promise<{ date: string; slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { date, slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const { post } = await loadPost(slug);
   if (!post) return {};
   // Canonicalise to the post's own publishDate segment, so a request that
   // reached this post under a different date segment still points search
@@ -214,10 +229,11 @@ function buildRichTextOptions(
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getBlogPostBySlug(slug);
+  const { post, isDraft } = await loadPost(slug);
   if (!post) notFound();
 
-  const nav = await getPostNavigation(slug);
+  // Navigation needs the whole catalogue (~12 calls); a draft view stays at one.
+  const nav = isDraft ? null : await getPostNavigation(slug);
 
   const assetMap = new Map<string, { url: string; title?: string | null }>();
   for (const asset of post.body?.links?.assets?.block ?? []) {
@@ -225,9 +241,12 @@ export default async function BlogPostPage({ params }: Props) {
   }
   const richTextOptions = buildRichTextOptions(assetMap);
 
-  const displayDate = formatPostDate(post.publishDate);
+  // Only a draft can lack a publishDate (listings drop such posts).
+  const displayDate = post.publishDate ? formatPostDate(post.publishDate) : "Sin fecha de publicación";
 
-  const canonicalPath = `/blog/${publishDateToSegment(post.publishDate)}/${post.slug}/`;
+  const canonicalPath = isDraft
+    ? draftPostPath({ slug: post.slug, publishDate: post.publishDate || null })
+    : `/blog/${publishDateToSegment(post.publishDate)}/${post.slug}/`;
   const structuredData = jsonLdProps([
     articleGraph({
       path: canonicalPath,
@@ -256,7 +275,11 @@ export default async function BlogPostPage({ params }: Props) {
   ]);
 
   return (
-    <main className="page-offset mx-auto max-w-3xl px-4 py-12" data-pagefind-body>
+    <main
+      className="page-offset mx-auto max-w-3xl px-4 py-12"
+      data-contentful-entry={post.sys?.id}
+      data-pagefind-body
+    >
       <script type="application/ld+json" dangerouslySetInnerHTML={structuredData} />
       <nav className="mb-6 text-sm text-muted">
         <Link href="/" className="hover:text-ink transition-colors" prefetch={PREFETCH}>Inicio</Link>
@@ -339,7 +362,14 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       )}
 
-      <PostOnwardNav nav={nav} />
+      {nav && <PostOnwardNav nav={nav} />}
+      {isDraft && (
+        <DraftBar
+          entryId={post.sys?.id}
+          path={canonicalPath}
+          published={Boolean(post.sys?.publishedAt)}
+        />
+      )}
     </main>
   );
 }

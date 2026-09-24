@@ -1628,3 +1628,12 @@ Decided through a grilling session, not built yet. The plan is in
   ([ADR 0002](adr/0002-edit-link-without-site-login.md)).
 - Draft preview covers Blog posts only, at one Contentful call per view.
   Listings stay published-only. Mi Movilicemos is out of scope.
+
+### 2026-09-23 — Draft preview and Edit link built (branch, not deployed)
+
+Built on `feat/draft-preview` per [plan-draft-preview.md](plan-draft-preview.md),
+with 2 local builds (about 24 Contentful calls). Verified locally that
+visitors, including unknown URLs, make zero Contentful calls. Still to do:
+create the Preview API token and secret, a manual `vercel deploy` from the
+branch to test the Contentful Preview button, and a check of the Vercel
+Output Directory before merging.

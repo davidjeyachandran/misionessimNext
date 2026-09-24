@@ -5,6 +5,9 @@ import {
   archiveTermParams,
 } from "@/app/blog/_components/ArchiveView";
 
+// Unknown params 404 without calling Contentful (docs/adr/0001).
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return archiveTermParams("category", "category");
 }

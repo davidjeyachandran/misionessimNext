@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogIndexView, blogTotalPages } from "@/app/blog/_components/BlogIndexView";
 
+// Unknown params 404 without calling Contentful (docs/adr/0001).
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const totalPages = await blogTotalPages();
   const params: { page: string }[] = [];

@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "./_components/SiteHeader";
 import { SiteFooter } from "./_components/SiteFooter";
 import { Analytics } from "./_components/Analytics";
+import { EditLink } from "./_components/EditLink";
 import { SITE_URL } from "../lib/site";
 import { jsonLdProps, siteGraph } from "../lib/structured-data";
 import { ANALYTICS_ENABLED, GA_MEASUREMENT_ID } from "../lib/analytics";
@@ -66,6 +67,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        <EditLink spaceId={process.env.CONTENTFUL_SPACE_ID ?? ""} />
       </body>
       {ANALYTICS_ENABLED && <Analytics gaId={GA_MEASUREMENT_ID} />}
     </html>
