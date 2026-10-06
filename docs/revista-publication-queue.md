@@ -6,24 +6,18 @@ cheaper before publication than after. Sixteen editions were imported that way
 in August 2026 and are complete but invisible. This is the worklist for taking
 them live one edition at a time.
 
-The list below is a snapshot (2026-09-22). **The live list is the script** —
+The list below is a snapshot (2026-10-06). **The live list is the script** —
 the counts move as editions are published:
 
 ```bash
 yarn drafts:list
 ```
 
-## Queue — 113 unpublished posts across 4 editions
+## Queue — empty
 
-Newest first. `live` is how many of that edition's posts are already public
-(hand-published over the years, or by the Nº 118 import).
-
-| Edición | `--revista=` | Unpublished | Live |
-|---|---|---:|---:|
-| Carácter misionero · sep 2025 | `caracter-misionero` | 24 | 2 |
-| Discípulos que hacen discípulos · jun 2025 | `discipulos-que-hacen-discipulos` | 29 | 3 |
-| Cuidado Integral bíblico y solidario · mar 2025 | `cuidado-integral-biblico-y-solidario` | 25 | 2 |
-| La gente que no vemos · sep 2024 | `la-gente-que-no-vemos` | 35 | 0 |
+All sixteen imported editions are published. Nothing is waiting except the one
+bodyless stub described under "Not in the queue" below, which is all
+`yarn drafts:list` will show.
 
 Nº 118 · *El clamor macedonio* · jun 2026 is absent because its 26 posts were
 imported published. Editions that have left the queue, with what they published
@@ -43,6 +37,10 @@ and how many posts the edition now carries:
 | Envío responsable · dic 2025 | 23 | 24 | 2026-09-17 |
 | Regresando a casa · dic 2023 | 22 | 39 | 2026-09-22 |
 | Conferencias misioneras · jun 2024 | 34 | 39 | 2026-09-22 |
+| Carácter misionero · sep 2025 | 24 | 26 | 2026-09-26 |
+| Discípulos que hacen discípulos · jun 2025 | 29 | 32 | 2026-09-26 |
+| Cuidado Integral bíblico y solidario · mar 2025 | 25 | 27 | 2026-10-06 |
+| La gente que no vemos · sep 2024 | 35 | 35 | 2026-10-06 |
 
 ## Publishing an edition
 

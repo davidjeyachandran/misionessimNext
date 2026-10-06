@@ -1450,3 +1450,23 @@ across 4 editions.
 No deploy has landed since 2026-09-17 09:42 UTC, so four editions are now
 waiting on a build: `lucha-espiritual`, `envio-responsable-2`,
 `regresando-a-casa`, `conferencias-misioneras`.
+
+### 2026-09-26 — Carácter misionero and Discípulos que hacen discípulos published
+
+`caracter-misionero` (24/24) and `discipulos-que-hacen-discipulos` (29/29) — 53
+posts, no failures; the editions resolve 26 and 32 posts on the CDA. A deploy on
+2026-09-23 10:37 UTC had already picked up everything through 09-22.
+
+### 2026-10-06 — Last two editions published; the VAMOS queue is empty
+
+`yarn drafts:publish --live` for `cuidado-integral-biblico-y-solidario` (25/25)
+and `la-gente-que-no-vemos` (35/35) — 60 posts, no failures. The editions
+resolve 27 and 35 posts on the CDA with none still draft. All 16 imported
+editions are now published (466 posts over 2026-09-03 → 2026-10-06).
+
+Left alone on purpose: the one draft with no revista link,
+`la-feminidad-raiz-de-la-biblia-y-la-historia` — a bodyless 2022 stub, not an
+article. It should be archived rather than published.
+
+Waiting on a deploy: these two editions. The latest production build
+(2026-10-06 06:14 UTC) started before they finished publishing.
