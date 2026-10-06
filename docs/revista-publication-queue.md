@@ -15,9 +15,8 @@ yarn drafts:list
 
 ## Queue — empty
 
-All sixteen imported editions are published. Nothing is waiting except the one
-bodyless stub described under "Not in the queue" below, which is all
-`yarn drafts:list` will show.
+All sixteen imported editions are published, and the one leftover stub is
+archived, so `yarn drafts:list` now shows nothing.
 
 Nº 118 · *El clamor macedonio* · jun 2026 is absent because its 26 posts were
 imported published. Editions that have left the queue, with what they published
@@ -93,11 +92,11 @@ Only `sys.publishedAt` on the blogPost entries. Nothing else needs doing:
 
 ## Not in the queue
 
-One draft blogPost has no revista link: `la-feminidad-raiz-de-la-biblia-y-la-historia`
-(created 2022-08-20, `publishDate` 2020-01-16). It has a title and a hero but
-**no body** — an empty stub predating the migration, not an unpublished
-article. Archive it rather than publish it.
+One draft blogPost had no revista link: `la-feminidad-raiz-de-la-biblia-y-la-historia`
+(created 2022-08-20, `publishDate` 2020-01-16) — a title and a hero but **no
+body**, an empty stub predating the migration. Archived 2026-10-06 rather than
+published; it can be unarchived in Contentful if a body ever turns up.
 
-Thirty-eight further unpublished entries are **archived** duplicates from
+Thirty-eight other unpublished entries are **archived** duplicates from
 `scripts/archive-duplicate-posts.ts`. Every query here filters
 `sys.archivedAt` out so they can never be revived by a publish run.

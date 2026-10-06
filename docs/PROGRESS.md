@@ -1470,3 +1470,9 @@ article. It should be archived rather than published.
 
 Waiting on a deploy: these two editions. The latest production build
 (2026-10-06 06:14 UTC) started before they finished publishing.
+
+### 2026-10-06 — Bodyless stub archived
+
+Archived `la-feminidad-raiz-de-la-biblia-y-la-historia`, the one draft with no
+revista link and no body. `yarn drafts:list` now reports 0 unpublished posts.
+Reversible: unarchive it in Contentful.
