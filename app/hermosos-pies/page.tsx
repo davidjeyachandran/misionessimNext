@@ -5,8 +5,11 @@ import { Covered_By_Your_Grace } from "next/font/google";
 import { ScrollEffects } from "../_components/ScrollEffects";
 import { SpotifyEpisodes } from "../_components/SpotifyEpisodes";
 import { VideoThumbnail } from "../_components/VideoThumbnail";
+import { WhatsAppShare } from "../_components/WhatsAppShare";
 import { EPISODES, GUIDE_COVER, GUIDE_URL, VIDEOS } from "./content";
+import { FootprintTrail } from "./FootprintTrail";
 import { SignupForm } from "./SignupForm";
+import "./campaign.css";
 
 /*
  * "Cuán hermosos son los pies" campaign landing page (design:
@@ -68,6 +71,7 @@ export default function HermososPiesPage() {
             className="object-cover"
           />
         </div>
+        <div aria-hidden className="chsp-mist" />
         <div
           aria-hidden
           className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(92,48,28,.7)_0%,rgba(92,48,28,.25)_45%,rgba(92,48,28,0)_70%),linear-gradient(200deg,rgba(255,252,245,.9)_0%,rgba(255,252,245,0)_32%),linear-gradient(0deg,rgba(0,0,0,.15),rgba(0,0,0,.15))]"
@@ -86,10 +90,28 @@ export default function HermososPiesPage() {
             <span className="block font-heading text-[clamp(2rem,6vw,3.5rem)] font-semibold">
               SON LOS
             </span>{" "}
+            {/* Written in by a sweeping mask, then underlined (campaign.css). */}
             <span
               className={`${SCRIPT} -mt-1 block text-[clamp(4.5rem,14vw,8.5rem)] leading-[0.9] text-[#fdecc8]`}
             >
-              pies
+              <span className="relative inline-block">
+                <span className="chsp-write inline-block px-[0.08em]">pies</span>
+                <svg
+                  aria-hidden
+                  viewBox="0 0 200 24"
+                  preserveAspectRatio="none"
+                  className="chsp-underline absolute -bottom-[0.06em] left-[2%] h-[0.16em] w-[88%]"
+                >
+                  <path
+                    d="M4 18C46 12 104 7 196 6"
+                    pathLength={1}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="7"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </span>
             </span>
           </h1>
         </div>
@@ -104,6 +126,12 @@ export default function HermososPiesPage() {
         <p className="mt-2 font-heading text-lg font-extrabold text-[var(--chsp-teal)] sm:text-xl">
           ROMANOS 10:15
         </p>
+        <WhatsAppShare
+          path="/hermosos-pies/"
+          className="mt-6"
+          text={"“¡Cuán hermosos son los pies de los que anuncian buenas nuevas!” — Romanos 10:15\n\nConoce historias de misioneros latinos sirviendo entre pueblos no alcanzados:"}
+        />
+        <FootprintTrail className="mt-6" />
       </section>
 
       {/* Intro */}
@@ -197,6 +225,12 @@ export default function HermososPiesPage() {
         <figcaption className={`${LABEL_CAPS} mt-4 text-lg text-[var(--chsp-red)] sm:text-xl`}>
           Gio, director SIM Latinoamérica
         </figcaption>
+        <WhatsAppShare
+          path="/hermosos-pies/"
+          className="mt-6"
+          label="Invita a otros a orar"
+          text="Únete a 30 días orando por latinos que llevan el Evangelio a las naciones 🙏"
+        />
       </figure>
 
       {/* Podcasts */}

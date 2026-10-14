@@ -1,0 +1,85 @@
+/*
+ * Motion for the "Cuán hermosos son los pies" campaign page. Every animation
+ * is gated so content is fully visible without JS (html.js-anim is added by
+ * ScrollEffects only when JS runs and motion is allowed) and under
+ * prefers-reduced-motion.
+ */
+
+/* ---------- Hero: "pies" is written in, then underlined ---------- */
+
+/* A soft-edged mask sweeps left to right across the word, like a pen. */
+.js-anim .chsp-write {
+  -webkit-mask-image: linear-gradient(90deg, #000 45%, transparent 55%);
+  mask-image: linear-gradient(90deg, #000 45%, transparent 55%);
+  -webkit-mask-size: 220% 100%;
+  mask-size: 220% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: chsp-write 1.5s cubic-bezier(.45, .05, .35, 1) .6s both;
+}
+@keyframes chsp-write {
+  from { -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  to { -webkit-mask-position: 0 0; mask-position: 0 0; }
+}
+
+/* The underline swoosh draws itself once the word is done. */
+.js-anim .chsp-underline path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: chsp-draw .7s ease-out 1.95s forwards;
+}
+@keyframes chsp-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---------- Hero: drifting mist ---------- */
+
+/* Soft white banks low in the valley, wider than the hero so they can drift.
+   Static (still visible) under reduced motion. */
+.chsp-mist {
+  position: absolute;
+  inset: 38% -50% 8% -50%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .4;
+  mix-blend-mode: screen;
+  background:
+    radial-gradient(28% 32% at 18% 55%, rgba(255, 255, 255, .7), transparent 70%),
+    radial-gradient(22% 26% at 46% 40%, rgba(255, 255, 255, .55), transparent 70%),
+    radial-gradient(30% 30% at 72% 62%, rgba(255, 255, 255, .6), transparent 70%),
+    radial-gradient(20% 24% at 92% 45%, rgba(255, 255, 255, .5), transparent 70%);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chsp-mist { animation: chsp-drift 70s ease-in-out infinite alternate; }
+}
+@keyframes chsp-drift {
+  from { transform: translateX(-6%); }
+  to { transform: translateX(6%); }
+}
+
+/* ---------- Footprint trails ---------- */
+
+.chsp-print {
+  opacity: .55;
+  transform: translate(-50%, -50%) rotate(var(--chsp-rot)) scaleX(var(--chsp-flip));
+}
+.chsp-trail[data-state="armed"] .chsp-print { opacity: 0; }
+.chsp-trail[data-state="walking"] .chsp-print { animation: chsp-step .55s ease-out both; }
+@keyframes chsp-step {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(var(--chsp-rot)) scaleX(var(--chsp-flip)) scale(.6);
+  }
+  55% { opacity: .75; }
+  to {
+    opacity: .55;
+    transform: translate(-50%, -50%) rotate(var(--chsp-rot)) scaleX(var(--chsp-flip));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chsp-write, .chsp-underline path, .chsp-print { animation: none !important; }
+  .chsp-write { -webkit-mask-image: none; mask-image: none; }
+  .chsp-underline path { stroke-dashoffset: 0; }
+  .chsp-trail .chsp-print { opacity: .55; }
+}
