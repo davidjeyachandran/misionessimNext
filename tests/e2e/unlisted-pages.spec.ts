@@ -43,3 +43,25 @@ test("robots.txt does not disallow the unlisted page", async ({ request }) => {
 
   expect(body).not.toContain("rebuild-vs-wordpress");
 });
+
+// The "Cuán hermosos son los pies" campaign page stays unlisted until its
+// missing assets arrive (app/hermosos-pies/content.ts). Remove these when it
+// launches, in the same commit that adds it to the nav and sitemap.
+const CAMPAIGN = "/hermosos-pies/";
+
+test("the campaign page tells crawlers not to index it", async ({ page }) => {
+  await page.goto(`http://localhost:3000${CAMPAIGN}`);
+
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+  await expect(
+    page.getByRole("heading", { level: 1, name: "CUÁN HERMOSOS SON LOS pies" }),
+  ).toBeVisible();
+});
+
+for (const route of PUBLIC_ROUTES) {
+  test(`${route} does not link to the campaign page yet`, async ({ page }) => {
+    await page.goto(`http://localhost:3000${route}`);
+
+    await expect(page.locator(`a[href*="${CAMPAIGN}"]`)).toHaveCount(0);
+  });
+}
