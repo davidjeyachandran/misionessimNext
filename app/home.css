@@ -145,6 +145,7 @@ body { overflow-x: hidden; }
   transition: color .2s ease;
 }
 .nav-search:hover { color: var(--color-primary); }
+.nav-search-label { display: none; }
 .main-nav a.nav-cta {
   background: var(--color-primary);
   color: #fff;
@@ -507,7 +508,8 @@ body { overflow-x: hidden; }
   .main-nav ul { flex-direction: column; align-items: flex-start; gap: 6px; }
   .main-nav a { color: var(--color-secondary); font-size: 17px; }
   .main-nav a.nav-cta { margin: 14px 0 0; color: #fff; }
-  .nav-search { display: none; }
+  .nav-search { padding: 0; gap: 8px; font-size: 17px; }
+  .nav-search-label { display: inline; }
 }
 
 @media (max-width: 768px) {

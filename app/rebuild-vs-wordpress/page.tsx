@@ -515,18 +515,18 @@ export default function SitioNuevoVsActualPage() {
       <section className="mt-14">
         <Titulo>Lo que falta antes del cambio</Titulo>
         <p className="mb-6 max-w-[62ch] text-muted">
-          Queda un solo punto, y es lo único que el sitio actual tiene y el nuevo todavía no.
+          Ya no queda nada pendiente: lo último que tenía el sitio actual y el nuevo no era el buscador.
         </p>
         <div className="border-l-[3px] border-brand bg-white">
           <div className="flex flex-col gap-1 px-5 py-4">
             <span className="text-[11px] font-semibold uppercase tracking-wider text-brand">
-              Falta
+              Resuelto
             </span>
-            <span className="font-semibold text-ink">Un buscador dentro del sitio</span>
+            <span className="font-semibold text-ink">Buscador dentro del sitio</span>
             <span className="text-sm leading-relaxed text-muted">
-              WordPress tiene una lupa para buscar dentro del sitio; el sitio nuevo todavía no. Los
-              listados por categoría y por etiqueta cubren parte de esa necesidad, pero es una
-              diferencia que se nota.
+              La lupa del menú abre /buscar/, que busca en todos los artículos del blog y las
+              ediciones de la revista. El índice se genera en cada despliegue, así que el contenido
+              nuevo aparece en la búsqueda tras el siguiente.
             </span>
           </div>
         </div>

@@ -1476,3 +1476,22 @@ Waiting on a deploy: these two editions. The latest production build
 Archived `la-feminidad-raiz-de-la-biblia-y-la-historia`, the one draft with no
 revista link and no body. `yarn drafts:list` now reports 0 unpublished posts.
 Reversible: unarchive it in Contentful.
+
+## 2026-10-06 — Site search (Pagefind)
+
+Item 4 of the open list audited: cutover, slug repair and redirect coverage were
+already done (August); the only real gap left was search, which
+`/rebuild-vs-wordpress/` listed as the one missing feature.
+
+- `pagefind` devDependency; `yarn build` is now `next build && pagefind --site out`.
+  Indexes only pages with `data-pagefind-body` (blog post and revista edition
+  `<main>`): 1,531 pages, 24,638 words, ~4s.
+- `/buscar/` (`app/buscar/`): client component loading `/pagefind/pagefind.js`,
+  debounced, `?q=` seeded, `noindex`, not in the sitemap. Header gets a magnifier
+  link (labelled "Buscar" in the mobile menu).
+- Verified on the built `out/`: "fulani" returns the three Fulani posts with
+  highlighted excerpts. Index exists only after a build, so search does not work
+  under `next dev`. New content reaches search on the next deploy.
+- Not done: no e2e test yet; Lighthouse/visual-regression pass and the stale
+  Revista-link cleanup script are still open (the latter only tidies noise —
+  `gql()` already tolerates the links).

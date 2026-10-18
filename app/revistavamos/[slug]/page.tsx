@@ -51,7 +51,7 @@ export default async function RevistaPage({ params }: Props) {
   if (!revista) notFound();
 
   return (
-    <main className="page-offset mx-auto max-w-6xl px-4 py-12">
+    <main className="page-offset mx-auto max-w-6xl px-4 py-12" data-pagefind-body>
       <nav className="mb-6 text-sm text-muted">
         <Link href="/" prefetch={PREFETCH} className="transition-colors hover:text-ink">Inicio</Link>
         {" / "}
