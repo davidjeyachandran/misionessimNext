@@ -23,11 +23,22 @@ export function WhatsAppShare({
   text,
   path,
   label = "Compartir en WhatsApp",
-  tone = "light",
-  className = "",
+  ...rest
 }: WhatsAppShareProps) {
   const url = `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
   const href = `https://wa.me/?text=${encodeURIComponent(`${text}\n${url}`)}`;
+  return <WhatsAppLink href={href} label={label} {...rest} />;
+}
+
+interface WhatsAppLinkProps {
+  href: string;
+  label: string;
+  tone?: "light" | "dark";
+  className?: string;
+}
+
+/* WhatsApp-styled pill link to any WhatsApp URL, e.g. a channel invite. */
+export function WhatsAppLink({ href, label, tone = "light", className = "" }: WhatsAppLinkProps) {
   const colors =
     tone === "light"
       ? "border-[#1e8f4e] text-[#1e8f4e] hover:bg-[#1e8f4e] hover:text-white"

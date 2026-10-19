@@ -8,8 +8,15 @@ import type { SpotifyEpisode } from "../_components/SpotifyEpisodes";
  */
 
 /** Cover image of the 30-day prayer guide (design: "MOCKUP LIBRO"). */
-export const GUIDE_COVER: { src: string; alt: string; width: number; height: number } | null =
-  null;
+export const GUIDE_COVER: { src: string; alt: string; width: number; height: number } | null = {
+  src: "/hermosos-pies/guia-30-dias.webp",
+  alt: "Portada de la guía «30 días orando por latinos en misión» en una tableta",
+  width: 949,
+  height: 1021,
+};
+
+/** SIM Latinoamérica's WhatsApp channel. */
+export const WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029Vb5w2PzJUM2hE0Ci061b";
 
 /** Where "Descárgalo aquí" points — the PDF or a landing link. */
 export const GUIDE_URL: string | null = null;

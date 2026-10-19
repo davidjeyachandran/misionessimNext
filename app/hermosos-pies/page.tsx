@@ -5,8 +5,8 @@ import { Covered_By_Your_Grace } from "next/font/google";
 import { ScrollEffects } from "../_components/ScrollEffects";
 import { SpotifyEpisodes } from "../_components/SpotifyEpisodes";
 import { VideoThumbnail } from "../_components/VideoThumbnail";
-import { WhatsAppShare } from "../_components/WhatsAppShare";
-import { EPISODES, GUIDE_COVER, GUIDE_URL, VIDEOS } from "./content";
+import { WhatsAppLink, WhatsAppShare } from "../_components/WhatsAppShare";
+import { EPISODES, GUIDE_COVER, GUIDE_URL, VIDEOS, WHATSAPP_CHANNEL_URL } from "./content";
 import { FootprintTrail } from "./FootprintTrail";
 import { SignupForm } from "./SignupForm";
 import "./campaign.css";
@@ -126,11 +126,6 @@ export default function HermososPiesPage() {
         <p className="mt-2 font-heading text-lg font-extrabold text-[var(--chsp-teal)] sm:text-xl">
           ROMANOS 10:15
         </p>
-        <WhatsAppShare
-          path="/hermosos-pies/"
-          className="mt-6"
-          text={"“¡Cuán hermosos son los pies de los que anuncian buenas nuevas!” — Romanos 10:15\n\nConoce historias de misioneros latinos sirviendo entre pueblos no alcanzados:"}
-        />
         <FootprintTrail className="mt-6" />
       </section>
 
@@ -225,12 +220,14 @@ export default function HermososPiesPage() {
         <figcaption className={`${LABEL_CAPS} mt-4 text-lg text-[var(--chsp-red)] sm:text-xl`}>
           Gio, director SIM Latinoamérica
         </figcaption>
-        <WhatsAppShare
-          path="/hermosos-pies/"
-          className="mt-6"
-          label="Invita a otros a orar"
-          text="Únete a 30 días orando por latinos que llevan el Evangelio a las naciones 🙏"
-        />
+        <div className="mt-6 flex flex-wrap gap-3">
+          <WhatsAppShare
+            path="/hermosos-pies/"
+            label="Invitar a otros a orar"
+            text="Únete a 30 días orando por latinos que llevan el Evangelio a las naciones 🙏"
+          />
+          <WhatsAppLink href={WHATSAPP_CHANNEL_URL} label="Súmate al Canal de WhatsApp" />
+        </div>
       </figure>
 
       {/* Podcasts */}
