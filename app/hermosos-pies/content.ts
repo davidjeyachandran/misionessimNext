@@ -11,8 +11,8 @@ import type { SpotifyEpisode } from "../_components/SpotifyEpisodes";
 export const GUIDE_COVER: { src: string; alt: string; width: number; height: number } | null = {
   src: "/hermosos-pies/guia-30-dias.webp",
   alt: "Portada de la guía «30 días orando por latinos en misión» en una tableta",
-  width: 949,
-  height: 1021,
+  width: 875,
+  height: 1100,
 };
 
 /** SIM Latinoamérica's WhatsApp channel. */
