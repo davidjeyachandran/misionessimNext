@@ -141,20 +141,15 @@ export default function HermososPiesPage() {
             de estas historias y también desafiar a que más latinos den pasos de
             fe para servir a largo plazo en el mundo no alcanzado!
           </p>
-          <figure>
-            <Image
-              src="/hermosos-pies/yurani.webp"
-              alt="Yurani abraza con una sonrisa a una mujer con velo"
-              width={1200}
-              height={800}
-              unoptimized
-              sizes="(min-width: 768px) 50vw, 92vw"
-              className="w-full object-cover"
-            />
-            <figcaption className="mt-3 text-xs uppercase tracking-wide text-white/90">
-              Yurani, colombiana que sirvió en África
-            </figcaption>
-          </figure>
+          <Image
+            src="/hermosos-pies/pies-ninos.webp"
+            alt="Pies descalzos de niños y adultos sobre una estera verde, vistos desde arriba"
+            width={1200}
+            height={782}
+            unoptimized
+            sizes="(min-width: 768px) 50vw, 92vw"
+            className="w-full object-cover"
+          />
         </div>
       </section>
 
