@@ -3426,6 +3426,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/2019-10/requisitos-y-pasos-para-ser-misionero-0/",
+      "destination": "/blog/2019-10/requisitos-y-pasos-para-ser-misionero/",
+      "permanent": true
+    },
+    {
       "source": "/blog/tag/agenda/",
       "destination": "/blog/",
       "permanent": true

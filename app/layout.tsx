@@ -36,7 +36,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "SIM Latinoamérica",
-    locale: "es_ES",
+    // Latin American Spanish: the audience is Latinoamérica, not Spain.
+    locale: "es_419",
     images: [
       {
         url: "/home/banner-sim-home-2026-1200.webp",
