@@ -28,12 +28,15 @@
  *  - An existing `revista` back-reference is always preserved, never
  *    touched or cleared.
  *  - Matching slugs are always updates in place — never delete/recreate.
+ *  - Images (hero and inline) are reused when the environment already holds
+ *    them, never re-uploaded — see the asset-reuse section below.
  */
 import { readFile, writeFile } from "node:fs/promises";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import matter from "gray-matter";
+import type { AssetProps, PlainClientAPI } from "contentful-management";
 import { markdownToRichText, type RichTextNode } from "./lib/markdown-to-richtext";
 
 const POSTS_DIR = path.join(process.cwd(), "export", "posts");
@@ -255,6 +258,151 @@ function summarize(plans: PostPlan[]) {
 }
 
 // ---------------------------------------------------------------------------
+// Asset reuse — what makes a re-import idempotent
+//
+// `asset.createFromFiles` ALWAYS creates a new asset, so an unguarded --live
+// re-run duplicates every image it touches. Confirmed 2026-08-15: that run
+// re-uploaded all 12 inline body images imported on 2026-07-05, leaving each
+// file name with two copies in `main` and orphaning the July originals.
+//
+// Contentful assets have no custom fields to stamp the WP source URL onto
+// (title/description are presentation text — `description` is queried by the
+// site, so it is not a safe place to hide a machine key), which leaves the
+// file name as the only thing the CMA assets endpoint can be queried on. The
+// source file's byte size is used as a second key so that two genuinely
+// different WP uploads sharing a file name are not silently conflated.
+// ---------------------------------------------------------------------------
+
+interface ReusableAsset {
+  id: string;
+  size: number | null;
+  createdAt: string;
+  published: boolean;
+}
+
+type ContentfulCtx = { spaceId: string; environmentId: string };
+
+function toReusableAsset(asset: AssetProps): ReusableAsset {
+  const file = asset.fields.file?.["en-US"];
+  const size = file?.details?.size;
+  return {
+    id: asset.sys.id,
+    size: typeof size === "number" ? size : null,
+    createdAt: asset.sys.createdAt,
+    published: typeof asset.sys.publishedVersion === "number",
+  };
+}
+
+/** Usable = processed (has a CDN url) and not archived; archived assets
+ *  cannot be linked from a published entry. */
+function isUsableAsset(asset: AssetProps): boolean {
+  return (
+    Boolean(asset.fields.file?.["en-US"]?.url) &&
+    typeof asset.sys.archivedVersion !== "number"
+  );
+}
+
+/**
+ * The reuse check needs the source file's size, and a HEAD request is far
+ * cheaper than downloading an image we are probably not going to upload.
+ * Returns null when the origin is unreachable or reports no length — callers
+ * then fall back to matching on file name alone, which is what keeps
+ * re-imports working once the WP origin is switched off and there is nothing
+ * left to download.
+ */
+async function headContentLength(url: string): Promise<number | null> {
+  try {
+    const res = await fetch(url, {
+      method: "HEAD",
+      headers: { "user-agent": "misionessim-migration-bot/1.0" },
+    });
+    if (!res.ok) return null;
+    const length = Number(res.headers.get("content-length"));
+    return Number.isFinite(length) && length > 0 ? length : null;
+  } catch {
+    return null;
+  }
+}
+
+function createAssetReuseIndex(client: PlainClientAPI, ctx: ContentfulCtx) {
+  // file name -> assets already in the environment, plus any this run has
+  // uploaded (so two posts sharing an image upload it once).
+  const byFileName = new Map<string, ReusableAsset[]>();
+  const stats = { reused: 0, uploaded: 0 };
+
+  async function candidatesFor(fileName: string): Promise<ReusableAsset[]> {
+    const cached = byFileName.get(fileName);
+    if (cached) return cached;
+    // A failure here is deliberately NOT caught: an import that cannot check
+    // what already exists would go right back to duplicating assets, and the
+    // script is safe to restart (entry updates are in place).
+    const res = await client.asset.getMany({
+      ...ctx,
+      query: { "fields.file.en-US.fileName": fileName, limit: 100 },
+    });
+    const found = res.items.filter(isUsableAsset).map(toReusableAsset);
+    byFileName.set(fileName, found);
+    return found;
+  }
+
+  return {
+    /**
+     * Id of an asset the environment already holds for this file, or null if
+     * it genuinely has to be uploaded. `sourceSize` is only awaited when
+     * there is something to compare against, so the common "not there yet"
+     * path costs one CMA query and no network round-trip to the origin.
+     */
+    async find(
+      fileName: string,
+      sourceSize: () => number | null | Promise<number | null>,
+    ): Promise<string | null> {
+      const candidates = await candidatesFor(fileName);
+      if (candidates.length === 0) return null;
+
+      const size = await sourceSize();
+      const matches = size === null ? candidates : candidates.filter((a) => a.size === size);
+      if (matches.length === 0) {
+        console.warn(
+          `  WARN: ${fileName} already exists in "${ctx.environmentId}" but no copy matches the source size (source ${size} bytes, existing ${candidates.map((a) => a.size).join(", ")}) — treating it as a different file and uploading a new asset.`,
+        );
+        return null;
+      }
+      // The 2026-08-15 re-import left 12 file names with two copies each; the
+      // newest is the one the current entry bodies point at, so prefer it and
+      // leave the older orphans alone (cleaning those up is a separate call).
+      const newest = matches.reduce((a, b) =>
+        Date.parse(b.createdAt) > Date.parse(a.createdAt) ? b : a,
+      );
+      if (size === null) {
+        console.log(
+          `  reusing asset ${newest.id} for ${fileName} (matched on file name only — source size unavailable)`,
+        );
+      }
+      if (!newest.published) {
+        const asset = await client.asset.get({ ...ctx, assetId: newest.id });
+        await client.asset.publish({ ...ctx, assetId: newest.id }, asset);
+        newest.published = true;
+      }
+      stats.reused++;
+      return newest.id;
+    },
+
+    /** Record a freshly uploaded asset so later posts reuse it too. */
+    remember(asset: AssetProps) {
+      const fileName = asset.fields.file?.["en-US"]?.fileName;
+      stats.uploaded++;
+      if (!fileName) return;
+      byFileName.set(fileName, [
+        ...(byFileName.get(fileName) ?? []),
+        toReusableAsset(asset),
+      ]);
+    },
+
+    stats,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Live execution — UNTESTED as of 2026-07-04, no credentials for this space
 // yet. Uses the modern plain client API (createClient default), matching
 // mi-movilicemos's own SDK usage pattern (contentful.md).
@@ -272,42 +420,58 @@ async function runLive(plans: PostPlan[], environmentId: string) {
   const { createClient } = await import("contentful-management");
   const client = createClient({ accessToken: managementToken });
 
-  const ctx = { spaceId, environmentId };
+  const ctx: ContentfulCtx = { spaceId, environmentId };
+  const assets = createAssetReuseIndex(client, ctx);
+  // Inline images resolved earlier in this run, keyed by WP source URL.
+  // extractInlineImages only dedupes within one document, so without this the
+  // same image shared by two posts would be looked up (and, before the reuse
+  // index, uploaded) twice.
+  const inlineAssetIdByUrl = new Map<string, string>();
   let processed = 0;
 
   for (const plan of plans) {
-    // Upload + process the image first, if this post needs one, so we have
-    // an asset ID to attach to the entry.
+    // Resolve the image first, if this post needs one, so we have an asset ID
+    // to attach to the entry.
     let heroImageLink: { sys: { type: "Link"; linkType: "Asset"; id: string } } | undefined;
     if (plan.image.action === "upload-and-set" && plan.image.localPath) {
       const fileBuffer = readFileSync(plan.image.localPath);
-      const fileArrayBuffer = fileBuffer.buffer.slice(
-        fileBuffer.byteOffset,
-        fileBuffer.byteOffset + fileBuffer.byteLength,
-      ) as ArrayBuffer;
       const filename = path.basename(plan.image.localPath);
-      const asset = await client.asset.createFromFiles(ctx, {
-        fields: {
-          title: { "en-US": plan.fields.title },
-          description: { "en-US": "" },
-          file: {
-            "en-US": {
-              contentType: "image/jpeg",
-              fileName: filename,
-              file: fileArrayBuffer,
+      let assetId = await assets.find(filename, () => fileBuffer.byteLength);
+      if (!assetId) {
+        const fileArrayBuffer = fileBuffer.buffer.slice(
+          fileBuffer.byteOffset,
+          fileBuffer.byteOffset + fileBuffer.byteLength,
+        ) as ArrayBuffer;
+        const asset = await client.asset.createFromFiles(ctx, {
+          fields: {
+            title: { "en-US": plan.fields.title },
+            description: { "en-US": "" },
+            file: {
+              "en-US": {
+                contentType: "image/jpeg",
+                fileName: filename,
+                file: fileArrayBuffer,
+              },
             },
           },
-        },
-      });
-      const processedAsset = await client.asset.processForAllLocales(ctx, asset);
-      await client.asset.publish({ ...ctx, assetId: processedAsset.sys.id }, processedAsset);
-      heroImageLink = { sys: { type: "Link", linkType: "Asset", id: processedAsset.sys.id } };
+        });
+        const processedAsset = await client.asset.processForAllLocales(ctx, asset);
+        await client.asset.publish({ ...ctx, assetId: processedAsset.sys.id }, processedAsset);
+        assets.remember(processedAsset);
+        assetId = processedAsset.sys.id;
+      }
+      heroImageLink = { sys: { type: "Link", linkType: "Asset", id: assetId } };
     }
 
     // Upload inline images (wp-content image hyperlinks in the body), then
     // promote their enclosing single-image paragraphs to embedded-asset-block.
     const urlToAssetId = new Map<string, string>();
     for (const { url, alt } of plan.inlineImages) {
+      const alreadyResolved = inlineAssetIdByUrl.get(url);
+      if (alreadyResolved) {
+        urlToAssetId.set(url, alreadyResolved);
+        continue;
+      }
       try {
         // rewriteInternalLinks strips "https://misionessim.org" from image
         // URLs before extractInlineImages runs, leaving bare /wp-content/...
@@ -315,30 +479,42 @@ async function runLive(plans: PostPlan[], environmentId: string) {
         const absoluteUrl = url.startsWith("/")
           ? `https://misionessim.org${url}`
           : url;
-        const res = await fetch(absoluteUrl, {
-          headers: { "user-agent": "misionessim-migration-bot/1.0" },
-        });
-        if (!res.ok) {
-          console.warn(`  WARN: could not download ${url}: ${res.status}`);
-          continue;
-        }
-        const buffer = await res.arrayBuffer();
-        const contentType = res.headers.get("content-type") ?? "image/jpeg";
         const fileName = url.split("/").pop()?.split("?")[0] ?? "image.jpg";
-        const asset = await client.asset.createFromFiles(ctx, {
-          fields: {
-            title: { "en-US": alt || fileName },
-            description: { "en-US": alt },
-            file: { "en-US": { contentType, fileName, file: buffer } },
-          },
-        });
-        const processed = await client.asset.processForAllLocales(ctx, asset);
-        await client.asset.publish({ ...ctx, assetId: processed.sys.id }, processed);
-        urlToAssetId.set(url, processed.sys.id);
-        console.log(`  uploaded inline asset: ${fileName} → ${processed.sys.id}`);
+        // Ask Contentful before the origin: on a re-import the asset is
+        // normally already there, so nothing is downloaded and nothing is
+        // duplicated.
+        let assetId = await assets.find(fileName, () => headContentLength(absoluteUrl));
+        if (!assetId) {
+          const res = await fetch(absoluteUrl, {
+            headers: { "user-agent": "misionessim-migration-bot/1.0" },
+          });
+          if (!res.ok) {
+            console.warn(`  WARN: could not download ${url}: ${res.status}`);
+            continue;
+          }
+          const buffer = await res.arrayBuffer();
+          const contentType = res.headers.get("content-type") ?? "image/jpeg";
+          const asset = await client.asset.createFromFiles(ctx, {
+            fields: {
+              title: { "en-US": alt || fileName },
+              description: { "en-US": alt },
+              file: { "en-US": { contentType, fileName, file: buffer } },
+            },
+          });
+          const processedInline = await client.asset.processForAllLocales(ctx, asset);
+          await client.asset.publish(
+            { ...ctx, assetId: processedInline.sys.id },
+            processedInline,
+          );
+          assets.remember(processedInline);
+          assetId = processedInline.sys.id;
+          console.log(`  uploaded inline asset: ${fileName} → ${assetId}`);
+        }
+        urlToAssetId.set(url, assetId);
+        inlineAssetIdByUrl.set(url, assetId);
       } catch (e) {
         console.warn(
-          `  WARN: failed to upload inline image ${url}: ${(e as Error).message}`,
+          `  WARN: failed to resolve inline image ${url}: ${(e as Error).message}`,
         );
       }
     }
@@ -415,6 +591,10 @@ async function runLive(plans: PostPlan[], environmentId: string) {
     processed++;
     if (processed % 25 === 0) console.log(`  ${processed}/${plans.length}`);
   }
+
+  console.log(
+    `Assets: ${assets.stats.uploaded} uploaded, ${assets.stats.reused} reused from "${environmentId}".`,
+  );
 }
 
 // ---------------------------------------------------------------------------
