@@ -58,10 +58,10 @@ export default function HermososPiesPage() {
     <main className={`page-offset ${script.variable}`} style={PALETTE}>
       {/* Hero — the sky wash (brown from the left, white haze top-right) is a
           vector overlay in the design, not part of the photo. */}
-      <section className="hero-page relative !min-h-[min(85svh,820px)] !py-24 text-center">
+      <section className="hero-page relative !min-h-[min(68svh,656px)] !py-10 text-center">
         <div className="parallax-bg" data-parallax="0.8">
           <Image
-            src="/hermosos-pies/hero-paisaje.webp"
+            src="/hermosos-pies/hero-pies.webp"
             alt=""
             fill
             fetchPriority="high"
