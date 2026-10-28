@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SOCIAL_LINKS } from "../../_components/social";
-import { WHATSAPP_CHANNEL_URL, WHATSAPP_GROUP_URL } from "../content";
+import { GUIDE_URL, WHATSAPP_CHANNEL_URL, WHATSAPP_GROUP_URL } from "../content";
 import { LABEL_CAPS, PALETTE, SCRIPT, script } from "../theme";
 
 export const metadata: Metadata = {
@@ -47,6 +47,17 @@ export default function HermososPiesGraciasPage() {
           Recibimos tus datos y pronto alguien del equipo de SIM se pondrá en
           contacto contigo. Mientras tanto, camina con nosotros:
         </p>
+
+        {GUIDE_URL && (
+          <a
+            href={GUIDE_URL}
+            target="_blank"
+            rel="noopener"
+            className="mt-8 inline-block bg-[var(--chsp-teal)] px-6 py-3 font-heading text-lg font-extrabold uppercase text-white transition-colors hover:bg-[var(--chsp-brown)]"
+          >
+            Descarga la guía de oración
+          </a>
+        )}
 
         <ul className="mt-10 grid gap-4 text-left sm:grid-cols-2">
           {WHATSAPP_INVITES.map((invite) => (

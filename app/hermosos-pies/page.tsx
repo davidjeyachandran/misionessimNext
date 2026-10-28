@@ -3,8 +3,8 @@ import Image from "next/image";
 import { ScrollEffects } from "../_components/ScrollEffects";
 import { SpotifyEpisodes } from "../_components/SpotifyEpisodes";
 import { VideoThumbnail } from "../_components/VideoThumbnail";
-import { WhatsAppLink, WhatsAppShare } from "../_components/WhatsAppShare";
-import { EPISODES, GUIDE_COVER, GUIDE_URL, VIDEOS, WHATSAPP_CHANNEL_URL } from "./content";
+import { WhatsAppShare } from "../_components/WhatsAppShare";
+import { EPISODES, GUIDE_COVER, GUIDE_URL, VIDEOS } from "./content";
 import { FootprintTrail } from "./FootprintTrail";
 import { SignupForm } from "./SignupForm";
 import { LABEL_CAPS, PALETTE, SCRIPT, script } from "./theme";
@@ -197,7 +197,6 @@ export default function HermososPiesPage() {
             label="Invitar a otros a orar"
             text="Únete a 30 días orando por latinos que llevan el Evangelio a las naciones 🙏"
           />
-          <WhatsAppLink href={WHATSAPP_CHANNEL_URL} label="Súmate al Canal de WhatsApp" />
         </div>
       </figure>
 
