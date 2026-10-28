@@ -18,6 +18,9 @@ export const GUIDE_COVER: { src: string; alt: string; width: number; height: num
 /** SIM Latinoamérica's WhatsApp channel. */
 export const WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029Vb5w2PzJUM2hE0Ci061b";
 
+/** "Oportunidades SIM" WhatsApp group (the same one Sirve con SIM links to). */
+export { WHATSAPP_URL as WHATSAPP_GROUP_URL } from "../sirve-con-sim/contact";
+
 /** Where "Descárgalo aquí" points — the PDF or a landing link. */
 export const GUIDE_URL: string | null = null;
 

@@ -58,6 +58,12 @@ test("the campaign page tells crawlers not to index it", async ({ page }) => {
   ).toBeVisible();
 });
 
+test("the campaign's thank-you page tells crawlers not to index it", async ({ page }) => {
+  await page.goto(`http://localhost:3000${CAMPAIGN}gracias/`);
+
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+});
+
 for (const route of PUBLIC_ROUTES) {
   test(`${route} does not link to the campaign page yet`, async ({ page }) => {
     await page.goto(`http://localhost:3000${route}`);

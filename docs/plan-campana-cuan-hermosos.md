@@ -154,3 +154,64 @@ Following the existing `tests/e2e/*.spec.ts` style:
 - 3 × YouTube ID + still → `content.ts`
 - Confirm or replace the 3 Spotify episodes → `content.ts`
 - Remove `noindex`, add to nav and sitemap (one small commit)
+
+---
+
+# Phase 2: progressive signup form + success page (decided 2026-10-28)
+
+Replaces the "coming soon" no-op in `app/hermosos-pies/SignupForm.tsx`.
+
+## Decisions
+
+| # | Decision | Answer |
+|---|---|---|
+| F1 | Where submissions go | **Formspree**, a form of its own (paid plan, taken 2026-10-28). Env var `NEXT_PUBLIC_HERMOSOS_PIES_ENDPOINT` (`https://formspree.io/f/<id>`). **Supersedes D3**: no VerticalResponse integration. Export the Formspree CSV and import it into VerticalResponse by hand when the campaign ends. Notification recipients are set in the Formspree dashboard. Sirve con SIM stays on Web3Forms. |
+| F2 | Progressive flow | **Two submissions.** Step 1 (Nombre, Correo, consent) sends right away with `etapa: 1`, so the lead is kept even if they leave. Step 2 (all optional) then appears in place and sends `etapa: 2` with the email repeated so the two rows can be matched. A "Saltar" link goes straight to the success page. No `sendBeacon` and no localStorage autosave. |
+| F3 | Success page | **A separate static page**, `/hermosos-pies/gracias/`. It's noindex, unlisted, and the GA pageview counts as the conversion (no custom events). It's also the `_next` target for no-JS submits, which skip step 2. |
+| F4 | "Quiero…" | **Checkboxes**, none required, shown as large tappable cards: Saber cómo ser pies que sirven con SIM / Orar por pies que sirven con SIM / Dar para pies que sirven con SIM. |
+| F5 | Rol en la iglesia | **A single choice from chips**, optional. Top-level roles from mi-movilicemos (`poc/mi-movilicemos/src/data/questions.ts`) plus one extra: Pastor/ líder · Candidato/ Misionero · Movilizador · Encargado de cuidado integral · Apoyador / orador de la Misión · Miembro de la iglesia. |
+| F6 | País + WhatsApp | País `<select>` comes first in step 2: ~21 pinned countries (LatAm + España + EE.UU.), a divider, then the full `COUNTRIES` list from `app/sirve-con-sim/countries.ts`. WhatsApp is `type="tel"`, and choosing a country fills in its dial code (small map for the pinned countries only; the field stays editable). Light validation: digits/spaces/`+`, at least 8 digits. Helper text: "Para invitarte a nuestros grupos de WhatsApp. No compartimos tu número." |
+| F7 | Consent | One required checkbox in step 1: "Acepto recibir noticias de la campaña y la política de privacidad" (link `/privacidad/`). Add a Hermosos Pies paragraph to `app/privacidad/page.tsx` covering the data collected, the purpose (campaign updates, WhatsApp invitations, later newsletter import) and the external form provider. The current text says data is only used to answer enquiries, so it has to change. Claude drafts it; reviewed in the PR. |
+| F8 | Copy | Claude drafts all the Spanish microcopy; David reviews it in the PR. |
+
+## Fields sent to Formspree
+
+| Field | Step | Notes |
+|---|---|---|
+| `nombre` | 1 | required |
+| `email` | 1, 2 | required in 1; repeated in 2. Formspree uses `email` as the Reply-To |
+| `consentimiento` | 1 | required |
+| `etapa` | 1, 2 | `1` / `2` |
+| `quiero` | 2 | the ticked options joined with `; ` (one column in the CSV) |
+| `pais` | 2 | |
+| `whatsapp` | 2 | |
+| `rol` | 2 | |
+| `_subject` | 1, 2 | "Hermosos Pies — nuevo contacto" / "Hermosos Pies — más datos de {nombre}" |
+| `_next` | 1 (no-JS) | absolute `${SITE_URL}/hermosos-pies/gracias/` |
+| `_gotcha` | 1, 2 | Formspree's honeypot field |
+
+## Success page `/hermosos-pies/gracias/`
+
+- Heading in the campaign script and colours ("¡Gracias por dar el paso!") and a short line of copy.
+- Two large WhatsApp buttons, each with a one-line description:
+  - **Únete a Oportunidades SIM** (group): https://chat.whatsapp.com/FfwZVyN09pA49SpPhyITWd
+  - **Sigue el canal SIM Latinoamérica** (channel): https://whatsapp.com/channel/0029Vb5w2PzJUM2hE0Ci061b
+- Social row: Facebook, Instagram, Spotify, YouTube. Lift the `SOCIAL` array out of `app/_components/SiteFooter.tsx` into a shared module so there's one source.
+- A link back to `/hermosos-pies/`.
+
+## Implementation
+
+- `SignupForm.tsx` becomes a small step machine (`step1 → sending → step2 → sending → redirect`). Reuse Sirve con SIM's pattern: JSON `fetch` when JS runs, native `action`/`method` POST without it, Spanish error copy, console logging of server errors. Don't share code with `ContactForm.tsx` beyond copying the pattern; the two providers' reserved fields differ.
+- Move focus to the step 2 heading when it appears, with an `aria-live` announcement.
+- If step 2 fails, show the error but still offer "Saltar", because the lead is already saved.
+- With no endpoint configured, keep today's "próximamente" notice so previews still build.
+- Add `NEXT_PUBLIC_HERMOSOS_PIES_ENDPOINT` to `.env.example`, and set it in Vercel before deploying.
+- `app/hermosos-pies/gracias/page.tsx` gets `robots: { index: false }` and stays out of the sitemap and nav.
+
+## Tests
+
+- Step 1: required fields and consent, a mocked Formspree POST carries `etapa: 1`, and step 2 then appears.
+- Step 2: all fields optional, the payload carries `etapa: 2` + email + joined `quiero`, the redirect goes to `/gracias/`, and "Saltar" goes there without a POST.
+- Choosing País fills in the dial code.
+- `/hermosos-pies/gracias/` renders both WhatsApp links and the social links, and is noindex and unlisted (extend `unlisted-pages.spec.ts`).
+- Layout check at 375 px: no horizontal scroll; chips and cards wrap.
