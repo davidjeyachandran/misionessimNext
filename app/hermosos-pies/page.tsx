@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import Image from "next/image";
-import { Covered_By_Your_Grace } from "next/font/google";
 import { ScrollEffects } from "../_components/ScrollEffects";
 import { SpotifyEpisodes } from "../_components/SpotifyEpisodes";
 import { VideoThumbnail } from "../_components/VideoThumbnail";
@@ -9,6 +7,7 @@ import { WhatsAppLink, WhatsAppShare } from "../_components/WhatsAppShare";
 import { EPISODES, GUIDE_COVER, GUIDE_URL, VIDEOS, WHATSAPP_CHANNEL_URL } from "./content";
 import { FootprintTrail } from "./FootprintTrail";
 import { SignupForm } from "./SignupForm";
+import { LABEL_CAPS, PALETTE, SCRIPT, script } from "./theme";
 import "./campaign.css";
 
 /*
@@ -19,18 +18,7 @@ import "./campaign.css";
  * absent from app/sitemap.ts, and linked from nowhere on the site (see
  * tests/e2e/unlisted-pages.spec.ts). Not disallowed in robots.txt, so crawlers
  * can still read the noindex.
- *
- * The design's handwritten face is loaded here rather than in the root layout,
- * so only this route downloads it. Gotham and Bebas Neue map onto the site's
- * Raleway / Work Sans.
  */
-const script = Covered_By_Your_Grace({
-  variable: "--font-script",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: "Cuán hermosos son los pies",
   description:
@@ -39,18 +27,6 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/* Campaign palette, sampled from the design and scoped to this page. */
-const PALETTE = {
-  "--chsp-terracotta": "#ba4931",
-  "--chsp-tan": "#dcbb95",
-  "--chsp-brown": "#481f00",
-  "--chsp-red": "#992105",
-  "--chsp-teal": "#0d5971",
-} as CSSProperties;
-
-const SCRIPT = "font-[family-name:var(--font-script)] font-normal";
-/* Bebas Neue's role in the design: condensed caps labels. */
-const LABEL_CAPS = "font-heading font-bold uppercase tracking-[0.04em]";
 const SECTION_HEADING = "font-heading text-2xl font-extrabold uppercase sm:text-3xl lg:text-4xl";
 
 export default function HermososPiesPage() {

@@ -41,6 +41,7 @@ const SECTIONS = [
     title: "Qué datos recogemos",
     paragraphs: [
       "Por un lado, los datos que tú nos entregas voluntariamente al completar el formulario de la página Sirve con SIM: tu nombre y apellido, tu teléfono, tu correo electrónico, tu país y el comentario o consulta que decidas escribir.",
+      "También los que nos dejas en el formulario de la campaña «Cuán hermosos son los pies»: tu nombre y tu correo electrónico y, solo si decides contárnoslo, en qué quieres participar (saber más, orar o dar), tu país, tu número de WhatsApp y tu rol en la iglesia.",
       ...(ANALYTICS_ENABLED
         ? [
             "Por otro, cuando navegas por el sitio se recogen de forma automática algunos datos de uso: las páginas que visitas y cuándo, el país y la ciudad aproximada desde los que llegas, el tipo de dispositivo y navegador que usas, y el enlace o buscador que te trajo hasta aquí.",
@@ -68,13 +69,14 @@ const SECTIONS = [
     title: "Para qué los usamos y con quién los compartimos",
     paragraphs: [
       "Usamos los datos del formulario con un único fin: responder tu consulta y acompañarte en la conversación sobre servir con SIM. No los vendemos, no los cedemos a terceros con fines comerciales y no los usamos para enviarte publicidad que no hayas pedido.",
-      "El envío del formulario se procesa a través de un servicio externo de formularios, que transmite tu mensaje a nuestro correo institucional. Ese proveedor trata los datos únicamente por nuestra instrucción y para hacer posible el envío.",
+      "Los datos del formulario de la campaña «Cuán hermosos son los pies» los usamos para enviarte noticias de la campaña, invitarte a nuestros grupos y canales de WhatsApp si nos diste tu número, y ponerte en contacto con el equipo de SIM según lo que nos contaste. Al terminar la campaña añadimos tu nombre y tu correo a nuestra lista de noticias de SIM Latinoamérica, de la que puedes darte de baja en cualquier momento desde cualquiera de sus correos.",
+      "El envío de los formularios se procesa a través de servicios externos de formularios, que guardan tu envío y lo transmiten a nuestro correo institucional. Ese proveedor trata los datos únicamente por nuestra instrucción y para hacer posible el envío.",
     ],
   },
   {
     title: "En qué nos basamos para tratarlos",
     paragraphs: [
-      "Tratamos los datos del formulario sobre la base del consentimiento que otorgas al marcar la casilla antes de enviarlo. Puedes retirar ese consentimiento cuando quieras, sin que ello afecte al tratamiento realizado hasta ese momento.",
+      "Tratamos los datos de los formularios sobre la base del consentimiento que otorgas al marcar la casilla antes de enviarlos. Puedes retirar ese consentimiento cuando quieras, sin que ello afecte al tratamiento realizado hasta ese momento.",
       ...(ANALYTICS_ENABLED
         ? [
             "Las estadísticas de uso no dependen de ese consentimiento: las tratamos porque tenemos un interés legítimo en saber cómo se usa el sitio para poder mejorarlo. Puedes oponerte en cualquier momento, del modo que se explica más arriba.",
@@ -86,6 +88,7 @@ const SECTIONS = [
     title: "Cuánto tiempo los conservamos",
     paragraphs: [
       "Conservamos tu consulta mientras dure la conversación contigo y por un tiempo razonable después, de modo que podamos retomar el contacto si tú lo pides. Cuando ya no sea necesaria, la eliminamos.",
+      "Los datos de la campaña «Cuán hermosos son los pies» los conservamos mientras dure la campaña y, después, mientras sigas en nuestra lista de noticias. Si te das de baja o nos pides eliminarlos, los borramos.",
       ...(ANALYTICS_ENABLED
         ? [
             `Los datos de uso del sitio se conservan durante ${ANALYTICS_RETENTION_MONTHS} meses. Pasado ese plazo se elimina el registro individual de cada visita y solo quedan totales agregados, que no permiten identificar a nadie.`,
