@@ -27,16 +27,28 @@ export const GUIDE_URL: string | null =
 
 export interface CampaignVideo {
   title: string;
-  /** YouTube video id. The host isn't confirmed yet (YouTube is the guess). */
+  /** YouTube video id. */
   youtubeId?: string;
   still?: { src: string; alt: string; width: number; height: number };
 }
 
 /** The three "Conversaciones con Yurani, Carolina y Gio" videos. */
 export const VIDEOS: CampaignVideo[] = [
-  { title: "Video 1" },
-  { title: "Video 2" },
-  { title: "Video 3" },
+  {
+    title: "Aprendizajes de latinas sirviendo en África, Europa y Asia",
+    youtubeId: "w4JggP4mXa0",
+    still: { src: "/hermosos-pies/video-1.webp", alt: "", width: 640, height: 360 },
+  },
+  {
+    title: "Nunca es demasiado pronto ni demasiado tarde en la misión de Dios",
+    youtubeId: "VjKsHZ_cWu8",
+    still: { src: "/hermosos-pies/video-2.webp", alt: "", width: 640, height: 360 },
+  },
+  {
+    title: "Cuando obedecer a Dios significa dejarlo todo",
+    youtubeId: "yc0Q5urabGE",
+    still: { src: "/hermosos-pies/video-3.webp", alt: "", width: 640, height: 360 },
+  },
 ];
 
 /**
