@@ -14,17 +14,14 @@ import "./campaign.css";
  * "Cuán hermosos son los pies" campaign landing page (design:
  * Campaña-CHSP-SIM-editable.ai). Plan: docs/plan-campana-cuan-hermosos.md.
  *
- * Unlisted until the missing assets in ./content.ts arrive: noindex below,
- * absent from app/sitemap.ts, and linked from nowhere on the site (see
- * tests/e2e/unlisted-pages.spec.ts). Not disallowed in robots.txt, so crawlers
- * can still read the noindex.
+ * Indexable and listed in app/sitemap.ts. The thank-you page (./gracias)
+ * stays noindex.
  */
 export const metadata: Metadata = {
   title: "Cuán hermosos son los pies",
   description:
     "Historias de misioneros latinos sirviendo entre pueblos no alcanzados. Ora 30 días por ellos, escucha sus historias y da el siguiente paso.",
   alternates: { canonical: "/hermosos-pies/" },
-  robots: { index: false, follow: false },
   // Page-level openGraph/twitter replace the layout's homepage banner.
   openGraph: {
     type: "website",
