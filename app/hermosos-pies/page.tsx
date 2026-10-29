@@ -25,6 +25,28 @@ export const metadata: Metadata = {
     "Historias de misioneros latinos sirviendo entre pueblos no alcanzados. Ora 30 días por ellos, escucha sus historias y da el siguiente paso.",
   alternates: { canonical: "/hermosos-pies/" },
   robots: { index: false, follow: false },
+  // Page-level openGraph/twitter replace the layout's homepage banner.
+  openGraph: {
+    type: "website",
+    siteName: "SIM Latinoamérica",
+    locale: "es_ES",
+    url: "/hermosos-pies/",
+    title: "Cuán hermosos son los pies",
+    description:
+      "Historias de misioneros latinos sirviendo entre pueblos no alcanzados. Ora 30 días por ellos, escucha sus historias y da el siguiente paso.",
+    images: [
+      {
+        url: "/hermosos-pies/hero-pies.webp",
+        width: 1475,
+        height: 704,
+        alt: "Cuán hermosos son los pies",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/hermosos-pies/hero-pies.webp"],
+  },
 };
 
 const SECTION_HEADING = "font-heading text-2xl font-extrabold uppercase sm:text-3xl lg:text-4xl";
