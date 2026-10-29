@@ -5,16 +5,12 @@
  * Mirrors the shape scripts/import-cms.ts uses so the same review habits
  * apply: read the plan, then execute it.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 import {
-  WORK as DIR, HTML, REVISTA_ID, COVER_ASSET_ID, COVER_HERO, NO_HERO_SKIP, DROP_ARTICLES, DATE,
+  KEY, WORK as DIR, HTML, REVISTA_ID, COVER_ASSET_ID, COVER_HERO, NO_HERO_SKIP, DROP_ARTICLES, DATE,
 } from './issue.mjs';
-
-const slugify = t => t
-  .normalize('NFD').replace(/[̀-ͯ]/g, '')
-  .toLowerCase().replace(/[^a-z0-9\s-]/g, ' ')
-  .trim().replace(/\s+/g, '-').replace(/-+/g, '-').slice(0, 90);
+import { recovered, slugify } from './recovered.mjs';
 
 /**
  * `description` is required on blogPost. Taken from the article's own
@@ -62,15 +58,24 @@ const RUN_ON_MAX_WORDS = 8;
  */
 const ENDS_A_PARAGRAPH = /[.!?:;…»”"')\]]$/;
 
+/**
+ * The 2010–2013 e-zines repeat the editorial masthead on every page. When
+ * the frame after it starts lowercase, images.mjs keeps it as a run-on
+ * opener, so it lands inside the article; no issue's furniture regex can
+ * reach it there.
+ */
+const MASTHEAD = /^(Equipo Editorial\b.*|Directora: Cristina Conti|VAMOS, SIM)$/;
+
 function paragraphs(body) {
   const out = [];
-  for (const p of body.split('\n').map(t => t.trim()).filter(Boolean)) {
+  for (const p of body.split('\n').map(t => t.trim()).filter(t => t && !MASTHEAD.test(t))) {
     const prev = out[out.length - 1];
     const runsOn = prev
       && /^[a-záéíóúñü]/.test(p)
       && (prev.split(/\s+/).length <= RUN_ON_MAX_WORDS || !ENDS_A_PARAGRAPH.test(prev));
     if (runsOn) {
-      out[out.length - 1] = `${prev} ${p}`;
+      // The break can fall inside a hyphenated word («cada per-» / «sona»).
+      out[out.length - 1] = /\p{L}-$/u.test(prev) ? prev.slice(0, -1) + p : `${prev} ${p}`;
     } else out.push(p);
   }
   return out;
@@ -90,9 +95,32 @@ const toRichText = body => ({
 const rows = JSON.parse(readFileSync(`${DIR}/with-images.json`, 'utf8'));
 const plan = [];
 
-for (const r of rows) {
-  if (NO_HERO_SKIP.has(r.title) || DROP_ARTICLES.has(r.title)) continue;
-  const useCover = COVER_HERO.has(r.title);
+/**
+ * A dropped article comes back when recover.mjs listed it and its page-image
+ * transcription passes the text-layer check; it then replaces the spliced
+ * extraction wholesale. Without a recover-list.json this is a no-op.
+ */
+const recoverList = existsSync(`${DIR}/recover-list.json`)
+  ? JSON.parse(readFileSync(`${DIR}/recover-list.json`, 'utf8'))
+  : [];
+const refused = [];
+const MIN_WORDS = 150;
+
+for (const row of rows) {
+  if (NO_HERO_SKIP.has(row.title)) continue;
+  let r = row;
+  if (DROP_ARTICLES.has(row.title)) {
+    const item = recoverList.find(a => a.title === row.title);
+    const rec = item && recovered(KEY, DIR, row.title, item.pages);
+    if (!rec) continue;
+    if (!rec.ok) { refused.push(`${row.title} (${(rec.found * 100).toFixed(1)}% found)`); continue; }
+    // The floor images.mjs applies was measured on the spliced text, which
+    // carried the sidebars' words too; the clean transcription must clear it
+    // on its own.
+    if (rec.words < MIN_WORDS) continue;
+    r = { ...row, title: rec.title ?? row.title, body: rec.body, words: rec.words, recovered: true };
+  }
+  const useCover = COVER_HERO.has(row.title);
   if (!r.image && !useCover) continue;
 
   plan.push({
@@ -101,6 +129,7 @@ for (const r of rows) {
     description: describe(r.body),
     page: r.page,
     words: r.words,
+    ...(r.recovered ? { recovered: true } : {}),
     // All posts in an issue share its date; page order is kept in the
     // minute field so the feed reads in magazine order.
     publishDate: `${DATE}T00:${String(Math.min(59, r.page)).padStart(2, '0')}:00.000Z`,
@@ -115,7 +144,12 @@ for (const r of rows) {
 writeFileSync(`${DIR}/plan.json`, JSON.stringify(plan, null, 2));
 
 const dupes = plan.map(p => p.slug).filter((s, i, a) => a.indexOf(s) !== i);
-console.log(`${plan.length} posts planned${dupes.length ? ` · ⚠️ duplicate slugs: ${dupes}` : ' · slugs unique'}`);
+console.log(`${plan.length} posts planned${dupes.length ? ` · ⚠️ duplicate slugs: ${dupes}` : ' · slugs unique'}`
+  + ` · ${plan.filter(p => p.recovered).length} recovered from page images`);
+if (refused.length) {
+  console.log(`⚠️  ${refused.length} transcription(s) refused by the text-layer check — fix and re-run:`);
+  for (const t of refused) console.log(`     ${t}`);
+}
 for (const p of plan) {
   console.log(`\n  ${p.slug}\n    ${p.title}\n    hero: ${p.hero.kind === 'upload' ? p.hero.file.split('/').pop() : 'ISSUE COVER'} · ${p.words}w · ${p.body.content.length} paras`);
   console.log(`    desc: ${p.description}`);

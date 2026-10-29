@@ -9,7 +9,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 
-import { ARTICLES, SKIP_PAGES, ROW_PAGES, LIVE, WORK, HTML, EXTRA_FURNITURE } from './issue.mjs';
+import { ARTICLES, SKIP_PAGES, ROW_PAGES, byRow, LIVE, WORK, HTML, EXTRA_FURNITURE } from './issue.mjs';
 
 const MIN_AREA = 20000;               // px² — below this it's a logo or icon
 const MAX_ASPECT = 3.2;               // wider than this is a banner or rule
@@ -88,7 +88,6 @@ for (const { page, blocks } of pages) {
   for (let i = 1; i < xs.length; i++) if (xs[i] - xs[i - 1] > 60) edges.push((xs[i] + xs[i - 1]) / 2);
   const col = b => edges.filter(e => b.x > e).length;
   const byColumn = (a, b) => (col(a) - col(b)) || (a.y - b.y);
-  const byRow = (a, b) => (a.y - b.y) || (a.x - b.x);
   const ordered = [...blocks].sort(ROW_PAGES.has(page) ? byRow : byColumn)
     .filter(b => { const f = norm(b.text); return f && !isCredit(f) && !isChrome(f); });
   ordered.forEach((b, i) => {

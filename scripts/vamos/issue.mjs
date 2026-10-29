@@ -36,6 +36,12 @@ export const SKIP_PAGES = issue.skipPages ?? new Set();
  */
 export const ROW_PAGES = issue.rowPages ?? new Set();
 /**
+ * Row order for `rowPages`. Frames set side by side sit a point or two
+ * apart in y, so a strict y sort swaps them on jitter; within 4pt they
+ * count as one row and are read left to right.
+ */
+export const byRow = (a, b) => (Math.abs(a.y - b.y) < 4 ? a.x - b.x : a.y - b.y);
+/**
  * Articles anchored only to keep their text out of the preceding article,
  * then dropped — the page's layout defeats the text layer for that frame.
  * The per-frame counterpart of `skipPages`.

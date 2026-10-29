@@ -1521,3 +1521,51 @@ was wrong**: the PDF is an InDesign export with a real text layer (23 pages,
   ¡Yo soy perseguido, chico!, He decidido seguir a Cristo, Un solo cuerpo,
   Las buenas nuevas acerca de las malas noticias.
 
+
+## 2026-10-30 — VAMOS backfill: 47 empty editions imported, page-image recovery in progress
+
+**State when paused (resume from here).**
+
+- All 47 editions that had no posts (2009-12 → 2016-02) now have posts:
+  **281 drafts** from the text layer (`scripts/vamos/issues/<key>.mjs`, one per
+  edition; keys clashing with later editions carry a year suffix:
+  `fondos-misioneros-2016`, `idioma-y-cultura-2012`, `equipos-multiculturales-2011`).
+  Messy articles (pull quotes/sidebars spliced into the prose) were dropped
+  via `dropArticles`.
+- **Recovery of dropped articles from page images** (new):
+  `scripts/vamos/recover.mjs` renders pages + writes `recover-list.json`;
+  transcriptions live in `scripts/vamos/recovered/<key>/<slug>.txt`
+  (`# title` then one paragraph per line); `scripts/vamos/recovered.mjs`
+  checks each against the PDF text layer (≥97% of words must be on the
+  pages) and `build-plan.mjs` uses only passing files that clear 150 words.
+  Pipeline: extract → split → images → score → **recover** → build-plan → import.
+- Recovered drafts already imported: Persecución (15) and the 10 editions
+  2009-12 → 2010-11 (26).
+- **Not yet imported:** recovered transcriptions for 2010-12 (`sida`) onward,
+  ~170 files, all passing the check.
+- **Open check:** `recover.mjs` used to give an article only its start page,
+  so some transcriptions may stop before a continuation on the next page. The
+  page rule is fixed; 62 items gained a page (list was in the session
+  scratchpad). A subagent was appending continuations when the session
+  paused — re-check those 62 before importing (re-run `recover.mjs` per key;
+  look for files ending mid-sentence). Any of the 26 already-imported
+  2009–2010 recovered drafts that get extended need their Contentful body
+  **updated**, since `import.mjs` only creates.
+- Skipped on purpose: `comunicacion-integral/muestra-en-vez-de-informar`
+  (rotated note, not in the text layer); the iglesia-y-misiones "Rocío
+  Silva sidebar" (a continuation fragment). Unlisted articles found during
+  transcription and never anchored: «Dios está movilizando a Honduras» and
+  «Los pastores son la clave» (la-movilizacion-misionera), «El llamado
+  Macedonio se escucha hasta hoy» and «Latinos en Europa»
+  (donde-cristo-ya-no-es-conocido), «Escribir con impacto»
+  (comunicacion-integral).
+- Extractor fixes this round: line-end hyphen rejoining (extract + build-plan
+  run-on merge), `byRow` jitter tolerance for `rowPages`, masthead lines
+  stripped in build-plan.
+- Nothing published except Persecución's first 7. All imports are drafts;
+  publish per edition with `yarn drafts:publish --revista=<slug> --live`,
+  then deploy by hand.
+
+**To resume:** finish the continuation check → for each remaining key, oldest
+first: `node scripts/vamos/recover.mjs --issue=<key> && node scripts/vamos/build-plan.mjs --issue=<key> && node scripts/vamos/import.mjs --issue=<key> --live`
+(env: `set -a; . ./.env.local; set +a`).

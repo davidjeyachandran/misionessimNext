@@ -85,6 +85,18 @@ function columnsOf(words) {
   return cols.every(c => c.length >= MIN_COLUMN_LINES) ? cols : null;
 }
 
+/**
+ * Join a wrapped line onto the text before it. The 2010s issues hyphenate
+ * at the line end («ce-» / «rrar»), which a plain space join leaves as
+ * «ce- rrar»; a hyphen after a letter followed by a lowercase continuation
+ * is a break, not a dash, so the word is rejoined.
+ */
+function joinLine(text, next) {
+  return /\p{L}-$/u.test(text) && /^\p{Ll}/u.test(next)
+    ? text.slice(0, -1) + next
+    : text + ' ' + next;
+}
+
 /** Turn one frame's lines into the shape the rest of the pipeline reads. */
 function frame(lines) {
   const words = lines.flatMap(l => l.words);
@@ -108,12 +120,12 @@ function frame(lines) {
 
   let paras;
   if (!leftAligned) {
-    paras = [rawLines.map(l => l.text).join(' ')];
+    paras = [rawLines.map(l => l.text).reduce(joinLine)];
   } else {
     paras = [];
     for (const l of rawLines) {
       if (!paras.length || l.x > modalX + 4) paras.push(l.text);
-      else paras[paras.length - 1] += ' ' + l.text;
+      else paras[paras.length - 1] = joinLine(paras[paras.length - 1], l.text);
     }
   }
   return {

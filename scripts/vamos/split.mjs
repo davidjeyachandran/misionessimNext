@@ -8,7 +8,7 @@
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 
-import { ARTICLES, SKIP_PAGES, ROW_PAGES, LIVE, WORK as DIR } from './issue.mjs';
+import { ARTICLES, SKIP_PAGES, ROW_PAGES, byRow, LIVE, WORK as DIR } from './issue.mjs';
 // Leading quote marks vary (straight, curly) and must not defeat an anchor.
 const norm = s => s.replace(/\s+/g, ' ').replace(/^["“”'‘’¡\s]+/, '').trim();
 
@@ -26,7 +26,7 @@ for (const { page, blocks } of pages) {
   for (let i = 1; i < xs.length; i++) if (xs[i] - xs[i - 1] > 60) edges.push((xs[i] + xs[i - 1]) / 2);
   const col = b => edges.filter(e => b.x > e).length;
   const ordered = ROW_PAGES.has(page)
-    ? [...blocks].sort((a, b) => (a.y - b.y) || (a.x - b.x))
+    ? [...blocks].sort(byRow)
     : [...blocks].sort((a, b) => (col(a) - col(b)) || (a.y - b.y));
   for (const b of ordered) {
     const flat = norm(b.text);
