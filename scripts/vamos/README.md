@@ -25,6 +25,7 @@ August 2026 to run any issue. Run against `master` so far:
 | Fondos misioneros · dic 2022 | `fondos-misioneros` | 44, draft |
 | Idioma y cultura · sep 2022 | `idioma-y-cultura` | 37, draft |
 | Tu trabajo en el Reino · jun 2022 | `tu-trabajo-en-el-reino` | 48, draft |
+| Persecución · may 2014 | `persecucion` | 7, draft (layout-limited — see PROGRESS 2026-10-29) |
 
 ## Why this is not the sim-blog pipeline
 

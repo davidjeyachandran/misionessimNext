@@ -1495,3 +1495,29 @@ already done (August); the only real gap left was search, which
 - Not done: no e2e test yet; Lighthouse/visual-regression pass and the stale
   Revista-link cleanup script are still open (the latter only tidies noise —
   `gql()` already tolerates the links).
+
+## 2026-10-29 — VAMOS mayo 2014: articles imported (7 of ~22)
+
+The 2026-08-24 entry above called `persecucionvamosmayo14.pdf` a scan with no
+text layer and concluded "zero linked articles, and that is correct". **That
+was wrong**: the PDF is an InDesign export with a real text layer (23 pages,
+~65k characters). It had no posts because nothing ever ran it through the
+`scripts/vamos` pipeline.
+
+- New `scripts/vamos/issues/persecucion.mjs`; 7 posts created as **drafts** and
+  linked to the edition (`revista.blogPosts` 0 → 7). Publish with
+  `yarn drafts:publish --revista=persecucion --live`, then deploy by hand.
+- This is the oldest issue the pipeline has seen and the layout fights it:
+  pull quotes and sidebars sit inside the measure and are spliced into the
+  prose, p18 interleaves three columns, p17's article is split around a
+  sidebar, and the open letter on p19 has letter-spaced words. Imported only
+  the articles that came out clean; the rest are anchored in `dropArticles`.
+- **Not imported (need hand-editing or a manual transcription):** No surge por
+  casualidad, ¿Por qué no estamos siendo perseguidos?, La persecución continúa
+  para que la Iglesia despierte, ¿Por qué padecen persecución…?, La Iglesia
+  secreta, Si no fuera un verdadero cristiano…, Preparándote para el
+  sufrimiento, Perseguidos por descuido de uno, De bombardero a maestro de la
+  Biblia, Torturado y rescatado en el escape, Perdonando a los asesinos,
+  ¡Yo soy perseguido, chico!, He decidido seguir a Cristo, Un solo cuerpo,
+  Las buenas nuevas acerca de las malas noticias.
+
