@@ -23,7 +23,7 @@ export { WHATSAPP_URL as WHATSAPP_GROUP_URL } from "../sirve-con-sim/contact";
 
 /** Where "Descárgalo aquí" points — the PDF or a landing link. */
 export const GUIDE_URL: string | null =
-  "https://movilicemos.org/sites/default/files/recursos/2026/Devocional-CHSP-SIM_2026.pdf";
+  "https://movilicemos.org/sites/default/files/recursos/2026/Devocional-HermososPies-SIM_2026.pdf";
 
 export interface CampaignVideo {
   title: string;

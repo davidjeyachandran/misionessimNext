@@ -157,7 +157,7 @@ test.describe("Hermosos Pies gracias page", () => {
     );
     await expect(page.getByRole("link", { name: /Descarga la guía de oración/ })).toHaveAttribute(
       "href",
-      "https://movilicemos.org/sites/default/files/recursos/2026/Devocional-CHSP-SIM_2026.pdf",
+      "https://movilicemos.org/sites/default/files/recursos/2026/Devocional-HermososPies-SIM_2026.pdf",
     );
     for (const name of ["Facebook", "Instagram", "Spotify", "YouTube"]) {
       await expect(page.locator("main").getByRole("link", { name, exact: true })).toBeVisible();
