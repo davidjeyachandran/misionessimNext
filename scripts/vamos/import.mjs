@@ -12,6 +12,11 @@
  * whose linked asset is still a draft, so leaving them unpublished would
  * just move the work to whoever presses publish.
  *
+ * Pass --refresh to also rewrite the body and description of recovered posts
+ * (page-image transcriptions, see recover.mjs) that already exist, when the
+ * transcription has since changed. Only drafts are touched: once an editor
+ * has published a post, it is theirs.
+ *
  * The revista entry itself is never modified apart from appending these
  * posts to its `blogPosts` list, which is the link the edition page reads.
  * Appending drafts is safe — getRevistaBySlug in lib/contentful.ts drops
@@ -27,6 +32,7 @@ const ENV = 'master';
 const TOKEN = process.env.CONTENTFUL_MANAGEMENT_TOKEN;
 const LIVE = process.argv.includes('--live');
 const PUBLISH = process.argv.includes('--publish');
+const REFRESH = process.argv.includes('--refresh');
 
 if (!TOKEN) { console.error('Missing CONTENTFUL_MANAGEMENT_TOKEN'); process.exit(1); }
 
@@ -85,10 +91,10 @@ async function uploadAsset(file, title) {
 }
 
 // ── existing slugs, so a re-run never duplicates ───────────────────────────
-const existing = new Set();
+const existing = new Map();
 for (let skip = 0; ; skip += 1000) {
-  const page = await cma(`/entries?content_type=blogPost&limit=1000&skip=${skip}&select=fields.slug`);
-  for (const e of page.items) if (e.fields?.slug?.['en-US']) existing.add(e.fields.slug['en-US']);
+  const page = await cma(`/entries?content_type=blogPost&limit=1000&skip=${skip}&select=sys.id,fields.slug`);
+  for (const e of page.items) if (e.fields?.slug?.['en-US']) existing.set(e.fields.slug['en-US'], e.sys.id);
   if (skip + page.items.length >= page.total) break;
 }
 console.log(`${existing.size} blogPost slugs already in ${ENV}`);
@@ -98,6 +104,24 @@ const collisions = plan.filter(p => existing.has(p.slug));
 if (collisions.length) console.log(`⚠️  ${collisions.length} slug collisions, will be skipped: ${collisions.map(c => c.slug).join(', ')}`);
 
 const todo = plan.filter(p => !existing.has(p.slug));
+
+if (REFRESH) {
+  for (const p of plan.filter(q => q.recovered && existing.has(q.slug))) {
+    const e = await cma(`/entries/${existing.get(p.slug)}`);
+    const same = JSON.stringify(e.fields.body?.['en-US']) === JSON.stringify(p.body)
+      && e.fields.description?.['en-US'] === p.description;
+    if (same) continue;
+    if (e.sys.publishedVersion) { console.log(`  refresh skipped, published: ${p.slug}`); continue; }
+    if (!LIVE) { console.log(`  would refresh ${p.slug}`); continue; }
+    e.fields.body = { 'en-US': p.body };
+    e.fields.description = { 'en-US': p.description };
+    await cma(`/entries/${e.sys.id}`, {
+      method: 'PUT', headers: { ...CT, 'X-Contentful-Version': String(e.sys.version) },
+      body: { fields: e.fields },
+    });
+    console.log(`  refreshed ${p.slug}`);
+  }
+}
 console.log(`${KEY}: ${todo.length} to create as ${PUBLISH ? 'PUBLISHED' : 'drafts'}${LIVE ? '' : '  (dry run — pass --live to write)'}\n`);
 
 if (!LIVE) {

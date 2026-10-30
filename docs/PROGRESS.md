@@ -1569,3 +1569,13 @@ was wrong**: the PDF is an InDesign export with a real text layer (23 pages,
 **To resume:** finish the continuation check → for each remaining key, oldest
 first: `node scripts/vamos/recover.mjs --issue=<key> && node scripts/vamos/build-plan.mjs --issue=<key> && node scripts/vamos/import.mjs --issue=<key> --live`
 (env: `set -a; . ./.env.local; set +a`).
+
+### 2026-10-30 (later) — VAMOS recovered imports, paused for Contentful quota
+
+Paused because Contentful warned that the API/asset bandwidth limit is at 85%. Make no Contentful API calls until the monthly reset.
+
+- The continuation check on the 62 widened items is finished. Only `iglesia-y-misiones/misiones-es-tarea-de-la-iglesia` needed text added, and its draft has been refreshed with the new `import.mjs --refresh`.
+- Recovered drafts are now imported for every edition up to `resolucion-de-conflictos` (2012-01), plus all of 2012-02 → 2013-04 and `liderazgo-y-capacitacion-de-lideres`.
+- **`salud-fisica` was interrupted mid-import.** Three drafts were created but never appended to the revista: buena-salud-para-estar-en-el-campo-de-batalla, el-equilibrio-en-nuestras-vidas and prevenir-para-no-lamentar. The fourth, que-la-enfermedad-no-te-detenga, may exist half-made or as an orphan asset. A re-run skips existing slugs and so will not link them. Link them by hand, or teach import.mjs to append existing plan slugs.
+- Still to import: salud-fisica (rest), seguridad-en-el-campo, esperanza-para-las-mujeres-valiosas, oscuridad-en-los-colores-vibrantes-asia, africa, redes-sociales, alcanzando-los-aprendices-de-orales, caballeros-de-dios, la-movilizacion-misionera, conociendo-el-mundo-musulman and fondos-misioneros-2016. For each, run `recover.mjs`, then `build-plan.mjs`, then `import.mjs --live`.
+- `volviendo-casa` created 0 posts. Its recovered items are probably under the 150-word floor; check this.
