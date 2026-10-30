@@ -33,6 +33,10 @@
       "source": "/revistavamos/(.*)\\.pdf",
       "headers": [
         {
+          "key": "x-vercel-enable-rewrite-caching",
+          "value": "1"
+        },
+        {
           "key": "Cache-Control",
           "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
