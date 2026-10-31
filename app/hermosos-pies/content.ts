@@ -51,16 +51,17 @@ export const VIDEOS: CampaignVideo[] = [
   },
 ];
 
-/**
- * The design's podcast cards are a screenshot of the /recursos podcast band,
- * so these are those same three episodes (ids from app/recursos/page.tsx),
- * standing in until the campaign's own episodes are confirmed.
- */
 export const EPISODES: SpotifyEpisode[] = [
-  { id: "2CP1iLYpS7qyBC2MXYR3Ym", title: "Revista Soy Influencer para el Reino - Parte 1" },
-  { id: "54NEkbbfNuk0vGxpv7XH50", title: "Latina levantando fondos entre latinos" },
   {
-    id: "7r8olcw377DXeQV6HkH5V1",
-    title: "Una respuesta bíblica sobre la pobreza urbana por Zacarías Powell",
+    id: "6XmErUbxA3teWfJuMhQZFn",
+    title: "Pies de paciencia y perseverancia | La historia de Roshni",
+  },
+  {
+    id: "0XArfAHTSS8MnGEhlOADlI",
+    title: "Pies que corren hacia la esperanza | La historia de Natán",
+  },
+  {
+    id: "6M32bTLJboS0FImwnUxRGw",
+    title: "Donde caminan los pies, llega la fe | La historia de Juanita",
   },
 ];
