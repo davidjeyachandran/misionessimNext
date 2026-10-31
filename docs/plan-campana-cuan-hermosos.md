@@ -188,7 +188,6 @@ Replaces the "coming soon" no-op in `app/hermosos-pies/SignupForm.tsx`.
 | `rol` | 2 | |
 | `_subject` | 1, 2 | "Hermosos Pies — nuevo contacto" / "Hermosos Pies — más datos de {nombre}" |
 | `_next` | 1 (no-JS) | absolute `${SITE_URL}/hermosos-pies/gracias/` |
-| `_gotcha` | 1, 2 | Formspree's honeypot field |
 
 ## Success page `/hermosos-pies/gracias/`
 

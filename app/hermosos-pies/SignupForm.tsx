@@ -66,17 +66,11 @@ function TwoStepSignup() {
   const router = useRouter();
   const [lead, setLead] = useState<{ nombre: string; email: string } | null>(null);
 
-  if (!lead) return <StepOne onSent={setLead} onBot={() => router.push(GRACIAS)} />;
+  if (!lead) return <StepOne onSent={setLead} />;
   return <StepTwo lead={lead} onDone={() => router.push(GRACIAS)} />;
 }
 
-function StepOne({
-  onSent,
-  onBot,
-}: {
-  onSent: (lead: { nombre: string; email: string }) => void;
-  onBot: () => void;
-}) {
+function StepOne({ onSent }: { onSent: (lead: { nombre: string; email: string }) => void }) {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState(false);
 
@@ -84,10 +78,6 @@ function StepOne({
     event.preventDefault();
     const data = Object.fromEntries(new FormData(event.currentTarget).entries()) as Data;
 
-    // Honeypot: people never see it. Formspree would drop the submission
-    // anyway; skipping the request gives the bot nothing to tune against.
-    if (data._gotcha) return onBot();
-    delete data._gotcha;
     // Only the native submit below uses this.
     delete data._next;
 
@@ -111,7 +101,6 @@ function StepOne({
       <input type="hidden" name="_subject" value="Hermosos Pies — nuevo contacto" />
       {/* Absolute: Formspree redirects to it from its own domain. */}
       <input type="hidden" name="_next" value={`${SITE_URL}${GRACIAS}`} />
-      <Honeypot />
 
       <div>
         <label htmlFor="chsp-nombre" className={LABEL}>
@@ -181,7 +170,6 @@ function StepTwo({
     event.preventDefault();
     const form = event.currentTarget;
     const fd = new FormData(form);
-    if (fd.get("_gotcha")) return onDone();
 
     // A dial code on its own is not a number.
     const phone = whatsapp.trim();
@@ -234,7 +222,6 @@ function StepTwo({
           acompañarte mejor <span className="text-ink/70">(todo es opcional)</span>.
         </p>
       </div>
-      <Honeypot />
 
       <fieldset>
         <legend className={LABEL}>Quiero…</legend>
@@ -348,20 +335,6 @@ function StepTwo({
         </p>
       )}
     </form>
-  );
-}
-
-/* Formspree's own honeypot field: off-screen, skipped by keyboard and AT. */
-function Honeypot() {
-  return (
-    <input
-      type="text"
-      name="_gotcha"
-      tabIndex={-1}
-      autoComplete="off"
-      aria-hidden="true"
-      className="absolute -left-[9999px] size-px opacity-0"
-    />
   );
 }
 
