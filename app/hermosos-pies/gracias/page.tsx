@@ -55,7 +55,7 @@ export default function HermososPiesGraciasPage() {
             rel="noopener"
             className="mt-8 inline-block bg-[var(--chsp-teal)] px-6 py-3 font-heading text-lg font-extrabold uppercase text-white transition-colors hover:bg-[var(--chsp-brown)]"
           >
-            Descarga la guía de oración
+            Descarga la devocional
           </a>
         )}
 
