@@ -52,5 +52,9 @@ export default {
   coverHero: new Set(),
   noHeroSkip: new Set(),
   heroOverride: {},
+  // Same column title as a different article in misiones-de-corto-plazo.
+  slugOverride: {
+    'ideas-practicas-para-involucrarte-en-las-misiones': 'ideas-practicas-para-involucrarte-en-las-misiones-volviendo-a-casa',
+  },
   furniture: /^(Enero|2011|Tema:|Por:|equipo editorial|Directora:|ezine\.|Sandra Chiang|Tu iglesia local|web:|La revista SIM|misionessim\.org|VOLVIENDO A CASA|Hay más de 200 ideas|VAMOS ya está)/i,
 };

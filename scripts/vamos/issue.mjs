@@ -52,6 +52,13 @@ export const ARTICLES = issue.articles;
 export const COVER_HERO = issue.coverHero ?? new Set();
 export const NO_HERO_SKIP = issue.noHeroSkip ?? new Set();
 export const HERO_OVERRIDE = issue.heroOverride ?? {};
+/**
+ * title-derived slug → slug to use instead, for an article whose title is
+ * already taken by a *different* article elsewhere (a recurring column
+ * title, say). A reprint of the same article keeps the slug and is linked
+ * instead — see `import.mjs --link-reprints`.
+ */
+export const SLUG_OVERRIDE = issue.slugOverride ?? {};
 export const REVISTA_ID = issue.revistaId;
 export const COVER_ASSET_ID = issue.coverAssetId;
 export const DATE = issue.date;

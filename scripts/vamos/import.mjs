@@ -18,9 +18,11 @@
  * has published a post, it is theirs.
  *
  * The revista entry itself is never modified apart from appending these
- * posts to its `blogPosts` list, which is the link the edition page reads.
- * Appending drafts is safe — getRevistaBySlug in lib/contentful.ts drops
- * links that do not resolve, so a draft stays invisible until published.
+ * posts — and any of this edition's posts an interrupted earlier run created
+ * but never linked — to its `blogPosts` list. The site does not read that
+ * list: an edition's articles are the posts whose own `revista` field points
+ * at it (lib/content/edition-navigation.ts), so a post appears in exactly one
+ * edition. The list is kept in step for editors working in Contentful.
  */
 import { readFileSync } from 'node:fs';
 import { basename } from 'node:path';
@@ -92,16 +94,28 @@ async function uploadAsset(file, title) {
 
 // ── existing slugs, so a re-run never duplicates ───────────────────────────
 const existing = new Map();
+/** Slugs whose existing entry already points at this edition. */
+const ours = new Set();
 for (let skip = 0; ; skip += 1000) {
-  const page = await cma(`/entries?content_type=blogPost&limit=1000&skip=${skip}&select=sys.id,fields.slug`);
-  for (const e of page.items) if (e.fields?.slug?.['en-US']) existing.set(e.fields.slug['en-US'], e.sys.id);
+  const page = await cma(`/entries?content_type=blogPost&limit=1000&skip=${skip}&select=sys.id,fields.slug,fields.revista`);
+  for (const e of page.items) {
+    const slug = e.fields?.slug?.['en-US'];
+    if (!slug) continue;
+    existing.set(slug, e.sys.id);
+    if (e.fields.revista?.['en-US']?.sys?.id === REVISTA_ID) ours.add(slug);
+  }
   if (skip + page.items.length >= page.total) break;
 }
 console.log(`${existing.size} blogPost slugs already in ${ENV}`);
 
 const plan = JSON.parse(readFileSync(`${DIR}/plan.json`, 'utf8'));
-const collisions = plan.filter(p => existing.has(p.slug));
-if (collisions.length) console.log(`⚠️  ${collisions.length} slug collisions, will be skipped: ${collisions.map(c => c.slug).join(', ')}`);
+// A slug that exists already is either ours from an earlier (perhaps
+// interrupted) run — skipped, but still linked to the edition below — or a
+// post of another edition, which is a real clash and needs a new slug.
+const already = plan.filter(p => ours.has(p.slug));
+const collisions = plan.filter(p => existing.has(p.slug) && !ours.has(p.slug));
+if (already.length) console.log(`${already.length} already created for this edition: ${already.map(c => c.slug).join(', ')}`);
+if (collisions.length) console.log(`⚠️  ${collisions.length} slugs belong to OTHER entries, will be skipped: ${collisions.map(c => c.slug).join(', ')}`);
 
 const todo = plan.filter(p => !existing.has(p.slug));
 
@@ -126,6 +140,10 @@ console.log(`${KEY}: ${todo.length} to create as ${PUBLISH ? 'PUBLISHED' : 'draf
 
 if (!LIVE) {
   for (const p of todo) console.log(`  would create ${p.slug}  hero=${p.hero.kind}`);
+  const rev = await cma(`/entries/${REVISTA_ID}`);
+  const have = new Set((rev.fields.blogPosts?.['en-US'] ?? []).map(l => l.sys.id));
+  const unlinked = already.filter(p => !have.has(existing.get(p.slug)));
+  for (const p of unlinked) console.log(`  would link existing ${p.slug}`);
   process.exit(0);
 }
 
@@ -163,12 +181,14 @@ for (const [i, p] of todo.entries()) {
 }
 
 // ── append to the edition's article list (deduped) ─────────────────────────
-if (created.length) {
-  const rev = await cma(`/entries/${REVISTA_ID}`);
-  const cur = rev.fields.blogPosts?.['en-US'] ?? [];
-  const have = new Set(cur.map(l => l.sys.id));
-  const merged = [...cur, ...created.filter(id => !have.has(id))
-    .map(id => ({ sys: { type: 'Link', linkType: 'Entry', id } }))];
+// Includes this edition's entries from earlier runs, so a run interrupted
+// between creating entries and linking them is repaired by re-running.
+const rev = await cma(`/entries/${REVISTA_ID}`);
+const cur = rev.fields.blogPosts?.['en-US'] ?? [];
+const have = new Set(cur.map(l => l.sys.id));
+const toLink = [...already.map(p => existing.get(p.slug)), ...created].filter(id => !have.has(id));
+if (toLink.length) {
+  const merged = [...cur, ...toLink.map(id => ({ sys: { type: 'Link', linkType: 'Entry', id } }))];
   rev.fields.blogPosts = { 'en-US': merged };
   const updated = await cma(`/entries/${REVISTA_ID}`, {
     method: 'PUT', headers: { ...CT, 'X-Contentful-Version': String(rev.sys.version) },

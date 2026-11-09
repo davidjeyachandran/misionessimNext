@@ -9,6 +9,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 import {
   KEY, WORK as DIR, HTML, REVISTA_ID, COVER_ASSET_ID, COVER_HERO, NO_HERO_SKIP, DROP_ARTICLES, DATE,
+  SLUG_OVERRIDE,
 } from './issue.mjs';
 import { recovered, slugify } from './recovered.mjs';
 
@@ -124,7 +125,7 @@ for (const row of rows) {
   if (!r.image && !useCover) continue;
 
   plan.push({
-    slug: slugify(r.title),
+    slug: SLUG_OVERRIDE[slugify(r.title)] ?? slugify(r.title),
     title: r.title,
     description: describe(r.body),
     page: r.page,
