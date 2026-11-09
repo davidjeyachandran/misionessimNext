@@ -2,6 +2,7 @@
   "name": "misionessim-new",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "dev": "next dev",
     "prebuild": "tsx scripts/check-revista-rewrites.ts",
