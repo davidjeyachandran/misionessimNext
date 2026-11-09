@@ -62,6 +62,13 @@ export function createContentfulClient({
 
   return {
     async query<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
+      // Quota kill switch: set CONTENTFUL_PAUSED=1 (e.g. in .env.local) and no
+      // request leaves the machine. Fails loudly rather than rendering empty.
+      if (process.env.CONTENTFUL_PAUSED === "1") {
+        throw new Error(
+          "Contentful lookups are paused (CONTENTFUL_PAUSED=1). Remove it from .env.local to re-enable.",
+        );
+      }
       const response = await fetchWithRetry(JSON.stringify({ query, variables }));
       if (!response.ok) {
         throw new Error(`Contentful GraphQL error: ${response.status}`);

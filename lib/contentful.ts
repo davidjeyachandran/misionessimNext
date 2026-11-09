@@ -10,21 +10,49 @@ import {
   buildRevistaCatalogue,
   normalizeRevistaSlug as normalizeStoredRevistaSlug,
 } from "./content/revista-catalogue";
-import { createContentfulClient } from "./contentful/client";
+import { type ContentfulClient, createContentfulClient } from "./contentful/client";
+import {
+  fetchAllEntries,
+  fetchAllRevistas,
+  fetchPostBySlug,
+} from "./contentful/queries";
+import {
+  DEFAULT_SNAPSHOT_DIR,
+  readCatalogue,
+  readPost,
+  readRevistas,
+  snapshotExists,
+} from "./contentful/snapshot";
 import { revistaPdfPath as buildRevistaPdfPath } from "./publishing/paths";
 
-// Contentful GraphQL caps collection `limit` at 100, so the full-catalogue
-// fetch pages through in chunks of this size.
-const PAGE_SIZE = 100;
+// ---------------------------------------------------------------------------
+// Where content comes from
+//
+// By default the site reads `content-snapshot/` (see lib/contentful/snapshot.ts)
+// and makes no API calls at all: a build used to cost ~1,000 GraphQL calls
+// against a hard monthly quota. `yarn sync:contentful` refreshes the snapshot.
+// With no snapshot on disk it falls back to the live API, as before.
+// CONTENTFUL_SOURCE=live|snapshot forces one or the other.
 
+function useSnapshot(): boolean {
+  const forced = process.env.CONTENTFUL_SOURCE;
+  if (forced === "live") return false;
+  const present = snapshotExists(DEFAULT_SNAPSHOT_DIR);
+  if (forced === "snapshot" && !present) {
+    throw new Error(
+      "CONTENTFUL_SOURCE=snapshot but content-snapshot/ is missing. Run `yarn sync:contentful` first.",
+    );
+  }
+  return present;
+}
 
-const contentfulClient = createContentfulClient({
-  spaceId: process.env.CONTENTFUL_SPACE_ID ?? "",
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN ?? "",
-});
-
-function gql<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
-  return contentfulClient.query<T>(query, variables);
+// Created on first use, so a snapshot build needs no Contentful credentials.
+let liveClient: ContentfulClient | undefined;
+function live(): ContentfulClient {
+  return (liveClient ??= createContentfulClient({
+    spaceId: process.env.CONTENTFUL_SPACE_ID ?? "",
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN ?? "",
+  }));
 }
 
 // ---------------------------------------------------------------------------
@@ -87,7 +115,8 @@ export interface BlogPost extends BlogPostCard {
 // reads from the same space. Losing entries stay resolvable by direct URL
 // (getBlogPostBySlug is unfiltered); they're just not surfaced in listings.
 
-interface RawEntry {
+export interface RawEntry {
+  sys?: { publishedAt?: string | null } | null;
   slug: string;
   title: string;
   publishDate: string | null;
@@ -99,44 +128,14 @@ interface RawEntry {
   revista?: { sys: { id: string }; slug: string; title: string } | null;
 }
 
-const CATALOGUE_FIELDS = `
-  slug
-  title
-  publishDate
-  description
-  categories
-  tags
-  author
-  heroImage { url description width height }
-  revista { sys { id } slug title }
-`;
-
-// Fetch every blogPost once (paged) — ~10 GraphQL calls, memoized for the
-// whole build. This was `cache()`, which reset on every page render; see
-// `buildMemo` for why that cost ~3,000 calls a build.
-const getAllEntries = buildMemo(async (): Promise<RawEntry[]> => {
-  const all: RawEntry[] = [];
-  let skip = 0;
-  while (true) {
-    const data = await gql<{
-      blogPostCollection: { total: number; items: RawEntry[] };
-    }>(
-      `query ($limit: Int!, $skip: Int!) {
-        blogPostCollection(order: publishDate_DESC, limit: $limit, skip: $skip) {
-          total
-          items { ${CATALOGUE_FIELDS} }
-        }
-      }`,
-      { limit: PAGE_SIZE, skip },
-    );
-    all.push(...data.blogPostCollection.items);
-    if (all.length >= data.blogPostCollection.total || data.blogPostCollection.items.length === 0) {
-      break;
-    }
-    skip += PAGE_SIZE;
-  }
-  return all;
-});
+// Every blogPost, read once and memoized for the whole build. This was
+// `cache()`, which reset on every page render; see `buildMemo` for why that
+// cost ~3,000 calls a build.
+const getAllEntries = buildMemo(async (): Promise<RawEntry[]> =>
+  useSnapshot()
+    ? readCatalogue<RawEntry>(DEFAULT_SNAPSHOT_DIR)
+    : fetchAllEntries(live()),
+);
 
 function toCard(e: RawEntry): BlogPostCard {
   return {
@@ -282,35 +281,11 @@ export const getBlogPostsByTag = cache(
 // Single-post query (unfiltered — any slug, including a de-duplicated loser,
 // still resolves so existing/shared URLs never 404).
 
-export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | null> => {
-  const data = await gql<{ blogPostCollection: { items: (BlogPost & { revista?: { slug: string; title: string } | null })[] } }>(
-    `query ($slug: String!) {
-      blogPostCollection(where: { slug: $slug }, limit: 1) {
-        items {
-          sys { publishedAt }
-          slug
-          title
-          publishDate
-          description
-          categories
-          tags
-          heroImage { url description width height }
-          body {
-            json
-            links {
-              assets {
-                block { sys { id } url title description width height }
-              }
-            }
-          }
-          revista { slug title }
-        }
-      }
-    }`,
-    { slug },
-  );
-  return data.blogPostCollection.items[0] ?? null;
-});
+export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | null> =>
+  useSnapshot()
+    ? readPost<BlogPost>(DEFAULT_SNAPSHOT_DIR, slug)
+    : fetchPostBySlug(live(), slug),
+);
 
 // Derive the URL date segment (YYYY-MM) from a publishDate ISO string.
 export function publishDateToSegment(publishDate: string): string {
@@ -352,17 +327,7 @@ export function normalizeRevistaSlug(storedSlug: string): string {
   return normalizeStoredRevistaSlug(storedSlug);
 }
 
-const REVISTA_CARD_FIELDS = `
-  sys { id }
-  slug
-  title
-  fecha
-  coverImage { url description width height }
-  revistaPdf { url }
-  body { json }
-`;
-
-interface RawRevista {
+export interface RawRevista {
   sys: { id: string };
   slug: string;
   title: string;
@@ -400,26 +365,9 @@ function toRevistaCard(r: RawRevista, urlSlug: string): RevistaCard {
 
 // All editions, newest first, with unique URL slugs assigned.
 export const getAllRevistas = buildMemo(async (): Promise<RevistaCard[]> => {
-  const all: RawRevista[] = [];
-  let skip = 0;
-  while (true) {
-    const data = await gql<{
-      revistaCollection: { total: number; items: RawRevista[] };
-    }>(
-      `query ($limit: Int!, $skip: Int!) {
-        revistaCollection(order: fecha_DESC, limit: $limit, skip: $skip) {
-          total
-          items { ${REVISTA_CARD_FIELDS} }
-        }
-      }`,
-      { limit: PAGE_SIZE, skip },
-    );
-    all.push(...data.revistaCollection.items);
-    if (all.length >= data.revistaCollection.total || data.revistaCollection.items.length === 0) {
-      break;
-    }
-    skip += PAGE_SIZE;
-  }
+  const all = useSnapshot()
+    ? readRevistas<RawRevista>(DEFAULT_SNAPSHOT_DIR)
+    : await fetchAllRevistas(live());
 
   return buildRevistaCatalogue(all.map((entry) => ({ ...entry, id: entry.sys.id }))).map(
     ({ entry, slug }) => toRevistaCard(entry, slug),

@@ -28,6 +28,7 @@
     "import:recovered": "node --env-file=.env.local node_modules/.bin/tsx scripts/import-recovered-posts.ts",
     "check:revista-rewrites": "tsx scripts/check-revista-rewrites.ts",
     "check:image-proxy": "tsx scripts/check-image-proxy.ts",
+    "sync:contentful": "node --env-file=.env.local node_modules/.bin/tsx scripts/sync-contentful.ts",
     "setup:deploy-webhook": "tsx scripts/setup-contentful-deploy-webhook.ts"
   },
   "dependencies": {

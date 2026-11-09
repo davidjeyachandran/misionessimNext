@@ -1579,3 +1579,14 @@ Paused because Contentful warned that the API/asset bandwidth limit is at 85%. M
 - **`salud-fisica` was interrupted mid-import.** Three drafts were created but never appended to the revista: buena-salud-para-estar-en-el-campo-de-batalla, el-equilibrio-en-nuestras-vidas and prevenir-para-no-lamentar. The fourth, que-la-enfermedad-no-te-detenga, may exist half-made or as an orphan asset. A re-run skips existing slugs and so will not link them. Link them by hand, or teach import.mjs to append existing plan slugs.
 - Still to import: salud-fisica (rest), seguridad-en-el-campo, esperanza-para-las-mujeres-valiosas, oscuridad-en-los-colores-vibrantes-asia, africa, redes-sociales, alcanzando-los-aprendices-de-orales, caballeros-de-dios, la-movilizacion-misionera, conociendo-el-mundo-musulman and fondos-misioneros-2016. For each, run `recover.mjs`, then `build-plan.mjs`, then `import.mjs --live`.
 - `volviendo-casa` created 0 posts. Its recovered items are probably under the 150-word floor; check this.
+
+### 2026-11-01 — Builds read a local Contentful snapshot (zero quota per build)
+
+A build cost ~1,000 GraphQL calls (one per post page plus the catalogue), against a hard monthly quota. Builds now read `content-snapshot/` instead.
+
+- `yarn sync:contentful` refreshes it: ~20 calls for the catalogue and editions, plus one per post whose catalogue row changed (`--full` re-downloads all ~900). An interrupted sync resumes, and the snapshot only becomes usable once a sync completes.
+- Source selection is in `lib/contentful.ts`: snapshot if `content-snapshot/meta.json` exists, else live API as before. `CONTENTFUL_SOURCE=live|snapshot` forces one. A snapshot build needs no Contentful credentials.
+- **Workflow:** publish in Contentful → `yarn sync:contentful` → build/deploy. Forgetting the sync deploys stale content. Commit `content-snapshot/` so Vercel builds from it.
+- The queries moved to `lib/contentful/queries.ts` so the sync and the live path share them. Tests: `tests/unit/contentful-snapshot.test.ts`.
+- **Not yet run against the real API** (the space was quota-paused): the first `yarn sync:contentful` is the real test. Remove `CONTENTFUL_PAUSED` from `.env.local` first.
+- Still metered: visitors load images and PDFs from the Contentful CDN, so asset bandwidth is unaffected by this.
