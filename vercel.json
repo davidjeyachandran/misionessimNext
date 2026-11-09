@@ -26,6 +26,10 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400, stale-while-revalidate=604800"
+        },
+        {
+          "key": "CDN-Cache-Control",
+          "value": "public, max-age=31536000"
         }
       ]
     },
@@ -39,6 +43,10 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=86400, stale-while-revalidate=604800"
+        },
+        {
+          "key": "CDN-Cache-Control",
+          "value": "public, max-age=31536000"
         }
       ]
     },
@@ -3591,7 +3599,7 @@
     },
     {
       "source": "/revistavamos/equipos-multiculturales-2024/equiposmulticulturalesvamosjun23.pdf",
-      "destination": "https://downloads.ctfassets.net/i46buyptg48q/3qpMYFRgo0QzhYzgLnl355/b6c65118ad663438fc7467929c95021f/equiposmulticulturalesvamosjun23.pdf"
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/3qpMYFRgo0QzhYzgLnl355/252dabe9d72672610146c2fcb8959a19/equiposmulticulturalesvamosjun23.pdf"
     },
     {
       "source": "/revistavamos/equipos-multiculturales/2011-07-EquiposMulticulturalesVAMOS.pdf",
@@ -3615,7 +3623,7 @@
     },
     {
       "source": "/revistavamos/familias-misioneras/FamiliamisioneraVAMOSfeb20.pdf",
-      "destination": "https://downloads.ctfassets.net/i46buyptg48q/7g3FDF3FsNsAEFHp7igUOS/e9d51e29dcc9da4e074dbfa2519393d4/FamiliamisioneraVAMOSfeb20.pdf"
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/7g3FDF3FsNsAEFHp7igUOS/f03f689e0dadac571926050533abdb7a/FamiliamisioneraVAMOSfeb20.pdf"
     },
     {
       "source": "/revistavamos/fondos-misioneros-2022/FondosenMisionVAMOSdic22.pdf",
@@ -3695,7 +3703,7 @@
     },
     {
       "source": "/revistavamos/la-movilizacion-es-discipulado/MovilizacionESdiscipuladoVAMOSjago21.pdf",
-      "destination": "https://downloads.ctfassets.net/i46buyptg48q/2InqHjCresgaTfers7crqT/c00a5a1e805a98e4dfa08e4c832dd057/MovilizacionESdiscipuladoVAMOSjago21.pdf"
+      "destination": "https://assets.ctfassets.net/i46buyptg48q/2InqHjCresgaTfers7crqT/7fe08ca291dc59953723a1e2976d82c6/MovilizacionESdiscipuladoVAMOSjago21.pdf"
     },
     {
       "source": "/revistavamos/la-movilizacion-misionera/2013-12-MovilizacionVAMOS.pdf",
