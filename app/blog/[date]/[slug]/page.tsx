@@ -14,6 +14,7 @@ import {
 } from "../../../../lib/contentful";
 import { hintedSrc } from "../../../../lib/contentful-image-loader";
 import { PostOnwardNav } from "../../_components/PostOnwardNav";
+import { isNoindexedPost } from "../../../../lib/content/duplicate-posts";
 import { formatPostDate } from "../../../../lib/dates";
 import { socialImage } from "../../../../lib/social-image";
 import {
@@ -50,6 +51,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.title,
     description: post.description ?? undefined,
     alternates: { canonical: `/blog/${canonicalDate}/${slug}/` },
+    // Near-duplicates of another post (data/duplicate-posts.json): stay live,
+    // but out of the index. `follow` keeps passing link equity along.
+    ...(isNoindexedPost(slug) ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       type: "article",
       title: post.title,

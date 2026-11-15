@@ -83,6 +83,26 @@
   ],
   "redirects": [
     {
+      "source": "/blog/2019-10/un-llamado-de-la-selva/",
+      "destination": "/blog/2017-07/un-llamado-desde-las-profundidades-de-la-selva/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2020-01/errores-comunes-sobre-el-llamado-misionero/",
+      "destination": "/blog/2020-12/errores-comunes-en-cuanto-al-llamado-misionero/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2021-08/simply-mobilizing/",
+      "destination": "/blog/2021-09/movilizar-es-mover-recursos/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/2024-05/trabajo-conproposito/",
+      "destination": "/blog/2022-06/que-dice-la-biblia-sobre-el-trabajo/",
+      "permanent": true
+    },
+    {
       "source": "/la-revista/al-100-el-latino-en-misiones/",
       "destination": "/revistavamos/latinos-al-100/",
       "permanent": true
@@ -3104,7 +3124,7 @@
     },
     {
       "source": "/blog/2021-09/simply-mobilizing/feed/",
-      "destination": "/blog/2021-08/simply-mobilizing/",
+      "destination": "/blog/2021-09/movilizar-es-mover-recursos/",
       "permanent": true
     },
     {
@@ -3409,7 +3429,7 @@
     },
     {
       "source": "/blog/2021-09/simply-mobilizing/",
-      "destination": "/blog/2021-08/simply-mobilizing/",
+      "destination": "/blog/2021-09/movilizar-es-mover-recursos/",
       "permanent": true
     },
     {

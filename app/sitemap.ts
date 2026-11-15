@@ -9,6 +9,7 @@ import {
   getBlogPostsByCategory,
   publishDateToSegment,
 } from "../lib/contentful";
+import { isExcludedFromSitemap } from "../lib/content/duplicate-posts";
 import { listingPagesAfterFirst } from "../lib/content/sitemap-pages";
 import { SITE_URL } from "../lib/site";
 
@@ -82,12 +83,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }));
 
-  const postEntries: MetadataRoute.Sitemap = posts.map((p) => ({
-    url: url(`/blog/${publishDateToSegment(p.publishDate)}/${p.slug}`),
-    lastModified: p.publishDate || undefined,
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
+  // Noindexed and redirected near-duplicates are left out. `posts` itself stays
+  // whole: the listing pages below paginate over the full catalogue.
+  const postEntries: MetadataRoute.Sitemap = posts
+    .filter((p) => !isExcludedFromSitemap(p.slug))
+    .map((p) => ({
+      url: url(`/blog/${publishDateToSegment(p.publishDate)}/${p.slug}`),
+      lastModified: p.publishDate || undefined,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    }));
 
   // Pages 2..N of the blog index. `posts` is the catalogue order the index
   // renders (newest first), so each page is dated by the newest post on it.

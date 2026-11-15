@@ -1,0 +1,335 @@
+{
+  "_comment": "Near-duplicate blog posts (see docs/PROGRESS.md 2026-11-10). `noindex`: page stays live but is dropped from search and the sitemap. `redirects`: 301 to the kept post (generated into vercel.json by `yarn build:duplicate-redirects`). `keep` is the surviving URL. Traffic = Search Console clicks/impressions over 16 months at decision time.",
+  "noindex": [
+    {
+      "slug": "4-razones-por-las-que-no-se-discipula",
+      "path": "/blog/2014-01/4-razones-por-las-que-no-se-discipula/",
+      "keep": "/blog/2025-06/4-razones-por-las-que-los-cristianos-no-discipulan/",
+      "basis": "traffic",
+      "weakTraffic": "0c/18i",
+      "keepTraffic": "5c/144i"
+    },
+    {
+      "slug": "llamadas-llenas-de-sanidad",
+      "path": "/blog/2015-12/llamadas-llenas-de-sanidad/",
+      "keep": "/blog/2020-01/mis-papas-no-aceptaban/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "buscas-donde-dios-te-puede-usar",
+      "path": "/blog/2019-10/buscas-donde-dios-te-puede-usar/",
+      "keep": "/blog/2017-07/espacios-que-ofrecen-oportunidades-y-bendicion/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "el-arte-como-testigo-del-evangelio-un-cristiano-indio-y-su-poesia",
+      "path": "/blog/2020-01/el-arte-como-testigo-del-evangelio-un-cristiano-indio-y-su-poesia/",
+      "keep": "/blog/2020-01/el-arte-es-importante-para-dios/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "17c/1151i"
+    },
+    {
+      "slug": "el-sindrome-del-superheroe",
+      "path": "/blog/2020-01/el-sindrome-del-superheroe/",
+      "keep": "/blog/2020-01/quiero-involucrarme-en-misiones-por-donde-empiezo/",
+      "basis": "traffic",
+      "weakTraffic": "0c/16i",
+      "keepTraffic": "3c/178i"
+    },
+    {
+      "slug": "la-belleza-de-dios-para-cumplir-su-mision",
+      "path": "/blog/2020-01/la-belleza-de-dios-para-cumplir-su-mision/",
+      "keep": "/blog/2020-01/glorificamos-a-dios-a-traves-del-arte/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "8c/595i"
+    },
+    {
+      "slug": "madres-de-impacto-mundial",
+      "path": "/blog/2020-01/madres-de-impacto-mundial/",
+      "keep": "/blog/2020-01/mis-papas-no-aceptaban/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "mi-familia-y-mi-llamado",
+      "path": "/blog/2020-01/mi-familia-y-mi-llamado/",
+      "keep": "/blog/2020-02/dios-revela-la-mision-de-la-familia/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/259i"
+    },
+    {
+      "slug": "mi-parte-en-la-gran-comision",
+      "path": "/blog/2020-01/mi-parte-en-la-gran-comision/",
+      "keep": "/blog/2020-01/la-mentoria-una-aliada-en-el-ministerio-0/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/15i"
+    },
+    {
+      "slug": "no-tienes-por-que-caminar-solo-0",
+      "path": "/blog/2020-01/no-tienes-por-que-caminar-solo-0/",
+      "keep": "/blog/2020-01/no-tienes-por-que-caminar-solo/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "para-el-obrero-latino-es-un-paso-gigante",
+      "path": "/blog/2020-01/para-el-obrero-latino-es-un-paso-gigante/",
+      "keep": "/blog/2020-01/una-lucha-interna-contra-las-expectativas/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "viajes-de-corto-plazo-y-noviazgo",
+      "path": "/blog/2020-01/viajes-de-corto-plazo-y-noviazgo/",
+      "keep": "/blog/2023-01/puedo-tener-novio-a-en-un-viaje-de-corto-plazo/",
+      "basis": "traffic",
+      "weakTraffic": "0c/6i",
+      "keepTraffic": "0c/14i"
+    },
+    {
+      "slug": "dios-de-la-ciudad",
+      "path": "/blog/2020-02/dios-de-la-ciudad/",
+      "keep": "/blog/2020-02/el-perfil-del-plantador-de-iglesias/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "7c/198i"
+    },
+    {
+      "slug": "experimentando-el-sabor-de-servir-dios",
+      "path": "/blog/2020-02/experimentando-el-sabor-de-servir-dios/",
+      "keep": "/blog/2022-05/experimentando-el-servir-a-dios-en-familia/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/6i"
+    },
+    {
+      "slug": "plantando-en-un-pais-patriarcal",
+      "path": "/blog/2020-02/plantando-en-un-pais-patriarcal/",
+      "keep": "/blog/2020-02/plantar-iglesias-la-mejor-forma-de-extender-el-reino/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "1c/32i"
+    },
+    {
+      "slug": "camaleones-culturales",
+      "path": "/blog/2020-09/camaleones-culturales/",
+      "keep": "/blog/2020-09/conociendo-un-htc-0/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/14i"
+    },
+    {
+      "slug": "fieles-al-llamado",
+      "path": "/blog/2020-09/fieles-al-llamado/",
+      "keep": "/blog/2014-09/mas-importante-aun-oren-para-que-podamos-ser-fieles/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "una-linea-muy-delgada",
+      "path": "/blog/2020-10/una-linea-muy-delgada/",
+      "keep": "/blog/2020-10/sin-perder-el-enfoque/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "bellas-palabras-de-vida",
+      "path": "/blog/2020-11/bellas-palabras-de-vida/",
+      "keep": "/blog/2020-12/el-envio-de-responsables-de-obreros-preparados/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/17i"
+    },
+    {
+      "slug": "discipulado-movilizacion-personalizacion",
+      "path": "/blog/2021-08/discipulado-movilizacion-personalizacion/",
+      "keep": "/blog/2021-09/el-equipo-pastoral-discipula-y-moviliza/",
+      "basis": "traffic",
+      "weakTraffic": "0c/6i",
+      "keepTraffic": "2c/25i"
+    },
+    {
+      "slug": "deja-que-la-biblia-argumente-por-ti-al-hablar-con-tu-amigo-hindu",
+      "path": "/blog/2021-10/deja-que-la-biblia-argumente-por-ti-al-hablar-con-tu-amigo-hindu/",
+      "keep": "/blog/2021-11/alaba-a-dios-tambien-con-tu-mente/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/51i"
+    },
+    {
+      "slug": "la-apologetica-y-el-discipulado",
+      "path": "/blog/2021-10/la-apologetica-y-el-discipulado/",
+      "keep": "/blog/2021-10/entendiendo-el-por-que-detras-de-las-preguntas/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "mas-que-llegar-a-la-mente-dirigete-al-corazon-musulman",
+      "path": "/blog/2021-10/mas-que-llegar-a-la-mente-dirigete-al-corazon-musulman/",
+      "keep": "/blog/2021-10/apologetica-para-las-religiones-del-mundo/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "3c/23i"
+    },
+    {
+      "slug": "tu-testimonio-el-mejor-metodo-para-llevar-a-cristo-a-los-budistas",
+      "path": "/blog/2021-10/tu-testimonio-el-mejor-metodo-para-llevar-a-cristo-a-los-budistas/",
+      "keep": "/blog/2021-10/sin-amistad-genuina-no-llegaras-a-ningun-lado/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "apoyados-y-aprobados-por-la-familia",
+      "path": "/blog/2021-12/apoyados-y-aprobados-por-la-familia/",
+      "keep": "/blog/2020-02/dios-revela-la-mision-de-la-familia/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/259i"
+    },
+    {
+      "slug": "se-buscan-mujeres-que",
+      "path": "/blog/2022-03/se-buscan-mujeres-que/",
+      "keep": "/blog/2021-06/decidio-destruir-sus-idolos/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "las-similitudes-de-cristo-y-krishna",
+      "path": "/blog/2022-04/las-similitudes-de-cristo-y-krishna/",
+      "keep": "/blog/2021-11/el-recurso-apologetico-mas-grande-que-existe-la-biblia/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/11i"
+    },
+    {
+      "slug": "el-ingles-es-necesario-en-todos-los-casos",
+      "path": "/blog/2022-09/el-ingles-es-necesario-en-todos-los-casos/",
+      "keep": "/blog/2022-09/por-que-debemos-conocer-la-cultura-y-su-cosmovision/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "49c/6596i"
+    },
+    {
+      "slug": "todo-puede-cambiar-en-un-instante-pero-dios-es-el-mismo",
+      "path": "/blog/2023-01/todo-puede-cambiar-en-un-instante-pero-dios-es-el-mismo/",
+      "keep": "/blog/2023-01/7-cosas-que-toda-familia-misionera-debe-considerar/",
+      "basis": "traffic",
+      "weakTraffic": "0c/7i",
+      "keepTraffic": "6c/369i"
+    },
+    {
+      "slug": "si-todo-esta-bien-por-que-me-voy",
+      "path": "/blog/2023-03/si-todo-esta-bien-por-que-me-voy/",
+      "keep": "/blog/2024-05/transiciones-mensaje-para-los-pastores-y-lideres/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/9i"
+    },
+    {
+      "slug": "por-que-necesito-otras-culturas-en-mi-equipo-de-plantacion-de-iglesias",
+      "path": "/blog/2023-06/por-que-necesito-otras-culturas-en-mi-equipo-de-plantacion-de-iglesias/",
+      "keep": "/blog/2023-06/unidos-con-un-solo-proposito/",
+      "basis": "longest text",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/0i"
+    },
+    {
+      "slug": "adoptar-una-etnia-no-alcanzada",
+      "path": "/blog/2023-09/adoptar-una-etnia-no-alcanzada/",
+      "keep": "/blog/2024-06/comibam-promueve-alcanzando-a-las-etnias-no-alcanzadas/",
+      "basis": "traffic",
+      "weakTraffic": "0c/8i",
+      "keepTraffic": "2c/84i"
+    },
+    {
+      "slug": "barreras-entre-los-no-alcanzados",
+      "path": "/blog/2023-09/barreras-entre-los-no-alcanzados/",
+      "keep": "/blog/2023-09/3-barreras-que-existen-entre-los-no-alcanzados/",
+      "basis": "newer (your rule)",
+      "weakTraffic": "0c/61i",
+      "keepTraffic": "15c/779i"
+    },
+    {
+      "slug": "que-atrae-a-los-musulmanes",
+      "path": "/blog/2023-09/que-atrae-a-los-musulmanes/",
+      "keep": "/blog/2023-09/que-les-llama-la-atencion-a-los-musulmanes-sobre-jesus/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "1c/7i"
+    },
+    {
+      "slug": "con-quien-hablo",
+      "path": "/blog/2023-12/con-quien-hablo/",
+      "keep": "/blog/2023-12/te-toca-hacer-un-debrief/",
+      "basis": "traffic",
+      "weakTraffic": "0c/0i",
+      "keepTraffic": "0c/6i"
+    },
+    {
+      "slug": "jesus-ingreso-al-mundo",
+      "path": "/blog/2024-03/jesus-ingreso-al-mundo/",
+      "keep": "/blog/2024-06/aprendiendo-a-convivir/",
+      "basis": "longest text",
+      "weakTraffic": "0c/5i",
+      "keepTraffic": "0c/5i"
+    },
+    {
+      "slug": "como-un-equipo-en-campo-de-juego",
+      "path": "/blog/2024-05/como-un-equipo-en-campo-de-juego/",
+      "keep": "/blog/2023-06/orando-en-unidad/",
+      "basis": "traffic",
+      "weakTraffic": "0c/7i",
+      "keepTraffic": "0c/11i"
+    }
+  ],
+  "redirects": [
+    {
+      "slug": "un-llamado-de-la-selva",
+      "path": "/blog/2019-10/un-llamado-de-la-selva/",
+      "keep": "/blog/2017-07/un-llamado-desde-las-profundidades-de-la-selva/",
+      "basis": "traffic",
+      "weakTraffic": "1c/9i",
+      "keepTraffic": "10c/191i"
+    },
+    {
+      "slug": "errores-comunes-sobre-el-llamado-misionero",
+      "path": "/blog/2020-01/errores-comunes-sobre-el-llamado-misionero/",
+      "keep": "/blog/2020-12/errores-comunes-en-cuanto-al-llamado-misionero/",
+      "basis": "newer (your rule)",
+      "weakTraffic": "1c/2i",
+      "keepTraffic": "1c/4i"
+    },
+    {
+      "slug": "simply-mobilizing",
+      "path": "/blog/2021-08/simply-mobilizing/",
+      "keep": "/blog/2021-09/movilizar-es-mover-recursos/",
+      "basis": "newer (your rule)",
+      "weakTraffic": "2c/33i",
+      "keepTraffic": "1c/374i"
+    },
+    {
+      "slug": "trabajo-conproposito",
+      "path": "/blog/2024-05/trabajo-conproposito/",
+      "keep": "/blog/2022-06/que-dice-la-biblia-sobre-el-trabajo/",
+      "basis": "traffic",
+      "weakTraffic": "2c/257i",
+      "keepTraffic": "39c/5251i"
+    }
+  ]
+}
