@@ -22,6 +22,7 @@ const MENU_LINKS = [
   { label: "Blog", href: "/blog/", external: false },
   { label: "Historias", href: "https://historias.misionessim.org/", external: true },
   { label: "Ora", href: "/ora/", external: false },
+  { label: "Dar", href: "/dar/", external: false },
   { label: "Servir con SIM", href: "/sirve-con-sim/", external: false },
 ];
 
