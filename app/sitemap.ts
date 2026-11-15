@@ -43,7 +43,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: url("/nosotros"), changeFrequency: "yearly", priority: 0.8 },
     { url: url("/recursos"), changeFrequency: "monthly", priority: 0.8 },
     { url: url("/ora"), changeFrequency: "monthly", priority: 0.8 },
-    { url: url("/dar"), changeFrequency: "yearly", priority: 0.8 },
     { url: url("/sirve-con-sim"), changeFrequency: "yearly", priority: 0.8 },
     { url: url("/hermosos-pies"), changeFrequency: "monthly", priority: 0.7 },
     { url: url("/declaracion-de-fe-de-sim"), changeFrequency: "yearly", priority: 0.5 },

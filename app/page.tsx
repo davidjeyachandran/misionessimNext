@@ -138,9 +138,6 @@ export default async function Home() {
                   Escríbenos a{" "}
                   <a href="mailto:sim.preguntas@sim.org">sim.preguntas@sim.org</a>
                 </p>
-                <Link className="btn btn-outline" href="/dar/">
-                  Descubre cómo
-                </Link>
               </div>
             </article>
             <article className="card reveal">
