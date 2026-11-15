@@ -28,4 +28,26 @@ describe("published Blog catalogue", () => {
       title: "Abuelas, a distancia",
     });
   });
+
+  it("drops a retired duplicate and hands its revista link to the survivor", () => {
+    const catalogue = buildBlogCatalogue([
+      {
+        slug: "requisitos-y-pasos-para-ser-misionero",
+        title: "Cómo ir al campo misionero: pasos, requisitos y preparación",
+        publishDate: "2019-10-11T00:00:00Z",
+      },
+      {
+        slug: "requisitos-y-pasos-para-ser-misionero-0",
+        title: "Requisitos y pasos para ser misionero",
+        publishDate: "2019-10-11T00:00:00Z",
+        revista: { slug: "/la-capacitacion-misionera", title: "La capacitación misionera" },
+      },
+    ]);
+
+    expect(catalogue).toHaveLength(1);
+    expect(catalogue[0]).toMatchObject({
+      slug: "requisitos-y-pasos-para-ser-misionero",
+      revista: { slug: "/la-capacitacion-misionera" },
+    });
+  });
 });
