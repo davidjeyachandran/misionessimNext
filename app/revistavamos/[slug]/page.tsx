@@ -3,10 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { getAllRevistas, getRevistaBySlug } from "../../../lib/contentful";
+import { getAllRevistas, getRevistaBySlug, getRevistaNeighbours } from "../../../lib/contentful";
 import { socialImage } from "../../../lib/social-image";
 import { fechaToEdicion } from "../../../lib/dates";
 import { PostCard } from "../../blog/_components/PostCard";
+import { EditionNav } from "../_components/EditionNav";
 
 export async function generateStaticParams() {
   const revistas = await getAllRevistas();
@@ -49,6 +50,7 @@ export default async function RevistaPage({ params }: Props) {
   const { slug } = await params;
   const revista = await getRevistaBySlug(slug);
   if (!revista) notFound();
+  const neighbours = await getRevistaNeighbours(slug);
 
   return (
     <main className="page-offset mx-auto max-w-6xl px-4 py-12" data-pagefind-body>
@@ -136,6 +138,8 @@ export default async function RevistaPage({ params }: Props) {
           </div>
         </section>
       )}
+
+      <EditionNav {...neighbours} />
     </main>
   );
 }

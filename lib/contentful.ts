@@ -374,6 +374,22 @@ export const getAllRevistas = buildMemo(async (): Promise<RevistaCard[]> => {
   );
 });
 
+export interface RevistaNeighbours {
+  /** The edition published before this one (older). */
+  previous: RevistaCard | null;
+  /** The edition published after this one (newer). */
+  next: RevistaCard | null;
+}
+
+// The editions either side of this one in the catalogue's own order (newest
+// first), so stepping through matches the /revistavamos/ listing exactly.
+export async function getRevistaNeighbours(slug: string): Promise<RevistaNeighbours> {
+  const all = await getAllRevistas();
+  const i = all.findIndex((r) => r.slug === slug);
+  if (i === -1) return { previous: null, next: null };
+  return { previous: all[i + 1] ?? null, next: all[i - 1] ?? null };
+}
+
 // ---------------------------------------------------------------------------
 // Onward navigation
 //
