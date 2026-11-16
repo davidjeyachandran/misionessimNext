@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 // Gifts are taken on SIM USA's Spanish giving page; this site has no payment
 // flow of its own.
-const DONATE_URL = "https://www.simusa.org/es-donar/#donate-form-section";
+const DONATE_URL = "https://www.simusa.org/es-donar?fund-code=P099717+Project+Gifts+NonUS";
 const CONTACT_EMAIL = "sim.preguntas@sim.org";
 
 // "Fotos de diferentes maneras en que las ofrendas son utilizadas". Photos are
@@ -22,13 +22,13 @@ const CONTACT_EMAIL = "sim.preguntas@sim.org";
 const USOS = [
   {
     image: "/pages/dar-bravos-prayer.webp",
-    alt: "Una iglesia ora por obreros que son enviados a la misión",
-    caption: "Iglesias que oran y envían a sus obreros a la misión.",
+    alt: "Una iglesia ora por sus enviados a la misión",
+    caption: "La iglesia envía; acompañamos y recibimos a sus enviados.",
   },
   {
-    image: "/pages/dar-engcamp.webp",
-    alt: "Un capacitador acompaña a un participante durante un taller",
-    caption: "Capacitación de obreros latinos para el servicio transcultural.",
+    image: "/pages/dar-capacitacion.webp",
+    alt: "Obreros latinos de SIM conversan alrededor de una mesa",
+    caption: "Equipos movilizan; los capacitamos y equipamos con recursos.",
   },
   {
     image: "/pages/dar-stand.webp",
@@ -71,7 +71,7 @@ export default function DarPage() {
         intro="Da hoy para ser parte de la facilitación de más latinos participando en ministerios transculturales."
         image={{
           src: "/heroes/dar.webp",
-          alt: "Obreros latinos de SIM conversan alrededor de una mesa",
+          alt: "Equipo de SIM Latinoamérica reunido en un parque",
         }}
         cta={{ label: "Quiero dar una ofrenda", href: DONATE_URL }}
       />
