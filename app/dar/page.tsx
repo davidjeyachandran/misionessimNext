@@ -12,7 +12,9 @@ export const metadata: Metadata = {
 
 // Gifts are taken on SIM USA's Spanish giving page; this site has no payment
 // flow of its own.
-const DONATE_URL = "https://www.simusa.org/es-donar?fund-code=P099717+Project+Gifts+NonUS";
+const DONATE_URL = "https://www.simusa.org/es-donar?fund-code=P090588%20Project%20Gifts%20NonUS";
+const projectUrl = (code: string) =>
+  `https://www.simusa.org/es-donar?fund-code=${code}+Project+Gifts+NonUS`;
 const CONTACT_EMAIL = "sim.preguntas@sim.org";
 
 // "Fotos de diferentes maneras en que las ofrendas son utilizadas". Photos are
@@ -39,6 +41,23 @@ const USOS = [
     image: "/pages/dar-fam-tailandia.webp",
     alt: "Una familia misionera latina sirviendo en Tailandia",
     caption: "Familias latinas sirviendo donde Cristo aún no es conocido.",
+  },
+];
+
+const PROYECTOS = [
+  {
+    code: "P090790",
+    title: "Envía más obreros",
+    text: "Movilizamos, capacitamos y acompañamos a la Iglesia para enviar misioneros donde más se necesita el Evangelio.",
+    image: "/pages/dar-proyecto-obreros.webp",
+    alt: "Campo de trigo: enviemos más misioneros latinos a Su mies",
+  },
+  {
+    code: "P099717",
+    title: "Capacitación y recursos",
+    text: "Para que la Iglesia latinoamericana siga creciendo como fuerza misionera y alcance más naciones con el Evangelio.",
+    image: "/pages/dar-proyecto-capacitacion.webp",
+    alt: "Un grupo conversa alrededor de una mesa en un tiempo con pastores enviadores",
   },
 ];
 
@@ -103,6 +122,48 @@ export default function DarPage() {
               />
               <figcaption className="mt-3 text-sm text-muted">{u.caption}</figcaption>
             </figure>
+          ))}
+        </div>
+      </section>
+
+      {/* Proyectos */}
+      <section className="mx-auto max-w-5xl px-4 pb-16">
+        <h2 className="font-heading text-center text-3xl font-bold text-ink">
+          Da a los obreros o apoya un proyecto
+        </h2>
+        <p className="mt-3 text-center text-lg text-muted">
+          Elige dónde quieres que llegue tu ofrenda.
+        </p>
+        <div className="mt-10 grid gap-8 md:grid-cols-2">
+          {PROYECTOS.map((p) => (
+            <article
+              key={p.code}
+              className="flex flex-col overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-black/5"
+            >
+              <Image
+                src={p.image}
+                alt={p.alt}
+                width={900}
+                height={675}
+                unoptimized
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <div className="flex flex-1 flex-col p-6">
+                <span className="self-start rounded bg-brand/10 px-2 py-0.5 text-xs font-semibold tracking-wide text-brand">
+                  {p.code}
+                </span>
+                <h3 className="font-heading mt-3 text-xl font-bold text-ink">{p.title}</h3>
+                <p className="mt-2 flex-1 text-muted">{p.text}</p>
+                <a
+                  href={projectUrl(p.code)}
+                  target="_blank"
+                  rel="noopener"
+                  className="mt-6 inline-block self-start rounded-btn bg-brand px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+                >
+                  Apoyar este proyecto
+                </a>
+              </div>
+            </article>
           ))}
         </div>
       </section>
