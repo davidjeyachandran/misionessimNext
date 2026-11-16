@@ -111,5 +111,31 @@
     "to": {
       "description": "Dependencia de Dios, fiabilidad, persistencia, celo evangelizador y adaptabilidad: las características que comparten los misioneros que ven frutos duraderos."
     }
+  },
+  {
+    "slug": "que-es-el-nomadismo",
+    "entryId": "7ob91W7ew8ghQ146l5d0uB",
+    "reason": "Nov 2026: ~2,000 impressions in 28 days at position 9.2, 0 clicks. Searches are 'qué es el nomadismo' / 'nomadismo'; the old description was a mid-post sentence with no definition.",
+    "from": {
+      "title": "¿Qué es el nomadismo?",
+      "description": "Es importante entender que el nomadismo no se define solo por la movilidad, sino por su cosmovisión, aunque la movilidad es un factor, como ya veremos."
+    },
+    "to": {
+      "title": "¿Qué es el nomadismo? Definición y los 3 tipos de nómadas",
+      "description": "El nomadismo no se define solo por moverse de lugar, sino por una cosmovisión. Conoce los tres tipos de pueblos nómadas: pastores, cazadores-recolectores e itinerantes."
+    }
+  },
+  {
+    "slug": "el-significado-de-atar-y-desatar",
+    "entryId": "7xK23qwweuY0EpYbb63gGb",
+    "reason": "Nov 2026: 842 impressions (90 d) at position 9.3, 4 clicks. Top query is 'atar y desatar como arma espiritual'; the old description was cut mid-sentence.",
+    "from": {
+      "title": "El significado de \"atar y desatar\"",
+      "description": "En las últimas décadas ha surgido una idea popular —aunque parece errónea— de que “atar y desatar” se refiere a “atar a los demonios.” Sin embargo, la evidencia"
+    },
+    "to": {
+      "title": "¿Qué significa «atar y desatar» en la Biblia? (Mateo 16 y 18)",
+      "description": "¿Es «atar y desatar» un arma espiritual para atar demonios? Lo que la frase significaba en tiempos de Jesús, según Mateo 16:19 y 18:18, y qué armas sí nos da la Biblia."
+    }
   }
 ]
