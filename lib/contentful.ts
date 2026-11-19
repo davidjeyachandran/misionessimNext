@@ -55,6 +55,21 @@ function live(): ContentfulClient {
   }));
 }
 
+// Draft preview only. Created on first use so builds and visitor requests
+// never need the preview token.
+let previewClient: ContentfulClient | undefined;
+
+function previewClientFor(): ContentfulClient {
+  return (previewClient ??= createContentfulClient({
+    spaceId: process.env.CONTENTFUL_SPACE_ID ?? "",
+    accessToken: process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN ?? "",
+  }));
+}
+
+function previewGql<T>(query: string, variables?: Record<string, unknown>): Promise<T> {
+  return previewClientFor().query<T>(query, variables);
+}
+
 // ---------------------------------------------------------------------------
 // Types
 
@@ -79,7 +94,8 @@ export interface BlogPostCard {
 export interface BlogPost extends BlogPostCard {
   /** CMS publish timestamp — the closest thing we have to a last-modified
    *  date, since the WordPress import did not carry one. Used for JSON-LD. */
-  sys?: { publishedAt?: string | null } | null;
+  /** `publishedAt` is null for a never-published draft. */
+  sys?: { id?: string; publishedAt?: string | null } | null;
   body?: {
     json: RichTextDocument;
     links?: {
@@ -286,6 +302,26 @@ export const getBlogPostBySlug = cache(async (slug: string): Promise<BlogPost | 
     ? readPost<BlogPost>(DEFAULT_SNAPSHOT_DIR, slug)
     : fetchPostBySlug(live(), slug),
 );
+
+// Draft preview: one Preview API call, and the only call a draft page makes.
+export const getDraftBlogPostBySlug = cache((slug: string) =>
+  fetchPostBySlug(previewClientFor(), slug, true),
+);
+
+export async function getDraftBlogPostEntry(
+  id: string,
+): Promise<{ slug: string; publishDate: string | null } | null> {
+  const data = await previewGql<{
+    blogPost: { slug: string | null; publishDate: string | null } | null;
+  }>(
+    `query ($id: String!) {
+      blogPost(id: $id, preview: true) { slug publishDate }
+    }`,
+    { id },
+  );
+  const entry = data.blogPost;
+  return entry?.slug ? { slug: entry.slug, publishDate: entry.publishDate } : null;
+}
 
 // Derive the URL date segment (YYYY-MM) from a publishDate ISO string.
 export function publishDateToSegment(publishDate: string): string {

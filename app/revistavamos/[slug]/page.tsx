@@ -9,6 +9,9 @@ import { fechaToEdicion } from "../../../lib/dates";
 import { PostCard } from "../../blog/_components/PostCard";
 import { EditionNav } from "../_components/EditionNav";
 
+// Unknown params 404 without calling Contentful (docs/adr/0001).
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const revistas = await getAllRevistas();
   return revistas.map((r) => ({ slug: r.slug }));
@@ -53,7 +56,7 @@ export default async function RevistaPage({ params }: Props) {
   const neighbours = await getRevistaNeighbours(slug);
 
   return (
-    <main className="page-offset mx-auto max-w-6xl px-4 py-12" data-pagefind-body>
+    <main className="page-offset mx-auto max-w-6xl px-4 py-12" data-contentful-entry={revista.id} data-pagefind-body>
       <nav className="mb-6 text-sm text-muted">
         <Link href="/" prefetch={PREFETCH} className="transition-colors hover:text-ink">Inicio</Link>
         {" / "}

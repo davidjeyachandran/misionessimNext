@@ -1615,3 +1615,25 @@ A build cost ~1,000 GraphQL calls (one per post page plus the catalogue), agains
 - **Noindex is paired with a self-canonical, not a canonical to the keeper:** Google treats noindex plus a cross-page canonical as contradictory.
 - **Not yet verified on a built site** (no snapshot, builds cost quota): after the next `yarn sync:contentful` + build, check one noindexed post for `<meta name="robots" content="noindex, follow">` and that none of the 41 appear in `out/sitemap.xml`. Then deploy manually.
 - **Check in Search Console 2–4 weeks after deploy:** noindexed URLs drop out of the index; keepers hold or gain traffic.
+
+### 2026-09-23 — Draft preview and Edit link planned
+
+Decided through a grilling session, not built yet. The plan is in
+[plan-draft-preview.md](plan-draft-preview.md) (branch `feat/draft-preview`).
+
+- Drop `output: "export"` for a mostly-static site with Next.js Draft Mode
+  ([ADR 0001](adr/0001-mostly-static-site-with-draft-mode.md)).
+- No site login: `?edit` reveals an "Edit in Contentful" link, and drafts are
+  reachable only through Contentful's Preview button
+  ([ADR 0002](adr/0002-edit-link-without-site-login.md)).
+- Draft preview covers Blog posts only, at one Contentful call per view.
+  Listings stay published-only. Mi Movilicemos is out of scope.
+
+### 2026-09-23 — Draft preview and Edit link built (branch, not deployed)
+
+Built on `feat/draft-preview` per [plan-draft-preview.md](plan-draft-preview.md),
+with 2 local builds (about 24 Contentful calls). Verified locally that
+visitors, including unknown URLs, make zero Contentful calls. Still to do:
+create the Preview API token and secret, a manual `vercel deploy` from the
+branch to test the Contentful Preview button, and a check of the Vercel
+Output Directory before merging.

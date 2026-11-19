@@ -88,14 +88,15 @@ export function fetchAllRevistas(
 export async function fetchPostBySlug(
   client: ContentfulClient,
   slug: string,
+  preview = false,
 ): Promise<BlogPost | null> {
   const data = await client.query<{
     blogPostCollection: { items: BlogPost[] };
   }>(
-    `query ($slug: String!) {
-      blogPostCollection(where: { slug: $slug }, limit: 1) {
+    `query ($slug: String!, $preview: Boolean!) {
+      blogPostCollection(where: { slug: $slug }, limit: 1, preview: $preview) {
         items {
-          sys { publishedAt }
+          sys { id publishedAt }
           slug
           title
           publishDate
@@ -115,7 +116,7 @@ export async function fetchPostBySlug(
         }
       }
     }`,
-    { slug },
+    { slug, preview },
   );
   return data.blogPostCollection.items[0] ?? null;
 }
